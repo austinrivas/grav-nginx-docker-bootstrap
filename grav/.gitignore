@@ -21,6 +21,7 @@ user/localhost/config/security.yaml
 user/plugins/error/
 user/plugins/markdown-notices/
 user/plugins/problems/
+user/themes/antimatter/
 
 # OS Generated
 .DS_Store*

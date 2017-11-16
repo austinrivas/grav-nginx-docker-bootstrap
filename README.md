@@ -12,6 +12,8 @@ modern FE development workflows, and simplified application backends.
 
 ## [Production](https://lakewoodranch-commercial.com) | [Admin](https://lakewoodranch-commercial.com/push-admin)
 
+[ ![Codeship Status for push-orlando/lwrc-grav](https://app.codeship.com/projects/07f01b30-ad52-0135-7ef6-2a6929614bbd/status?branch=master)](https://app.codeship.com/projects/257200)
+
 TODO: Deploy to production url with coming soon page
 
 TODO: Describe prod environment snowflakes
