@@ -1,0 +1,17 @@
+title: 'Lakewood Ranch Commercial'
+default_lang: en
+author:
+  name: 'Push Admin'
+  email: dev+lwrc@pushhere.com
+taxonomies:
+  - category
+  - tag
+metadata:
+  description: 'update meta description'
+summary:
+  enabled: true
+  format: short
+  size: 300
+  delimiter: '==='
+blog:
+  route: /blog

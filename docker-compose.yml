@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  nginx-php-grav:
+    container_name: lwrc-grav
+    image: pushhere/nginx-php-grav:1.0.0 # https://hub.docker.com/r/pushhere/nginx-php-grav/
+    ports:
+      - "2222:22"
+      - "80:80"
+    volumes:
+      - "./grav:/usr/share/nginx/html/"
+      - "./nginx:/etc/nginx/"
+      - "./.ssh:/root/.ssh/"

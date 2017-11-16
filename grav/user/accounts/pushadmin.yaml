@@ -1,0 +1,14 @@
+email: dev@pushhere.com
+access:
+  admin:
+    login: true
+    super: true
+  site:
+    login: true
+fullname: 'Push Admin'
+title: 'Site Admin'
+state: enabled
+hashed_password: $2y$10$G45DRD18D0WluwlvuHZjG.RAGE8HWBMHb7fTd7yP53z3iyTurdwLi
+language: en
+login_attempts: {  }
+twofa_secret: P7XNPDGOTYZRV77JO5AHCVIM6AI6ITRW
