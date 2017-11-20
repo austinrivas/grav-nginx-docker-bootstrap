@@ -66,7 +66,7 @@ TODO: include this step in the docker image initialization
 
 If after you run `docker-compose up` you seen an error like:
 
-```aidl
+```bash
 Starting lwrc-grav ... 
 Starting lwrc-grav ... error
 
