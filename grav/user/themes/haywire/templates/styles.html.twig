@@ -1,0 +1,44 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-8 is-offset-2">
+
+                <div class="columns">
+                    <div class="column content">
+                        {{ page.content }}
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="columns">
+                    <div class="column content">
+                        {% embed 'partials/card.html.twig' %}
+                            {% block card_image %}
+                                <figure class="image is-4by3 is-bg-primary"></figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p class="body-copy-1">Primary Color</p>
+                                <p>$primary</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="column content">
+                        {% embed 'partials/card.html.twig' %}
+                            {% block card_image %}
+                                <figure class="image is-4by3 is-bg-primary-invert"></figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p class="body-copy-1">Primary Invert Color</p>
+                                <p>$primary-invert</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
