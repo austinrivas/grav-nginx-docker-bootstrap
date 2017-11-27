@@ -1,19 +1,39 @@
-//@font-face {
-//    font-family: "Muli-Light";
-//    font-style: normal;
-//    font-weight: normal;
-//    src: url("Muli-Light.ttf");
-//}
-//@font-face {
-//    font-family: "Muli-Regular";
-//    font-style: normal;
-//    font-weight: normal;
-//    src: url("Muli-Regular.ttf");
-//}
+@function theme_font_url($font-name)
+    @return "../../fonts/#{$font-name}.otf"
+
+@mixin font_face($font-name, $font-weight: normal, $font-style: normal)
+    @font-face
+        font-family: $font-name
+        font-style: $font-style
+        font-weight: $font-weight
+        src: url(theme_font_url($font-name))
+
+$proxima-nova-bold: "ProximaNova-Bold"
+$proxima-nova-bold-family: $proxima-nova-bold, sans-serif
+@include font_face($proxima-nova-bold, bold)
+
+$proxima-nova-regular: "ProximaNova-Reg"
+$proxima-nova-regular-family: $proxima-nova-regular, sans-serif
+@include font_face($proxima-nova-regular)
+
+$gotham-bold: "Gotham-Bold"
+$gotham-bold-family: $gotham-bold, sans-serif
+@include font_face($gotham-bold, bold)
+
+$gotham-medium: "Gotham-Medium"
+$gotham-medium-family: $gotham-medium, sans-serif
+@include font_face($gotham-medium)
+
+$eames-century-modern-regular: "EamesCenturyModern-Regular"
+$eames-century-modern-regular-family: $eames-century-modern-regular, serif
+@include font_face($eames-century-modern-regular)
+
+
 
 // Typography
 
-$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif
+$family-sans-serif: $proxima-nova-regular-family
+$family-serif: $eames-century-modern-regular-family
 $family-monospace: monospace
 $render-mode: optimizeLegibility
 
