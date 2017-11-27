@@ -2,8 +2,9 @@ $black: hsl(0, 0%, 4%)
 $black-bis: hsl(0, 0%, 7%)
 $black-ter: hsl(0, 0%, 14%)
 
-$blue-dark: #243746
-$blue-light: #AAC6C9
+$blue-dark: hsl(206, 32%, 21%) // #243746
+$blue-light: hsl(180, 23%, 94%) // #ECF3F3
+$blue-tiffany: hsl(186, 22%, 73%) // #AAC6C9
 
 $grey-darker: hsl(0, 0%, 21%)
 $grey-dark: hsl(0, 0%, 29%)
@@ -23,31 +24,42 @@ $cyan: hsl(204, 86%, 53%)
 $blue: hsl(217, 71%, 53%)
 $purple: hsl(271, 100%, 71%)
 $red: hsl(348, 100%, 61%)
+$gold: hsl(48, 25%, 59%) // #B1A77D
+$gold-light: hsl(49, 26%, 75%) // #D0CAAF
+$cream: hsl(60, 20%, 96%) // #F7F7F3
+$olive: hsl(71, 5%, 47%) // #7C7E73
+
+// Contextual Colors
 
 $primary: $blue-dark
-
 $info: $cyan
 $success: $green
 $warning: $yellow
 $danger: $red
-
 $light: $white-ter
 $dark: $grey-darker
 
 // Invert colors
 
+$black-invert: findColorInvert($black)
+$white-invert: findColorInvert($white)
 $orange-invert: findColorInvert($orange)
 $yellow-invert: findColorInvert($yellow)
 $green-invert: findColorInvert($green)
 $turquoise-invert: findColorInvert($turquoise)
 $blue-dark-invert: findColorInvert($blue-dark)
 $blue-light-invert: findColorInvert($blue-light)
+$blue-tiffany-invert: findColorInvert($blue-tiffany)
 $cyan-invert: findColorInvert($cyan)
 $blue-invert: findColorInvert($blue)
 $purple-invert: findColorInvert($purple)
 $red-invert: findColorInvert($red)
+$gold-invert: findColorInvert($gold)
+$gold-light-invert: findColorInvert($gold-light)
+$cream-invert: findColorInvert($cream)
+$olive-invert: findColorInvert($olive)
 
-$primary-invert: $blue-light
+$primary-invert: $blue-dark-invert
 $info-invert: $cyan-invert
 $success-invert: $green-invert
 $warning-invert: $yellow-invert
