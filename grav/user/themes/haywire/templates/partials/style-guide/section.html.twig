@@ -1,0 +1,8 @@
+<h2>{{ sectionTitle }}</h2>
+<hr>
+{% for styles in rows %}
+    {% include "partials/style-guide/row.html.twig" with {
+    styles: styles,
+    swatchType: swatchType
+    } %}
+{% endfor %}

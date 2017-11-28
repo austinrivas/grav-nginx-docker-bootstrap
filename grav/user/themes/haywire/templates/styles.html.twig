@@ -11,364 +11,48 @@
                     </div>
                 </div>
 
-                <hr>
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Named Colors',
+                swatchType: 'color',
+                rows: [
+                [
+                'is-bg-blue-dark',
+                'is-bg-blue-light',
+                'is-bg-blue-tiffany',
+                'is-bg-gold'
+                ],
+                [
+                'is-bg-gold-light',
+                'is-bg-cream',
+                'is-bg-olive',
+                'is-bg-white'
+                ],
+                [
+                'is-bg-black'
+                ]
+                ]
+                } %}
 
-                <h2>Named Colors</h2>
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Contextual Colors',
+                swatchType: 'color',
+                rows: [
+                [
+                'is-bg-primary',
+                'is-bg-info',
+                'is-bg-success',
+                'is-bg-warning'
+                ],[
+                'is-bg-danger',
+                'is-bg-light',
+                'is-bg-dark'
+                ]
+                ]
+                } %}
 
-                <hr>
-
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-blue-dark"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$blue-dark</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-blue-light"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$blue-light</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-blue-tiffany"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$blue-tiffany</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-gold"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$gold</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-gold-light"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$gold-light</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-cream"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$cream</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-olive"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$olive</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-white"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$white</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-black"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$black</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-blue-dark-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$blue-dark-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-blue-light-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$blue-light-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-blue-tiffany-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$blue-tiffany-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-gold-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$gold-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-gold-light-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$gold-light-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-cream-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$cream-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-olive-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$olive-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-white-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$white-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-black-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$black-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-
-                <hr>
-
-                <h2>Contextual Colors</h2>
-
-                <hr>
-
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-primary"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$primary</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-info"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$info</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-success"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$success</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-warning"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$warning</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-danger"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$danger</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-light"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$light</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-dark"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$dark</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-primary-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$primary-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-info-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$info-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-success-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$success-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-warning-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$warning-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-danger-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$danger-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-light-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$light-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'color-swatch'} %}
-                            {% block card_image %}
-                                <figure class="image is-4by3 is-bg-dark-invert"></figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>$dark-invert</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-
-                <hr>
-
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Fonts',
+                swatchType: 'type',
                 rows: [
                 [
                 'is-proxima-nova-bold',
@@ -382,8 +66,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Nav Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__nav-item-label',
@@ -392,8 +77,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Hero Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__hero-headline',
@@ -403,8 +89,9 @@
                 } %}
 
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Featured Projects Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__featured-projects-headline'
@@ -412,8 +99,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Featured Project Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__featured-project-title',
@@ -423,8 +111,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Primary CTA Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__primary-cta'
@@ -432,8 +121,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Content Tile Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__content-tile-primary-heading',
@@ -443,8 +133,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Callout Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__callout-heading',
@@ -453,8 +144,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Contact Us Section Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__contact-us-section-heading',
@@ -463,8 +155,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Footer Signup Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__footer-signup-heading',
@@ -473,8 +166,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Footer Links Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__footer-links'
@@ -482,8 +176,9 @@
                 ]
                 } %}
 
-                {% include 'partials/type/section.html.twig' with {
+                {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Footer Copy Typography',
+                swatchType: 'type',
                 rows: [
                 [
                 'type__footer-copy'

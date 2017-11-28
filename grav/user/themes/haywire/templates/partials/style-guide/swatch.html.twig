@@ -1,0 +1,15 @@
+{% set cardClass = "#{swatchType}-swatch" %}
+{% embed 'partials/card.html.twig' with { cardClass: cardClass } %}
+    {% block card_image %}
+        {% if swatchType == 'color' %}
+            <figure class="image is-4by3 {{ typeClass }}"></figure>
+        {% endif %}
+    {% endblock %}
+    {% block card_content %}
+        {% if swatchType == 'type' %}
+            <p class="{{ typeClass }}">Aa Zz</p>
+            <hr>
+        {% endif %}
+        <p>.{{ typeClass }}</p>
+    {% endblock %}
+{% endembed %}
