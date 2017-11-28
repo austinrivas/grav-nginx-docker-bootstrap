@@ -1,0 +1,5 @@
+<div class="columns">
+    {% for style in styles %}
+        {% include 'partials/type/swatch.html.twig' with { typeClass: style } %}
+    {% endfor %}
+</div>
