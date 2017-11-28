@@ -367,60 +367,129 @@
 
                 <hr>
 
-                <h2>Fonts</h2>
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Fonts',
+                rows: [
+                [
+                'is-proxima-nova-bold',
+                'is-proxima-nova-regular',
+                'is-eames-century-modern-regular'
+                ],
+                [
+                'is-family-sans-serif',
+                'is-family-serif'
+                ]
+                ]
+                } %}
 
-                <hr>
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Nav Typography',
+                rows: [
+                [
+                'type__nav-item-label',
+                'type__hero-content'
+                ]
+                ]
+                } %}
 
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'font-swatch'} %}
-                            {% block card_content %}
-                                <p class="is-proxima-nova-bold">Aa Zz</p>
-                                <hr>
-                                <p>$proxima-nova-bold-family</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'font-swatch'} %}
-                            {% block card_content %}
-                                <p class="is-proxima-nova-regular">Aa Zz</p>
-                                <hr>
-                                <p>$proxima-nova-regular-family</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'font-swatch'} %}
-                            {% block card_content %}
-                                <p class="is-eames-century-modern-regular">Aa Zz</p>
-                                <hr>
-                                <p>$eames-century-modern-regular-family</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Hero Typography',
+                rows: [
+                [
+                'type__hero-headline',
+                'type__hero-content'
+                ]
+                ]
+                } %}
 
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'font-swatch'} %}
-                            {% block card_content %}
-                                <p class="is-family-sans-serif">Aa Zz</p>
-                                <hr>
-                                <p>$family-sans-serif</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { 'cardClass': 'font-swatch'} %}
-                            {% block card_content %}
-                                <p class="is-family-serif">Aa Zz</p>
-                                <hr>
-                                <p>$family-serif</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
+
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Featured Projects Typography',
+                rows: [
+                [
+                'type__featured-projects-headline'
+                ]
+                ]
+                } %}
+
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Featured Project Typography',
+                rows: [
+                [
+                'type__featured-project-title',
+                'type__featured-project-callout',
+                'type__featured-project-details'
+                ]
+                ]
+                } %}
+
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Primary CTA Typography',
+                rows: [
+                [
+                'type__primary-cta'
+                ]
+                ]
+                } %}
+
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Content Tile Typography',
+                rows: [
+                [
+                'type__content-tile-primary-heading',
+                'type__content-tile-secondary-heading',
+                'type__content-tile-tile-content'
+                ]
+                ]
+                } %}
+
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Callout Typography',
+                rows: [
+                [
+                'type__callout-heading',
+                'type__callout-content'
+                ]
+                ]
+                } %}
+
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Contact Us Section Typography',
+                rows: [
+                [
+                'type__contact-us-section-heading',
+                'type__contact-us-section-content'
+                ]
+                ]
+                } %}
+
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Footer Signup Typography',
+                rows: [
+                [
+                'type__footer-signup-heading',
+                'type__footer-signup-content'
+                ]
+                ]
+                } %}
+
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Footer Links Typography',
+                rows: [
+                [
+                'type__footer-links'
+                ]
+                ]
+                } %}
+
+                {% include 'partials/type/section.html.twig' with {
+                sectionTitle: 'Footer Copy Typography',
+                rows: [
+                [
+                'type__footer-copy'
+                ]
+                ]
+                } %}
 
             </div>
         </div>
