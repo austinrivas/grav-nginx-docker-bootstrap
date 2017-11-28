@@ -1,0 +1,16 @@
+@mixin icon ($height, $mobile-height)
+    display: flex
+    height: $height
+    svg
+        height: $height
+    @include break-max($tablet)
+        height: $mobile-height
+        svg
+            height: $mobile-height
+
+
+.icon__logo--header
+    @include icon(57px, 28px)
+
+.icon__logo--footer
+    @include icon(57px, 37px)
