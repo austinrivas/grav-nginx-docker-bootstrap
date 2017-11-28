@@ -13,6 +13,35 @@
                     </div>
                 </div>
 
+                <div class="columns">
+                    <div class="column is-12">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'logo-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__logo--header'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__logo--header'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-12">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'logo-card' } %}
+                            {% block card_image %}
+                                <figure class="image is-bg-blue-dark">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__logo--footer'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__logo--footer'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                </div>
+
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Named Colors',
                 swatchType: 'color',

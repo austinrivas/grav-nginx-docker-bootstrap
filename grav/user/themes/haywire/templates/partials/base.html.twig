@@ -4,6 +4,7 @@
 <head>
     {% block head %}
         {% include 'partials/head.html.twig' %}
+        {%- include 'partials/svg-sprite.html.twig' -%}
     {% endblock %}
 </head>
 <body class="{{ page.header.body_classes }}">
@@ -12,7 +13,7 @@
 <div id="app">
 
     {% include 'partials/navbar.html.twig' %}
-    
+
     <section class="section">
         {% block content %}{% endblock %}
     </section>
