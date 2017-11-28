@@ -7,6 +7,8 @@
 
                 <div class="columns">
                     <div class="column content">
+                        <h1>Style Guide</h1>
+                        <hr>
                         {{ page.content }}
                     </div>
                 </div>
@@ -73,6 +75,16 @@
                 [
                 'type__nav-item-label',
                 'type__hero-content'
+                ]
+                ]
+                } only %}
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Favorites Typography',
+                swatchType: 'type',
+                rows: [
+                [
+                'type__favorites--label'
                 ]
                 ]
                 } only %}
@@ -228,6 +240,107 @@
                 rows: [
                 [
                 'type__property-description-toggle'
+                ]
+                ]
+                } only %}
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Content Section Typography',
+                swatchType: 'type',
+                rows: [
+                [
+                'type__content-section-heading',
+                'type__content-section-content'
+                ]
+                ]
+                } only %}
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Data Section Typography',
+                swatchType: 'type',
+                rows: [
+                [
+                'type__data-section-heading',
+                'type__data-section-content',
+                'type__data-section-value',
+                'type__data-section-label'
+                ]
+                ]
+                } only %}
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Affiliations Section Typography',
+                swatchType: 'type',
+                rows: [
+                [
+                'type__affiliations-section-heading',
+                'type__affiliations-section-content'
+                ]
+                ]
+                } only %}
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Contact Form Typography',
+                swatchType: 'type',
+                rows: [
+                [
+                'type__contact-form-heading',
+                'type__contact-form-label'
+                ]
+                ]
+                } only %}
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Contact Info Typography',
+                swatchType: 'type',
+                rows: [
+                [
+                'type__contact-info-heading',
+                'type__contact-info-subheading',
+                'type__contact-info-content'
+                ]
+                ]
+                } only %}
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Blog Post Typography',
+                swatchType: 'type',
+                rows: [
+                [
+                'type__blog-post--headline',
+                'type__blog-post--subheading',
+                'type__blog-post--author-name',
+                'type__blog-post--date'
+                ],[
+                'type__blog-post--image-caption',
+                'type__blog-post--content',
+                'type__blog-post--quotation',
+                'type__blog-post--tags-heading'
+                ],[
+                'type__blog-post--tag'
+                ]
+                ]
+                } only %}
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Media Tile Typography',
+                swatchType: 'type',
+                rows: [
+                [
+                'type__media-tile--heading-featured',
+                'type__media-tile--heading',
+                'type__media-tile--date',
+                'type__media-tile--caption'
+                ]
+                ]
+                } only %}
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Pagination Typography',
+                swatchType: 'type',
+                rows: [
+                [
+                'type__pagination--page-number'
                 ]
                 ]
                 } only %}
