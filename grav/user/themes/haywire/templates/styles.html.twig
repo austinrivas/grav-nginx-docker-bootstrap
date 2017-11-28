@@ -13,6 +13,10 @@
                     </div>
                 </div>
 
+                <h2>Logos</h2>
+
+                <hr>
+
                 <div class="columns">
                     <div class="column is-12">
                         {% embed 'partials/card.html.twig' with { cardClass: 'logo-card' } %}
@@ -37,6 +41,149 @@
                             {% endblock %}
                             {% block card_content %}
                                 <p>iconId: 'icon__logo--footer'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                </div>
+
+                <h2>Icons</h2>
+
+                <hr>
+
+                <div class="columns">
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__arrow-back'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__arrow-back'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__arrow-forward'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__arrow-back'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__favorite'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__arrow-back'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__favorite-selected'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__arrow-back'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__favorite-unselected'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__arrow-back'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__filter'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__arrow-back'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image is-bg-blue-dark">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__grid'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__arrow-back'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__hamburger-nav'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__arrow-back'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__link'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__link'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__mail'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__mail'</p>
+                            {% endblock %}
+                        {% endembed %}
+                    </div>
+                    <div class="column is-3">
+                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
+                            {% block card_image %}
+                                <figure class="image">
+                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__map'} %}
+                                </figure>
+                            {% endblock %}
+                            {% block card_content %}
+                                <p>iconId: 'icon__map'</p>
                             {% endblock %}
                         {% endembed %}
                     </div>
