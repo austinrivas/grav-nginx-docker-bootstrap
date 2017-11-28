@@ -1,9 +1,10 @@
 <div class="columns">
     {% for style in styles %}
-        <div class="column is-3">
+        <div class="column {{ columnClass | default('is-3') }}">
             {% include "partials/style-guide/swatch.html.twig" with {
+            cardClass: cardClass,
             swatchType: swatchType,
-            typeClass: style
+            style: style
             } only %}
         </div>
     {% endfor %}

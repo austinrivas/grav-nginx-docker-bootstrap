@@ -1,15 +1,31 @@
 {% set cardClass = "#{swatchType}-swatch" %}
+{% if swatchType == 'icon' %}
+    {% set iconId = style %}
+{% elseif swatchType == 'typography' %}
+    {% set typeClass = style  %}
+{% elseif swatchType == 'color' %}
+    {% set colorClass = style %}
+    {% set aspectRatio = 'is-4by3' %}
+{% endif %}
 {% embed 'partials/card.html.twig' with { cardClass: cardClass } %}
     {% block card_image %}
-        {% if swatchType == 'color' %}
-            <figure class="image is-4by3 {{ typeClass }}"></figure>
+        {% if swatchType == 'color' or swatchType == 'icon' %}
+            <figure class="image {{ aspectRatio }} {{ colorClass }}">
+                {% if swatchType == 'icon' %}
+                    {% include 'partials/svg-icon.html.twig' with { iconId: iconId } %}
+                {% endif %}
+            </figure>
         {% endif %}
     {% endblock %}
     {% block card_content %}
-        {% if swatchType == 'type' %}
+        {% if swatchType == 'icon' %}
+            <p>{{ iconId }}</p>
+        {% elseif swatchType == 'typography' %}
             <p class="{{ typeClass }}">Aa Zz</p>
             <hr>
+            <p>.{{ typeClass }}</p>
+        {% elseif swatchType == 'color' %}
+            <p>.{{ colorClass }}</p>
         {% endif %}
-        <p>.{{ typeClass }}</p>
     {% endblock %}
 {% endembed %}

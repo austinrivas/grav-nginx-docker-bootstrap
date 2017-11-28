@@ -2,6 +2,7 @@
 <hr>
 {% for styles in rows %}
     {% include "partials/style-guide/row.html.twig" with {
+    columnClass: columnClass,
     styles: styles,
     swatchType: swatchType
     } only %}

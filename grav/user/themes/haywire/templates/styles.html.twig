@@ -13,181 +13,39 @@
                     </div>
                 </div>
 
-                <h2>Logos</h2>
+                {% include 'partials/style-guide/section.html.twig' with {
+                columnClass: 'is-6',
+                sectionTitle: 'Logos',
+                swatchType: 'icon',
+                rows: [
+                [
+                'icon__logo--header',
+                'icon__logo--footer'
+                ]
+                ]
+                } only %}
 
-                <hr>
-
-                <div class="columns">
-                    <div class="column is-12">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'logo-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__logo--header'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__logo--header'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-12">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'logo-card' } %}
-                            {% block card_image %}
-                                <figure class="image is-bg-blue-dark">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__logo--footer'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__logo--footer'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-
-                <h2>Icons</h2>
-
-                <hr>
-
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__arrow-back'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__arrow-back'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__arrow-forward'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__arrow-back'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__favorite'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__arrow-back'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__favorite-selected'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__arrow-back'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__favorite-unselected'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__arrow-back'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__filter'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__arrow-back'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image is-bg-blue-dark">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__grid'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__arrow-back'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__hamburger-nav'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__arrow-back'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
-                <div class="columns">
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__link'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__link'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__mail'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__mail'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                    <div class="column is-3">
-                        {% embed 'partials/card.html.twig' with { cardClass: 'icon-card' } %}
-                            {% block card_image %}
-                                <figure class="image">
-                                    {% include 'partials/svg-icon.html.twig' with { iconId: 'icon__map'} %}
-                                </figure>
-                            {% endblock %}
-                            {% block card_content %}
-                                <p>iconId: 'icon__map'</p>
-                            {% endblock %}
-                        {% endembed %}
-                    </div>
-                </div>
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Icons',
+                swatchType: 'icon',
+                rows: [
+                [
+                'icon__arrow-back',
+                'icon__arrow-forward',
+                'icon__favorite',
+                'icon__favorite-selected'
+                ],[
+                'icon__favorite-unselected',
+                'icon__filter',
+                'icon__grid',
+                'icon__hamburger-nav'
+                ],[
+                'icon__link',
+                'icon__mail',
+                'icon__map'
+                ]
+                ]
+                } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Named Colors',
@@ -230,7 +88,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Fonts',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'is-proxima-nova-bold',
@@ -246,7 +104,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Nav Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__nav-item--label'
@@ -256,7 +114,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Favorites Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__favorites--label'
@@ -266,7 +124,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Hero Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__hero--headline',
@@ -278,7 +136,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Featured Projects Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__featured-projects--headline'
@@ -288,7 +146,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Featured Project Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__featured-project--title',
@@ -300,7 +158,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Primary CTA Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__primary--cta'
@@ -310,7 +168,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Content Tile Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__content-tile--primary-heading',
@@ -322,7 +180,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Callout Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__callout--heading',
@@ -333,7 +191,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Contact Us Section Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__contact-us-section--heading',
@@ -344,7 +202,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Footer Signup Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__footer-signup--heading',
@@ -355,7 +213,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Footer Links Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__footer--links'
@@ -365,7 +223,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Footer Copy Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__footer--copy'
@@ -375,7 +233,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Property Page Heading Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__property-page--headline',
@@ -387,7 +245,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Property Page Info Table Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__property-info--table-header',
@@ -398,7 +256,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Property Page Description Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__property-description--header',
@@ -411,7 +269,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Property Page Description Toggle Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__property-description--toggle'
@@ -421,7 +279,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Content Section Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__content-section--heading',
@@ -432,7 +290,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Data Section Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__data-section--heading',
@@ -445,7 +303,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Affiliations Section Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__affiliations-section--heading',
@@ -456,7 +314,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Contact Form Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__contact-form--heading',
@@ -467,7 +325,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Contact Info Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__contact-info--heading',
@@ -479,7 +337,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Blog Post Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__blog-post--headline',
@@ -499,7 +357,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Media Tile Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__media-tile--heading-featured',
@@ -512,7 +370,7 @@
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Pagination Typography',
-                swatchType: 'type',
+                swatchType: 'typography',
                 rows: [
                 [
                 'type__pagination--page-number'
