@@ -1,0 +1,36 @@
+{% set iconCardType = 'icon' %}
+{% set typographyCardType = 'typography' %}
+{% set colorCardType = 'color' %}
+{% set cardType = card.cardType %}
+{% set cardClass = "#{cardType}-style" %}
+{% set iconId = card.iconId %}
+{% set typographyClass = card.typographyClass %}
+{% set colorClass = card.colorClass %}
+{% set aspectRatio = card.aspectRatio %}
+
+{% if cardType == colorCardType %}
+    {% set aspectRatio = aspectRatio | default('is-4by3') %}
+{% endif %}
+
+{% embed 'partials/card.html.twig' with { cardClass: cardClass } %}
+    {% block card_image %}
+        {% if cardType == colorCardType or cardType == iconCardType %}
+            <figure class="image {{ aspectRatio }} {{ colorClass }}">
+                {% if cardType == 'icon' %}
+                    {% include 'partials/svg-icon.html.twig' with { iconId: iconId } %}
+                {% endif %}
+            </figure>
+        {% endif %}
+    {% endblock %}
+    {% block card_content %}
+        {% if cardType == iconCardType %}
+            <p>{{ iconId }}</p>
+        {% elseif cardType == typographyCardType %}
+            <p class="{{ typographyClass }}">Aa Zz</p>
+            <hr>
+            <p>.{{ typographyClass }}</p>
+        {% elseif cardType == colorCardType %}
+            <p>.{{ colorClass }}</p>
+        {% endif %}
+    {% endblock %}
+{% endembed %}

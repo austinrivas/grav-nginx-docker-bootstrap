@@ -1,3 +1,9 @@
+{% set halfRowCard = 'is-6' %}
+{% set iconCardType = 'icon' %}
+{% set typographyCardType = 'typography' %}
+{% set colorCardType = 'color' %}
+{% set darkBgColor = 'is-bg-blue-dark' %}
+
 {% extends 'partials/base.html.twig' %}
 
 {% block content %}
@@ -14,368 +20,431 @@
                 </div>
 
                 {% include 'partials/style-guide/section.html.twig' with {
-                columnClass: 'is-6',
                 sectionTitle: 'Logos',
-                swatchType: 'icon',
-                rows: [
-                [
-                'icon__logo--header',
-                'icon__logo--footer'
-                ]
+                cardsPerRow: 2,
+                cards: [
+                {
+                cardType: iconCardType,
+                iconId: 'icon__logo--header',
+                columnClass: halfRowCard
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__logo--footer',
+                columnClass: halfRowCard,
+                colorClass: darkBgColor
+                }
                 ]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Icons',
-                swatchType: 'icon',
-                rows: [
-                [
-                'icon__arrow-back',
-                'icon__arrow-forward',
-                'icon__favorite',
-                'icon__favorite-selected'
-                ],[
-                'icon__favorite-unselected',
-                'icon__filter',
-                'icon__grid',
-                'icon__hamburger-nav'
-                ],[
-                'icon__link',
-                'icon__mail',
-                'icon__map'
-                ]
+                cards: [
+                {
+                cardType: iconCardType,
+                iconId: 'icon__arrow-back'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__arrow-forward'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__favorite'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__favorite-selected'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__favorite-unselected'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__filter'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__grid'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__hamburger-nav'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__link'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__mail'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__map'
+                }
                 ]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Named Colors',
-                swatchType: 'color',
-                rows: [
-                [
-                'is-bg-blue-dark',
-                'is-bg-blue-light',
-                'is-bg-blue-tiffany',
-                'is-bg-gold'
-                ],
-                [
-                'is-bg-gold-light',
-                'is-bg-cream',
-                'is-bg-olive',
-                'is-bg-white'
-                ],
-                [
-                'is-bg-black'
-                ]
+                cards: [
+                {
+                cardType: colorCardType,
+                colorClass: 'is-bg-blue-dark'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-blue-light'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-blue-tiffany'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-gold'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-gold-light'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-cream'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-olive'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-white'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-black'
+                }
                 ]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Contextual Colors',
-                swatchType: 'color',
-                rows: [
-                [
-                'is-bg-primary',
-                'is-bg-info',
-                'is-bg-success',
-                'is-bg-warning'
-                ],[
-                'is-bg-danger',
-                'is-bg-light',
-                'is-bg-dark'
-                ]
-                ]
+                cards: [{
+                cardType: colorCardType,
+                colorClass: 'is-bg-primary'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-info'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-success'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-warning'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-danger'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-light'
+                },{
+                cardType: colorCardType,
+                colorClass: 'is-bg-dark'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Fonts',
-                swatchType: 'typography',
-                rows: [
-                [
-                'is-proxima-nova-bold',
-                'is-proxima-nova-regular',
-                'is-eames-century-modern-regular'
-                ],
-                [
-                'is-family-sans-serif',
-                'is-family-serif'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'is-proxima-nova-bold'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'is-proxima-nova-regular'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'is-eames-century-moder-regular'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'is-family-sans-serif'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'is-family-serif'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Nav Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__nav-item--label'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__nav-item--label'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Favorites Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__favorites--label'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__favorites--label'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Hero Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__hero--headline',
-                'type__hero--content'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__hero--headline'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__hero--content'
+                }]
                 } only %}
-
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Featured Projects Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__featured-projects--headline'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__featured-projects--headline'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Featured Project Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__featured-project--title',
-                'type__featured-project--callout',
-                'type__featured-project--details'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__featured-project--title'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__featured-project--callout'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__featured-project--details'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Primary CTA Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__primary--cta'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__primary--cta'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Content Tile Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__content-tile--primary-heading',
-                'type__content-tile--secondary-heading',
-                'type__content-tile--content'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__content-tile--primary-heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__content-tile--secondary-heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__content-tile--content'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Callout Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__callout--heading',
-                'type__callout--content'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__callout--heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__callout--content'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Contact Us Section Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__contact-us-section--heading',
-                'type__contact-us-section--content'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__contact-us-section--heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__contact-us-section--content'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
-                sectionTitle: 'Footer Signup Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__footer-signup--heading',
-                'type__footer-signup--content'
-                ]
-                ]
+                sectionTitle: 'Footer Signup Section Typography',
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__footer-signup--heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__footer-signup--content'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
-                sectionTitle: 'Footer Links Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__footer--links'
-                ]
-                ]
+                sectionTitle: 'Footer Links Section Typography',
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__footer--links'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
-                sectionTitle: 'Footer Copy Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__footer--copy'
-                ]
-                ]
+                sectionTitle: 'Footer Copy Section Typography',
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__footer--copy'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
-                sectionTitle: 'Property Page Heading Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__property-page--headline',
-                'type__property-page--subheading',
-                'type__property-page--bold-subheading'
-                ]
-                ]
+                sectionTitle: 'Property Page Heading Section Typography',
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-page--headline'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-page--subheading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-page--bold-subheading'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Property Page Info Table Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__property-info--table-header',
-                'type__property-info--table-cell'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-info--table-header'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-info--table-cell'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Property Page Description Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__property-description--header',
-                'type__property-description--content',
-                'type__property-description--subheading',
-                'type__property-description--info'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-description--header'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-description--content'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-description--subheading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-description--info'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Property Page Description Toggle Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__property-description--toggle'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__property-description--toggle'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Content Section Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__content-section--heading',
-                'type__content-section--content'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__content-section--heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__content-section--content'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Data Section Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__data-section--heading',
-                'type__data-section--content',
-                'type__data-section--value',
-                'type__data-section--label'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__data-section--heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__data-section--content'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__data-section--value'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__data-section--label'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Affiliations Section Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__affiliations-section--heading',
-                'type__affiliations-section--content'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__affiliations-section--heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__affiliations-section--content'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Contact Form Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__contact-form--heading',
-                'type__contact-form--label'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__contact-form--heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__contact-form--label'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Contact Info Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__contact-info--heading',
-                'type__contact-info--subheading',
-                'type__contact-info--content'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__contact-info--heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__contact-info--subheading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__contact-info--content'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Blog Post Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__blog-post--headline',
-                'type__blog-post--subheading',
-                'type__blog-post--author',
-                'type__blog-post--date'
-                ],[
-                'type__blog-post--image-caption',
-                'type__blog-post--content',
-                'type__blog-post--quotation',
-                'type__blog-post--tags-heading'
-                ],[
-                'type__blog-post--tag'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__blog-post--headline'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__blog-post--subheading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__blog-post--author'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__blog-post--date'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__blog-post--image-caption'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__blog-post--content'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__blog-post--quotation'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__blog-post--tags-heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__blog-post--tag'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Media Tile Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__media-tile--heading-featured',
-                'type__media-tile--heading',
-                'type__media-tile--date',
-                'type__media-tile--caption'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__media-tile--heading-featured'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__media-tile--heading'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__media-tile--date'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__media-tile--caption'
+                }]
                 } only %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Pagination Typography',
-                swatchType: 'typography',
-                rows: [
-                [
-                'type__pagination--page-number'
-                ]
-                ]
+                cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'type__pagination--page-number'
+                }]
                 } only %}
 
             </div>
