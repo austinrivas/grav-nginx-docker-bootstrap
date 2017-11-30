@@ -1,16 +1,79 @@
-@mixin icon ($height, $mobile-height)
+@mixin icon ($height, $width, $mobile-height: null, $mobile-width: null)
+
+    @if $mobile-height == null
+        $mobile-height: $height
+
+    @if $mobile-width == null
+        $mobile-width: $width
+
     display: flex
     height: $height
+    width: $width
     svg
         height: $height
+        width: $width
     @include break-max($tablet)
         height: $mobile-height
+        width: $mobile-width
         svg
             height: $mobile-height
+            width: $mobile-width
 
-
+$icon__logo--header--height: 57px
+$icon__logo--header--height-mobile: 28px
+$icon__logo--header--width: 303px
+$icon__logo--header--width-mobile: 145px
 .icon__logo--header
-    @include icon(57px, 28px)
+    @include icon($icon__logo--header--height, $icon__logo--header--width, $icon__logo--header--height-mobile, $icon__logo--header--width-mobile)
 
+$icon__logo--footer--height: $icon__logo--header--height
+$icon__logo--footer--height-mobile: 37px
+$icon__logo--footer--width: $icon__logo--header--width
+$icon__logo--footer--width-mobile: 200px
 .icon__logo--footer
-    @include icon(57px, 37px)
+    @include icon($icon__logo--footer--height, $icon__logo--footer--width, $icon__logo--footer--height-mobile, $icon__logo--footer--width-mobile)
+
+$icon__arrow--height: 7.94px
+$icon__arrow--width: 13.22px
+.icon__arrow-back, .icon__arrow-forward
+    @include icon($icon__arrow--height, $icon__arrow--width)
+
+$icon__favorite--height: 20.57px
+$icon__favorite--width: 24px
+.icon__favorite, .icon__favorite-selected, .icon__favorite-unselected
+    @include icon($icon__favorite--height, $icon__favorite--width)
+
+$icon__filter--height: 31.4px
+$icon__filter--width: 26.15px
+.icon__filter
+    @include icon($icon__filter--height, $icon__filter--width)
+
+$icon__grid--height: 32px
+$icon__grid--width: $icon__grid--height
+.icon__grid
+    @include icon($icon__grid--height, $icon__grid--width)
+
+$icon__map--height: 30.35px
+$icon__map--width: 33.3px
+.icon__map
+    @include icon($icon__map--height, $icon__map--width)
+
+$icon__hamburger-nav--height: 20px
+$icon__hamburger-nav--width: 24px
+.icon__hamburger-nav
+    @include icon($icon__hamburger-nav--height, $icon__hamburger-nav--width)
+
+$icon__mail--height: 31px
+$icon__mail--width: 46px
+.icon__mail
+    @include icon($icon__mail--height, $icon__mail--width)
+
+$icon__link--height: 36px
+$icon__link--width: $icon__link--height
+.icon__link
+    @include icon($icon__link--height, $icon__link--width)
+
+$icon__share--height: 22px
+$icon__share--width: 34px
+.icon__share
+    @include icon($icon__share--height, $icon__share--width)

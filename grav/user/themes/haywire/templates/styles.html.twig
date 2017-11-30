@@ -3,6 +3,7 @@
 {% set typographyCardType = 'typography' %}
 {% set colorCardType = 'color' %}
 {% set darkBgColor = 'is-bg-blue-dark' %}
+{% set goldBGColor = 'is-bg-gold-light' %}
 
 {% extends 'partials/base.html.twig' %}
 
@@ -47,31 +48,38 @@
                 iconId: 'icon__arrow-forward'
                 },{
                 cardType: iconCardType,
-                iconId: 'icon__favorite'
+                iconId: 'icon__favorite',
+                colorClass: goldBGColor
                 },{
                 cardType: iconCardType,
-                iconId: 'icon__favorite-selected'
+                iconId: 'icon__favorite-selected',
+                colorClass: goldBGColor
                 },{
                 cardType: iconCardType,
-                iconId: 'icon__favorite-unselected'
+                iconId: 'icon__favorite-unselected',
+                colorClass: goldBGColor
                 },{
                 cardType: iconCardType,
                 iconId: 'icon__filter'
                 },{
                 cardType: iconCardType,
-                iconId: 'icon__grid'
+                iconId: 'icon__grid',
+                colorClass: goldBGColor
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__map'
                 },{
                 cardType: iconCardType,
                 iconId: 'icon__hamburger-nav'
                 },{
                 cardType: iconCardType,
-                iconId: 'icon__link'
-                },{
-                cardType: iconCardType,
                 iconId: 'icon__mail'
                 },{
                 cardType: iconCardType,
-                iconId: 'icon__map'
+                iconId: 'icon__link'
+                },{
+                cardType: iconCardType,
+                iconId: 'icon__share'
                 }
                 ]
                 } only %}
