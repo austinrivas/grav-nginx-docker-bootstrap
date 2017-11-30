@@ -19,6 +19,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('navbar', require('./components/Navbar.vue'));
+Vue.component('arcmap', require('./components/ArcMap.vue'));
 
 const app = new Vue({
     el: '#app'
