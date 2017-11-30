@@ -8,7 +8,17 @@
         let map = {}, view = {}, layers = [], graphics = [];
 
         // first, we use Dojo's loader to require the map class
-        esriLoader.dojoRequire(["esri/Map", "esri/views/MapView", "esri/layers/FeatureLayer", "esri/symbols/SimpleMarkerSymbol", "esri/geometry/Point", "esri/Graphic", "esri/layers/GraphicsLayer"], (Map, MapView, FeatureLayer, SimpleMarkerSymbol, Point, Graphic, GraphicsLayer) => {
+        esriLoader.dojoRequire([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/FeatureLayer",
+            "esri/symbols/SimpleMarkerSymbol",
+            "esri/geometry/Point",
+            "esri/geometry/Polygon",
+            "esri/Graphic",
+            "esri/tasks/QueryTask",
+            "esri/tasks/support/Query"],
+            (Map, MapView, FeatureLayer, SimpleMarkerSymbol, Point, Polygon, Graphic, QueryTask, Query) => {
 
 
             function removeAllMarkers() {
@@ -21,7 +31,7 @@
                 return '<p>Test</p>'
             }
 
-            function addMapMarkerToDisplay(lonLat, filter, name, popupData) {
+            function addMapMarkerToDisplay(featureLayer, lonLat, filter, name, popupData, boundaryVertexes) {
 
                 // [-82.4285, 27.4417]
                 let pnt = new Point({
@@ -40,12 +50,16 @@
                             width: "0.5px"
                         }
                     }),
-                    layer: fl,
+                    layer: featureLayer,
                     popupTemplate: {
                         title: name,
                         content: createMarkerContent(popupData)
                     }
                 });
+
+                if (boundaryVertexes && boundaryVertexes.length) {
+                    let boundary = new Polygon(boundaryVertexes);
+                }
 
                 graphics.push({graphic: gr, 'filter': filter});
                 view.graphics.add(gr)
@@ -54,11 +68,15 @@
 
 
             map = new Map({
-                basemap: "streets"
+                basemap: "topo-vector"
             });
 
-            let fl = new FeatureLayer({url: 'http://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/1_to_2_Acres/FeatureServer/0'});
+            let lwrCommercialParcelsFeatureServer = {url: 'https://services5.arcgis.com/pGZTLavDTVHngCQj/ArcGIS/rest/services/LWR_Commercial_Parcels/FeatureServer/0'};
 
+            let parcelsFeatureLayer = new FeatureLayer(lwrCommercialParcelsFeatureServer);
+            let queryTask = new QueryTask(lwrCommercialParcelsFeatureServer);
+
+            let query = new Query();
             //https://lwrcommercial.local/app/uploads/2017/08/678111-map-marker-256.png
 
             // LWR lng, lat: 27.411704, -82.428515
@@ -77,22 +95,22 @@
                 // addMapMarkerToDisplay([areas[i].latitude, areas[i].longitude], areas[i].name, areas[i].data)
                 for (let ii = areas[i].properties.length - 1; ii >= 0; ii--) {
                     addMapMarkerToDisplay(
+                        parcelsFeatureLayer,
                         [areas[i].properties[ii].latitude, areas[i].properties[ii].longitude],
                         areas[i].name,
                         areas[i].properties[ii].name,
-                        areas[i].properties[ii].data
+                        areas[i].properties[ii].data,
+                        areas[i].properties[ii].boundaryVertexes
                     );
                 }
             }
 
 
-            map.layers.add(fl);
+            map.layers.add(parcelsFeatureLayer);
 
 
             // Bind to all filters
             $("#map-filters li input").on('change', function (e) {
-
-                console.log('filter change event handler', e);
 
                 removeAllMarkers();
 
@@ -109,7 +127,15 @@
 
                 filtered.map(function (gr) {
                     view.graphics.add(gr.graphic)
-                })
+                });
+
+                queryTask.execute(query)
+                    .then((results)=>{
+                        console.log('query results', results);
+                    }, (error) => {
+                        console.log('query error', error);
+                    });
+
 
             });
 
@@ -189,6 +215,9 @@
                         // once it's loaded, create the map
                         new PropertyMap(areas)
                     }
+                }, {
+                    // use a specific version instead of latest 4.x
+                    url: 'https://js.arcgis.com/4.4/'
                 });
             }
         }
