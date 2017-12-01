@@ -77,6 +77,9 @@
             let queryTask = new QueryTask(lwrCommercialParcelsFeatureServer);
 
             let query = new Query();
+            query.returnGeometry = true;
+            query.outFields = ["*"];
+            query.where = 'Property_I = 579101259';
             //https://lwrcommercial.local/app/uploads/2017/08/678111-map-marker-256.png
 
             // LWR lng, lat: 27.411704, -82.428515
