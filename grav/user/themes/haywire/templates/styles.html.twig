@@ -3,6 +3,7 @@
 {% set inputCardType = 'input' %}
 {% set textAreaInputType = 'textarea' %}
 {% set selectInputType = 'select' %}
+{% set checkboxInputType = 'checkbox' %}
 {% set buttonCardType = 'button' %}
 {% set typographyCardType = 'typography' %}
 {% set colorCardType = 'color' %}
@@ -55,6 +56,10 @@
                 value: '2',
                 text: "two"
                 }]
+                },{
+                cardType: inputCardType,
+                inputType: checkboxInputType,
+                inputClass: 'is-primary-invert'
                 }
                 ]
                 } %}
@@ -441,6 +446,9 @@
                 },{
                 cardType: typographyCardType,
                 typographyClass: 'type__contact-form--label'
+                },{
+                cardType: typographyCardType,
+                typographyClass: 'type__contact-form-checkbox-label'
                 }]
                 } only %}
 
