@@ -4,10 +4,12 @@
 
 {% set inputCardType = 'input' %}
 {% set inputTemplate = 'partials/elements/input.html.twig' %}
+{% set textAreaTemplate = 'partials/elements/textarea.html.twig' %}
 {% set inputType = card.inputType %}
 {% set inputClass = card.inputClass %}
 {% set inputPlaceholder = card.inputPlaceholder | default('FIRST NAME') %}
 {% set textInputType = 'text' %}
+{% set textAreaInputType = 'textarea' %}
 
 {% set iconCardType = 'icon' %}
 {% set iconId = card.iconId %}
@@ -47,6 +49,11 @@
                     inputClass: inputClass,
                     placeholder: inputPlaceholder
                 } only %}
+            {% elseif inputType == textAreaInputType %}
+                {% include textAreaTemplate with {
+                    inputClass: inputClass,
+                    placeholder: inputPlaceholder
+                } %}
             {% endif %}
         {% endif %}
     {% endblock %}
@@ -62,7 +69,11 @@
         {% elseif cardType == buttonCardType %}
             <p>.button.{{ buttonClass }}</p>
         {% elseif cardType == inputCardType %}
-            <p>input[type="{{ inputType }}"].{{ inputClass }}</p>
+            {% if inputType == textInputType %}
+                <p>input[type="{{ inputType }}"].input.{{ inputClass }}</p>
+            {% elseif inputType == textAreaInputType %}
+                <p>.textarea.{{ inputClass }}</p>
+            {% endif %}
         {% endif %}
     {% endblock %}
 {% endembed %}
