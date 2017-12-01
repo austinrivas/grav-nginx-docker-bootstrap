@@ -22,6 +22,15 @@ $input__width: 100%
     @include break-max($tablet)
         height: 45px
 
+@mixin select-arrow($color, $size: 16px, $margin-top: -13px, $border-width: 1px)
+    &:not(.is-multiple)::after
+        border: $border-width solid $color
+        border-right: 0
+        border-top: 0
+        height: $size
+        width: $size
+        margin-top: $margin-top
+
 .input
     &.is-primary, &.is-primary-invert
         @extend .type__placeholder
@@ -34,9 +43,18 @@ $input__width: 100%
         resize: none
 
 .select
-    &.is-primary-invert
+    select:required:invalid
+        color: gray
+    option
         @extend .type__placeholder
+        &[value=""][disabled]
+            display: none
+    &.is-primary-invert
         @extend .input__size
+        @include select-arrow($primary-invert)
+        &:not(.is-multiple)
+            @extend .input__size
         select
             @extend .input__size
             @extend .input__padding
+
