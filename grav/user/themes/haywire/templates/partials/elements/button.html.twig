@@ -1,3 +1,13 @@
-<button class="button {{ class }}">
-    {% block button_content %}{% endblock %}
-</button>
+{% if addons %}
+    <div class="buttons {{ class }}">
+        {% for addon in addons %}
+            <span class="button {{ addon.class }}" {% if addon.disabled %} disabled{% endif %}>
+                {{ addon.content }}
+            </span>
+        {% endfor %}
+    </div>
+{% else %}
+    <button class="button {{ class }}" {% if disabled %} disabled{% endif %}>
+        {% block button_content %}{% if content %}{{ content }}{% endif %}{% endblock %}
+    </button>
+{% endif %}

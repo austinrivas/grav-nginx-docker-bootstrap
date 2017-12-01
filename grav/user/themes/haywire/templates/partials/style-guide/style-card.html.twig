@@ -14,6 +14,11 @@
 {% set textAreaInputType = 'textarea' %}
 {% set selectInputType = 'select' %}
 {% set checkboxInputType = 'checkbox' %}
+{% set iconCardType = 'icon' %}
+{% set buttonCardType = 'button' %}
+{% set typographyCardType = 'typography' %}
+{% set colorCardType = 'color' %}
+
 {% set inputType = card.inputType %}
 {% set inputClass = card.inputClass %}
 {% set inputDisabled = card.disabled %}
@@ -22,17 +27,14 @@
 {% set selectOptions = card.selectOptions %}
 {% set checkboxLabel = card.checkboxLabel | default('Click Me') %}
 
-{% set iconCardType = 'icon' %}
 {% set iconId = card.iconId %}
 
-{% set buttonCardType = 'button' %}
 {% set buttonClass = card.buttonClass %}
 {% set buttonContent = card.buttonContent | default('Click Here') %}
+{% set buttonAddons = card.addons %}
 
-{% set typographyCardType = 'typography' %}
 {% set typographyClass = card.typographyClass %}
 
-{% set colorCardType = 'color' %}
 {% set colorClass = card.colorClass %}
 
 {% set aspectRatio = card.aspectRatio %}
@@ -53,10 +55,13 @@
         {% if cardType == buttonCardType %}
             {% embed buttonTemplate with {
                 class: buttonClass,
+                addons: buttonAddons
             } %}
-                {% block button_content %}
-                    {{ buttonContent }}
-                {% endblock %}
+                {% if buttonContent %}
+                    {% block button_content %}
+                        {{ buttonContent }}
+                    {% endblock %}
+                {% endif %}
             {% endembed %}
         {% endif %}
         {% if cardType == inputCardType %}
