@@ -10,12 +10,23 @@
 
 $proxima-nova-bold: "ProximaNova-Bold"
 $proxima-nova-bold-family: $proxima-nova-bold, sans-serif
-@include font_face($proxima-nova-bold, bold)
 
 $proxima-nova-regular: "ProximaNova-Reg"
 $proxima-nova-regular-family: $proxima-nova-regular, sans-serif
-@include font_face($proxima-nova-regular)
 
 $eames-century-modern-regular: "EamesCenturyModern-Regular"
 $eames-century-modern-regular-family: $eames-century-modern-regular, serif
-@include font_face($eames-century-modern-regular)
+
+$family-sans-serif: $proxima-nova-regular-family
+$family-serif: $eames-century-modern-regular-family
+$family-monospace: monospace
+
+$family-primary: $family-sans-serif
+$family-code: $family-monospace
+
+$fonts: ("primary": $family-primary, $proxima-nova-bold: $proxima-nova-bold-family, $proxima-nova-regular: $proxima-nova-regular-family, $eames-century-modern-regular: $eames-century-modern-regular-family)
+
+@each $name, $family in $fonts
+    @include font_face($eames-century-modern-regular)
+    .is-#{$name}
+        font-family: $family
