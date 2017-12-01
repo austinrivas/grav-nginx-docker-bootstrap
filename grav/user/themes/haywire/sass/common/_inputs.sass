@@ -1,0 +1,20 @@
+$control-radius: $radius
+$control-radius-small: $radius-small
+$control-padding-vertical: calc(0.375em - 1px)
+$control-padding-horizontal: calc(0.625em - 1px)
+$label-color: $grey-darker
+$label-weight: $weight-bold
+$help-size: $size-small
+
+.input
+    &.is-primary, &.is-primary-invert
+        height: 60px
+        padding-left: 33px
+        @include break-max($tablet)
+            height: 45px
+            width: 100%
+            padding-left: 25px
+    &.is-primary
+        width: 319px
+    &.is-primary-invert
+        width: 382px

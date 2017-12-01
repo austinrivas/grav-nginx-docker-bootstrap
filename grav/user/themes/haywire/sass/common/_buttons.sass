@@ -21,10 +21,10 @@ $button-static-background-color: $white-ter
 $button-static-border-color: $grey-lighter
 
 .button
-    @extend .type__primary-cta
-    margin: 25px
     text-transform: uppercase
     &.is-primary, &.is-primary-invert
+        @extend .type__primary-cta
+        margin: 25px
         height: 60px
         width: 260px
         @include break-max($tablet)
