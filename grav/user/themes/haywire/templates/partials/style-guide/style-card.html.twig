@@ -1,30 +1,53 @@
-{% set buttonCardType = 'button' %}
-{% set iconCardType = 'icon' %}
-{% set typographyCardType = 'typography' %}
-{% set colorCardType = 'color' %}
 {% set cardType = card.cardType %}
 {% set cardClass = "#{cardType}-style" %}
+{% set cardTemplate = 'partials/card.html.twig' %}
+
+{% set inputCardType = 'input' %}
+{% set inputTemplate = 'partials/elements/input.html.twig' %}
+{% set inputType = card.inputType %}
+{% set inputClass = card.inputClass %}
+{% set inputPlaceholder = card.inputPlaceholder | default('FIRST NAME') %}
+{% set textInputType = 'text' %}
+
+{% set iconCardType = 'icon' %}
 {% set iconId = card.iconId %}
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+
+{% set buttonCardType = 'button' %}
 {% set buttonClass = card.buttonClass %}
+
+{% set typographyCardType = 'typography' %}
 {% set typographyClass = card.typographyClass %}
+
+{% set colorCardType = 'color' %}
 {% set colorClass = card.colorClass %}
+
 {% set aspectRatio = card.aspectRatio %}
 
 {% if cardType == colorCardType %}
     {% set aspectRatio = aspectRatio | default('is-4by3') %}
 {% endif %}
 
-{% embed 'partials/card.html.twig' with { cardClass: cardClass } %}
+{% embed cardTemplate with { cardClass: cardClass } %}
     {% block card_image %}
         {% if cardType == colorCardType or cardType == iconCardType %}
             <figure class="image {{ aspectRatio }} {{ colorClass }}">
-                {% if cardType == 'icon' %}
-                    {% include 'partials/svg-icon.html.twig' with { iconId: iconId } %}
+                {% if cardType == iconCardType %}
+                    {% include iconTemplate with { iconId: iconId } %}
                 {% endif %}
             </figure>
         {% endif %}
         {% if cardType == buttonCardType %}
             <button class="button {{ buttonClass }}">Click Here</button>
+        {% endif %}
+        {% if cardType == inputCardType %}
+            {% if inputType == textInputType %}
+                {% include inputTemplate with {
+                    inputType: inputType,
+                    inputClass: inputClass,
+                    placeholder: inputPlaceholder
+                } only %}
+            {% endif %}
         {% endif %}
     {% endblock %}
     {% block card_content %}
@@ -38,6 +61,8 @@
             <p>.{{ colorClass }}</p>
         {% elseif cardType == buttonCardType %}
             <p>.button.{{ buttonClass }}</p>
+        {% elseif cardType == inputCardType %}
+            <p>input[type="{{ inputType }}"].{{ inputClass }}</p>
         {% endif %}
     {% endblock %}
 {% endembed %}

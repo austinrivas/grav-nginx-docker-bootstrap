@@ -1,5 +1,6 @@
 {% set halfRowCard = 'is-6' %}
 {% set iconCardType = 'icon' %}
+{% set inputCardType = 'input' %}
 {% set buttonCardType = 'button' %}
 {% set typographyCardType = 'typography' %}
 {% set colorCardType = 'color' %}
@@ -20,6 +21,21 @@
                         {{ page.content }}
                     </div>
                 </div>
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Form Elements',
+                cardsPerRow: 2,
+                cards: [{
+                cardType: inputCardType,
+                inputType: 'text',
+                inputClass: 'is-primary'
+                },{
+                cardType: inputCardType,
+                inputType: 'text',
+                inputClass: 'is-primary-invert'
+                }
+                ]
+                } %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Buttons',
