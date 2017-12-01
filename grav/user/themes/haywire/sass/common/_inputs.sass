@@ -6,16 +6,28 @@ $label-color: $grey-darker
 $label-weight: $weight-bold
 $help-size: $size-small
 
+$input__padding-left: 33px
+$input__padding-left--mobile: 25px
+.input__padding
+    padding-left: $input__padding-left
+    @include break-max($tablet)
+        padding-left: $input__padding-left--mobile
+
 .input
     &.is-primary, &.is-primary-invert
         @extend .type__placeholder
+        @extend .input__padding
         height: 60px
-        padding-left: 33px
         @include break-max($tablet)
             height: 45px
             width: 100%
-            padding-left: 25px
     &.is-primary
         width: 319px
     &.is-primary-invert
         width: 382px
+
+.textarea
+    &.is-primary-invert
+        @extend .type__placeholder
+        resize: none
+
