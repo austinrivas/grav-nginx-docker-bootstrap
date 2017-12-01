@@ -46,7 +46,6 @@ $input__width: 100%
     select:required:invalid
         color: gray
     option
-        @extend .type__placeholder
         &[value=""][disabled]
             display: none
     &.is-primary-invert
@@ -57,4 +56,6 @@ $input__width: 100%
         select
             @extend .input__size
             @extend .input__padding
+            @extend .type__placeholder
+            color: $primary
 
