@@ -1,6 +1,8 @@
 {% set halfRowCard = 'is-6' %}
 {% set iconCardType = 'icon' %}
 {% set inputCardType = 'input' %}
+{% set textAreaInputType = 'textarea' %}
+{% set selectInputType = 'select' %}
 {% set buttonCardType = 'button' %}
 {% set typographyCardType = 'typography' %}
 {% set colorCardType = 'color' %}
@@ -35,9 +37,21 @@
                 inputClass: 'is-primary-invert'
                 },{
                 cardType: inputCardType,
-                inputType: 'textarea',
+                inputType: textAreaInputType,
                 inputClass: 'is-primary-invert',
                 inputPlaceholder: ' '
+                },{
+                cardType: inputCardType,
+                inputType: selectInputType,
+                inputClass: 'is-primary-invert',
+                selectOptions: [{
+                value: '1',
+                text: "one"
+                },{
+                value: '2',
+                text: "two",
+                selected: true
+                }]
                 }
                 ]
                 } %}

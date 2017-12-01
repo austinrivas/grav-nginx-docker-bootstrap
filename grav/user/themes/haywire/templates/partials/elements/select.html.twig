@@ -1,0 +1,7 @@
+<div class="select {{ inputClass }}">
+    <select>
+        {% for option in options %}
+            <option value="{{ option.value }}" {% if option.selected %}selected{% endif %}>{{ option.text }}</option>
+        {% endfor %}
+    </select>
+</div>

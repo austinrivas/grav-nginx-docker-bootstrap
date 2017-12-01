@@ -13,21 +13,30 @@ $input__padding-left--mobile: 25px
     @include break-max($tablet)
         padding-left: $input__padding-left--mobile
 
+$input__height: 60px
+$input__height--mobile: 45px
+$input__width: 100%
+.input__size
+    height: 60px
+    width: 100%
+    @include break-max($tablet)
+        height: 45px
+
 .input
     &.is-primary, &.is-primary-invert
         @extend .type__placeholder
         @extend .input__padding
-        height: 60px
-        @include break-max($tablet)
-            height: 45px
-            width: 100%
-    &.is-primary
-        width: 319px
-    &.is-primary-invert
-        width: 382px
+        @extend .input__size
 
 .textarea
     &.is-primary-invert
         @extend .type__placeholder
         resize: none
 
+.select
+    &.is-primary-invert
+        @extend .type__placeholder
+        @extend .input__size
+        select
+            @extend .input__size
+            @extend .input__padding
