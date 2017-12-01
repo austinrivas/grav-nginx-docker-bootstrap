@@ -2,24 +2,32 @@
 {% set cardClass = "#{cardType}-style" %}
 {% set cardTemplate = 'partials/card.html.twig' %}
 
-{% set inputCardType = 'input' %}
 {% set inputTemplate = 'partials/elements/input.html.twig' %}
 {% set textAreaTemplate = 'partials/elements/textarea.html.twig' %}
 {% set selectInputTemplate = 'partials/elements/select.html.twig' %}
-{% set inputType = card.inputType %}
-{% set inputClass = card.inputClass %}
-{% set inputPlaceholder = card.inputPlaceholder | default('FIRST NAME') %}
+{% set checkboxInputTemplate = 'partials/elements/checkbox.html.twig' %}
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+{% set inputCardType = 'input' %}
 {% set textInputType = 'text' %}
 {% set textAreaInputType = 'textarea' %}
 {% set selectInputType = 'select' %}
+{% set checkboxInputType = 'checkbox' %}
+{% set inputType = card.inputType %}
+{% set inputClass = card.inputClass %}
+{% set inputDisabled = card.disabled %}
+{% set inputChecked = card.checked %}
+{% set inputPlaceholder = card.inputPlaceholder | default('FIRST NAME') %}
 {% set selectOptions = card.selectOptions %}
+{% set checkboxLabel = card.checkboxLabel | default('Click Me') %}
 
 {% set iconCardType = 'icon' %}
 {% set iconId = card.iconId %}
-{% set iconTemplate = 'partials/svg-icon.html.twig' %}
 
 {% set buttonCardType = 'button' %}
 {% set buttonClass = card.buttonClass %}
+{% set buttonContent = card.buttonContent | default('Click Here') %}
 
 {% set typographyCardType = 'typography' %}
 {% set typographyClass = card.typographyClass %}
@@ -43,7 +51,13 @@
             </figure>
         {% endif %}
         {% if cardType == buttonCardType %}
-            <button class="button {{ buttonClass }}">Click Here</button>
+            {% embed buttonTemplate with {
+                class: buttonClass,
+            } %}
+                {% block button_content %}
+                    {{ buttonContent }}
+                {% endblock %}
+            {% endembed %}
         {% endif %}
         {% if cardType == inputCardType %}
             {% if inputType == textInputType %}
@@ -62,11 +76,19 @@
                     inputClass: inputClass,
                     options: selectOptions
                 } %}
+            {% elseif inputType == checkboxInputType %}
+                {% include checkboxInputTemplate with {
+                    inputClass: inputClass,
+                    checked: inputChecked,
+                    disabled: inputDisabled,
+                    label: checkboxLabel
+                } %}
             {% endif %}
         {% endif %}
     {% endblock %}
     {% block card_content %}
         {% if cardType == iconCardType %}
+            {% set template = iconTemplate %}
             <p>{{ iconId }}</p>
         {% elseif cardType == typographyCardType %}
             <p class="{{ typographyClass }}">Aa Zz</p>
@@ -75,15 +97,25 @@
         {% elseif cardType == colorCardType %}
             <p>.{{ colorClass }}</p>
         {% elseif cardType == buttonCardType %}
+            {% set template = buttonTemplate %}
             <p>.button.{{ buttonClass }}</p>
         {% elseif cardType == inputCardType %}
             {% if inputType == textInputType %}
+                {% set template = inputTemplate %}
                 <p>input[type="{{ inputType }}"].input.{{ inputClass }}</p>
             {% elseif inputType == textAreaInputType %}
+                {% set template = textAreaTemplate %}
                 <p>.textarea.{{ inputClass }}</p>
             {% elseif inputType == selectInputType %}
+                {% set template = selectInputTemplate %}
                 <p>.select.{{ inputClass }}</p>
+            {% elseif inputType == checkboxInputType %}
+                {% set template = checkboxInputTemplate %}
+                <p>label.checkbox.{{ inputClass }}</p>
             {% endif %}
+        {% endif %}
+        {% if template %}
+            <p>Template : {{ template }}</p>
         {% endif %}
     {% endblock %}
 {% endembed %}
