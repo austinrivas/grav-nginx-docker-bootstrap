@@ -1,5 +1,6 @@
 {% set halfRowCard = 'is-6' %}
 {% set iconCardType = 'icon' %}
+{% set buttonCardType = 'button' %}
 {% set typographyCardType = 'typography' %}
 {% set colorCardType = 'color' %}
 {% set darkBgColor = 'is-bg-blue-dark' %}
@@ -19,6 +20,21 @@
                         {{ page.content }}
                     </div>
                 </div>
+
+                {% include 'partials/style-guide/section.html.twig' with {
+                sectionTitle: 'Buttons',
+                cardsPerRow: 2,
+                cards: [{
+                cardType: buttonCardType,
+                buttonClass: 'is-primary'
+                },{
+                cardType: buttonCardType,
+                buttonClass: 'is-primary-invert'
+                },{
+                cardType: buttonCardType,
+                buttonClass: 'is-favorite'
+                }]
+                } %}
 
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Logos',
@@ -125,6 +141,9 @@
                 colorClass: 'is-bg-primary'
                 },{
                 cardType: colorCardType,
+                colorClass: 'is-bg-primary-invert'
+                },{
+                cardType: colorCardType,
                 colorClass: 'is-bg-info'
                 },{
                 cardType: colorCardType,
@@ -147,6 +166,9 @@
                 {% include 'partials/style-guide/section.html.twig' with {
                 sectionTitle: 'Fonts',
                 cards: [{
+                cardType: typographyCardType,
+                typographyClass: 'is-family-primary'
+                },{
                 cardType: typographyCardType,
                 typographyClass: 'is-proxima-nova-bold'
                 },{
@@ -217,7 +239,7 @@
                 sectionTitle: 'Primary CTA Typography',
                 cards: [{
                 cardType: typographyCardType,
-                typographyClass: 'type__primary--cta'
+                typographyClass: 'type__primary-cta'
                 }]
                 } only %}
 
