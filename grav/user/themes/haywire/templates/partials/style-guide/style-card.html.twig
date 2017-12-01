@@ -1,9 +1,11 @@
+{% set buttonCardType = 'button' %}
 {% set iconCardType = 'icon' %}
 {% set typographyCardType = 'typography' %}
 {% set colorCardType = 'color' %}
 {% set cardType = card.cardType %}
 {% set cardClass = "#{cardType}-style" %}
 {% set iconId = card.iconId %}
+{% set buttonClass = card.buttonClass %}
 {% set typographyClass = card.typographyClass %}
 {% set colorClass = card.colorClass %}
 {% set aspectRatio = card.aspectRatio %}
@@ -21,6 +23,9 @@
                 {% endif %}
             </figure>
         {% endif %}
+        {% if cardType == buttonCardType %}
+            <button class="button {{ buttonClass }}">Click Here</button>
+        {% endif %}
     {% endblock %}
     {% block card_content %}
         {% if cardType == iconCardType %}
@@ -31,6 +36,8 @@
             <p>.{{ typographyClass }}</p>
         {% elseif cardType == colorCardType %}
             <p>.{{ colorClass }}</p>
+        {% elseif cardType == buttonCardType %}
+            <p>.button.{{ buttonClass }}</p>
         {% endif %}
     {% endblock %}
 {% endembed %}
