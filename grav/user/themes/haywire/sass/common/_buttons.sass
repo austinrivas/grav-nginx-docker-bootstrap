@@ -20,6 +20,14 @@ $button-static-color: $grey
 $button-static-background-color: $white-ter
 $button-static-border-color: $grey-lighter
 
+@mixin disabled-button($color: $primary-invert, $border-color: $primary-invert, $background-color: $white)
+    &[disabled]
+        background-color: $background-color !important
+        color: $color !important
+        border-color: $border-color !important
+        svg
+            fill: $color
+
 .button
     text-transform: uppercase
     &.is-primary, &.is-primary-invert
@@ -38,19 +46,32 @@ $button-static-border-color: $grey-lighter
         width: 118px
 
 .buttons
-    height: 40px
-    &.is-primary-invert
+    .button
+        margin: 0 !important
+        &:not(:last-child)
+            margin-right: 0 !important
+
+    &.is-blog-button-group
+        @extend .is-primary-invert
+        height: 40px
+        width: auto !important
         .button
+            @include disabled-button
             @extend .is-primary-invert
             @extend .type__button-group-cta
             height: 40px
-            margin: 0
-            width: auto
+            width: auto !important
             color: $white !important
-            &[disabled]
-                background-color: $white !important
-                color: $primary-invert !important
-                border-color: $primary-invert !important
-            &:not(:last-child)
-                margin-right: 0
+
+    &.is-filter-button-group
+        @extend .is-gold
+        height: 60px
+        .button
+            @include disabled-button($gold, $gold)
+            @extend .is-gold
+            @extend .is-icon-white
+            height: 60px
+            width: 60px
+            color: $gold !important
+
 
