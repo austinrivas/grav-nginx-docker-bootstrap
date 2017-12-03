@@ -38,4 +38,19 @@ $button-static-border-color: $grey-lighter
         width: 118px
 
 .buttons
+    height: 40px
     &.is-primary-invert
+        .button
+            @extend .is-primary-invert
+            @extend .type__button-group-cta
+            height: 40px
+            margin: 0
+            width: auto
+            color: $white !important
+            &[disabled]
+                background-color: $white !important
+                color: $primary-invert !important
+                border-color: $primary-invert !important
+            &:not(:last-child)
+                margin-right: 0
+
