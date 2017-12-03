@@ -1,8 +1,15 @@
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
 {% if addons %}
     <div class="buttons {{ class }}">
         {% for addon in addons %}
             <span class="button {{ addon.class }}" {% if addon.disabled %} disabled{% endif %}>
-                {{ addon.content }}
+                {% if addon.content %}{{ addon.content }}{% endif %}
+                {% if addon.iconId %}
+                    {% include iconTemplate with {
+                        iconId: addon.iconId,
+                        contextualClass: addon.contextualClass
+                    } only %}
+                {% endif %}
             </span>
         {% endfor %}
     </div>
