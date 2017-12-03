@@ -15,6 +15,14 @@
     </div>
 {% else %}
     <button class="button {{ class }}" {% if disabled %} disabled{% endif %}>
-        {% block button_content %}{% if content %}{{ content }}{% endif %}{% endblock %}
+        {% if iconId %}
+            {% include iconTemplate with {
+            iconId: iconId
+            } only %}
+        {% elseif content %}
+            {% block button_content %}
+                {{ content }}
+            {% endblock %}
+        {% endif %}
     </button>
 {% endif %}

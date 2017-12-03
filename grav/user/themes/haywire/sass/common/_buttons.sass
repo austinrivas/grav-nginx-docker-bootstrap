@@ -28,22 +28,32 @@ $button-static-border-color: $grey-lighter
         svg
             fill: $color
 
+$button-height: 60px
+$button-height--mobile: 45px
+$button-margin: 25px
 .button
     text-transform: uppercase
     &.is-primary, &.is-primary-invert
         @extend .type__primary-cta
-        margin: 25px
-        height: 60px
+        margin: $button-margin
+        height: $button-height
         width: 260px
         @include break-max($tablet)
-            margin: 25px 0 25px 0
-            height: 45px
+            margin: $button-margin 0 $button-margin 0
+            height: $button-height--mobile
             width: 100%
     &.is-favorite
         @extend .type__favorites--label
         @extend .is-blue-light
-        height: 45px
+        height: $button-height--mobile
         width: 118px
+
+    &.is-icon-button
+        @extend .is-white
+        @extend .is-icon-gold
+        border: 1px solid $gold !important
+        width: $button-height
+        height: $button-height
 
 .buttons
     .button
@@ -65,13 +75,13 @@ $button-static-border-color: $grey-lighter
 
     &.is-filter-button-group
         @extend .is-gold
-        height: 60px
+        height: $button-height
         .button
             @include disabled-button($gold, $gold)
             @extend .is-gold
             @extend .is-icon-white
-            height: 60px
-            width: 60px
+            height: $button-height
+            width: $button-height
             color: $gold !important
 
 
