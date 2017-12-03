@@ -103,7 +103,7 @@
             <p>.{{ colorClass }}</p>
         {% elseif cardType == buttonCardType %}
             {% set template = buttonTemplate %}
-            <p>.button.{{ buttonClass }}</p>
+            <p>.{% if buttonAddons %}buttons{% else %}button{% endif %}.{{ buttonClass }}</p>
         {% elseif cardType == inputCardType %}
             {% if inputType == textInputType %}
                 {% set template = inputTemplate %}
