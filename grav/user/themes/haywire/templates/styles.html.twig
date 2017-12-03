@@ -11,6 +11,8 @@
 {% set goldBGColor = 'is-bg-gold-light' %}
 {% set sectionTemplate = 'partials/style-guide/section.html.twig' %}
 
+{% set buttonContent = card.buttonContent | default('Click Here') %}
+
 {% extends 'partials/base.html.twig' %}
 
 {% block content %}
@@ -69,13 +71,20 @@
                     cardsPerRow: 2,
                     cards: [{
                         cardType: buttonCardType,
-                        buttonClass: 'is-primary'
+                        buttonClass: 'is-primary',
+                        buttonContent: buttonContent
                     },{
                         cardType: buttonCardType,
-                        buttonClass: 'is-primary-invert'
+                        buttonClass: 'is-primary-invert',
+                        buttonContent: buttonContent
                     },{
                         cardType: buttonCardType,
-                        buttonClass: 'is-favorite'
+                        buttonClass: 'is-favorite',
+                        buttonContent: buttonContent
+                    },{
+                        cardType: buttonCardType,
+                        buttonClass: 'is-icon-button',
+                        iconId: 'icon__grid'
                     },{
                         cardType: buttonCardType,
                         buttonClass: 'is-blog-button-group',

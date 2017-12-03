@@ -30,7 +30,7 @@
 {% set iconId = card.iconId %}
 
 {% set buttonClass = card.buttonClass %}
-{% set buttonContent = card.buttonContent | default('Click Here') %}
+{% set buttonContent = card.buttonContent %}
 {% set buttonAddons = card.addons %}
 
 {% set typographyClass = card.typographyClass %}
@@ -55,7 +55,8 @@
         {% if cardType == buttonCardType %}
             {% embed buttonTemplate with {
                 class: buttonClass,
-                addons: buttonAddons
+                addons: buttonAddons,
+                iconId: iconId
             } %}
                 {% if buttonContent %}
                     {% block button_content %}
