@@ -53,17 +53,12 @@
             </figure>
         {% endif %}
         {% if cardType == buttonCardType %}
-            {% embed buttonTemplate with {
+            {% include buttonTemplate with {
                 class: buttonClass,
                 addons: buttonAddons,
-                iconId: iconId
-            } %}
-                {% if buttonContent %}
-                    {% block button_content %}
-                        {{ buttonContent }}
-                    {% endblock %}
-                {% endif %}
-            {% endembed %}
+                iconId: iconId,
+                content: buttonContent
+            } only %}
         {% endif %}
         {% if cardType == inputCardType %}
             {% if inputType == textInputType %}
@@ -80,7 +75,8 @@
             {% elseif inputType == selectInputType %}
                 {% include selectInputTemplate with {
                     inputClass: inputClass,
-                    options: selectOptions
+                    options: selectOptions,
+                    iconId: iconId
                 } %}
             {% elseif inputType == checkboxInputType %}
                 {% include checkboxInputTemplate with {

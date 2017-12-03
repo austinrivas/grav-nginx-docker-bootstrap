@@ -33,19 +33,8 @@ $input__width: 100%
         @extend .type__placeholder
         resize: none
 
-@mixin select-arrow()
+@mixin select-arrow
     &:not(.is-multiple)
-        &::before
-            content: ''
-            width: $input__height
-            height: 100%
-            background-color: $primary-invert
-            position: absolute
-            right: 0
-            pointer-events: none
-            z-index: 1
-            @include break-max($tablet)
-                width: $input__height--mobile
         &::after
             border: 2px solid $white
             border-right: 0
@@ -60,22 +49,68 @@ $input__width: 100%
                 margin-top: -5px
                 margin-right: 0
 
-.select
+@mixin select-icon($iconId)
+    &:not(.is-multiple)
+        &::after
+            content: url("data:image/svg+xml;utf8,<svg class='#{$iconId}'><use xlink:href='##{$iconId}'></use></svg>")
+            border: 0 !important
+            transform: none !important
+            top: 0 !important
+            right: 0 !important
+            margin-top: 0 !important
+            height: $input__height
+            width: $input__height
+            svg
+                fill: $gold
+
+@mixin select-dropdown-bg($color, $border-color: $color)
+    &:not(.is-multiple)
+        &::before
+            content: ''
+            width: $input__height
+            height: 100%
+            background-color: $color
+            position: absolute
+            right: 0
+            pointer-events: none
+            z-index: 1
+            border: 1px solid $border-color
+            @include break-max($tablet)
+                width: $input__height--mobile
+
+@mixin select-input
+    @extend .input__size
+    &:not(.is-multiple)
+        @extend .input__size
+    select
+        @extend .input__size
+        @extend .input__padding
+        @extend .type__placeholder
+
     select:required:invalid
         color: gray
     option
         &[value=""][disabled]
             display: none
+
+.select
     &.is-primary-invert
+        @include select-input
         @include select-arrow
-        @extend .input__size
-        &:not(.is-multiple)
-            @extend .input__size
+        @include select-dropdown-bg($primary-invert)
+        @extend .is-icon-white
         select
-            @extend .input__size
-            @extend .input__padding
-            @extend .type__placeholder
             color: $primary
+
+    &.is-select-filter
+        @include select-input
+        @include select-dropdown-bg($white, $gold)
+        @include select-icon('icon__filter')
+        @extend .is-icon-gold
+        select
+            color: $gold
+            border: 1px solid $gold
+
 
 @mixin styled-checkbox
     user-select: none
