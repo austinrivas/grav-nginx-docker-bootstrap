@@ -112,6 +112,12 @@ $shades: ("black-bis": $black-bis, "black-ter": $black-ter, "grey-darker": $grey
     $color-invert: nth($pair, 2)
     .is-bg-#{$name}
         background-color: $color
-    .is-bg-#{name}-invert
+    .is-bg-#{$name}-invert
         background-color: $color-invert
+    .is-icon-#{$name}
+        svg
+            fill: $color
+    .is-icon-#{$name}-invert
+        svg
+            fill: $color-invert
 
