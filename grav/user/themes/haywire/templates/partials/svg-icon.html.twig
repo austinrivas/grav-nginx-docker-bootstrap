@@ -1,1 +1,5 @@
+{% if iconId %}
 <svg class="{{ iconId }} {{ contextualClass }}"><use xlink:href="#{{ iconId }}"></use></svg>
+{% elseif iconClass %}
+    <span class="{{ iconClass }}"></span>
+{% endif %}
