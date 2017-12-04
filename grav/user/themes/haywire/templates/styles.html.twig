@@ -130,14 +130,8 @@
                 } only %}
 
                 {% include sectionTemplate with {
-                    sectionTitle: 'Icons',
+                    sectionTitle: 'SVG Images',
                     cards: [{
-                        cardType: iconCardType,
-                        iconId: 'icon__arrow-back'
-                    },{
-                        cardType: iconCardType,
-                        iconId: 'icon__arrow-forward'
-                    },{
                         cardType: iconCardType,
                         iconId: 'icon__favorite',
                         colorClass: goldBGColor
@@ -150,28 +144,47 @@
                         iconId: 'icon__favorite-selected'
                     },{
                         cardType: iconCardType,
-                        iconId: 'icon__filter'
-                    },{
-                        cardType: iconCardType,
-                        iconId: 'icon__grid'
-                    },{
-                        cardType: iconCardType,
-                        iconId: 'icon__map'
-                    },{
-                        cardType: iconCardType,
-                        iconId: 'icon__hamburger-nav'
-                    },{
-                        cardType: iconCardType,
-                        iconId: 'icon__mail'
-                    },{
-                        cardType: iconCardType,
-                        iconId: 'icon__link'
-                    },{
-                        cardType: iconCardType,
                         iconId: 'icon__share'
                     }
                 ]
                 } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: "Font Icons",
+                    cards: [{
+                        cardType: iconCardType,
+                        iconClass: 'icon__arrow-back',
+                        iconContent: "\e900"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__arrow-forward',
+                        iconContent: "\e901"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__filter',
+                        iconContent: "\e905"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__grid',
+                        iconContent: "\e906"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__hamburger-nav',
+                        iconContent: "\e90a"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__link',
+                        iconContent: "\e907"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__mail',
+                        iconContent: "\e908"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__map',
+                        iconContent: "\e909"
+                    }]
+                } %}
 
                 {% include sectionTemplate with {
                     sectionTitle: 'Named Colors',

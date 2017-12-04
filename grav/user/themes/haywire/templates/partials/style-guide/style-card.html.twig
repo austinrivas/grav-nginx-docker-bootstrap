@@ -28,6 +28,8 @@
 {% set checkboxLabel = card.checkboxLabel | default('Click Me') %}
 
 {% set iconId = card.iconId %}
+{% set iconClass = card.iconClass %}
+{% set iconContent = card.iconContent %}
 
 {% set buttonClass = card.buttonClass %}
 {% set buttonContent = card.buttonContent %}
@@ -48,7 +50,7 @@
         {% if cardType == colorCardType or cardType == iconCardType %}
             <figure class="image {{ aspectRatio }} {{ colorClass }}">
                 {% if cardType == iconCardType %}
-                    {% include iconTemplate with { iconId: iconId } %}
+                    {% include iconTemplate with { iconId: iconId, iconClass: iconClass } %}
                 {% endif %}
             </figure>
         {% endif %}
@@ -71,27 +73,29 @@
                 {% include textAreaTemplate with {
                     inputClass: inputClass,
                     placeholder: inputPlaceholder
-                } %}
+                } only %}
             {% elseif inputType == selectInputType %}
                 {% include selectInputTemplate with {
                     inputClass: inputClass,
                     options: selectOptions,
                     iconId: iconId
-                } %}
+                } only %}
             {% elseif inputType == checkboxInputType %}
                 {% include checkboxInputTemplate with {
                     inputClass: inputClass,
                     checked: inputChecked,
                     disabled: inputDisabled,
                     label: checkboxLabel
-                } %}
+                } only %}
             {% endif %}
         {% endif %}
     {% endblock %}
     {% block card_content %}
         {% if cardType == iconCardType %}
             {% set template = iconTemplate %}
-            <p>{{ iconId }}</p>
+            {% if iconId %}<p>iconId : {{ iconId }}</p>{% endif %}
+            {% if iconClass %}<p>iconClass : {{ iconClass }}</p>{% endif %}
+            {% if iconContent %}<p>:before content : {{ iconContent }}</p>{% endif %}
         {% elseif cardType == typographyCardType %}
             <p class="{{ typographyClass }}">Aa Zz</p>
             <hr>
