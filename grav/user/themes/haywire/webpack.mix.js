@@ -18,7 +18,7 @@ mix.setPublicPath('dist')
         processCssUrls: false
     })
     .browserSync({
-        proxy: 'lwr-commercial.local',
+        proxy: 'localhost',
         port: 8000,
         files: [
             'dist/css/{*,**/*}.css',
