@@ -49,19 +49,24 @@ $input__width: 100%
                 margin-top: -5px
                 margin-right: 0
 
-@mixin select-icon($iconId)
+@mixin select-icon($icon-name, $color, $font-size, $font-size--mobile)
     &:not(.is-multiple)
         &::after
-            content: url("data:image/svg+xml;utf8,<svg class='#{$iconId}'><use xlink:href='##{$iconId}'></use></svg>")
-            border: 0 !important
+            @extend .is-#{$icon-name}
+            font-size: $font-size
+            color: $color
             transform: none !important
             top: 0 !important
             right: 0 !important
             margin-top: 0 !important
-            height: $input__height
+            height: 100%
             width: $input__height
-            svg
-                fill: $gold
+            border-color: $color
+            text-align: center
+            @include break-max($tablet)
+                height: 100%
+                width: $input__height--mobile
+                font-size: $font-size--mobile
 
 @mixin select-dropdown-bg($color, $border-color: $color)
     &:not(.is-multiple)
@@ -93,6 +98,8 @@ $input__width: 100%
         &[value=""][disabled]
             display: none
 
+$select-input__icon-size: 32px
+$select-input__icon-size--mobile: $select-input__icon-size
 .select
     &.is-primary-invert
         @include select-input
@@ -105,7 +112,7 @@ $input__width: 100%
     &.is-select-filter
         @include select-input
         @include select-dropdown-bg($white, $gold)
-        @include select-icon('icon__filter')
+        @include select-icon('icon__filter', $gold, $select-input__icon-size, $select-input__icon-size--mobile)
         @extend .is-icon-gold
         select
             color: $gold
