@@ -98,8 +98,8 @@ $input__width: 100%
         &[value=""][disabled]
             display: none
 
-$select-input__icon-size: 32px
-$select-input__icon-size--mobile: $select-input__icon-size
+$select-input__icon-size: 42px
+$select-input__icon-size--mobile: 32px
 .select
     &.is-primary-invert
         @include select-input
@@ -113,7 +113,6 @@ $select-input__icon-size--mobile: $select-input__icon-size
         @include select-input
         @include select-dropdown-bg($white, $gold)
         @include select-icon('icon__filter', $gold, $select-input__icon-size, $select-input__icon-size--mobile)
-        @extend .is-icon-gold
         select
             color: $gold
             border: 1px solid $gold
