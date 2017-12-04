@@ -35,6 +35,7 @@ $button-margin: 25px
     text-transform: uppercase
     &.is-primary, &.is-primary-invert
         @extend .type__primary-cta
+        display: inline-block
         margin: $button-margin
         height: $button-height
         width: 260px
@@ -47,6 +48,7 @@ $button-margin: 25px
         @extend .is-blue-light
         height: $button-height--mobile
         width: 118px
+        display: inline-block
 
     &.is-icon-button
         @extend .is-white
@@ -58,6 +60,7 @@ $button-margin: 25px
 .buttons
     .button
         margin: 0 !important
+        display: flex !important
         &:not(:last-child)
             margin-right: 0 !important
 
