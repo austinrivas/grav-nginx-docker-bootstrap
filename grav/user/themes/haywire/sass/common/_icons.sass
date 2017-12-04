@@ -77,3 +77,15 @@ $icon__share--height: 22px
 $icon__share--width: 34px
 .icon__share
     @include icon($icon__share--height, $icon__share--width)
+
+$icons: ("icon__arrow-back": "\e900", "icon__arrow-forward": "\e901", "icon__hamburger-nav": "\e90a", "icon__link": "\e907", "icon__mail": "\e908", "icon__map": "\e909", "icon__filter": "\e905", "icon__grid": "\e906")
+
+@each $icon-name, $content in $icons
+    .#{$icon-name}
+        &:before
+            font-family: $icon_font-family
+            content: $content
+
+    .is-#{$icon-name}
+        font-family: $icon_font-family
+        content: $content

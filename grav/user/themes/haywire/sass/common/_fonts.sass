@@ -17,11 +17,6 @@ $proxima-nova-regular-family: $proxima-nova-regular, sans-serif
 $eames-century-modern-regular: "EamesCenturyModern-Regular"
 $eames-century-modern-regular-family: $eames-century-modern-regular, serif
 
-$icon-font: "lwr-commercial-icons"
-$icon-font-family: $icon-font
-
-@include font_face($icon-font, $icon-font-family, normal, normal, "ttf")
-
 $family-sans-serif: $proxima-nova-regular-family
 $family-serif: $eames-century-modern-regular-family
 $family-monospace: monospace
@@ -35,3 +30,11 @@ $fonts: ("primary": $family-primary, "proxima-nova-bold": $proxima-nova-bold-fam
     @include font_face($name, $family)
     .is-#{$name}
         font-family: $family
+
+$icon-font: "lwr-commercial-icons"
+$icon-font-family: $icon-font
+
+@include font_face($icon-font, $icon-font-family, normal, normal, "ttf")
+
+.is-#{$icon-font-family}
+    font-family: $icon-font-family
