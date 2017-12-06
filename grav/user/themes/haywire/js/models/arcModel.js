@@ -1,4 +1,5 @@
 import * as esriLoader from 'esri-loader';
+import PROPERTY_FIELDS from "./propertyFields";
 import PropertyModel from "./propertyModel"
 
 export default class ArcModel {
@@ -22,6 +23,15 @@ export default class ArcModel {
     static queryWhereSelectAll () {
         return "'TRUE' = 'TRUE'";
     }
+
+    static queryWhereSelectPropertyById (id) {
+        if (id) {
+            return `${PROPERTY_FIELDS.id} = ${id}`;
+        } else {
+            console.error("A property id is required to query by Id");
+        }
+    }
+
 
     async executeQuery(queryOutfields, queryWhere) {
         queryOutfields = queryOutfields || ArcModel.queryOutfieldsSelectAll();
@@ -52,7 +62,7 @@ export default class ArcModel {
             });
     }
 
-    async logArcFeature(queryOutfields, queryWhere) {
+    async logArcFeatures(queryOutfields, queryWhere) {
         const response = await this.executeQuery(queryOutfields, queryWhere),
             features = response.results ? response.results.features : null,
             error = response.error ? response.error : null;
