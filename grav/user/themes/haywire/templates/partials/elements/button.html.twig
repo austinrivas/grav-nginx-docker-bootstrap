@@ -14,7 +14,7 @@
         {% endfor %}
     </div>
 {% else %}
-    <button class="button {{ class }} {{ iconClass }}" {% if disabled %} disabled{% endif %}>
+    <button class="button {{ class }} {{ iconClass }}" {% if disabled %} disabled{% endif %} {% if type %} type="{{ type }}" {% endif %}>
         {% if iconId %}
             {% include iconTemplate with {
                 iconId: iconId
