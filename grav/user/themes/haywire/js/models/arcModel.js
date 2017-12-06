@@ -15,20 +15,31 @@ export default class ArcModel {
         this._featureServerUrl = url;
     }
 
-    async loadArcFeature() {
+    static queryOutfieldsSelectAll () {
+        return ["*"];
+    }
+
+    static queryWhereSelectAll () {
+        return "'TRUE' = 'TRUE'";
+    }
+
+    async executeQuery(queryOutfields, queryWhere) {
+        queryOutfields = queryOutfields || ArcModel.queryOutfieldsSelectAll();
+        queryWhere = queryWhere || ArcModel.queryWhereSelectAll();
+
         const response = {},
             options = {},
-            modules = ["esri/layers/FeatureLayer", "esri/tasks/QueryTask", "esri/tasks/support/Query"],
+            modules = ["esri/tasks/QueryTask", "esri/tasks/support/Query"],
             lwrCommercialParcelsFeatureServer = {url: this.featureServerUrl};
 
         return await esriLoader.loadModules(modules, options)
-            .then(([FeatureLayer, QueryTask, Query]) => {
+            .then(([QueryTask, Query]) => {
                 const queryTask = new QueryTask(lwrCommercialParcelsFeatureServer);
                 let query = new Query();
 
                 query.returnGeometry = true;
-                query.outFields = ["*"];
-                query.where = "'TRUE' = 'TRUE'";
+                query.outFields = queryOutfields;
+                query.where = queryWhere;
 
                 return queryTask.execute(query)
                     .then((results)=>{
@@ -41,8 +52,8 @@ export default class ArcModel {
             });
     }
 
-    async logArcFeature() {
-        const response = await this.loadArcFeature(),
+    async logArcFeature(queryOutfields, queryWhere) {
+        const response = await this.executeQuery(queryOutfields, queryWhere),
             features = response.results ? response.results.features : null,
             error = response.error ? response.error : null;
 
