@@ -1,11 +1,27 @@
-<footer class="footer">
+<!-- Templates -->
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+{% set formTemplate = 'partials/forms/inline-form.html.twig' %}
+
+
+<!-- Classes -->
+{% set iconLogoId = 'icon__logo--footer' %}
+
+<footer class="footer lwrc-footer">
     <div class="container">
         <div class="content has-text-centered">
-            <p>
-                <strong>Haywire</strong> by <a href="https://github.com/robbinfellow">Robbin Johansson</a>.
-            </p>
-            <p class="is-size-7">
-                Grav theme made for developers.
+            <p>{% include iconTemplate with { iconId: iconLogoId } only %}</p>
+            <h3>Sign Up Get Updates</h3>
+            <p class="type__footer-signup--content">Enter your email address for updates and the latest news from Lakewood Ranch Commercial</p>
+            <form action="" method="">
+                {% include formTemplate only %}
+            </form>
+            <ul>
+                <li><a href="#">Press</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+            <p class="is-size-12">
+                &copy; 2017 Lakewood Ranch Commercial
             </p>
         </div>
     </div>
