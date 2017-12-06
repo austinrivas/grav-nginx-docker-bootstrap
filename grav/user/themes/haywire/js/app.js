@@ -3,6 +3,8 @@
 */
 
 import "babel-polyfill";
+import ArcModel from "./models/arc";
+import PropertyModel from "./models/property"
 
 /**
  * Load all of this project's JavaScript dependencies including Vue
@@ -11,6 +13,8 @@ import "babel-polyfill";
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.ArcModel = ArcModel;
+window.PropertyModel = PropertyModel;
 
 /**
  * Create a fresh Vue application instance and attach it to
