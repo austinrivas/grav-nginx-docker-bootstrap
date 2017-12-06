@@ -3,6 +3,15 @@ export default class Collection {
     constructor (model) {
         this.model = model;
         this.collection = {};
+        this.allModelsLoaded = false;
+    }
+
+    get allModelsLoaded () {
+        return this._modelsLoaded;
+    }
+
+    set allModelsLoaded (bool) {
+        this._modelsLoaded = bool;
     }
 
     get collection () {
@@ -32,7 +41,7 @@ export default class Collection {
     }
 
     findAll () {
-        return this.collection;
+        return Object.values(this.collection);
     }
 
     findById (id) {
@@ -40,6 +49,20 @@ export default class Collection {
             return this.collection[id];
         } else {
             console.error("An id is required to retrieve a model from a collection")
+        }
+    }
+
+    async findByKeyValue (key, value) {
+        if (key && value) {
+            return await this.findAll()
+                .reduce((accumulator, model) => {
+                    if (model[key] === value) {
+                        accumulator.push(model);
+                    }
+                    return accumulator;
+                }, []);
+        } else {
+            console.error(`Both a key and a value are required to retrieve a model from a collection key: ${key}, value: ${value}`);
         }
     }
 
@@ -57,6 +80,7 @@ export default class Collection {
 
     removeAll () {
         this.collection = {};
+        this.allModelsLoaded = false;
     }
 
 }
