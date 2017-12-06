@@ -3,8 +3,8 @@
 */
 
 import "babel-polyfill";
-import ArcModel from "./models/arc";
-import PropertyModel from "./models/property"
+import ArcModel from "./models/arcModel";
+import PropertyModel from "./models/propertyModel"
 
 /**
  * Load all of this project's JavaScript dependencies including Vue

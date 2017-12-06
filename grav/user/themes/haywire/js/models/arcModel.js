@@ -1,4 +1,5 @@
 import * as esriLoader from 'esri-loader';
+import PropertyModel from "./propertyModel"
 
 export default class ArcModel {
 
@@ -27,7 +28,7 @@ export default class ArcModel {
 
                 query.returnGeometry = true;
                 query.outFields = ["*"];
-                query.where = "Feat_Prop = 'TRUE'";
+                query.where = "'TRUE' = 'TRUE'";
 
                 return queryTask.execute(query)
                     .then((results)=>{
@@ -45,14 +46,15 @@ export default class ArcModel {
             features = response.results ? response.results.features : null,
             error = response.error ? response.error : null;
 
-        console.log("features", features);
-        console.log("error", error);
-
-        if (features && !error) {
+        if (error) {
+            console.log("ArcGIS query returned an error", error);
+        } else if (features && !error) {
             features.forEach((feature) => {
-                const attributes = feature.attributes;
-                console.log(attributes.Property_I, attributes);
+                const model = new PropertyModel(feature);
+                console.log(model.id, model.toJSON());
             })
+        } else if (!features && !error) {
+            console.log("No features returned from ArcGIS query", response);
         }
     }
 }
