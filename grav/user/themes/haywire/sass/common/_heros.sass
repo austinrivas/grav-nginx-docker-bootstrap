@@ -1,0 +1,53 @@
+@mixin hero-arrow-down
+    border: 1px solid #3273dc;
+    border-right: 0;
+    border-top: 0;
+    content: " ";
+    display: block;
+    height: 0.5em;
+    pointer-events: none;
+    position: absolute;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    width: 0.5em;
+    margin-top: -0.375em;
+    right: 50%;
+    top: 250px;
+    z-index: 4;
+    border: 2px solid $white
+    border-right: 0
+    border-top: 0
+    height: 25px
+    width: 25px
+    margin-top: -6px
+    margin-right: 6px
+    @include break-max($tablet)
+        height: 17px
+        width: 17px
+        margin-top: -5px
+        margin-right: 0
+
+.hero.lwrc
+    background: rgba(36, 55, 70, 0.6)
+    color: #ffffff
+    text-align: center
+    min-height: 530px
+    justify-content: center
+    align-items: center
+    flex-direction: row
+    @include break-max($tablet)
+        min-height: 400px
+        align-items: flex-start
+    .hero-p
+        padding: 2em 0 0
+        max-width: 60rem
+        margin: 0 auto
+        word-wrap: break-word
+        &:after
+            @include hero-arrow-down
+    .hero-body
+        flex-shrink: 1
+    h1
+        color: #fff
