@@ -38,6 +38,16 @@ export default class PropertyCollection extends Collection {
         }
     }
 
+    async findFeaturedProperties () {
+        const key = 'featured';
+
+        if (!this.allModelsLoaded) {
+            await this.findAllProperties();
+        }
+
+        return await this.findByKeyValue(key, true);
+    }
+
     async findPropertyById (id) {
         if (id) {
             let property = this.findById(id);
@@ -70,13 +80,13 @@ export default class PropertyCollection extends Collection {
 
     async findPropertiesByType (type) {
         if (type) {
-            const typeKey = 'type';
+            const key = 'type';
 
             if (!this.allModelsLoaded) {
                 await this.findAllProperties();
             }
 
-            return await this.findByKeyValue(typeKey, type);
+            return await this.findByKeyValue(key, type);
         } else {
             console.error("A type value is required in order to find a property by type.")
         }
