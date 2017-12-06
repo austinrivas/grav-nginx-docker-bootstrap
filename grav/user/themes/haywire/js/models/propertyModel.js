@@ -1,31 +1,4 @@
-const PROPERTY_FIELDS = {
-    acres: "Acres",
-    address: "Primary_Ad",
-    association: "Associatio",
-    availability: "Available_",
-    blockId: "Block_ID__",
-    city: "City",
-    description: "Full_Prope",
-    exteriorPerimeter: "Exterior_P",
-    featured: "Feat_Prop",
-    id: "Property_I",
-    imageUrl: "IMAGE_URL",
-    lotId: "Lot_ID__Pa",
-    objectId: "OBJECTID",
-    parkingDescription: "Parking__A",
-    pictureOrder: "Picture_Or",
-    pricePerAcre: "Price_Per1",
-    pricePerSqft: "Price_Per_",
-    relatedProperties: "Related_Pr",
-    shapeArea: "SHAPE__Area",
-    shapeLength: "SHAPE__Length",
-    subdivision: "Subdivisio",
-    totalPrice: "Total_Pric",
-    totalSqft: "Total_Squa",
-    type: "Type__Deve",
-    utilities: "Utilities_",
-    zip: "Zip"
-};
+import PROPERTY_FIELDS from "./propertyFields";
 
 export default class PropertyModel {
     constructor (arcFeature) {
