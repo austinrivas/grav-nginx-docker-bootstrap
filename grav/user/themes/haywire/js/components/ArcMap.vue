@@ -71,7 +71,9 @@
                 basemap: "topo-vector"
             });
 
-            let lwrCommercialParcelsFeatureServer = {url: 'https://services5.arcgis.com/pGZTLavDTVHngCQj/ArcGIS/rest/services/LWR_Commercial_Parcels/FeatureServer/0'};
+            let featureServerUrl = 'https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0';
+
+            let lwrCommercialParcelsFeatureServer = {url: featureServerUrl};
 
             let parcelsFeatureLayer = new FeatureLayer(lwrCommercialParcelsFeatureServer);
             let queryTask = new QueryTask(lwrCommercialParcelsFeatureServer);
@@ -79,7 +81,7 @@
             let query = new Query();
             query.returnGeometry = true;
             query.outFields = ["*"];
-            query.where = 'Property_I = 579101259';
+            query.where = "Feat_Prop = 'TRUE'";
             //https://lwrcommercial.local/app/uploads/2017/08/678111-map-marker-256.png
 
             // LWR lng, lat: 27.411704, -82.428515

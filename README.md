@@ -10,7 +10,17 @@ modern FE development workflows, and simplified application backends.
 
 # Environments
 
-## [Production](https://lakewoodranch-commercial.com) | [Admin](https://lakewoodranch-commercial.com/push-admin)
+Place the following in your `/etc/hosts` file:
+
+	138.197.68.166 lc-www1
+
+Run the following commands to add your git remote repositories:
+
+	git remote add prod push_dev@lc-www1:~/repos/www.lwrcommercial.com/Prod.git
+	git remote add stage push_dev@lc-www1:~/repos/www.lwrcommercial.com/Stage.git
+	git remote add test push_dev@lc-www1:~/repos/www.lwrcommercial.com/Test.git
+
+## [Production](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/push-admin)
 
 [ ![Codeship Status for push-orlando/lwrc-grav](https://app.codeship.com/projects/07f01b30-ad52-0135-7ef6-2a6929614bbd/status?branch=master)](https://app.codeship.com/projects/257200)
 
@@ -22,7 +32,7 @@ TODO: Describe prod environment snowflakes
 
 TODO: Describe prod deployment
 
-## [Staging](https://lakewoodranch-commercial.com) | [Admin](https://lakewoodranch-commercial.com/push-admin)
+## [Staging](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/push-admin)
 
 TODO: Deploy to staging url
 
