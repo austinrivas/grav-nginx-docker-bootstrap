@@ -31,6 +31,7 @@ export default class PropertyCollection extends Collection {
             await features.forEach((feature) => {
                 _this.add(new this.model(feature))
             });
+            this.allModelsLoaded = true;
             return this.findAll();
         } else if (!features && !error) {
             console.log("No features returned from ArcGIS query", response);
@@ -64,6 +65,20 @@ export default class PropertyCollection extends Collection {
 
         } else {
             console.error("An id is required to retrieve a model from a collection")
+        }
+    }
+
+    async findPropertiesByType (type) {
+        if (type) {
+            const typeKey = 'type';
+
+            if (!this.allModelsLoaded) {
+                await this.findAllProperties();
+            }
+
+            return await this.findByKeyValue(typeKey, type);
+        } else {
+            console.error("A type value is required in order to find a property by type.")
         }
     }
 
