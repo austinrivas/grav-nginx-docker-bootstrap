@@ -35,7 +35,7 @@ yarn && yarn run production
 
 # Check to see if our nginx vhost files have changed
 # If so then we need to restart our Nginx service
-ENV_VHOST="conf/nginx/vhost-$APP_ENV.conf"
+ENV_VHOST="nginx/sites-available/vhost-$APP_ENV.conf"
 if [[ $FILES_CHANGED == *"$ENV_VHOST"* ]]; then
   echo "Virtual host file was changed for this environment. Bouncing web server..."
   sudo /bin/systemctl restart nginx
