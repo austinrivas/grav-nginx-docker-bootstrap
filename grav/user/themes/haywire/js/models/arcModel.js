@@ -8,8 +8,8 @@ export default class ArcModel {
     // constructor sets the featureServerUrl for the arc model
     // an eventual improvement would be to make featureServerUrl a parameter to allow for multi data sources
     constructor () {
-        // TODO: make featureServerURL cms manageable
-        this.featureServerUrl = 'https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0';
+        const featureServerMetaSelector = 'meta[name="arc-gis-feature-server-url"]';
+        this.featureServerUrl = ArcModel.getArcGISFeatureServerUrl(featureServerMetaSelector);
     }
 
     get featureServerUrl() {
@@ -18,6 +18,12 @@ export default class ArcModel {
 
     set featureServerUrl(url) {
         this._featureServerUrl = url;
+    }
+
+    static getArcGISFeatureServerUrl (metaSelector) {
+        const element = document.querySelector(metaSelector);
+
+        return element && element.getAttribute("content");
     }
 
     // a static method that returns the select all fields outfield selector
