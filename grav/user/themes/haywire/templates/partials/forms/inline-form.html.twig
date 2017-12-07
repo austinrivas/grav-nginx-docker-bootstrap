@@ -1,0 +1,12 @@
+{% set inputTemplate = 'partials/elements/input.html.twig' %}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+
+<div class="field has-addons inline-form">
+  <div class="control">
+        {% include inputTemplate with { inputType: 'text', class: 'inline-input', placeholder: 'enter email' } only %}
+  </div>
+  <div class="control">
+        {% include buttonTemplate with { content: 'Submit', class: 'is-primary', type: 'submit'  } only %}
+  </div>
+</div>

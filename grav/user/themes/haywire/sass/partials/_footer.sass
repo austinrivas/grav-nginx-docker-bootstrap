@@ -1,4 +1,42 @@
 
-.footer
-    margin-top: 2rem
-    box-shadow: 0 1000px 0 1000px $footer-background-color
+.footer.lwrc-footer
+    margin-top: 0
+    padding: 4rem 1.5rem 4rem
+    display: flex
+    align-items: center
+    color: #fff
+    @extend .is-bg-blue-dark
+    .icon__logo--footer
+        margin: 0 auto 5rem
+        @include break-max($tablet)
+            margin: 0 auto 3rem
+    h3
+        text-transform: uppercase
+        @extend .type__footer-signup--heading
+        @extend .is-gold
+    ul
+        display: flex
+        text-align: center
+        align-items: center
+        justify-content: center
+        margin: 4rem auto 2rem
+        list-style: none
+        li
+            box-sizing: border-box
+            margin-top: 0
+            padding: 0 20px
+            position: relative
+            &:after
+                content: "|"
+                position: absolute
+                right: 0
+            &:last-child
+                &:after
+                    display: none
+    a
+        text-decoration:none
+        color: #fff
+        text-transform: uppercase
+    p
+        max-width: 460px
+        margin: 0 auto
