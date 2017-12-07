@@ -17,6 +17,8 @@
         justify-content: center
 
 .featured
+    .card
+        @extend .is-shadowless
     h2
         @extend .type__featured-projects--headline
         @extend .is-blue-dark
@@ -32,7 +34,10 @@
         @extend .is-gold
         @extend .type__featured-project--title
     .prop-description
-        padding: 1em .5em;
+        padding: 1em .5em
+        min-height: 140px
+    .is-center
+        @include is-center
     article
         margin: 0 40px
         position: relative
