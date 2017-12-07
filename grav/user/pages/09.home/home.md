@@ -10,6 +10,7 @@ content:
         custom:
             - _hero
             - _featured
+            - _callouts
 ---
 
 

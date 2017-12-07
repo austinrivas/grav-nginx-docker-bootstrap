@@ -40,3 +40,7 @@
 @mixin is-center
     display: flex
     justify-content: center
+
+@mixin is-mobile-button
+    @include break-max($tablet)
+        width: 70%
