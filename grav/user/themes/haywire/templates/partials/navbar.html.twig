@@ -1,10 +1,38 @@
+<!-- Templates -->
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+<!-- Labels -->
+{% set buttonFavLabel = 'View Saved' %}
+
+<!-- Classes -->
+{% set iconLogoId = 'icon__logo--header' %}
+{% set iconFavId = 'icon__favorite-selected' %}
+{% set buttonFavClass = 'is-favorite' %}
+{% set buttonFavIconClass = 'fav-button-icon' %}
+
+
 <navbar inline-template>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="container is-fluid">
-            <div class="navbar-brand">
+    <nav class="navbar lwrc-navbar" role="navigation" aria-label="main navigation">
+        <div class="fav-buttons-set is-hidden-touch">
+            {% include buttonTemplate with { iconId: iconFavId, class: buttonFavIconClass } only %}
+            {% include buttonTemplate with { content: buttonFavLabel, class: buttonFavClass  } only %}
+        </div>
+        <div class="container is-hidden-touch">
+            <div class="logo">
                 <a class="navbar-item" href="{{ base_url == '' ? '/' : base_url }}">
-                    {{ config.site.title }}
+                    {% include iconTemplate with { iconId: iconLogoId } only %}
                 </a>
+            </div>
+        </div>
+        <div class="container is-fluid">
+
+            <div class="navbar-brand is-hidden-desktop">
+                <div class="logo-mobile">
+                    <a class="navbar-item" href="{{ base_url == '' ? '/' : base_url }}">
+                        {% include iconTemplate with { iconId: iconLogoId } only %}
+                    </a>
+                </div>
 
                 <button class="button navbar-burger" :class="{'is-active': navIsActive}" @click.prevent="toggleNav">
                     <span></span>

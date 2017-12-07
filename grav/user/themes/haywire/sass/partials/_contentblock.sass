@@ -1,0 +1,32 @@
+.content-blocks
+    margin: 2em 0 0
+    .content-tile
+        justify-content: center
+        align-items: center
+        display: flex
+        height: 100%
+        flex-direction: column
+        padding: 0 3em
+        color: $white
+        @include break-max($widescreen)
+            padding: 2em 0
+        h2
+            @extend .type__content-tile--primary-heading
+        h3
+            @extend .type__content-tile--secondary-heading
+            @extend .is-gold-light
+        p
+            @extend .type__content-tile--content
+            margin: 1em 0 .5em
+            padding: 0 3em
+        .button
+            margin: 1.5em 0 0 0
+        h2, h3, p
+            @extend .has-text-centered
+            flex-basis: 50px
+        &.is-bg-primary
+            h2
+                @extend .is-blue-tiffany
+        &.is-bg-primary-invert
+            h2
+                @extend .is-blue-dark

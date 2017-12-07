@@ -1,0 +1,76 @@
+<!-- Templates -->
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+<!-- Labels -->
+{% set buttonLabel = 'View All Properties' %}
+
+<!-- Classes -->
+{% set iconFavUnselectId = 'icon__favorite-unselected' %}
+{% set buttonClass = 'is-primary' %}
+{% set iconFavId = 'icon__favorite' %}
+
+<!-- Vars -->
+{% set propTitle = 'Name of property goes here - Lot 10 $1,300,000' %}
+{% set propSubTitle = 'FPO: Text callout development site' %}
+{% set propDetails = '5 Acres | Raw Land | For Sale | $15 PS' %}
+{% set propImg = 'https://bulma.io/images/placeholders/640x480.png' %}
+
+
+
+<section class="featured">
+    <div class="container">
+
+        <h2 class="has-text-centered">Featured Projects</h2>
+
+        <div class="columns is-variable is-9">
+
+            <div class="column card">
+                <article class="is-child is-bg-cream">
+                    {% include iconTemplate with { iconId: iconFavId } only %}
+                    <figure class="image is-4by3">
+                        <img src="{{ propImg }}">
+                    </figure>
+                    <div class="prop-description">
+                        <p class="prop-title">{{ propTitle }}</p>
+                        <p class="subtitle">{{ propSubTitle }}</p>
+                        <p class="details">{{ propDetails }}</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="column card">
+                <article class="is-child is-bg-cream">
+                    {% include iconTemplate with { iconId: iconFavId } only %}
+                    <figure class="image is-4by3">
+                        <img src="{{ propImg }}">
+                    </figure>
+                    <div class="prop-description">
+                        <p class="prop-title">{{ propTitle }}</p>
+                        <p class="subtitle">{{ propSubTitle }}</p>
+                        <p class="details">{{ propDetails }}</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="column card">
+                <article class="is-child is-bg-cream">
+                    {% include iconTemplate with { iconId: iconFavUnselectId } only %}
+                    <figure class="image is-4by3">
+                        <img src="{{ propImg }}">
+                    </figure>
+                    <div class="prop-description">
+                        <p class="prop-title">{{ propTitle }}</p>
+                        <p class="subtitle">{{ propSubTitle }}</p>
+                        <p class="details">{{ propDetails }}</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="is-center">
+            {% include buttonTemplate with { content: buttonLabel, class: buttonClass  } only %}
+        </div>
+
+    </div>
+
+</section>

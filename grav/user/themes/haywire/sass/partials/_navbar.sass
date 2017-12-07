@@ -1,6 +1,60 @@
 
-.navbar
-    border-bottom: solid 1px $grey-lighter
-
+.navbar.lwrc-navbar
+    border-bottom: 0
+    flex-flow: row wrap
     .navbar-burger
         border: 0
+        padding-right: 4.75em
+        padding-top: 4em
+        span
+            width: 25px
+            height: 3px
+            @extend .is-blue-tiffany
+            &:nth-child(1)
+                top: calc(50% - 6px)
+            &:nth-child(2)
+                top: calc(50% + 3px)
+            &:nth-child(3)
+                top: calc(50% + 12px)
+
+
+    .logo
+        margin: 2rem 0
+    .logo-mobile
+        margin: 0.7rem 0
+    .fav-buttons-set
+        display: flex
+        position: absolute
+        right: 0
+        button
+            border-left: 1px solid #fff
+            @extend .is-bg-blue-light
+            &.fav-button-icon
+                height: 2.8em;
+
+    .container
+        justify-content: center
+        .navbar-menu
+            flex-grow: 1
+            margin-bottom: 2rem
+            .navbar-end
+                flex: 1
+                justify-content: center
+            .navbar-item, .navbar-link
+                @extend .type__nav-item--label
+                flex-wrap: nowrap
+                justify-content: center
+                width: 15%
+            a
+                text-transform: uppercase
+                @extend .is-olive
+                &:after
+                    width: 0
+                    height: 0
+                    border-left: 7px solid $olive
+                    border-right: 7px solid transparent
+                    border-top: 7px solid transparent
+                    border-bottom-color: transparent
+                    margin-top: -.5em
+                    right: -2.4rem
+                    line-height: 0

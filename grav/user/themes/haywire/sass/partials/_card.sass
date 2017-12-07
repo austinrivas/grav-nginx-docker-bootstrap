@@ -16,3 +16,37 @@
         display: flex
         justify-content: center
 
+.featured
+    .card
+        @extend .is-shadowless
+    h2
+        @extend .type__featured-projects--headline
+        @extend .is-blue-dark
+        text-transform: uppercase
+        margin: 3em 0 2em
+    .details
+        text-transform: uppercase
+        @extend .type__featured-project--details
+    .subtitle
+        margin-bottom: 0
+        @extend .type__featured-project--callout
+    .prop-title
+        @extend .is-gold
+        @extend .type__featured-project--title
+    .prop-description
+        padding: 1em .5em
+        min-height: 140px
+    .is-center
+        @include is-center
+        .button
+            @include is-mobile-button
+    article
+        margin: 0 40px
+        position: relative
+        @include break-max($widescreen)
+            margin: 0
+        svg
+            position: absolute
+            right: .9em
+            top: .5em
+            z-index: 1

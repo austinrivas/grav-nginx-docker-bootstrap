@@ -1,0 +1,66 @@
+<!-- Templates -->
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+<!-- Labels -->
+{% set buttonLabelMap = 'View Map' %}
+{% set buttonLabelAbout = 'About Lakewood Ranch' %}
+{% set buttonLabelAround = 'Around Lakewood Ranch' %}
+
+<!-- Classes -->
+{% set buttonClassPrimary = 'is-primary' %}
+{% set buttonClassPrimaryInv = 'is-primary-invert' %}
+
+<!-- Vars -->
+{% set contentImg = 'https://bulma.io/images/placeholders/640x480.png' %}
+
+<section class="content-blocks">
+    <div class="container">
+
+        <div class="columns is-gapless is-multiline">
+
+            <div class="column is-half">
+                <figure class="image is-4by3">
+                    <img src="{{ contentImg }}">
+                </figure>
+            </div>
+
+            <div class="column is-half">
+                <div class="content-tile is-bg-primary">
+                    <h3>
+                        SEARCH FOR PROPERTIES
+                    </h3>
+                    <h2>
+                        SEE THE MAP
+                    </h2>
+                    <p>
+                        Search for commercial properties currently for sale using our interactive map.
+                    </p>
+                    {% include buttonTemplate with { content: buttonLabelMap, class: buttonClassPrimaryInv } only %}
+                </div>
+            </div>
+
+            <div class="column is-half">
+                <div class="content-tile is-bg-primary-invert">
+                    <h2>
+                        LAKEWOOD RANCH
+                    </h2>
+                    <p>
+                        Learn more about our award-winning community and why it’s the perfect place for your business
+                        to call home.
+                    </p>
+                    {% include buttonTemplate with { content: buttonLabelAbout, class: buttonClassPrimary } only %}
+                    {% include buttonTemplate with { content: buttonLabelAround, class: buttonClassPrimary } only %}
+                </div>
+            </div>
+
+            <div class="column is-half">
+                <figure class="image is-4by3">
+                    <img src="{{ contentImg }}">
+                </figure>
+            </div>
+
+        </div>
+
+    </div>
+</section>
