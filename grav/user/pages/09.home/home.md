@@ -12,6 +12,8 @@ content:
             - _featured
             - _content-block
             - _callouts
+            - _content-block-bottom
+            - _contact-cta
 ---
 
 

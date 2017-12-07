@@ -1,0 +1,43 @@
+<!-- Templates -->
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+<!-- Labels -->
+{% set buttonLabel = 'View Services' %}
+
+<!-- Classes -->
+{% set buttonClassPrimary = 'is-primary' %}
+
+
+<section class="content-blocks content-blocks-bottom">
+    <div class="container">
+
+        <div class="columns is-gapless is-multiline">
+
+            <div class="column is-half">
+                <div class="content-tile is-bg-gold-light">
+                    <h2>
+                        Leasing &amp; Sales
+                    </h2>
+                    <p>
+                        Our results-driven team guides businesses through every step of the leasing and buying process.
+                    </p>
+                    {% include buttonTemplate with { content: buttonLabel, class: buttonClassPrimary } only %}
+                </div>
+            </div>
+
+            <div class="column is-half">
+                <div class="content-tile">
+                    <h2>
+                        Development &amp; Property Management
+                    </h2>
+                    <p>
+                        We provide comprehensive Management services from construction budgeting to facility management.
+                    </p>
+                    {% include buttonTemplate with { content: buttonLabel, class: buttonClassPrimary } only %}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

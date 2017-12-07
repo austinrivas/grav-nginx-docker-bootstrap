@@ -1,0 +1,30 @@
+.contact-cta
+    max-height: 300px
+    min-height: 500px
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    @include break-max($tablet)
+        min-height: 350px
+        .button
+            width: 70%
+    @extend .is-bg-blue-tiffany
+    .container
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+    h2
+        @extend .is-uppercase
+        @extend .type__contact-us-section--heading
+        @extend .is-blue-dark
+    p
+        color: $white
+        flex-basis: 1.5em
+        max-width: 600px
+        margin-top: 1.5em
+        @extend .type__contact-us-section--content
+        @extend .has-text-centered
+        @include break-max($tablet)
+            padding: 0 2em
