@@ -1,7 +1,9 @@
 import Collection from "./collection"
 
+// LocalStorageCollection is an abstract class that provides and interface for storing an array of ids in localstorage
 export default class LocalStorageCollection extends Collection {
 
+    // constructor throws an error if localstorage is not available or if the collectionKey param is missing
     constructor (model, collectionKey) {
         super(model);
 
@@ -20,6 +22,7 @@ export default class LocalStorageCollection extends Collection {
         this.initializeCollection();
     }
 
+    // retrieve the string value of the collectionKey entry in localstorage and deserialize it into an array of int ids
     get collection () {
         const separator = ",";
 
@@ -39,6 +42,7 @@ export default class LocalStorageCollection extends Collection {
         }
     }
 
+    // take an array of int ids and serialize it into a string at collectionKey in localstorage
     set collection (collection) {
         if (collection instanceof Array) {
             this.localStorage.setItem(this.collectionKey, collection);
@@ -63,10 +67,12 @@ export default class LocalStorageCollection extends Collection {
         this._localStorage = localStorage;
     }
 
+    // a static method that determines if the user agent has access to localstorage
     static isWindowAndHasLS(w) {
         return w && w.localStorage;
     }
 
+    // add the id of the model to the localstorage serialized array
     add (model) {
         if (!model) {
             return new Error("LocalStorageCollection.add method requires a model as a parameter");
@@ -84,21 +90,26 @@ export default class LocalStorageCollection extends Collection {
         return true;
     }
 
+    // destroy the entry for collectionKey in localstorage
     destroy () {
         this.localStorage.removeItem(this.collectionKey);
         return true;
     }
 
+    // if the collectionKey has not been defined in localstorage then initialize it as an empty array
     initializeCollection () {
         if (!this.localStorage.hasOwnProperty(this.collectionKey)) {
             this.collection = [];
         }
     }
 
+    // findAllLocalModels just returns the value of this.colleciton to preserve the collection api interface
     findAllLocalModels () {
         return this.collection;
     }
 
+    // findLocalModelById just returns the value of the id if it exists in localstorage
+    // this could do more, like instantiate the model itself, but the current requirements to not dictate that
     findLocalModelById (id) {
         let collection = this.collection;
 
@@ -113,14 +124,18 @@ export default class LocalStorageCollection extends Collection {
         }
     }
 
+    // returns false to preserve the collection api interface
     async findLocalModelByKeyValue() {
         return false;
     }
 
+    // returns false to preserve the collection api interface
     async findLocalModelByKeyValueRange () {
         return false;
     }
 
+    // remove a model from localstorage
+    // all this is doing is removing the id of the model from the serialized array at localstorage collectionKey
     remove (model) {
         if (!model) {
             return new Error("LocalStorageCollection.remove method requires a model as a parameter");
@@ -143,6 +158,7 @@ export default class LocalStorageCollection extends Collection {
         }
     }
 
+    // empty the localstorage collection
     removeAll () {
         this.collection = [];
         return true;

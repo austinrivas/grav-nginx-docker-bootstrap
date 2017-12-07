@@ -48,6 +48,7 @@ export default class Collection {
         }
     }
 
+    // initialize the collection in an empty state
     initializeCollection () {
         this.collection = {};
         return true;
