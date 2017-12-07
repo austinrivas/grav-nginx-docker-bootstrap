@@ -1,3 +1,4 @@
+// the PROPERTY_FIELDS object acts a mapping between ArcGIS feature field names and model properties used in the app
 export default {
     acres: "Acres",
     address: "Primary_Ad",

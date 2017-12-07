@@ -1,11 +1,16 @@
+// Collection class is an abstract class that provides the basic features of a collection
+// Collection is responsible for local filtering based on key value pairs and ranges
+// Collection also provides the ability to add and remove individual models from its collection
 export default class Collection {
 
+    // constructors sets the model for the collection, initializes and empty collection, and sets the initial state to unloaded
     constructor (model) {
         this.model = model;
         this.collection = {};
         this.allModelsLoaded = false;
     }
 
+    // allModelsLoaded is a flag used to determine whether a collection is complete or not
     get allModelsLoaded () {
         return this._modelsLoaded;
     }
@@ -14,6 +19,7 @@ export default class Collection {
         this._modelsLoaded = bool;
     }
 
+    // collection is a hash map of {id: model} pairs
     get collection () {
         return this._collection;
     }
@@ -22,6 +28,7 @@ export default class Collection {
         this._collection = collection;
     }
 
+    // the model class of the models in this collection
     get model () {
         return this._model;
     }
@@ -30,6 +37,7 @@ export default class Collection {
         this._model = model;
     }
 
+    // add a single model to the collection
     add (model) {
         if (!model) {
             console.error("Collection.add method requires a model as a parameter");
@@ -40,11 +48,13 @@ export default class Collection {
         }
     }
 
-    findAll () {
+    // return an array of all the models in the local collection
+    findAllLocalModels () {
         return Object.values(this.collection);
     }
 
-    findById (id) {
+    // return a model with the id specified
+    findLocalModelById (id) {
         if (id) {
             return this.collection[id];
         } else {
@@ -52,9 +62,10 @@ export default class Collection {
         }
     }
 
-    async findByKeyValue (key, value) {
+    // async filter all local models by the given key value pair
+    async findLocalModelByKeyValue (key, value) {
         if (key && value) {
-            return await this.findAll()
+            return await this.findAllLocalModels()
                 .reduce((accumulator, model) => {
                     if (model[key] === value) {
                         accumulator.push(model);
@@ -66,10 +77,11 @@ export default class Collection {
         }
     }
 
-    async findByKeyValueRange (key, lowerBound, upperBound) {
+    // async filter all local models by the given key and value range
+    async findLocalModelByKeyValueRange (key, lowerBound, upperBound) {
         if (key) {
             if (lowerBound >= 0 && upperBound >= lowerBound) {
-                return await this.findAll()
+                return await this.findAllLocalModels()
                     .reduce((accumulator, model) => {
                         if (model[key] >= lowerBound && model[key] <= upperBound) {
                             accumulator.push(model);
@@ -84,6 +96,7 @@ export default class Collection {
         }
     }
 
+    // remove a model from the local collection
     remove (model) {
         if (!model) {
             console.error("Collection.find method requires a model as a parameter");
@@ -96,6 +109,7 @@ export default class Collection {
         }
     }
 
+    // remove all models from the local collection
     removeAll () {
         this.collection = {};
         this.allModelsLoaded = false;

@@ -2,9 +2,13 @@ import * as esriLoader from 'esri-loader';
 import PROPERTY_FIELDS from "./propertyFields";
 import PropertyModel from "./propertyModel"
 
+// ArcModel is a resource model that is responsible for constructing ArcGIS queries and retrieving remote data from a feature server
 export default class ArcModel {
 
+    // constructor sets the featureServerUrl for the arc model
+    // an eventual improvement would be to make featureServerUrl a parameter to allow for multi data sources
     constructor () {
+        // TODO: make featureServerURL cms manageable
         this.featureServerUrl = 'https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0';
     }
 
@@ -16,14 +20,17 @@ export default class ArcModel {
         this._featureServerUrl = url;
     }
 
+    // a static method that returns the select all fields outfield selector
     static queryOutfieldsSelectAll () {
         return ["*"];
     }
 
+    // a static method that returns the select all where clause
     static queryWhereSelectAll () {
         return "'TRUE' = 'TRUE'";
     }
 
+    // a static method that return a where clause for selecting a specific feature by id
     static queryWhereSelectPropertyById (id) {
         if (id) {
             return `${PROPERTY_FIELDS.id} = ${id}`;
@@ -33,15 +40,13 @@ export default class ArcModel {
     }
 
 
+    // async method that loads esri modules and executes a QueryTask with the query parameters
     async executeQuery(queryOutfields, queryWhere) {
-        queryOutfields = queryOutfields || ArcModel.queryOutfieldsSelectAll();
-        queryWhere = queryWhere || ArcModel.queryWhereSelectAll();
-
-        const response = {},
-            options = {},
+        const options = {},
             modules = ["esri/tasks/QueryTask", "esri/tasks/support/Query"],
             lwrCommercialParcelsFeatureServer = {url: this.featureServerUrl};
 
+        // async await the result of loading the esri modules and executing the query
         return await esriLoader.loadModules(modules, options)
             .then(([QueryTask, Query]) => {
                 const queryTask = new QueryTask(lwrCommercialParcelsFeatureServer);
@@ -53,15 +58,15 @@ export default class ArcModel {
 
                 return queryTask.execute(query)
                     .then((results)=>{
-                        response.results = results;
-                        return response;
+                        return results.features ? results.features : [];
                     }, (error) => {
-                        response.error = error;
-                        return response;
+                        console.log("ArcGIS query returned an error", error);
+                        return [];
                     });
             });
     }
 
+    // an async debug method for running queries and logging the result to console
     async logArcFeatures(queryOutfields, queryWhere) {
         const response = await this.executeQuery(queryOutfields, queryWhere),
             features = response.results ? response.results.features : null,

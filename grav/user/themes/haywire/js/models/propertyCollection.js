@@ -2,10 +2,15 @@ import ArcModel from "./arcModel";
 import Collection from "./collection";
 import PropertyModel from "./propertyModel";
 
+// PropertyCollection class is a data store that is repsonsible for async fetching features from ArcGIS
+// After fetching features it will instantiate a model for each feature and store them locally
+// PropertyCollection is also responsible for local filtering of the models in the local store and returning the result
 export default class PropertyCollection extends Collection {
 
+    // constructor sets the model used by the collection
     constructor () {
         super(PropertyModel);
+        // a reference to the ArcModel class used for querying ArcGIS
         this.arcModel = ArcModel;
     }
 
@@ -17,27 +22,24 @@ export default class PropertyCollection extends Collection {
         this._arcModel = new arcModel();
     }
 
+    // async load all the properties from ArcGIS and set the all models loaded flag to true and return them as an array
     async findAllProperties () {
         let _this = this;
 
-        const response = await this.arcModel.executeQuery(ArcModel.queryOutfieldsSelectAll(), ArcModel.queryWhereSelectAll()),
-            features = response.results ? response.results.features : null,
-            error = response.error ? response.error : null;
+        const features = await this.arcModel.executeQuery(ArcModel.queryOutfieldsSelectAll(), ArcModel.queryWhereSelectAll());
 
-        if (error) {
-            console.log("ArcGIS query returned an error", error);
-        } else if (features && !error) {
+        if (features && features.length) {
             this.removeAll();
             await features.forEach((feature) => {
-                _this.add(new this.model(feature))
+                _this.add(new this.model(feature));
             });
             this.allModelsLoaded = true;
-            return this.findAll();
-        } else if (!features && !error) {
-            console.log("No features returned from ArcGIS query", response);
         }
+
+        return this.findAllLocalModels();
     }
 
+    // async load all the properties from ArcGIS and return the featured properties as an array
     async findFeaturedProperties () {
         const key = 'featured';
 
@@ -45,39 +47,37 @@ export default class PropertyCollection extends Collection {
             await this.findAllProperties();
         }
 
-        return await this.findByKeyValue(key, true);
+        return await this.findLocalModelByKeyValue(key, true);
     }
 
+    // async load a property from ArcGIS if it does not exist locally and return it
     async findPropertyById (id) {
         if (id) {
-            let property = this.findById(id);
+            let property = this.findLocalModelById(id);
 
             if (property) {
                 return property;
             } else {
                 let _this = this;
 
-                const response = await this.arcModel.executeQuery(ArcModel.queryOutfieldsSelectAll(), ArcModel.queryWhereSelectPropertyById(id)),
-                    features = response.results ? response.results.features : null,
-                    error = response.error ? response.error : null;
+                const features = await this.arcModel.executeQuery(ArcModel.queryOutfieldsSelectAll(), ArcModel.queryWhereSelectPropertyById(id));
 
-                if (error) {
-                    console.log("ArcGIS query returned an error", error);
-                } else if (features && !error) {
+                if (features && features.length) {
                     await features.forEach((feature) => {
-                        _this.add(new this.model(feature))
+                        _this.add(new this.model(feature));
                     });
-                    return this.findById(id);
-                } else if (!features && !error) {
-                    console.log("No features returned from ArcGIS query", response);
                 }
+
+                return this.findLocalModelById(id);
             }
 
         } else {
-            console.error("An id is required to retrieve a model from a collection")
+            console.error("An id is required to retrieve a model from a collection");
+            return null;
         }
     }
 
+    // async load all properties and then return the models that fall within the acreage range parameters
     async findPropertiesByAcreageRange (lowerBound, upperBound) {
         if (lowerBound >= 0 && upperBound >= lowerBound) {
             const key = 'acres';
@@ -86,12 +86,14 @@ export default class PropertyCollection extends Collection {
                 await this.findAllProperties();
             }
 
-            return await this.findByKeyValueRange(key, lowerBound, upperBound);
+            return await this.findLocalModelByKeyValueRange(key, lowerBound, upperBound);
         } else {
             console.error("A lowerBound and upperBound must be defined, upperBound must be greater than or equal to lowerBound");
+            return null;
         }
     }
 
+    // async load all properties and return the values that have a matching subdivision value
     async findPropertiesBySubdivision (subdivision) {
         if (subdivision) {
             const key = 'subdivision';
@@ -100,12 +102,14 @@ export default class PropertyCollection extends Collection {
                 await this.findAllProperties();
             }
 
-            return await this.findByKeyValue(key, subdivision);
+            return await this.findLocalModelByKeyValue(key, subdivision);
         } else {
             console.error("A type value is required in order to find a property by type.");
+            return null;
         }
     }
 
+    // async load all properties and return the values that have a matching type value
     async findPropertiesByType (type) {
         if (type) {
             const key = 'type';
@@ -114,9 +118,10 @@ export default class PropertyCollection extends Collection {
                 await this.findAllProperties();
             }
 
-            return await this.findByKeyValue(key, type);
+            return await this.findLocalModelByKeyValue(key, type);
         } else {
             console.error("A type value is required in order to find a property by type.");
+            return null;
         }
     }
 

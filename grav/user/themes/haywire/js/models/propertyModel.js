@@ -1,5 +1,7 @@
 import PROPERTY_FIELDS from "./propertyFields";
 
+// PropertyModel is a simple data container class that maps ArcGIS feature field names to usable names
+// PropertyModel wraps all properties in getter / setter methods to allow manipulation of values while maintaining immutable underlying data
 export default class PropertyModel {
     constructor (arcFeature) {
         const attributes = arcFeature && arcFeature.attributes ? arcFeature.attributes : null;
@@ -100,6 +102,7 @@ export default class PropertyModel {
         this._exteriorPerimeter = exteriorPerimeter;
     }
 
+    // cast the featured value as a boolean on access
     get featured () {
         return this._featured === "TRUE";
     }
@@ -252,6 +255,7 @@ export default class PropertyModel {
         this._zip = zip;
     }
 
+    // return a JSON representation of the model using pretty field names
     toJSON () {
         return {
             acres: this.acres,
