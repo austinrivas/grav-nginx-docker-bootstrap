@@ -78,6 +78,20 @@ export default class PropertyCollection extends Collection {
         }
     }
 
+    async findPropertiesByAcreageRange (lowerBound, upperBound) {
+        if (lowerBound >= 0 && upperBound >= lowerBound) {
+            const key = 'acres';
+
+            if (!this.allModelsLoaded) {
+                await this.findAllProperties();
+            }
+
+            return await this.findByKeyValueRange(key, lowerBound, upperBound);
+        } else {
+            console.error("A lowerBound and upperBound must be defined, upperBound must be greater than or equal to lowerBound");
+        }
+    }
+
     async findPropertiesBySubdivision (subdivision) {
         if (subdivision) {
             const key = 'subdivision';
@@ -88,7 +102,7 @@ export default class PropertyCollection extends Collection {
 
             return await this.findByKeyValue(key, subdivision);
         } else {
-            console.error("A type value is required in order to find a property by type.")
+            console.error("A type value is required in order to find a property by type.");
         }
     }
 
@@ -102,7 +116,7 @@ export default class PropertyCollection extends Collection {
 
             return await this.findByKeyValue(key, type);
         } else {
-            console.error("A type value is required in order to find a property by type.")
+            console.error("A type value is required in order to find a property by type.");
         }
     }
 
