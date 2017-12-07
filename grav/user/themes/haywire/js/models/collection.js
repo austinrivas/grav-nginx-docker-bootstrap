@@ -66,6 +66,25 @@ export default class Collection {
         }
     }
 
+    async findByKeyValueRange (key, lowerBound, upperBound) {
+        if (key) {
+            if (lowerBound >= 0 && upperBound >= lowerBound) {
+                return await this.findAll()
+                    .reduce((accumulator, model) => {
+                        console.log(model[key], [lowerBound, upperBound]);
+                        if (model[key] >= lowerBound && model[key] <= upperBound) {
+                            accumulator.push(model);
+                        }
+                        return accumulator;
+                    }, []);
+            } else {
+                console.error("A lowerBound and upperBound must be defined, upperBound must be greater than or equal to lowerBound");
+            }
+        } else {
+            console.error(`A key is required in order to retrieve a model by value range [${lowerBound}, ${upperBound}].`);
+        }
+    }
+
     remove (model) {
         if (!model) {
             console.error("Collection.find method requires a model as a parameter");
