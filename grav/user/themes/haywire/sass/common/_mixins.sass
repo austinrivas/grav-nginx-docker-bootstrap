@@ -44,3 +44,19 @@
 @mixin is-mobile-button
     @include break-max($tablet)
         width: 70%
+
+
+@mixin responsive-asp-ratio($width, $height)
+	$asp-percentage: percentage($height / $width);
+	padding-top: $asp-percentage;
+	position: relative;
+	img 
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-family: 'object-fit: cover;'; 
+		width: 100%;
+
+	@supports (object-fit: cover) 
+		img 
+			object-fit: cover;
