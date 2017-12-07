@@ -71,7 +71,6 @@ export default class Collection {
             if (lowerBound >= 0 && upperBound >= lowerBound) {
                 return await this.findAll()
                     .reduce((accumulator, model) => {
-                        console.log(model[key], [lowerBound, upperBound]);
                         if (model[key] >= lowerBound && model[key] <= upperBound) {
                             accumulator.push(model);
                         }
