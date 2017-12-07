@@ -6,6 +6,7 @@ import "babel-polyfill";
 import ArcModel from "./models/arcModel";
 import PropertyModel from "./models/propertyModel"
 import PropertyCollection from "./models/propertyCollection"
+import FavoritePropertiesCollection from "./models/favoritePropertiesCollection"
 
 /**
  * Load all of this project's JavaScript dependencies including Vue
@@ -15,6 +16,7 @@ window.Vue = require('vue');
 window.ArcModel = ArcModel;
 window.PropertyModel = PropertyModel;
 window.PropertyCollection = PropertyCollection;
+window.FavoritePropertiesCollection = FavoritePropertiesCollection;
 
 /**
  * Create a fresh Vue application instance and attach it to
