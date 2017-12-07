@@ -78,6 +78,20 @@ export default class PropertyCollection extends Collection {
         }
     }
 
+    async findPropertiesBySubdivision (subdivision) {
+        if (subdivision) {
+            const key = 'subdivision';
+
+            if (!this.allModelsLoaded) {
+                await this.findAllProperties();
+            }
+
+            return await this.findByKeyValue(key, subdivision);
+        } else {
+            console.error("A type value is required in order to find a property by type.")
+        }
+    }
+
     async findPropertiesByType (type) {
         if (type) {
             const key = 'type';
