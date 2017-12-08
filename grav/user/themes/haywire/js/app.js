@@ -29,5 +29,6 @@ Vue.component('featured-projects', require('./components/FeaturedProjects.vue'))
 Vue.component('navbar', require('./components/Navbar.vue'));
 
 const app = new Vue({
+    delimiters: ['${', '}'],
     el: '#app'
 });
