@@ -34,7 +34,7 @@ export default class PropertyModel {
             this.utilities = attributes[PROPERTY_FIELDS.utilities];
             this.zip = attributes[PROPERTY_FIELDS.zip];
         } else {
-            console.error("Unable to initialize property without attributes", arcFeature);
+            return new Error("Unable to initialize property without attributes", arcFeature);
         }
     }
 

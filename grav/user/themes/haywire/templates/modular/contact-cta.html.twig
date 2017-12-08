@@ -1,0 +1,16 @@
+<!-- Templates -->
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+<!-- Labels -->
+{% set buttonLabel = 'Contact Us' %}
+
+<!-- Classes -->
+{% set buttonClass = 'is-primary' %}
+
+<section class="contact-cta">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <p>Contact us directly with any questions or to learn more about commercial real estate opportunities.</p>
+        {% include buttonTemplate with { content: buttonLabel, class: buttonClass  } only %}
+    </div>
+</section>

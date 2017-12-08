@@ -33,6 +33,9 @@ $button-height--mobile: 45px
 $button-margin: 25px
 .button
     text-transform: uppercase
+    &.is-primary, &.is-primary-invert, &.is-favorite, &.is-icon-button
+        display: flex !important
+
     &.is-primary, &.is-primary-invert
         @extend .type__primary-cta
         display: inline-block
