@@ -27,7 +27,7 @@
             &:nth-child(3)
                 top: calc(50% + 12px)
                 @include break-max($tablet)
-                    top: calc(50% + 4px);
+                    top: calc(50% + 4px)
 
     .logo
         margin: 2rem 0
@@ -37,11 +37,17 @@
         display: flex
         position: absolute
         right: 0
-        button
-            border-left: 1px solid #fff
+        height: 45px
+        .button.is-favorite, .button.is-icon-button
             @extend .is-bg-blue-light
-            &.fav-button-icon
-                height: 2.8em;
+            height: 100%
+
+        .button.is-favorite
+            border-left: 1px solid $white
+
+        .button.is-icon-button
+            border: none !important
+
 
     .container
         justify-content: center
