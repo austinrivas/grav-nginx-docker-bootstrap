@@ -73,27 +73,42 @@ export default class LocalStorageCollection extends Collection {
     }
 
     // add the id of the model to the localstorage serialized array
-    add (model) {
+    async add (model) {
         if (!model) {
             return new Error("LocalStorageCollection.add method requires a model as a parameter");
         } else if (!model.id) {
             return new Error("The model being removed has no id");
         }
 
-        let collection = this.collection;
+        let collection = this.collection,
+            exists = await this.exists(model.id);
 
-        if (!collection.includes(model.id)) {
+        if (!exists) {
             collection.push(model.id);
             this.collection = collection;
+            exists = await this.exists(model.id)
         }
 
-        return true;
+        return exists;
     }
 
     // destroy the entry for collectionKey in localstorage
     destroy () {
         this.localStorage.removeItem(this.collectionKey);
         return true;
+    }
+
+    // check for the existance of the given id in localstorage and return a boolean
+    async exists (id) {
+        if (!id) {
+            return new Error("An id parameter is required to check for existence in localstorage")
+        }
+
+        const result = await this.collection.find((iterateeId) => {
+            return iterateeId === id;
+        });
+
+        return !!result;
     }
 
     // if the collectionKey has not been defined in localstorage then initialize it as an empty array
@@ -110,12 +125,8 @@ export default class LocalStorageCollection extends Collection {
 
     // findLocalModelById just returns the value of the id if it exists in localstorage
     // this could do more, like instantiate the model itself, but the current requirements to not dictate that
-    findLocalModelById (id) {
-        let collection = this.collection;
-
-        const exists = collection.find((iterateeId) => {
-            return iterateeId === id;
-        });
+    async findLocalModelById (id) {
+        const exists = await this.exists(id);
 
         if (exists) {
             return id;
@@ -136,25 +147,25 @@ export default class LocalStorageCollection extends Collection {
 
     // remove a model from localstorage
     // all this is doing is removing the id of the model from the serialized array at localstorage collectionKey
-    remove (model) {
+    async remove (model) {
         if (!model) {
             return new Error("LocalStorageCollection.remove method requires a model as a parameter");
         } else if (!model.id) {
             return new Error("The model being removed has no id");
         } else {
-            const modelExistsInLocalStorage = this.findLocalModelById(model.id);
+            let exists = await this.exists(model.id);
 
-            if (!modelExistsInLocalStorage) {
-                return new Error(`There is no model in the collection with id ${model.id} to remove`);
-            } else {
+            if (exists) {
                 let collection = this.collection;
 
-                this.collection = collection.filter((iterateeId) => {
+                this.collection = await collection.filter((iterateeId) => {
                     return iterateeId !== model.id;
                 });
 
-                return true;
+                exists = await this.exists(model.id);
             }
+
+            return !exists;
         }
     }
 
