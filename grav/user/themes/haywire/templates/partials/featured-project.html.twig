@@ -1,0 +1,12 @@
+{% set favoriteIconTemplate = 'partials/favorite-icon.html.twig' %}
+<article class="is-child is-bg-cream">
+    {% include favoriteIconTemplate with { id: id } only %}
+    <figure class="image is-4by3">
+        <img src="{{ propImg }}">
+    </figure>
+    <div class="prop-description">
+        <p class="prop-title">{{ propTitle }}</p>
+        <p class="subtitle">{{ propSubTitle }}</p>
+        <p class="details">{{ propDetails }}</p>
+    </div>
+</article>
