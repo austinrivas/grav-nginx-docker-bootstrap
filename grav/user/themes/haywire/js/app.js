@@ -4,7 +4,6 @@
 
 import "babel-polyfill";
 import ArcModel from "./models/arcModel";
-import PropertyModel from "./models/propertyModel"
 import PropertyCollection from "./models/propertyCollection"
 import FavoritePropertiesCollection from "./models/favoritePropertiesCollection"
 
@@ -13,10 +12,9 @@ import FavoritePropertiesCollection from "./models/favoritePropertiesCollection"
  */
 
 window.Vue = require('vue');
-window.ArcModel = ArcModel;
-window.PropertyModel = PropertyModel;
-window.PropertyCollection = PropertyCollection;
-window.FavoritePropertiesCollection = FavoritePropertiesCollection;
+window.ArcModel = new ArcModel();
+window.Properties = new PropertyCollection();
+window.FavoriteProperties = new FavoritePropertiesCollection();
 
 /**
  * Create a fresh Vue application instance and attach it to
