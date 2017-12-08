@@ -1,6 +1,6 @@
 {% set favoriteIconTemplate = 'components/favorite-icon.html.twig' %}
 <featured-project inline-template>
-    <article class="is-child is-bg-cream">
+    <article class="featured-project is-child is-bg-cream">
         {% include favoriteIconTemplate with { id: id } only %}
         <figure class="image is-4by3">
             <img src="{{ propImg }}">

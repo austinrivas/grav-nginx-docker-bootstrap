@@ -9,7 +9,7 @@ content:
         dir: asc
         custom:
             - _hero
-            - _featured
+            - _featured-projects
             - _content-block
             - _callouts
             - _content-block-bottom

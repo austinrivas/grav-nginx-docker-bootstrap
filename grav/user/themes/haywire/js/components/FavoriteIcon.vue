@@ -35,7 +35,6 @@
                         this.favorite = await FavoriteProperties.add(this.model) === true;
                     }
                     this.toggling = false;
-                    return true;
                 }
             }
         }
