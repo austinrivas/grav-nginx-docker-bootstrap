@@ -72,5 +72,8 @@
         </div>
 
     </div>
-
+    {% set filterTemplate = 'partials/properties/filter.html.twig' %}
+    <div class="container">
+        {% include filterTemplate only %}
+    </div>
 </section>
