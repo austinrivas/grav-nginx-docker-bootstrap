@@ -24,8 +24,11 @@ window.FavoritePropertiesCollection = FavoritePropertiesCollection;
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('navbar', require('./components/Navbar.vue'));
 Vue.component('arcmap', require('./components/ArcMap.vue'));
+Vue.component('favorite-icon', require('./components/FavoriteIcon.vue'));
+Vue.component('featured-project', require('./components/FeaturedProject.vue'));
+Vue.component('featured-projects', require('./components/FeaturedProjects.vue'));
+Vue.component('navbar', require('./components/Navbar.vue'));
 
 const app = new Vue({
     el: '#app'
