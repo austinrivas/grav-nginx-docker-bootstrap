@@ -45,18 +45,93 @@
     @include break-max($tablet)
         width: 70%
 
+@mixin is-range-slider($width, $height, $input-top, $input-bg-color, $input-thumb-color, $float: none, $input-height: 20px, $input-border-radius: 14px)
+    position: relative
+    width: $width
+    height: $height
+    float: $float
+    text-align: center
+
+    input[type="range"]
+        pointer-events: none
+        position: absolute
+        -webkit-appearance: none
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+        border-radius: $input-border-radius
+        background: $input-bg-color
+        left: 0
+        top: $input-top
+        width: $width
+        outline: none
+        height: $input-height
+        border: 8px solid $white
+        margin: 0
+        padding: 0
+
+
+    input[type="range"]::-webkit-slider-thumb
+        pointer-events: all
+        position: relative
+        z-index: 1
+        outline: 0
+        -webkit-appearance: none
+        width: $input-height
+        height: $input-height
+        border-radius: $input-border-radius
+        background: $white
+        border: 1px solid $input-thumb-color
+        box-shadow: 0 0 5px rgba(0 ,0, 0, 0.2)
+
+
+    input[type="range"]::-moz-range-thumb
+        pointer-events: all
+        position: relative
+        z-index: 10
+        -moz-appearance: none
+        width: $input-height
+        height: $input-height
+        border-radius: $input-border-radius
+        background: $white
+        border: 1px solid $input-thumb-color
+        box-shadow: 0 0 5px rgba(0 ,0, 0, 0.2)
+
+    input[type="range"]::-ms-thumb
+        pointer-events: all
+        position: relative
+        z-index: 10
+        -ms-appearance: none
+        width: $input-height
+        height: $input-height
+        border-radius: $input-border-radius
+        background: $white
+        border: 1px solid $input-thumb-color
+        box-shadow: 0 0 5px rgba(0 ,0, 0, 0.2)
+
+    input[type=range]::-moz-range-track
+        position: relative
+        z-index: -1
+        background-color: rgba(0, 0, 0, 1)
+        border: 0
+
+    input[type=range]:last-of-type::-moz-range-track
+        -moz-appearance: none
+        background: none transparent
+        border: 0
+
+    input[type=range]::-moz-focus-outer
+        border: 0
 
 @mixin responsive-asp-ratio($width, $height)
-	$asp-percentage: percentage($height / $width);
-	padding-top: $asp-percentage;
-	position: relative;
-	img 
-		position: absolute;
-		top: 0;
-		left: 0;
-		font-family: 'object-fit: cover;'; 
-		width: 100%;
+	$asp-percentage: percentage($height / $width)
+	padding-top: $asp-percentage
+	position: relative
+	img
+		position: absolute
+		top: 0
+		left: 0
+		font-family: 'object-fit: cover;'
+		width: 100%
 
-	@supports (object-fit: cover) 
-		img 
-			object-fit: cover;
+	@supports (object-fit: cover)
+		img
+			object-fit: cover

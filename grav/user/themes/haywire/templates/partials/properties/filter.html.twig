@@ -1,0 +1,118 @@
+{# Templates #}
+{% set iconTemplate          = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate        = 'partials/elements/button.html.twig' %}
+{% set selectTemplate        = 'partials/elements/select.html.twig' %}
+{% set sliderTemplate        = 'partials/elements/slider.html.twig' %}
+
+{# Classes #}
+{% set iconFavId             = 'icon__favorite-selected' %}
+{% set iconHamId             = 'icon__hamburger-nav' %}
+{% set iconGridId            = 'icon__grid' %}
+{% set buttonClassGold       = 'is-gold is-marginless is-button-100' %}
+{% set buttonClassPrimary    = 'is-primary is-marginless' %}
+{% set buttonClassGroup      = 'is-filter-button-group' %}
+{% set buttonClassFav        = 'is-favorite-prop-filter' %}
+{% set buttonClassFavClicked = 'is-favorite-prop-filter is-clicked' %}
+{% set selectTemplateClass   = 'is-gold' %}
+
+{# Labels #}
+{% set selectTemplateOptionsRange = [{
+        text: "ITEM WITH A RANGE",
+        disabled: true,
+        selected: true
+    },{
+        value: '1',
+        text: "one"
+    },{
+        value: '2',
+        text: "two"
+    }]
+%}
+{% set selectTemplateFilterType = [{
+        text: "SELECT A FILTER TYPE",
+        disabled: true,
+        selected: true
+    },{
+        value: '1',
+        text: "one"
+    },{
+        value: '2',
+        text: "two"
+    }]
+%}
+{% set buttonFilterApplyLabel   = 'Apply' %}
+{% set buttonPropLabel          = 'View *prop name*' %}
+
+<!-- filter desktop range -->
+
+<div class="property-filter">
+    <div class="columns">
+        <div class="column is-3">
+            {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
+        </div>
+        <div class="column is-3">
+            {% include sliderTemplate with { valueSlider1: 20, minValueSlider1: 1, maxValueSlider1: 300, StepSlider1: 1, valueSlider2: 120, minValueSlider2: 1, maxValueSlider2: 300, StepSlider2: 1 } only %}
+        </div>
+        <div class="column is-1">
+            {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
+        </div>
+        <div class="column is-3">
+            {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } %}
+        </div>
+        <div class="column is-2">
+            <div class="columns is-gapless">
+                <div class="column is-8">
+                    {% include buttonTemplate with { class: buttonClassGroup,
+                            addons: [{
+                            iconClass: iconHamId
+                        },{
+                            iconClass: iconGridId,
+                            disabled: true
+                        }]}
+                    %}
+                </div>
+                <div class="column is-4">
+                    {% include buttonTemplate with { class: buttonClassFav, iconId: iconFavId } %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- filter desktop pulldown  -->
+<br>
+<br>
+<br>
+<div class="property-filter">
+    <div class="columns">
+        <div class="column is-3">
+            {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
+        </div>
+        <div class="column is-3">
+            {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
+        </div>
+        <div class="column is-1">
+            {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
+        </div>
+        <div class="column is-3">
+            {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } %}
+        </div>
+        <div class="column is-2">
+            <div class="columns is-gapless">
+                <div class="column is-8">
+                    {% include buttonTemplate with { class: buttonClassGroup,
+                            addons: [{
+                            iconClass: iconHamId
+                        },{
+                            iconClass: iconGridId,
+                            disabled: true
+                        }]}
+                    %}
+                </div>
+                <div class="column is-4">
+                    {% include buttonTemplate with { class: buttonClassFavClicked, iconId: iconFavId } %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

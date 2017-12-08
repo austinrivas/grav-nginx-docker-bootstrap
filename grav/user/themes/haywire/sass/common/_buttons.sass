@@ -33,7 +33,7 @@ $button-height--mobile: 45px
 $button-margin: 25px
 .button
     text-transform: uppercase
-    &.is-primary, &.is-primary-invert, &.is-favorite, &.is-icon-button
+    &.is-primary, &.is-primary-invert, &.is-gold, &.is-favorite, &.is-icon-button
         display: flex !important
 
     &.is-primary, &.is-primary-invert
@@ -46,12 +46,28 @@ $button-margin: 25px
             margin: $button-margin 0 $button-margin 0
             height: $button-height--mobile
             width: 100%
+
     &.is-favorite
         @extend .type__favorites--label
         @extend .is-blue-light
         height: $button-height--mobile
         width: 118px
         display: inline-block
+
+    &.is-favorite-prop-filter
+        @extend .type__favorites--label
+        background-color: $white
+        border: 1px solid $gold
+        height: 60px
+        width: 60px !important
+        display: inline-block
+        svg
+            fill: $gold
+            margin: 0 auto
+        &.is-clicked
+            @extend .is-bg-gold
+            svg
+                fill: $white
 
     &.is-icon-button
         @extend .is-white
@@ -60,7 +76,6 @@ $button-margin: 25px
         width: $button-height
         height: $button-height
         font-size: 28px
-
 
 .buttons
     .button
