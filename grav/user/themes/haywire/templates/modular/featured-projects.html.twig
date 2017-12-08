@@ -12,7 +12,6 @@
 {% set propTitle = 'Name of property goes here - Lot 10 $1,300,000' %}
 {% set propSubTitle = 'FPO: Text callout development site' %}
 {% set propDetails = '5 Acres | Raw Land | For Sale | $15 PS' %}
-{% set propImg = 'https://bulma.io/images/placeholders/640x480.png' %}
 
 {# Routes #}
 {% set mapUrl = '/map' %}
@@ -28,34 +27,19 @@
 
                 <div class="column card">
                     <featured-project :model="first" inline-template>
-                        {% include featuredProjectTemplate with {
-                            propImg: propImg,
-                            propTitle: propTitle,
-                            propSubTitle: propSubTitle,
-                            propDetails: propDetails
-                        } only %}
+                        {% include featuredProjectTemplate only %}
                     </featured-project>
                 </div>
 
                 <div class="column card">
                     <featured-project :model="second" inline-template>
-                        {% include featuredProjectTemplate with {
-                            propImg: propImg,
-                            propTitle: propTitle,
-                            propSubTitle: propSubTitle,
-                            propDetails: propDetails
-                        } only %}
+                        {% include featuredProjectTemplate only %}
                     </featured-project>
                 </div>
 
                 <div class="column card">
                     <featured-project :model="third" inline-template>
-                        {% include featuredProjectTemplate with {
-                            propImg: propImg,
-                            propTitle: propTitle,
-                            propSubTitle: propSubTitle,
-                            propDetails: propDetails
-                        } only %}
+                        {% include featuredProjectTemplate only %}
                     </featured-project>
                 </div>
 
