@@ -1,0 +1,65 @@
+{% set iconTemplate          = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate        = 'partials/elements/button.html.twig' %}
+{% set selectTemplate        = 'partials/elements/select.html.twig' %}
+{% set sliderTemplate        = 'partials/elements/slider.html.twig' %}
+
+{% set iconFavId             = 'icon__favorite-selected' %}
+{% set iconHamId             = 'icon__hamburger-nav' %}
+{% set iconGridId            = 'icon__grid' %}
+{% set buttonClassGold       = 'is-gold is-marginless is-button-100' %}
+{% set buttonClassPrimary    = 'is-primary is-marginless' %}
+{% set buttonClassGroup      = 'is-filter-button-group' %}
+{% set selectTemplateClass   = 'is-gold' %}
+{% set selectTemplateOptions = [{
+        text: "Select an Option",
+        disabled: true,
+        selected: true
+    },{
+        value: '1',
+        text: "one"
+    },{
+        value: '2',
+        text: "two"
+    }]
+%}
+
+{% set buttonFilterApplyLabel = 'Apply' %}
+{% set buttonPropLabel = 'View *prop name*' %}
+
+<div class="property-filter">
+    <div class="columns">
+        <div class="column is-one-quarter">
+            {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptions  } only %}
+        </div>
+        <div class="column is-one-quarter">
+            {% include sliderTemplate with { valueSlider1: 20, minValueSlider1: 1, maxValueSlider1: 300, StepSlider1: 1, valueSlider2: 120, minValueSlider2: 1, maxValueSlider2: 300, StepSlider2: 1 } only %}
+        </div>
+        <div class="column is-one-quarter">
+            <div class="columns">
+                <div class="column is-one-third">
+                    {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
+                </div>
+                <div class="column">
+                    {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } %}
+                </div>
+            </div>
+        </div>
+        <div class="column is-one-quarter">
+            <div class="columns">
+                <div class="column">
+                    {% include buttonTemplate with { class: buttonClassGroup,
+                            addons: [{
+                            iconClass: iconHamId
+                        },{
+                            iconClass: iconGridId,
+                            disabled: true
+                        }]}
+                    %}
+                </div>
+                <div class="column">
+                    {% include buttonTemplate with { class: 'is-favorite', iconId: iconFavId } %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
