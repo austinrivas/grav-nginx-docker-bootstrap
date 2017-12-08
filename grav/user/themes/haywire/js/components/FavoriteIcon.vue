@@ -2,24 +2,41 @@
     export default {
         props: ['id'],
 
-        mounted() {
-            //
-            console.log(this.id);
+        async mounted() {
+            this.model.id = JSON.parse(this.id);
+            this.favorite = await FavoriteProperties.exists(this.model.id);
         },
 
         data() {
-            return {}
+            return {
+                favorite: null,
+                model: {
+                    id: null
+                },
+                toggling: false
+            }
         },
 
         computed: {
-            isFavorite: () => {
-                return true;
+            isFavorite: function () {
+                return !this.toggling && this.favorite;
             }
         },
 
         methods: {
-            toggleFavorite: () => {
-                console.log('toggleFavorite')
+            toggleFavorite: async function (e) {
+                e.preventDefault();
+                if (!this.toggling) {
+                    this.toggling = true;
+                    const isFavorite = await FavoriteProperties.exists(this.model.id);
+                    if (isFavorite) {
+                        this.favorite = !(await FavoriteProperties.remove(this.model) === true);
+                    } else {
+                        this.favorite = await FavoriteProperties.add(this.model) === true;
+                    }
+                    this.toggling = false;
+                    return true;
+                }
             }
         }
     }
