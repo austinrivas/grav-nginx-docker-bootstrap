@@ -6,7 +6,6 @@ export default class Collection {
     // constructors sets the model for the collection, initializes and empty collection, and sets the initial state to unloaded
     constructor (model) {
         this.model = model;
-        this.collection = {};
         this.allModelsLoaded = false;
     }
 
@@ -40,12 +39,19 @@ export default class Collection {
     // add a single model to the collection
     add (model) {
         if (!model) {
-            console.error("Collection.add method requires a model as a parameter");
+            return new Error("Collection.add method requires a model as a parameter");
         } else if (!model.id) {
-            console.error("The model being removed has no id");
+            return new Error("The model being added has no id");
         } else {
             this.collection[model.id] = model;
+            return true;
         }
+    }
+
+    // initialize the collection in an empty state
+    initializeCollection () {
+        this.collection = {};
+        return true;
     }
 
     // return an array of all the models in the local collection
@@ -58,7 +64,7 @@ export default class Collection {
         if (id) {
             return this.collection[id];
         } else {
-            console.error("An id is required to retrieve a model from a collection")
+            return new Error("An id is required to retrieve a model from a collection");
         }
     }
 
@@ -73,7 +79,7 @@ export default class Collection {
                     return accumulator;
                 }, []);
         } else {
-            console.error(`Both a key and a value are required to retrieve a model from a collection key: ${key}, value: ${value}`);
+            return new Error(`Both a key and a value are required to retrieve a model from a collection key: ${key}, value: ${value}`);
         }
     }
 
@@ -89,23 +95,24 @@ export default class Collection {
                         return accumulator;
                     }, []);
             } else {
-                console.error("A lowerBound and upperBound must be defined, upperBound must be greater than or equal to lowerBound");
+                return new Error("A lowerBound and upperBound must be defined, upperBound must be greater than or equal to lowerBound");
             }
         } else {
-            console.error(`A key is required in order to retrieve a model by value range [${lowerBound}, ${upperBound}].`);
+            return new Error(`A key is required in order to retrieve a model by value range [${lowerBound}, ${upperBound}].`);
         }
     }
 
     // remove a model from the local collection
     remove (model) {
         if (!model) {
-            console.error("Collection.find method requires a model as a parameter");
+            return new Error("Collection.remove method requires a model as a parameter");
         } else if (!model.id) {
-            console.error("The model being removed has no id");
+            return new Error("The model being removed has no id");
         } else if (!this.collection[model.id]) {
-            console.error(`There is no model in the collection with id ${model.id}`);
+            return new Error(`There is no model in the collection with id ${model.id} to remove`);
         } else if (model && this.collection[model.id]) {
             delete this.collection[model.id];
+            return true;
         }
     }
 
@@ -113,6 +120,7 @@ export default class Collection {
     removeAll () {
         this.collection = {};
         this.allModelsLoaded = false;
+        return true;
     }
 
 }

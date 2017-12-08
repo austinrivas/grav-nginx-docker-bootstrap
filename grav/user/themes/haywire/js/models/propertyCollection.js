@@ -12,6 +12,7 @@ export default class PropertyCollection extends Collection {
         super(PropertyModel);
         // a reference to the ArcModel class used for querying ArcGIS
         this.arcModel = ArcModel;
+        this.initializeCollection();
     }
 
     get arcModel () {
@@ -72,8 +73,7 @@ export default class PropertyCollection extends Collection {
             }
 
         } else {
-            console.error("An id is required to retrieve a model from a collection");
-            return null;
+            return new Error("An id is required to retrieve a model from a collection");
         }
     }
 
@@ -88,8 +88,7 @@ export default class PropertyCollection extends Collection {
 
             return await this.findLocalModelByKeyValueRange(key, lowerBound, upperBound);
         } else {
-            console.error("A lowerBound and upperBound must be defined, upperBound must be greater than or equal to lowerBound");
-            return null;
+            return new Error("A lowerBound and upperBound must be defined, upperBound must be greater than or equal to lowerBound");
         }
     }
 
@@ -104,8 +103,7 @@ export default class PropertyCollection extends Collection {
 
             return await this.findLocalModelByKeyValue(key, subdivision);
         } else {
-            console.error("A type value is required in order to find a property by type.");
-            return null;
+            return new Error("A type value is required in order to find a property by type.");
         }
     }
 
@@ -120,8 +118,7 @@ export default class PropertyCollection extends Collection {
 
             return await this.findLocalModelByKeyValue(key, type);
         } else {
-            console.error("A type value is required in order to find a property by type.");
-            return null;
+            return new Error("A type value is required in order to find a property by type.");
         }
     }
 

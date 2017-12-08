@@ -1,7 +1,7 @@
 ---
 title: Home
-body_classes: "index-page"
-
+body_classes: index-page
+visible: false
 content:
     items: '@self.modular'
     order:
@@ -15,5 +15,4 @@ content:
             - _content-block-bottom
             - _contact-cta
 ---
-
 

@@ -7,16 +7,25 @@
 
 <!-- Classes -->
 {% set iconLogoId = 'icon__logo--header' %}
-{% set iconFavId = 'icon__favorite-selected' %}
+{% set iconFavId = 'icon__favorite' %}
 {% set buttonFavClass = 'is-favorite' %}
-{% set buttonFavIconClass = 'fav-button-icon' %}
+{% set buttonFavIconClass = 'is-icon-button' %}
+{% set buttonFavHref = '/map?filter=favorites' %}
 
 
 <navbar inline-template>
     <nav class="navbar lwrc-navbar" role="navigation" aria-label="main navigation">
         <div class="fav-buttons-set is-hidden-touch">
-            {% include buttonTemplate with { iconId: iconFavId, class: buttonFavIconClass } only %}
-            {% include buttonTemplate with { content: buttonFavLabel, class: buttonFavClass  } only %}
+            {% include buttonTemplate with {
+                iconId: iconFavId,
+                class: buttonFavIconClass,
+                href: buttonFavHref
+            } only %}
+            {% include buttonTemplate with {
+                content: buttonFavLabel,
+                class: buttonFavClass,
+                href: buttonFavHref
+            } only %}
         </div>
         <div class="container is-hidden-touch">
             <div class="logo">
