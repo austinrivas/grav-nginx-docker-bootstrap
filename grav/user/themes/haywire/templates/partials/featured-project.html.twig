@@ -1,0 +1,13 @@
+{% set favoriteIconTemplate = 'components/favorite-icon.html.twig' %}
+<article class="featured-project is-child is-bg-cream">
+    {% include favoriteIconTemplate only %}
+    <figure class="image is-4by3 is-bg-primary-invert">
+        <img v-bind:src="image" v-if="image">
+    </figure>
+    <div class="prop-description">
+        <p class="prop-title" v-if="title">${ title }</p>
+        <p class="prop-price" v-if="price">${ price | currency }</p>
+        <p class="subtitle" v-if="subtitle">${ subtitle }</p>
+        <p class="details" v-if="details">${ details }</p>
+    </div>
+</article>

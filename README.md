@@ -56,13 +56,13 @@ Note: All paths are relative to the project root.
 
 - `git clone git@bitbucket.org:push-orlando/lwrc-grav.git lwrc-grav`
 
+- `cd lwrc-grav/grav`
+
 - `docker-compose up -d`
 
 - `docker-compose exec nginx-php-grav php bin/grav install`
 
 TODO: include this step in the docker image initialization
-
-- `cd lwrc-grav/grav`
 
 - `cd ../theme`
 
