@@ -1,6 +1,6 @@
 {# Templates #}
 {% set buttonTemplate = 'partials/elements/button.html.twig' %}
-{% set featuredProjectTemplate = 'components/featured-project.html.twig' %}
+{% set featuredProjectTemplate = 'partials/featured-project.html.twig' %}
 
 {# Labels #}
 {% set buttonLabel = 'View All Properties' %}
@@ -27,33 +27,36 @@
             <div class="columns is-variable is-9">
 
                 <div class="column card">
-                    {% include featuredProjectTemplate with {
-                        id: 1234,
-                        propImg: propImg,
-                        propTitle: propTitle,
-                        propSubTitle: propSubTitle,
-                        propDetails: propDetails
-                    } only %}
+                    <featured-project :model="first" inline-template>
+                        {% include featuredProjectTemplate with {
+                            propImg: propImg,
+                            propTitle: propTitle,
+                            propSubTitle: propSubTitle,
+                            propDetails: propDetails
+                        } only %}
+                    </featured-project>
                 </div>
 
                 <div class="column card">
-                    {% include featuredProjectTemplate with {
-                        id: 4321,
-                        propImg: propImg,
-                        propTitle: propTitle,
-                        propSubTitle: propSubTitle,
-                        propDetails: propDetails
-                    } only %}
+                    <featured-project :model="second" inline-template>
+                        {% include featuredProjectTemplate with {
+                            propImg: propImg,
+                            propTitle: propTitle,
+                            propSubTitle: propSubTitle,
+                            propDetails: propDetails
+                        } only %}
+                    </featured-project>
                 </div>
 
                 <div class="column card">
-                    {% include featuredProjectTemplate with {
-                        id: 1111,
-                        propImg: propImg,
-                        propTitle: propTitle,
-                        propSubTitle: propSubTitle,
-                        propDetails: propDetails
-                    } only %}
+                    <featured-project :model="third" inline-template>
+                        {% include featuredProjectTemplate with {
+                            propImg: propImg,
+                            propTitle: propTitle,
+                            propSubTitle: propSubTitle,
+                            propDetails: propDetails
+                        } only %}
+                    </featured-project>
                 </div>
 
             </div>
