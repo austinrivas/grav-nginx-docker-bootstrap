@@ -1,13 +1,19 @@
 <script>
     export default {
-        mounted() {
-            //
+        async mounted() {
+            const collection = await Properties.findFeaturedProperties();
+
+            this.first = collection[0];
+            this.second = collection[1];
+            this.third = collection[2];
         },
 
         data() {
-            return {}
-        },
-
-        methods: {}
+            return {
+                first: null,
+                second: null,
+                third: null,
+            }
+        }
     }
 </script>
