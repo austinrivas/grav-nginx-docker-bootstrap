@@ -33,6 +33,10 @@ $input__width: 100%
         @extend .type__placeholder
         resize: none
 
+section.is-range-slider
+    @include is-range-slider(100%, auto, 20px, $gold, $gold, none, 20px)
+
+
 @mixin select-arrow
     &:not(.is-multiple)
         &::after
@@ -101,13 +105,20 @@ $input__width: 100%
 $select-input__icon-size: 42px
 $select-input__icon-size--mobile: 32px
 .select
-    &.is-primary-invert
+    &.is-primary-invert, &.is-gold
         @include select-input
         @include select-arrow
-        @include select-dropdown-bg($primary-invert)
         @extend .is-icon-white
         select
             color: $primary
+
+    &.is-primary-invert
+        @include select-dropdown-bg($primary-invert)
+
+    &.is-gold
+        @include select-dropdown-bg($gold)
+        select
+            color: $gold
 
     &.is-select-filter
         @include select-input

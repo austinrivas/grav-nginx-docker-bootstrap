@@ -2,21 +2,32 @@
 .navbar.lwrc-navbar
     border-bottom: 0
     flex-flow: row wrap
+    .navbar-dropdown
+        a:before
+            @include break-max($tablet)
+                content: "-"
     .navbar-burger
         border: 0
         padding-right: 4.75em
         padding-top: 4em
+        @include break-max($tablet)
+            padding-top: 3em
+        &:hover
+            background-color: transparent
         span
             width: 25px
             height: 3px
-            @extend .is-blue-tiffany
+            @extend .is-blue-dark
             &:nth-child(1)
                 top: calc(50% - 6px)
             &:nth-child(2)
                 top: calc(50% + 3px)
+                @include break-max($tablet)
+                    top: calc(50% + 13px)
             &:nth-child(3)
                 top: calc(50% + 12px)
-
+                @include break-max($tablet)
+                    top: calc(50% + 4px)
 
     .logo
         margin: 2rem 0
@@ -26,11 +37,17 @@
         display: flex
         position: absolute
         right: 0
-        button
-            border-left: 1px solid #fff
+        height: 45px
+        .button.is-favorite, .button.is-icon-button
             @extend .is-bg-blue-light
-            &.fav-button-icon
-                height: 2.8em;
+            height: 100%
+
+        .button.is-favorite
+            border-left: 1px solid $white
+
+        .button.is-icon-button
+            border: none !important
+
 
     .container
         justify-content: center
@@ -45,9 +62,13 @@
                 flex-wrap: nowrap
                 justify-content: center
                 width: 15%
+                @include break-max($tablet)
+                    width: 100%
             a
                 text-transform: uppercase
                 @extend .is-olive
+                @include break-max($tablet)
+                    color: $blue-dark
                 &:after
                     width: 0
                     height: 0

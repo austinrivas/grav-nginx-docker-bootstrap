@@ -68,7 +68,7 @@
 
 
             map = new Map({
-                basemap: "topo-vector"
+                basemap: "hybrid"
             });
 
             let featureServerUrl = 'https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0';
