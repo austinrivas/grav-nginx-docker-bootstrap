@@ -41,7 +41,7 @@ export default class ArcModel {
         if (id) {
             return `${PROPERTY_FIELDS.id} = ${id}`;
         } else {
-            console.error("A property id is required to query by Id");
+            return new Error("A property id is required to query by Id");
         }
     }
 

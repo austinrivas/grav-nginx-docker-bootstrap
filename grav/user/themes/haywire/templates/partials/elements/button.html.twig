@@ -1,4 +1,5 @@
 {% set iconTemplate = 'partials/svg-icon.html.twig' %}
+
 {% if addons %}
     <div class="buttons {{ class }}">
         {% for addon in addons %}
@@ -14,13 +15,21 @@
         {% endfor %}
     </div>
 {% else %}
-    <button class="button {{ class }} {{ iconClass }}" {% if disabled %} disabled{% endif %} {% if type %} type="{{ type }}" {% endif %}>
-        {% if iconId %}
-            {% include iconTemplate with {
-                iconId: iconId
-            } only %}
-        {% elseif content %}
-            {{ content }}
-        {% endif %}
-    </button>
+    {% if href %}
+        {% set buttonElement = 'a' %}
+    {% else %}
+        {% set buttonElement = 'button' %}
+    {% endif %}
+    <{{ buttonElement }} class="button {{ class }} {{ iconClass }}"
+        {% if disabled %} disabled{% endif %}
+        {% if type %} type="{{ type }}"{% endif %}
+        {% if href %} href="{{ href }}"{% endif %}>
+            {% if iconId %}
+                {% include iconTemplate with {
+                    iconId: iconId
+                } only %}
+            {% elseif content %}
+                {{ content }}
+            {% endif %}
+    </{{ buttonElement }}>
 {% endif %}

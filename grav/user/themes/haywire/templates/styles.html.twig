@@ -3,6 +3,7 @@
 {% set inputCardType = 'input' %}
 {% set textAreaInputType = 'textarea' %}
 {% set selectInputType = 'select' %}
+{% set sliderInputType = 'range' %}
 {% set checkboxInputType = 'checkbox' %}
 {% set buttonCardType = 'button' %}
 {% set typographyCardType = 'typography' %}
@@ -67,7 +68,13 @@
                         inputClass: 'is-select-filter',
                         iconId: 'icon__filter',
                         selectOptions: selectOptions
-                    },{
+                    },
+                    {
+                        cardType: inputCardType,
+                        inputType: sliderInputType,
+                        inputClass: 'is-range-slider'
+                    },
+                    {
                         cardType: inputCardType,
                         inputType: checkboxInputType,
                         inputClass: 'is-primary-invert'
@@ -340,6 +347,9 @@
                     },{
                         cardType: typographyCardType,
                         typographyClass: 'type__content-tile--content'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__content-bottom-tile--primary-heading'
                     }]
                 } only %}
 

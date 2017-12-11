@@ -4,6 +4,7 @@
 
 {% set inputTemplate = 'partials/elements/input.html.twig' %}
 {% set textAreaTemplate = 'partials/elements/textarea.html.twig' %}
+{% set sliderTemplate = 'partials/elements/slider.html.twig' %}
 {% set selectInputTemplate = 'partials/elements/select.html.twig' %}
 {% set checkboxInputTemplate = 'partials/elements/checkbox.html.twig' %}
 {% set iconTemplate = 'partials/svg-icon.html.twig' %}
@@ -12,6 +13,7 @@
 {% set inputCardType = 'input' %}
 {% set textInputType = 'text' %}
 {% set textAreaInputType = 'textarea' %}
+{% set sliderInputType = 'range' %}
 {% set selectInputType = 'select' %}
 {% set checkboxInputType = 'checkbox' %}
 {% set iconCardType = 'icon' %}
@@ -75,6 +77,10 @@
                     inputClass: inputClass,
                     placeholder: inputPlaceholder
                 } only %}
+            {% elseif inputType == sliderInputType %}
+                {% include sliderTemplate with {
+                    inputClass: inputClass
+                } only %}
             {% elseif inputType == selectInputType %}
                 {% include selectInputTemplate with {
                     inputClass: inputClass,
@@ -113,6 +119,9 @@
             {% elseif inputType == textAreaInputType %}
                 {% set template = textAreaTemplate %}
                 <p>.textarea.{{ inputClass }}</p>
+            {% elseif inputType == sliderInputType %}
+                {% set template = sliderTemplate %}
+                <p>.is-range-slider</p>
             {% elseif inputType == selectInputType %}
                 {% set template = selectInputTemplate %}
                 <p>.select.{{ inputClass }}</p>
