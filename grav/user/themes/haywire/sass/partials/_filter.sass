@@ -6,6 +6,8 @@
         top: -7px
     .button
         width: 330px
+        @include break-max($tablet)
+            width: 100%
         &.is-favorite
             background-color: $white
             border: 1px solid $gold
@@ -16,3 +18,5 @@
                 margin: 0 auto
     .is-button-100
         width: 100px
+        @include break-max($tablet)
+            width: 100%
