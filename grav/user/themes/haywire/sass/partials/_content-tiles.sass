@@ -1,0 +1,26 @@
+section.content-blocks.content-tiles
+    margin-top: 0
+    &.is-inverse
+        .columns
+            flex-direction: row-reverse
+    &.is-tile-white
+        .is-column-text
+            @extend .is-bg-cream
+            h3,p
+                @extend .is-gold
+    &.is-tile-blue-tiffany
+        .is-column-text
+            @extend .is-blue-tiffany
+            h3,p
+                @extend .is-blue-dark
+    .is-column-text
+        @extend .is-bg-blue-dark
+        h3
+            @extend .is-blue-tiffany
+            @extend .type__content-tile--secondary-heading
+            margin: 1em 0 0 0
+            flex-basis: auto
+        p
+            @extend .type__content-tile--content
+            @extend .is-cream
+            padding: 0 2em
