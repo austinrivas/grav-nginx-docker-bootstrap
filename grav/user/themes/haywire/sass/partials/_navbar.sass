@@ -2,32 +2,34 @@
 .navbar.lwrc-navbar
     border-bottom: 0
     flex-flow: row wrap
-    .navbar-dropdown
-        a:before
-            @include break-max($tablet)
-                content: "-"
     .navbar-burger
         border: 0
         padding-right: 4.75em
-        padding-top: 4em
+        padding-top: 5.5em
+        &:focus
+            outline: 0
+            border: 0
+            box-shadow: none
         @include break-max($tablet)
-            padding-top: 3em
+            padding-top: 4em
         &:hover
             background-color: transparent
         span
+            color: $blue-tiffany
             width: 25px
             height: 3px
             @extend .is-blue-dark
             &:nth-child(1)
-                top: calc(50% - 6px)
-            &:nth-child(2)
-                top: calc(50% + 3px)
-                @include break-max($tablet)
-                    top: calc(50% + 13px)
+                top: calc(50% - 10px)
             &:nth-child(3)
-                top: calc(50% + 12px)
-                @include break-max($tablet)
-                    top: calc(50% + 4px)
+                top: calc(50% + 8px)
+        &.is-active
+            span
+                &:nth-child(1)
+                    transform: translateY(9px) rotate(45deg)
+                &:nth-child(3)
+                    transform: translateY(-8px) rotate(-45deg)
+
 
     .logo
         margin: 2rem 0
@@ -54,6 +56,12 @@
         .navbar-menu
             flex-grow: 1
             margin-bottom: 2rem
+            margin-right: 0
+            box-shadow: none
+            @include break-max($desktop)
+                background-color: $geyser
+                margin-bottom: 0
+                padding: 1rem 0
             .navbar-end
                 flex: 1
                 justify-content: center
@@ -61,21 +69,32 @@
                 @extend .type__nav-item--label
                 flex-wrap: nowrap
                 justify-content: center
-                width: 15%
+                padding: 0.5rem 1.4rem
+                background-color: transparent
+                &.is-active
+                    background-color: transparent
+                @include break-max($desktop)
+                    padding: 0.85rem 1.4rem
                 @include break-max($tablet)
                     width: 100%
+                @include break-min($widescreen)
+                    padding: 0.5rem 1.8rem
+                @include break-min($fullhd)
+                    padding: 0.5rem 2.4rem
+            .navbar-item.has-dropdown
+                padding: 0
+            .navbar-dropdown .navbar-item:before
+                @include break-max($desktop)
+                    content: "\2014"
             a
                 text-transform: uppercase
                 @extend .is-olive
-                @include break-max($tablet)
+                @include break-max($desktop)
                     color: $blue-dark
                 &:after
-                    width: 0
-                    height: 0
                     border-left: 7px solid $olive
                     border-right: 7px solid transparent
                     border-top: 7px solid transparent
                     border-bottom-color: transparent
-                    margin-top: -.5em
-                    right: -2.4rem
-                    line-height: 0
+                    top: 40%
+                    right: 0

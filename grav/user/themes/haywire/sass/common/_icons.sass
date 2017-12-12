@@ -1,4 +1,4 @@
-@mixin icon ($height, $width, $mobile-height: null, $mobile-width: null)
+@mixin icon ($height, $width, $mobile-height: null, $mobile-width: null, $breakpoint: $tablet)
 
     @if $mobile-height == null
         $mobile-height: $height
@@ -12,7 +12,7 @@
     svg
         height: $height
         width: $width
-    @include break-max($tablet)
+    @include break-max($breakpoint)
         height: $mobile-height
         width: $mobile-width
         svg
