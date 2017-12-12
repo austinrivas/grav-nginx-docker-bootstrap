@@ -129,3 +129,6 @@
 	@supports (object-fit: cover)
 		img
 			object-fit: cover
+
+@mixin font-size-vmax($scalar)
+    font-size: calc(#{$scalar} * (1vw + 1vh - 1vmin))
