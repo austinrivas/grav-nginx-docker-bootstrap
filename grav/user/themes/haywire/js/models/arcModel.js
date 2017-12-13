@@ -1,6 +1,6 @@
 import * as esriLoader from 'esri-loader';
 import PROPERTY_FIELDS from "./propertyFields";
-import PropertyModel from "./propertyModel"
+import PropertyModel from "./propertyModel";
 
 // ArcModel is a resource model that is responsible for constructing ArcGIS queries and retrieving remote data from a feature server
 export default class ArcModel {
@@ -8,8 +8,7 @@ export default class ArcModel {
     // constructor sets the featureServerUrl for the arc model
     // an eventual improvement would be to make featureServerUrl a parameter to allow for multi data sources
     constructor () {
-        const featureServerMetaSelector = 'meta[name="arc-gis-feature-server-url"]';
-        this.featureServerUrl = ArcModel.getArcGISFeatureServerUrl(featureServerMetaSelector);
+        this.featureServerUrl = ArcModel.getArcGISFeatureServerUrl();
     }
 
     get featureServerUrl() {
@@ -20,8 +19,11 @@ export default class ArcModel {
         this._featureServerUrl = url;
     }
 
-    static getArcGISFeatureServerUrl (metaSelector) {
-        const element = document.querySelector(metaSelector);
+    static getArcGISFeatureServerUrl (selector) {
+
+        selector = selector || 'meta[name="arc-gis-feature-server-url"]';
+
+        const element = document.querySelector(selector);
 
         return element && element.getAttribute("content");
     }
