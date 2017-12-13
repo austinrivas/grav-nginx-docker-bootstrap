@@ -4,25 +4,13 @@
 
 {% block head %}
     {{ parent() }}
-    <script
-        src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
-    <style type="text/css">
-        #mapNode {
-            padding: 0;
-            margin: 0;
-            height: 80vh;
-            width: 100%;
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
     {% include filterTemplate with {} only %}
     <arcmap inline-template>
-        <div class="map-container">
+        <div class="arc-map-container">
             <div id="mapNode"></div>
         </div>
     </arcmap>
