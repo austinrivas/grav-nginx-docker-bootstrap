@@ -58,13 +58,11 @@ TODO: Figure out the responsive on >1400px
             </div>
             {% include sliderTemplate with { valueSlider1: 20, minValueSlider1: 1, maxValueSlider1: 300, StepSlider1: 1, valueSlider2: 120, minValueSlider2: 1, maxValueSlider2: 300, StepSlider2: 1 } only %}
         </div>
-        <div class="column is-3" style="display: none;">
+        <div class="column is-3 is-hidden">
             {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
         </div>
-        <div class="column is-1" style="display: none;">
-            <div class="is-center">
-                {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
-            </div>
+        <div class="column is-1">
+            {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
         </div>
         <div class="column is-3">
             <div class="is-center">
