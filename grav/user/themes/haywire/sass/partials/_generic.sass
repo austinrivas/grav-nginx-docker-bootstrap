@@ -1,5 +1,5 @@
 section.generic
-	background: #fff
+	background: $white
 	padding: 10vh 0
 
 	.generic-body
@@ -16,16 +16,20 @@ section.generic
 		text-align: center
 
 		h2
-			color: $primary
-			font-size: 1.35em
-			text-transform: uppercase
-			letter-spacing: 2px
-
+			@extend .type__content-section--heading
+			@extend .is-uppercase
+			@extend .is-blue-dark
 		p
-			@extend .is-proxima-nova-regular
+			@extend .type__content-section--content
+			@extend .is-dark
 			margin: 2em 0 0
-			font-size: 1.2em
-			color: $grey
-			line-height: 1.8em
-			text-align: center
 
+section.generic.is-bg-gold
+	@extend .is-bg-gold
+
+	.container
+
+		h2
+			@extend .is-gold-light
+		p
+			@extend .is-white

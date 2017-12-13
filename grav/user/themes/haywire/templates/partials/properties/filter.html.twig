@@ -43,7 +43,9 @@
 {% set buttonFilterApplyLabel   = 'Apply' %}
 {% set buttonPropLabel          = 'View *prop name*' %}
 
-<!-- filter desktop range -->
+<!-- filter desktop range
+TODO: Figure out the responsive on >1400px
+-->
 
 <div class="property-filter">
     <div class="columns">
@@ -51,16 +53,23 @@
             {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
         </div>
         <div class="column is-3">
+            <div class="is-hidden">
+                {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
+            </div>
             {% include sliderTemplate with { valueSlider1: 20, minValueSlider1: 1, maxValueSlider1: 300, StepSlider1: 1, valueSlider2: 120, minValueSlider2: 1, maxValueSlider2: 300, StepSlider2: 1 } only %}
         </div>
         <div class="column is-1">
-            {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
+            <div class="is-center">
+                {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
+            </div>
         </div>
         <div class="column is-3">
-            {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } %}
+            <div class="is-center">
+                {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } %}
+            </div>
         </div>
         <div class="column is-2">
-            <div class="columns is-gapless">
+            <div class="columns is-hidden-touch is-gapless">
                 <div class="column is-8">
                     {% include buttonTemplate with { class: buttonClassGroup,
                             addons: [{
@@ -92,13 +101,17 @@
             {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
         </div>
         <div class="column is-1">
-            {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
+            <div class="is-center">
+                {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
+            </div>
         </div>
         <div class="column is-3">
-            {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } %}
+            <div class="is-center">
+                {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } %}
+            </div>
         </div>
         <div class="column is-2">
-            <div class="columns is-gapless">
+            <div class="columns is-hidden-touch is-gapless">
                 <div class="column is-8">
                     {% include buttonTemplate with { class: buttonClassGroup,
                             addons: [{

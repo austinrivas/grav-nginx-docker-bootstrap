@@ -1,0 +1,97 @@
+{# Templates #}
+{% set inputTemplate    = 'partials/elements/input.html.twig' %}
+{% set selectTemplate   = 'partials/elements/select.html.twig' %}
+{% set textareaTemplate = 'partials/elements/textarea.html.twig' %}
+{% set checkboxTemplate = 'partials/elements/checkbox.html.twig' %}
+{% set buttonTemplate   = 'partials/elements/button.html.twig' %}
+
+{# Classes #}
+{% set primaryInvertClass = 'is-primary-invert' %}
+{% set validationDanger = 'is-danger' %}
+{% set validationSuccess = 'is-success' %}
+{% set submitClass = 'is-primary is-marginless' %}
+
+{# Labels #}
+{% set selectTemplateOptions = [{
+        text: "SELECT A TOPIC",
+        disabled: true,
+        selected: true
+    },{
+        value: '1',
+        text: "one"
+    },{
+        value: '2',
+        text: "two"
+    }]
+%}
+{% set submitLabel = 'submit' %}
+{% set checkboxLabel = 'FPO: Yes I’d like to receive updated news and information' %}
+
+<div class="columns">
+    <div class="column">
+        <div class="field">
+            <label class="label">First Name*</label>
+            <div class="control">
+                {% include inputTemplate with { inputType: 'text', inputClass: primaryInvertClass, placeholder: 'enter name' } only %}
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Email Address</label>
+            <div class="control">
+                {% include inputTemplate with { inputType: 'email', inputClass: primaryInvertClass, validationClass: validationDanger, placeholder: 'enter email' } only %}
+            </div>
+            <p class="help is-danger">Validation fail</p>
+        </div>
+        <div class="field">
+            <label class="label">Preferred method of Contact</label>
+            <div class="control">
+                {% include inputTemplate with { inputType: 'text', inputClass: primaryInvertClass, placeholder: 'enter name' } only %}
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="field">
+            <label class="label">Last Name</label>
+            <div class="control">
+                {% include inputTemplate with { inputType: 'text', inputClass: primaryInvertClass, placeholder: 'enter name' } only %}
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Phone</label>
+            <div class="control">
+                {% include inputTemplate with { inputType: 'tel', inputClass: primaryInvertClass, validationClass: validationSuccess, placeholder: 'enter name' } only %}
+            </div>
+            <p class="help is-success">Validation Success</p>
+        </div>
+        <div class="field">
+            <label class="label">What can we help you with?</label>
+            <div class="control">
+                {% include selectTemplate with { inputClass: primaryInvertClass, options: selectTemplateOptions  } only %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Message</label>
+    <div class="control">
+        {% include textareaTemplate with { inputClass: primaryInvertClass } only %}
+    </div>
+</div>
+
+<div class="columns form-submit">
+    <div class="column is-8 is-4-widescreen">
+        <div class="field">
+            <div class="control">
+                {% include checkboxTemplate with { inputClass: primaryInvertClass, label: checkboxLabel } only %}
+            </div>
+        </div>
+    </div>
+    <div class="column is-4 is-8-widescreen">
+        <div class="is-right">
+            <div class="control">
+                {% include buttonTemplate with { content: submitLabel, class: submitClass, type: 'submit'  } only %}
+            </div>
+        </div>
+    </div>
+</div>

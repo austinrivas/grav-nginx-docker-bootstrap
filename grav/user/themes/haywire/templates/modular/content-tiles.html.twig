@@ -1,0 +1,29 @@
+{# Featured Image // last image uploaded for now #}
+{% set rowImage = page.media.images|last %}
+
+{#
+Tile classes legend:
+no class - default blue bg / white text
+is-tile-white - gold text / on cream bg
+is-tile-blue-tiffany - blue tiff bg / blue-dark text
+
+is-inverse - changes content/image tile positions within a row
+#}
+
+<section class="content-blocks content-tiles {{ page.header.class }}">
+    <div class="container">
+        <div class="columns is-gapless">
+            <div class="column is-half">
+                <figure class="image is-square">
+                    {{ rowImage }}
+                </figure>
+            </div>
+
+            <div class="column is-half is-column-text">
+                <div class="content-tile">
+                    {{ content }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

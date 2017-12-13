@@ -1,12 +1,12 @@
 {% if page.header.background %}
 <section class="generic lwrc" style="background: {{ page.header.background-color }}">
 {% else %}
-<section class="generic lwrc">
+<section class="generic lwrc {{ page.header.class }}">
 {% endif %}
     <div class="generic-body">
         <div class="container">
         	{% if page.header.title %}
-            	<h2 class="is-proxima-nova-bold is-uppercase type__data-section--heading">{{ page.header.title }}</h2>
+            	<h2>{{ page.header.title }}</h2>
             {% endif %}
 
             {% if page.content %}

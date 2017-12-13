@@ -35,9 +35,16 @@
     display: flex
     justify-content: center
 
+@mixin is-right
+    display: flex
+    justify-content: flex-end
+
 @mixin is-mobile-button
     @include break-max($tablet)
-        width: 70%
+        width: 95%
+
+@mixn is-hidden
+    display: none
 
 @mixin is-range-slider($width, $height, $input-top, $input-bg-color, $input-thumb-color, $float: none, $input-height: 20px, $input-border-radius: 14px)
     position: relative
@@ -45,6 +52,8 @@
     height: $height
     float: $float
     text-align: center
+    @include break-max($tablet)
+        margin: 0 0 1em
 
     input[type="range"]
         pointer-events: none
@@ -75,6 +84,9 @@
         background: $white
         border: 1px solid $input-thumb-color
         box-shadow: 0 0 5px rgba(0 ,0, 0, 0.2)
+        &:hover
+            background: $gold
+            cursor: pointer
 
 
     input[type="range"]::-moz-range-thumb
@@ -88,6 +100,9 @@
         background: $white
         border: 1px solid $input-thumb-color
         box-shadow: 0 0 5px rgba(0 ,0, 0, 0.2)
+        &:hover
+            background: $gold
+            cursor: pointer
 
     input[type="range"]::-ms-thumb
         pointer-events: all
@@ -100,6 +115,9 @@
         background: $white
         border: 1px solid $input-thumb-color
         box-shadow: 0 0 5px rgba(0 ,0, 0, 0.2)
+        &:hover
+            background: $gold
+            cursor: pointer
 
     input[type=range]::-moz-range-track
         position: relative

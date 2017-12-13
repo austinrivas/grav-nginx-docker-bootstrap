@@ -23,4 +23,10 @@
     .hero-body
         flex-shrink: 1
     h1
-        color: #fff
+        @extend .is-uppercase
+        color: $white
+body.nofound
+    .hero.lwrc
+        .hero-p
+            &:after
+                display: none
