@@ -114,35 +114,35 @@
             map.layers.add(parcelsFeatureLayer);
 
 
-            // Bind to all filters
-            $("#map-filters li input").on('change', function (e) {
-
-                removeAllMarkers();
-
-                let filtered = [];
-                // Get all markers in filters
-                $("#map-filters li input:checked").each(function () {
-                    let vl = $(this).val();
-                    graphics.map(function (gr) {
-                        if (gr.filter === vl) {
-                            filtered.push(gr)
-                        }
-                    })
-                });
-
-                filtered.map(function (gr) {
-                    view.graphics.add(gr.graphic)
-                });
-
-                queryTask.execute(query)
-                    .then((results)=>{
-                        console.log('query results', results);
-                    }, (error) => {
-                        console.log('query error', error);
-                    });
-
-
-            });
+//            // Bind to all filters
+//            $("#map-filters li input").on('change', function (e) {
+//
+//                removeAllMarkers();
+//
+//                let filtered = [];
+//                // Get all markers in filters
+//                $("#map-filters li input:checked").each(function () {
+//                    let vl = $(this).val();
+//                    graphics.map(function (gr) {
+//                        if (gr.filter === vl) {
+//                            filtered.push(gr)
+//                        }
+//                    })
+//                });
+//
+//                filtered.map(function (gr) {
+//                    view.graphics.add(gr.graphic)
+//                });
+//
+//                queryTask.execute(query)
+//                    .then((results)=>{
+//                        console.log('query results', results);
+//                    }, (error) => {
+//                        console.log('query error', error);
+//                    });
+//
+//
+//            });
 
         });
 

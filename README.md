@@ -22,8 +22,6 @@ Run the following commands to add your git remote repositories:
 
 ## [Production](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/push-admin)
 
-[ ![Codeship Status for push-orlando/lwrc-grav](https://app.codeship.com/projects/07f01b30-ad52-0135-7ef6-2a6929614bbd/status?branch=master)](https://app.codeship.com/projects/257200)
-
 TODO: Deploy to production url with coming soon page
 
 TODO: Describe prod environment snowflakes

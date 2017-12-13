@@ -1,42 +1,16 @@
 {% extends "partials/base.html.twig" %}
 
+{% set filterTemplate =  'partials/properties/filter.html.twig' %}
+
 {% block head %}
     {{ parent() }}
-    <script
-        src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
-        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
-    <style type="text/css">
-        #mapNode {
-            padding: 0;
-            margin: 0;
-            height: 80vh;
-            width: 100%;
-        }
-    </style>
 {% endblock %}
 
 {% block content %}
+    {% include filterTemplate with {} only %}
     <arcmap inline-template>
-        <div class="map-container">
-            <aside id="map-filters" role="menu">
-                <ul>
-                    <li>
-                        <input type="checkbox" class="filter" id="1-2-ancres" value="1 to 2 Ancres">
-                        <label for="1-2-ancres">1 to 2 Ancres</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" class="filter" id="5-10-ancres" value="5 to 10 Ancres">
-                        <label for="5-10-ancres">5 to 10 Ancres</label>
-                    </li>
-                    <li>
-                        <input type="checkbox" class="filter" id="10-20-ancres" value="10 to 20 Ancres">
-                        <label for="10-20-ancres">10 to 20 Ancres</label>
-                    </li>
-                </ul>
-            </aside>
-
+        <div class="arc-map-container">
             <div id="mapNode"></div>
         </div>
     </arcmap>
