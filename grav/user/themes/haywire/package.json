@@ -29,6 +29,7 @@
   "dependencies": {
     "arcgis": "^1.0.2",
     "esri-loader": "^1.5.3",
+    "lodash": "^4.17.4",
     "object-fit-images": "^3.2.3"
   }
 }
