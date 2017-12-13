@@ -14,6 +14,7 @@ import VueCurrencyFilter from "./filters/vueCurrencyFilter";
 
 window.Vue = require('vue');
 window.ArcModel = new ArcModel();
+window.ArcModelClass = ArcModel;
 window.Properties = new PropertyCollection();
 window.FavoriteProperties = new FavoritePropertiesCollection();
 
