@@ -1,9 +1,33 @@
 {% set formTemplate = 'partials/forms/contact-form.html.twig' %}
+{#
+Header yaml example:
+contact:
+    titleOne: 'Lakewood Ranch Commercial'
+    titleTwo: 'Commercial Contacts'
+    address: '<strong>LWR Commercial Realty</strong><br>14400 Covenant Way Lakewood Ranch, FL 34202'
+    phone: 941.907.6677
+    hours:
+        -
+            day: 'Mon. - Fri 9:00 am - 5:30 pm EST'
+        -
+            day: 'Sat. - Sun 10:00 am - 6:00 pm EST'
+persons:
+    -
+        name: 'John Doe'
+        title: CEO
+        email: john@doe.com
+        phone: 333-444-5555
+    -
+        name: 'Bradley Pitts'
+        title: CFO
+        email: bradley@pitts.com
+        phone: 555-666-7777
+#}
 <section class="contact is-fullheight">
     <div class="columns">
         <div class="container column is-8 is-bg-blue-light">
             <div class="form-container">
-                <h2>Please use the form below to contact us with any questions or comments you may have.</h2>
+                <h2>{{ content }}</h2>
                 <form method="" action="">
                     {% include formTemplate only %}
                 </form>
@@ -11,16 +35,20 @@
         </div>
 
         <aside class="column is-4 is-narrow-mobile is-fullheight section">
-            <h2>Lakewood Ranch Commercial</h2>
-            <p><strong>LWR Commercial Realty</strong><br>14400 Covenant Way Lakewood Ranch, FL 34202</p>
-            <p>Phone: <a href="tel:9419076677">941.907.6677</a></p>
+            <h2>{{ page.header.contact.titleOne }}</h2>
+            <p>{{ page.header.contact.address }}</p>
+            <p>Phone: <a href="tel:{{ page.header.contact.phone }}">{{ page.header.contact.phone }}</a></p>
             <p><strong>Hours:</strong><br>
-                Mon. - Fri 9:00 am - 5:30 pm EST<br>
-                Sat. - Sun 10:00 am - 6:00 pm EST</p>
-            <h2>Commercial Contacts</h2>
-            <p><strong>Jennifer Snow</strong><br>Title of the Person</p>
-            <p><a href="mailto:">jsnow@lwrcommercial.com</a><br>
-            <a href="tel:">555.555.5555</a></p>
+                {% for hour in page.header.contact.hours %}
+                    {{ hour.day }}<br>
+                {% endfor %}
+            </p>
+            <h2>{{ page.header.contact.titleTwo }}</h2>
+            {% for person in page.header.persons %}
+                <p><strong>{{ person.name }}</strong><br>{{ person.title }}</p>
+                <p><a href="mailto:{{ person.email }}">{{ person.email }}</a><br>
+                <a href="tel:{{ person.phone }}">{{ person.phone }}</a></p>
+            {% endfor %}
         </aside>
     </div>
 </section>
