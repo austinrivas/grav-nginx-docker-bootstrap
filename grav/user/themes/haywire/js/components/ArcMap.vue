@@ -1,21 +1,22 @@
 <script>
     import * as esriLoader from 'esri-loader'
     import ArcModelClass from '../models/arcModel'
-    import RetargetMouseScroll from '../events/retarget-mouse-scroll'
+    import RetargetMouseScroll from '../event-handlers/retarget-mouse-scroll'
 
     export default {
         mounted: async function () {
 
             let _this = this;
 
-            const options = {},
+            const basemap = "hybrid",
+                options = {},
+                mouseWheelEvent = "mouse-wheel",
                 modules = [
                     "esri/Map",
                     "esri/views/MapView",
                     "esri/layers/FeatureLayer",
                     "esri/symbols/SimpleMarkerSymbol",
                     "esri/geometry/Point",
-                    "esri/geometry/Polygon",
                     "esri/Graphic"];
 
             _this.mapNodeSelector = "mapNode";
@@ -27,51 +28,53 @@
             await esriLoader.loadModules(modules, options)
                 .then(([Map, MapView, FeatureLayer, SimpleMarkerSymbol, Point, Graphic]) => {
 
-                    const basemap = "hybrid",
-                        mouseWheelEvent = "mouse-wheel",
-                        defaultZoom = 13;
-
-                    _this.Point = Point;
+                    _this.FeatureLayer = FeatureLayer;
                     _this.Graphic = Graphic;
+                    _this.Map = Map;
+                    _this.MapView = MapView;
+                    _this.Point = Point;
                     _this.SimpleMarkerSymbol = SimpleMarkerSymbol;
-
-                    _this.map = new Map({ basemap: basemap });
-
-                    _this.view = new MapView({
-                        container: _this.mapNodeSelector,
-                        map: _this.map,
-                        zoom: defaultZoom,
-                        center: _this.defaultCenter // longitude, latitude
-                    });
-
-                    _this.view.on(mouseWheelEvent, _this.stopPropagation);
-
-                    _this.featureServer.url = ArcModelClass.getArcGISFeatureServerUrl();
-
-                    _this.featureLayer = new FeatureLayer(_this.featureServer);
-
-                    _this.map.layers.add(_this.featureLayer);
 
                 });
 
+            _this.map = new _this.Map({ basemap: basemap });
+
+            _this.featureServer.url = ArcModelClass.getArcGISFeatureServerUrl();
+
+            _this.featureLayer = new _this.FeatureLayer(_this.featureServer);
+
+            _this.map.layers.add(_this.featureLayer);
+
             _this.properties = await Properties.findAllProperties();
 
-            //_this.properties.forEach(_this.addMapMarkerToDisplay);
+            _this.mapView = new _this.MapView({
+                container: _this.mapNodeSelector,
+                map: _this.map,
+                zoom: _this.defaultZoom,
+                center: await _this.getMapCenter(_this.properties) // [longitude, latitude]
+            });
+
+            _this.mapView.on(mouseWheelEvent, _this.stopPropagation);
+
+            _this.properties.forEach(_this.addMapMarkerToDisplay);
         },
 
         data: function () {
             return {
-                defaultCenter: [-82.4285, 27.4417],
+                FeatureLayer: null,
+                Graphic: null,
+                Map: null,
+                MapView: null,
+                Point: null,
+                SimpleMarkerSymbol: null,
+                defaultZoom: 16,
                 featureLayer: null,
                 featureServer: {url: null},
-                Graphic: null,
                 graphics: [],
                 map: null,
                 mapNodeSelector: null,
-                Point: null,
+                mapView: null,
                 properties: null,
-                SimpleMarkerSymbol: null,
-                view: null
             };
         },
 
@@ -86,8 +89,8 @@
 
                 let _this = this,
                     pnt = new _this.Point({
-                        longitude: _this.defaultCenter[0],
-                        latitude: _this.defaultCenter[1]
+                        longitude: model.centroid.longitude,
+                        latitude: model.centroid.latitude
                     }),
                     gr = new _this.Graphic({
                         geometry: pnt,
@@ -107,16 +110,25 @@
                         }
                     });
 
-                this.graphics.push({ graphic: gr });
-                this.view.graphics.add(gr)
+                _this.graphics.push({ graphic: gr });
+                _this.mapView.graphics.add(gr)
             },
             createMarkerContent: function (model) {
                 return `<p>${model.toJSON()}</p>`;
             },
+            getMapCenter: async function (collection) {
+                const center = await collection.reduce((accumulator, model) => {
+                    accumulator.longitude += model.centroid.longitude;
+                    accumulator.latitude += model.centroid.latitude;
+                    return accumulator;
+                }, {longitude: 0, latitude: 0});
+
+                return [center.longitude / collection.length, center.latitude / collection.length];
+            },
             removeAllMarkers: function () {
                 let _this = this;
-                for (let i = this.graphics.length - 1; i >= 0; i--) {
-                    this.view.graphics.remove(_this.graphics[i].graphic)
+                for (let i = _this.graphics.length - 1; i >= 0; i--) {
+                    _this.mapView.graphics.remove(_this.graphics[i].graphic)
                 }
             },
             stopPropagation: function (e) {
