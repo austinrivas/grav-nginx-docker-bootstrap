@@ -4,7 +4,8 @@ import PROPERTY_FIELDS from "./propertyFields";
 // PropertyModel wraps all properties in getter / setter methods to allow manipulation of values while maintaining immutable underlying data
 export default class PropertyModel {
     constructor (arcFeature) {
-        const attributes = arcFeature && arcFeature.attributes ? arcFeature.attributes : null;
+        const attributes = arcFeature && arcFeature.attributes ? arcFeature.attributes : null,
+            geometry = arcFeature && arcFeature.geometry ? arcFeature.geometry : null;
 
         if (attributes) {
             this.acres = attributes[PROPERTY_FIELDS.acres];
@@ -35,6 +36,15 @@ export default class PropertyModel {
             this.zip = attributes[PROPERTY_FIELDS.zip];
         } else {
             return new Error("Unable to initialize property without attributes", arcFeature);
+        }
+
+        if (geometry) {
+            this.centroid = {
+                latitude: geometry.centroid.latitude,
+                longitude: geometry.centroid.longitude
+            };
+        } else {
+            return new Error("Unable to initialize property without geometry", arcFeature);
         }
     }
 
@@ -76,6 +86,18 @@ export default class PropertyModel {
 
     set blockId (blockId) {
         this._blockId = blockId;
+    }
+
+    get centroid () {
+        return this._centroid;
+    }
+
+    set centroid (centroid) {
+        if (centroid.latitude && centroid.longitude) {
+            this._centroid = centroid;
+        } else {
+            return new Error("A property centroid must have a latitude and longitude value", centroid);
+        }
     }
 
     get city () {
