@@ -1,5 +1,6 @@
 <script>
     import * as esriLoader from 'esri-loader'
+    import RetargetMouseScroll from '../events/retarget-mouse-scroll'
 
     let PropertyMap = function (areas) {
 
@@ -96,6 +97,7 @@
                 evt.stopPropagation();
             });
 
+
             for (let i = areas.length - 1; i >= 0; i--) {
                 // addMapMarkerToDisplay([areas[i].latitude, areas[i].longitude], areas[i].name, areas[i].data)
                 for (let ii = areas[i].properties.length - 1; ii >= 0; ii--) {
@@ -150,6 +152,13 @@
 
     export default {
         mounted: () => {
+            RetargetMouseScroll({
+                element: document.getElementById("mapNode"),
+                target: window,
+                preventDefault: false,
+                scrollMultiplier: 1.0
+            });
+
             let areas = [
                 {
                     name: "1 to 2 Ancres",
