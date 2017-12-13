@@ -1,6 +1,5 @@
 ---
 title: 'About Us'
-body_classes: index-about
 content:
     items: '@self.modular'
     order:
@@ -12,5 +11,6 @@ content:
             - _demographics
             - _economic-benefits
             - _affiliations
+body_classes: index-about
 ---
 
