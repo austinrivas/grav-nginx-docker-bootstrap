@@ -13,6 +13,9 @@ import FavoritePropertiesCollection from './models/favoritePropertiesCollection'
 import Vue from 'vue';
 import VueCurrencyFilter from './filters/vue-currency-filter';
 
+// Vue Event Bus
+import EventBus from './event-handlers/event-bus';
+
 // Vue Components
 import ArcMap from './components/ArcMap.vue';
 import FavoriteIcon from './components/FavoriteIcon.vue';
@@ -23,6 +26,7 @@ import PropertyAggregate from './components/PropertyAggregate.vue';
 import PropertyFilter from './components/PropertyFilter.vue';
 import SelectFilter from './components/SelectFilter.vue';
 
+// Vue Component declaration
 Vue.component('arcmap', ArcMap);
 Vue.component('favorite-icon', FavoriteIcon);
 Vue.component('featured-project', FeaturedProject);
@@ -38,6 +42,7 @@ Vue.component('select-filter', SelectFilter);
 
 // For easy reference
 window.Vue = Vue;
+window.VueEventBus = EventBus;
 
 // Create Resource and Collection Singletons
 window.ArcModel = new ArcModel();
