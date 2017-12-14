@@ -43,8 +43,36 @@
     @include break-max($tablet)
         width: 95%
 
-@mixn is-hidden
+@mixin is-hidden
     display: none
+
+// optimization will be needed
+
+@mixin is-share-block
+    display: flex
+    flex-direction: column
+    max-width: 105px
+    margin-right: 0
+    margin-left: auto
+    border: 1px solid $blue-tiffany
+    h4
+        @extend .type__share--title
+        @extend .is-uppercase
+        @extend .is-blue-dark
+        @extend .has-text-centered
+        @extend .is-bg-blue-tiffany
+        padding: 0.7em 0
+    .icon-block
+        svg
+            fill: $blue-dark
+        .button
+            border: 0
+        .icon__mail
+            height: 33px
+            width: 29px
+        .icon__link
+            height: 33px
+            width: 23px
 
 @mixin is-range-slider($width, $height, $input-top, $input-bg-color, $input-thumb-color, $float: none, $input-height: 20px, $input-border-radius: 14px)
     position: relative
