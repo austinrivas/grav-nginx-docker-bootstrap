@@ -45,13 +45,13 @@ TODO: Figure out the responsive on >1400px
     <div class="property-filter">
         <div class="columns">
             <div class="column is-3">
-                <select-filter :options="filters" inline-template>
-                    {% include selectTemplate with { inputClass: selectTemplateClass, options: selectOptions, vue: true  } only %}
+                <select-filter :options="filterOptions" inline-template>
+                    {% include selectTemplate with { inputClass: selectTemplateClass, options: selectOptions, vue: true } only %}
                 </select-filter>
             </div>
             <div class="column is-3" v-if="showSlider">
                 <div class="is-hidden">
-                    {% include selectTemplate with { inputClass: selectTemplateClass, options: sliderOptions  } only %}
+                    {% include selectTemplate with { inputClass: selectTemplateClass, options: sliderOptions } only %}
                 </div>
                 {% include sliderTemplate with {
                     valueSlider1: initialValueSlider1,
