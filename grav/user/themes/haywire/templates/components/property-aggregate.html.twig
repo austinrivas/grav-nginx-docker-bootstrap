@@ -1,0 +1,8 @@
+{% set filterTemplate =  'components/property-filter.html.twig' %}
+{% set arcMapTemplate = 'components/arcmap.html.twig' %}
+<property-aggregate inline-template>
+    <div class="property-aggregate-container">
+        {% include filterTemplate with {} only %}
+        {% include arcMapTemplate with {} only %}
+    </div>
+</property-aggregate>
