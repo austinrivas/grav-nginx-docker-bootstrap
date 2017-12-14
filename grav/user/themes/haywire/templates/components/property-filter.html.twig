@@ -18,7 +18,7 @@
 {# Labels #}
 {% set selectPlaceholderOption = {
         text: "Select a Filter",
-        value: null,
+        value: "unselected",
         selected: true,
         disabled: true
 } %}
@@ -45,7 +45,7 @@ TODO: Figure out the responsive on >1400px
     <div class="property-filter">
         <div class="columns">
             <div class="column is-3">
-                <select-filter :options="filterOptions" inline-template>
+                <select-filter :options="filterOptions" :selected="selectedFilterField" :change-event="filterChangeEvent" inline-template>
                     {% include selectTemplate with { inputClass: selectTemplateClass, options: selectOptions, vue: true } only %}
                 </select-filter>
             </div>
@@ -65,7 +65,7 @@ TODO: Figure out the responsive on >1400px
                 } only %}
             </div>
             <div class="column is-3" v-if="showFilterOptions">
-                <select-filter :options="selectedFilterOptions" inline-template>
+                <select-filter :options="selectedFilterOptions" :selected="selectedFilterValue" :change-event="filterValueChangeEvent" inline-template>
                     {% include selectTemplate with { inputClass: selectTemplateClass, options: selectFilterOptions, vue: true } only %}
                 </select-filter>
             </div>
