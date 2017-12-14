@@ -1,53 +1,63 @@
-{% if page.header.classes %}
-<section class="press lwrc {{ page.header.classes }}">
-{% else %}
-<section class="press lwrc">
-{% endif %}
-    <div class="press-body">
-        <div class="container">
-        	<div class="press-heading columns is-mobile is-multiline">
+{% block content %}
+    <articles inline-template>
+        {% set collection = page.collection() %}
+        {% if page.header.classes %}
+        <section class="press lwrc {{ page.header.classes }}">
+        {% else %}
+        <section class="press lwrc">
+        {% endif %}
+            <div class="press-body">
+                <div class="container">
+                	<div class="press-heading columns is-mobile is-multiline">
 
-        		<div class="column is-9-tablet is-9-desktop is-9-widescreen is-9-fullhd is-full-mobile press-title">
-        			<h1 class="type__media-tile--heading-featured is-uppercase">Press</h1>
-        		</div>
+                		<div class="column is-9-tablet is-9-desktop is-9-widescreen is-9-fullhd is-full-mobile press-title">
+                			<h1 class="type__media-tile--heading-featured is-uppercase">Press</h1>
+                		</div>
 
-        		<div class="column is-3-tablet is-3-desktop is-3-widescreen is-3-fullhd is-full-mobile press-filters columns is-gapless">
-        			<div class="buttons is-blog-button-group">
-        				<span disabled="disabled" class="button">News</span>
-        				<span class="button">Resources</span>
-        			</div>
-        		</div>
+                		<div class="column is-3-tablet is-3-desktop is-3-widescreen is-3-fullhd is-full-mobile press-filters columns is-gapless">
+                			<div class="buttons is-blog-button-group" :ref="'filterGroup'" data-category="{{ uri.param('category') }}">
+                                <a :disabled="activeCategory == 'News'" class="button" href="/press/category:News">News</a>
+                                <a :disabled="activeCategory == 'Resources'" class="button" href="/press/category:Resources">Resources</a>
+                			</div>
+                		</div>
 
-        	</div>
+                	</div>
 
 
-        	<div class="article-grid columns is-multiline">
+                	<div class="article-grid columns is-multiline">
 
-        		{% for post in taxonomy.findTaxonomy({'category':['News']}) %}
-        		<article class="column {% if loop.first %}is-8{% else %}is-4{% endif %} is-news">
+                		{% for post in collection %}
+                		<article class="column {% if loop.first %}is-8{% else %}is-4{% endif %} is-news">
 
-        			<div class="article-container">
-	        			<a class="article-photo" href="#" style="background-image: url(http://via.placeholder.com/350x350)"></a>
+                			<div class="article-container">
+        	        			<a class="article-photo" href="#" style="background-image: url(http://via.placeholder.com/350x350)"></a>
 
-	        			<div class="article-meta">
-	        				<time>{{ post.header.publish_date|date('F j, Y') }}</time>
-	        				
-	        				<h2 class="type__media-tile--heading-featured"><a href="#">{{ post.title }}</a></h2>
+        	        			<div class="article-meta">
+        	        				<time>{{ post.header.publish_date|date('F j, Y') }}</time>
+        	        				
+        	        				<h2 class="type__media-tile--heading-featured"><a href="#">{{ post.title }}</a></h2>
 
-	        				<p>
-	        					{{ post.content|length > 50 ? post.content|striptags|slice(0, 160) ~ '...' : post.content  }}
-	        				</p>
+        	        				<p>
+        	        					{{ post.content|length > 50 ? post.content|striptags|slice(0, 160) ~ '...' : post.content  }}
+        	        				</p>
 
-	        				<a class="button is-primary" href="{{ post.url }}">Read More</a>
+        	        				<a class="button is-primary" href="{{ post.url }}">Read More</a>
 
-	        			</div>
-	        		</div>
+        	        			</div>
+        	        		</div>
 
-        		</article>
-        		{% endfor %}
+                		</article>
+                		{% endfor %}
 
-        	</div>
+                	</div>
 
-        </div>
-    </div>
-</section>
+                </div>
+
+                {% if config.plugins.pagination.enabled and collection.params.pagination %}
+                    {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
+                {% endif %}
+                
+            </div>
+        </section>
+    </articles>
+{% endblock %}
