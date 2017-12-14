@@ -7,19 +7,19 @@ export default class ArcModel {
 
     // constructor sets the featureServerUrl for the arc model
     // an eventual improvement would be to make featureServerUrl a parameter to allow for multi data sources
-    constructor () {
+    constructor() {
         this.featureServerUrl = ArcModel.getArcGISFeatureServerUrl();
     }
 
-    get featureServerUrl () {
+    get featureServerUrl() {
         return this._featureServerUrl;
     }
 
-    set featureServerUrl (url) {
+    set featureServerUrl(url) {
         this._featureServerUrl = url;
     }
 
-    static getArcGISFeatureServerUrl (selector) {
+    static getArcGISFeatureServerUrl(selector) {
 
         selector = selector || 'meta[name="arc-gis-feature-server-url"]';
 
@@ -29,17 +29,17 @@ export default class ArcModel {
     }
 
     // a static method that returns the select all fields outfield selector
-    static queryOutfieldsSelectAll () {
+    static queryOutfieldsSelectAll() {
         return ["*"];
     }
 
     // a static method that returns the select all where clause
-    static queryWhereSelectAll () {
+    static queryWhereSelectAll() {
         return "'TRUE' = 'TRUE'";
     }
 
     // a static method that return a where clause for selecting a specific feature by id
-    static queryWhereSelectPropertyById (id) {
+    static queryWhereSelectPropertyById(id) {
         if (id) {
             return `${PROPERTY_FIELDS.id} = ${id}`;
         } else {
@@ -49,7 +49,7 @@ export default class ArcModel {
 
     // the request precallback is responsible for adding the returnDistinctValues option to the query params if the
     // query structure supports distinct results
-    static requestPreCallback (arcArgs) {
+    static requestPreCallback(arcArgs) {
         // test if we're sending the request to a mapservice query
         if (/query\/?$/.test(arcArgs.url)) {
             // if not requesting ObjectIds, count, or querying with a list of ObjectIDs, return distinct values.
@@ -61,7 +61,7 @@ export default class ArcModel {
     }
 
     // async method that loads esri modules and executes a QueryTask with the query parameters
-    async executeQuery (queryOutfields, queryWhere, distinctResultsOnly) {
+    async executeQuery(queryOutfields, queryWhere, distinctResultsOnly) {
         const options = {},
             modules = ["esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/request"],
             lwrCommercialParcelsFeatureServer = {url: this.featureServerUrl};
@@ -91,7 +91,7 @@ export default class ArcModel {
     }
 
     // an async debug method for running queries and logging the result to console
-    async logArcFeatures (queryOutfields, queryWhere, distinctResultsOnly) {
+    async logArcFeatures(queryOutfields, queryWhere, distinctResultsOnly) {
         const response = await this.executeQuery(queryOutfields, queryWhere, distinctResultsOnly);
 
         response.forEach((feature) => {

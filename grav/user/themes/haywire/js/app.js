@@ -1,6 +1,6 @@
 /**
-* Include polyfill for vue (IE)
-*/
+ * Include polyfill for vue (IE)
+ */
 
 import 'babel-polyfill';
 
@@ -57,7 +57,7 @@ window.FavoriteProperties = new FavoritePropertiesCollection();
  */
 
 Vue.use(VueCurrencyFilter, {
-    symbol : '$',
+    symbol: '$',
     thousandsSeparator: ',',
     fractionCount: 0,
     fractionSeparator: '.',

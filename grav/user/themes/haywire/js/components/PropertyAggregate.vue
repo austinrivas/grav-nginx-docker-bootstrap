@@ -1,12 +1,15 @@
 <script>
     export default {
-        mounted: async function () {
+
+        async mounted() {
             this.collection = await Properties.findAllProperties();
         },
-        data: function () {
+
+        data() {
             return {
                 collection: null
             }
         }
+
     }
 </script>

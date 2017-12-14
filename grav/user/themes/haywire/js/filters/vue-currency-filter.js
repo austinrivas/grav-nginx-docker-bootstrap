@@ -47,14 +47,14 @@ configFractionSeparator, configSymbolPosition, configSymbolSpacing)}}
 */
 
 const VueCurrencyFilter = {
-    install (Vue, options) {
+    install(Vue, options) {
 
         // helper to check undefined variable
-        function _isUndefined (obj) {
+        function _isUndefined(obj) {
             return typeof obj === "undefined"
         }
 
-        if(_isUndefined(options)) options = {}
+        if (_isUndefined(options)) options = {}
 
         // init default config
         let symbol = ''
@@ -65,22 +65,22 @@ const VueCurrencyFilter = {
         let symbolSpacing = true
 
         // overide with custom config if exist
-        if(!_isUndefined(options.symbol)) {
+        if (!_isUndefined(options.symbol)) {
             symbol = options.symbol
         }
-        if(!_isUndefined(options.thousandsSeparator)) {
+        if (!_isUndefined(options.thousandsSeparator)) {
             thousandsSeparator = options.thousandsSeparator
         }
-        if(!_isUndefined(options.fractionCount)) {
+        if (!_isUndefined(options.fractionCount)) {
             fractionCount = options.fractionCount
         }
-        if(!_isUndefined(options.fractionSeparator)) {
+        if (!_isUndefined(options.fractionSeparator)) {
             fractionSeparator = options.fractionSeparator
         }
-        if(!_isUndefined(options.symbolPosition)) {
+        if (!_isUndefined(options.symbolPosition)) {
             symbolPosition = options.symbolPosition
         }
-        if(!_isUndefined(options.symbolSpacing)) {
+        if (!_isUndefined(options.symbolSpacing)) {
             symbolSpacing = options.symbolSpacing
         }
 
@@ -93,29 +93,29 @@ const VueCurrencyFilter = {
                 let spaceSeparator = false
 
                 // overide again with on the fly config
-                if(!_isUndefined(_symbol)) symbol = _symbol
-                if(!_isUndefined(_thousandsSeparator)) thousandsSeparator = _thousandsSeparator
-                if(!_isUndefined(_fractionCount)) fractionCount = _fractionCount
-                if(!_isUndefined(_fractionSeparator)) fractionSeparator = _fractionSeparator
-                if(!_isUndefined(_symbolPosition)) symbolPosition = _symbolPosition
-                if(!_isUndefined(_symbolSpacing)) symbolSpacing = _symbolSpacing
+                if (!_isUndefined(_symbol)) symbol = _symbol
+                if (!_isUndefined(_thousandsSeparator)) thousandsSeparator = _thousandsSeparator
+                if (!_isUndefined(_fractionCount)) fractionCount = _fractionCount
+                if (!_isUndefined(_fractionSeparator)) fractionSeparator = _fractionSeparator
+                if (!_isUndefined(_symbolPosition)) symbolPosition = _symbolPosition
+                if (!_isUndefined(_symbolSpacing)) symbolSpacing = _symbolSpacing
 
-                if(thousandsSeparator === ''){
+                if (thousandsSeparator === '') {
                     emptySeparator = true
                     thousandsSeparator = 'empty'
                 }
-                else if(thousandsSeparator === ' '){
+                else if (thousandsSeparator === ' ') {
                     spaceSeparator = true
                     thousandsSeparator = 'space'
                 }
                 // reset to default --prevent unresponding browser
-                else if(!isNaN(parseInt(thousandsSeparator))) thousandsSeparator = '.'
+                else if (!isNaN(parseInt(thousandsSeparator))) thousandsSeparator = '.'
 
                 let result = 0.0
                 let afterDot, beforeDot, pattern, _ref
                 let isNegative = String(value).charAt(0) === '-'
 
-                if(isNegative) {
+                if (isNegative) {
                     value = String(value).slice(1)
                 }
 
@@ -144,13 +144,13 @@ const VueCurrencyFilter = {
                 string.splice((symbolPosition === 'front' ? 0 : 1), 0, symbol)
                 result = string.join(symbolSpacing ? ' ' : '')
 
-                if(isNegative) {
+                if (isNegative) {
                     result = '-' + result
                 }
-                if(emptySeparator) {
+                if (emptySeparator) {
                     result = result.replace(thousandsSeparator, '')
                 }
-                if(spaceSeparator) {
+                if (spaceSeparator) {
                     result = result.replace(thousandsSeparator, ' ')
                 }
 

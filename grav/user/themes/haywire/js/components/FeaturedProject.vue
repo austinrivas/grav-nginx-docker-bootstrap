@@ -2,13 +2,14 @@
     import PropertyModel from "../models/propertyModel";
 
     export default {
+
         props: ['model'],
 
         computed: {
-            id: function () {
+            id() {
                 return this.model && this.model.id ? this.model.id : null;
             },
-            title: function () {
+            title() {
 
                 let title = [];
 
@@ -24,16 +25,16 @@
 
                 return this.model && title.length ? title.join(' - ') : false;
             },
-            price: function () {
+            price() {
                 return this.model && this.model.totalPrice ? this.model.totalPrice : false;
             },
-            image: function () {
+            image() {
                 return this.model ? this.model.imageUrl : false;
             },
-            subtitle: function () {
+            subtitle() {
                 return this.model ? this.model.subdivision : false;
             },
-            details: function () {
+            details() {
 
                 let details = [];
 
@@ -59,5 +60,6 @@
                 return this.model && details.length ? details.join(' | ') : false;
             }
         }
+
     }
 </script>

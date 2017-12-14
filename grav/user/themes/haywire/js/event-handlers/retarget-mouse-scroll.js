@@ -15,7 +15,7 @@
 
 import _throttle from "lodash/throttle";
 
-var mouseScrollEvents = ["DOMMouseScroll", "mousewheel"];
+const mouseScrollEvents = ["DOMMouseScroll", "mousewheel"];
 
 let handleVerticalScroll = function (target, scrollAmount) {
     if (target.scrollBy) {
@@ -43,7 +43,7 @@ let handleScroll = function (evt, target, preventDefault, scrollMultiplier, vert
         }
     }
 
-    var scrollAmount = evt.detail || (-evt.wheelDelta / 40); // convert wheelData to lines
+    let scrollAmount = evt.detail || (-evt.wheelDelta / 40); // convert wheelData to lines
     scrollAmount *= 19; // convert lines to pixels
 
     if (typeof scrollMultiplier === "number" && !isNaN(scrollMultiplier)) {
@@ -113,7 +113,7 @@ let RetargetMouseScroll = function (options) {
         verticalScrollOnly = options.verticalScrollOnly;
     }
 
-    var addListener, removeListener, restoreFn,
+    let addListener, removeListener, restoreFn,
         handler = _throttle(function (evt) {
             evt = evt || window.event;
             if (preventRetarget && preventRetarget.call(this, evt)) return;

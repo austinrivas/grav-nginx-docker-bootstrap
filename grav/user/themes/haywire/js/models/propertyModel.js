@@ -3,7 +3,7 @@ import PROPERTY_FIELDS from "./propertyFields";
 // PropertyModel is a simple data container class that maps ArcGIS feature field names to usable names
 // PropertyModel wraps all properties in getter / setter methods to allow manipulation of values while maintaining immutable underlying data
 export default class PropertyModel {
-    constructor (arcFeature) {
+    constructor(arcFeature) {
         const attributes = arcFeature && arcFeature.attributes ? arcFeature.attributes : null,
             geometry = arcFeature && arcFeature.geometry ? arcFeature.geometry : null;
 
@@ -48,51 +48,51 @@ export default class PropertyModel {
         }
     }
 
-    get acres () {
+    get acres() {
         return this._acres;
     }
 
-    set acres (acres) {
+    set acres(acres) {
         this._acres = acres;
     }
 
-    get address () {
+    get address() {
         return this._address;
     }
 
-    set address (address) {
+    set address(address) {
         this._address = address;
     }
 
-    get association () {
+    get association() {
         return this._association;
     }
 
-    set association (association) {
+    set association(association) {
         this._association = association;
     }
 
-    get availability () {
+    get availability() {
         return this._availability;
     }
 
-    set availability (availability) {
+    set availability(availability) {
         this._availability = availability;
     }
 
-    get blockId () {
+    get blockId() {
         return this._blockId;
     }
 
-    set blockId (blockId) {
+    set blockId(blockId) {
         this._blockId = blockId;
     }
 
-    get centroid () {
+    get centroid() {
         return this._centroid;
     }
 
-    set centroid (centroid) {
+    set centroid(centroid) {
         if (centroid.latitude && centroid.longitude) {
             this._centroid = centroid;
         } else {
@@ -100,185 +100,185 @@ export default class PropertyModel {
         }
     }
 
-    get city () {
+    get city() {
         return this._city;
     }
 
-    set city (city) {
+    set city(city) {
         this._city = city;
     }
 
-    get description () {
+    get description() {
         return this._description;
     }
 
-    set description (description) {
+    set description(description) {
         this._description = description;
     }
 
-    get exteriorPerimeter () {
+    get exteriorPerimeter() {
         return this._exteriorPerimeter;
     }
 
-    set exteriorPerimeter (exteriorPerimeter) {
+    set exteriorPerimeter(exteriorPerimeter) {
         this._exteriorPerimeter = exteriorPerimeter;
     }
 
     // cast the featured value as a boolean on access
-    get featured () {
+    get featured() {
         return this._featured === "TRUE";
     }
 
-    set featured (featured) {
+    set featured(featured) {
         this._featured = featured;
     }
 
-    get id () {
+    get id() {
         return this._id;
     }
 
-    set id (id) {
+    set id(id) {
         this._id = id;
     }
 
-    get imageUrl () {
+    get imageUrl() {
         return this._imageUrl;
     }
 
-    set imageUrl (imageUrl) {
+    set imageUrl(imageUrl) {
         this._imageUrl = imageUrl;
     }
 
-    get lotId () {
+    get lotId() {
         return this._lotId;
     }
 
-    set lotId (lotId) {
+    set lotId(lotId) {
         this._lotId = lotId;
     }
 
-    get objectId () {
+    get objectId() {
         return this._objectId;
     }
 
-    set objectId (objectId) {
+    set objectId(objectId) {
         this._objectId = objectId;
     }
 
-    get parkingDescription () {
+    get parkingDescription() {
         return this._parkingDescription;
     }
 
-    set parkingDescription (parkingDescription) {
+    set parkingDescription(parkingDescription) {
         this._parkingDescription = parkingDescription;
     }
 
-    get pictureOrder () {
+    get pictureOrder() {
         return this._pictureOrder;
     }
 
-    set pictureOrder (pictureOrder) {
+    set pictureOrder(pictureOrder) {
         this._pictureOrder = pictureOrder;
     }
 
-    get pricePerAcre () {
+    get pricePerAcre() {
         return this._pricePerAcre;
     }
 
-    set pricePerAcre (pricePerAcre) {
+    set pricePerAcre(pricePerAcre) {
         this._pricePerAcre = pricePerAcre;
     }
 
-    get pricePerSqft () {
+    get pricePerSqft() {
         return this._pricePerSqft;
     }
 
-    set pricePerSqft (pricePerSqft) {
+    set pricePerSqft(pricePerSqft) {
         this._pricePerSqft = pricePerSqft;
     }
 
-    get relatedProperties () {
+    get relatedProperties() {
         return this._relatedProperties;
     }
 
-    set relatedProperties (relatedProperties) {
+    set relatedProperties(relatedProperties) {
         this._relatedProperties = relatedProperties;
     }
 
-    get shapeArea () {
+    get shapeArea() {
         return this._relatedProperties;
     }
 
-    set shapeArea (shapeArea) {
+    set shapeArea(shapeArea) {
         this._shapeArea = shapeArea;
     }
 
-    get shapeLength () {
+    get shapeLength() {
         return this._shapeLength;
     }
 
-    set shapeLength (shapeLength) {
+    set shapeLength(shapeLength) {
         this._shapeLength = shapeLength;
     }
 
-    get subdivision () {
+    get subdivision() {
         return this._subdivision;
     }
 
-    set subdivision (subdivision) {
+    set subdivision(subdivision) {
         this._subdivision = subdivision;
     }
 
-    get subdivision () {
+    get subdivision() {
         return this._subdivision;
     }
 
-    set subdivision (subdivision) {
+    set subdivision(subdivision) {
         this._subdivision = subdivision;
     }
 
-    get totalPrice () {
+    get totalPrice() {
         return this._totalPrice;
     }
 
-    set totalPrice (totalPrice) {
+    set totalPrice(totalPrice) {
         this._totalPrice = totalPrice;
     }
 
-    get totalSqft () {
+    get totalSqft() {
         return this._totalSqft;
     }
 
-    set totalSqft (totalSqft) {
+    set totalSqft(totalSqft) {
         this._totalSqft = totalSqft;
     }
 
-    get type () {
+    get type() {
         return this._type;
     }
 
-    set type (type) {
+    set type(type) {
         this._type = type;
     }
 
-    get utilities () {
+    get utilities() {
         return this._utilities;
     }
 
-    set utilities (utilities) {
+    set utilities(utilities) {
         this._utilities = utilities;
     }
 
-    get zip () {
+    get zip() {
         return this._zip;
     }
 
-    set zip (zip) {
+    set zip(zip) {
         this._zip = zip;
     }
 
     // return a JSON representation of the model using pretty field names
-    toJSON () {
+    toJSON() {
         return {
             acres: this.acres,
             address: this.address,
@@ -306,6 +306,6 @@ export default class PropertyModel {
             type: this.type,
             utilities: this.utilities,
             zip: this.zip
-        }
+        };
     }
 }

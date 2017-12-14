@@ -6,7 +6,7 @@
     export default {
         props: ['collection'],
 
-        mounted: async function () {
+        async mounted() {
             let _this = this;
 
             const basemap = "hybrid",
@@ -40,7 +40,7 @@
 
                 });
 
-            _this.map = new _this.Map({ basemap: basemap });
+            _this.map = new _this.Map({basemap: basemap});
 
             _this.featureServer.url = ArcModelClass.getArcGISFeatureServerUrl();
 
@@ -49,7 +49,7 @@
             _this.map.layers.add(_this.featureLayer);
         },
 
-        data: function () {
+        data() {
             return {
                 Extent: null,
                 FeatureLayer: null,
@@ -69,7 +69,7 @@
         },
 
         watch: {
-            collection: async function () {
+            async collection() {
                 const _this = this,
                     mouseWheelEvent = "mouse-wheel";
 
@@ -99,16 +99,25 @@
         },
 
         methods: {
-            addModelToMap: function (model) {
+            async getMapCenter(collection) {
+                const center = await collection.reduce((accumulator, model) => {
+                    accumulator.longitude += model.centroid.longitude;
+                    accumulator.latitude += model.centroid.latitude;
+                    return accumulator;
+                }, {longitude: 0, latitude: 0});
+
+                return [center.longitude / collection.length, center.latitude / collection.length];
+            },
+            addModelToMap(model) {
                 let _this = this,
                     gr = _this.createMarker(model);
 
                 _this.extent = _this.getMapExtent(model, _this.extent);
 
-                _this.graphics.push({ graphic: gr });
+                _this.graphics.push({graphic: gr});
                 _this.mapView.graphics.add(gr);
             },
-            createMarker: function (model) {
+            createMarker(model) {
                 let _this = this,
                     markerColor = [200, 25, 25, 0.8],
                     markerOutlineWidth = "0.5px",
@@ -136,7 +145,7 @@
                     }
                 })
             },
-            createMarkerContent: function (model) {
+            createMarkerContent(model) {
                 let _this = this,
                     tooltipContainer = _this.parseHTML(`<div class="arcmap-tooltip-container"></div>`),
                     content = [];
@@ -157,21 +166,12 @@
                     return accumulator;
                 }, tooltipContainer);
             },
-            getMapCenter: async function (collection) {
-                const center = await collection.reduce((accumulator, model) => {
-                    accumulator.longitude += model.centroid.longitude;
-                    accumulator.latitude += model.centroid.latitude;
-                    return accumulator;
-                }, {longitude: 0, latitude: 0});
-
-                return [center.longitude / collection.length, center.latitude / collection.length];
-            },
             parseHTML: function (htmlString) {
                 const contentType = 'text/html';
 
                 return new DOMParser().parseFromString(htmlString, contentType).documentElement;
             },
-            removeAllMarkers: function (graphics, mapView) {
+            removeAllMarkers(graphics, mapView) {
                 if (graphics && graphics.length && mapView && mapView.graphics && mapView.graphics.length) {
                     for (let i = graphics.length - 1; i >= 0; i--) {
                         mapView.graphics.remove(graphics[i].graphic)
@@ -180,12 +180,12 @@
 
                 return [];
             },
-            stopPropagation: function (e) {
+            stopPropagation(e) {
                 if (e && e.stopPropagation) {
                     e.stopPropagation();
                 }
             },
-            getMapExtent: function (model, extent) {
+            getMapExtent(model, extent) {
                 return {
                     xmin: !extent.xmin || model.centroid.longitude < extent.xmin ? model.centroid.longitude : extent.xmin,
                     xmax: !extent.xmax || model.centroid.longitude > extent.xmax ? model.centroid.longitude : extent.xmax,

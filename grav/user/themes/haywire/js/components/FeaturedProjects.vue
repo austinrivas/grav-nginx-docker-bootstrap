@@ -1,5 +1,6 @@
 <script>
     export default {
+
         async mounted() {
             const collection = await Properties.findFeaturedProperties();
 
@@ -15,5 +16,6 @@
                 third: null,
             }
         }
+
     }
 </script>
