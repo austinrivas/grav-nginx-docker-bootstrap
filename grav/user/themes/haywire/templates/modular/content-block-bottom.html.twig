@@ -1,39 +1,36 @@
 <!-- Templates -->
 {% set buttonTemplate = 'partials/elements/button.html.twig' %}
 
-<!-- Labels -->
-{% set buttonLabel = 'View Services' %}
-
 <!-- Classes -->
 {% set buttonClassPrimary = 'is-primary' %}
 
 
-<section class="content-blocks content-blocks-bottom">
+<section class="content-blocks content-blocks-bottom {{ page.header.class }}">
     <div class="container">
 
         <div class="columns is-gapless is-multiline">
 
             <div class="column is-half">
-                <div class="content-tile is-bg-cream">
+                <div class="content-tile left-tile">
                     <h2>
-                        Leasing &amp; Sales
+                        {{ page.header.titleLeft}}
                     </h2>
                     <p>
-                        Our results-driven team guides businesses through every step of the leasing and buying process.
+                        {{ page.header.contentLeft }}
                     </p>
-                    {% include buttonTemplate with { content: buttonLabel, class: buttonClassPrimary } only %}
+                    {% include buttonTemplate with { content: page.header.buttonLeft, class: buttonClassPrimary, href: page.header.buttonLeftUrl } only %}
                 </div>
             </div>
 
             <div class="column is-half">
-                <div class="content-tile">
+                <div class="content-tile right-tile">
                     <h2>
-                        Development &amp; Property Management
+                        {{ page.header.titleRight }}
                     </h2>
                     <p>
-                        We provide comprehensive Management services from construction budgeting to facility management.
+                        {{ page.header.contentRight}}
                     </p>
-                    {% include buttonTemplate with { content: buttonLabel, class: buttonClassPrimary } only %}
+                    {% include buttonTemplate with { content: page.header.buttonRight, class: buttonClassPrimary, href: page.header.buttonRightUrl } only %}
                 </div>
             </div>
 
