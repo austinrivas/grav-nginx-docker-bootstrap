@@ -16,30 +16,17 @@
 {% set selectTemplateClass   = 'is-gold' %}
 
 {# Labels #}
-{% set selectTemplateOptionsRange = [{
-        text: "ITEM WITH A RANGE",
-        disabled: true,
-        selected: true
-    },{
-        value: '1',
-        text: "one"
-    },{
-        value: '2',
-        text: "two"
-    }]
-%}
-{% set selectTemplateFilterType = [{
-        text: "SELECT A FILTER TYPE",
-        disabled: true,
-        selected: true
-    },{
-        value: '1',
-        text: "one"
-    },{
-        value: '2',
-        text: "two"
-    }]
-%}
+{% set selectPlaceholderOption = {
+        text: "Select a Filter",
+        value: null,
+        selected: true,
+        disabled: true
+} %}
+{% set selectOptions = [selectPlaceholderOption] %}
+
+{% set selectFilterOptions = [selectPlaceholderOption] %}
+{% set sliderOptions = [] %}
+
 {% set buttonFilterApplyLabel   = 'Apply' %}
 {% set buttonPropLabel          = 'View *prop name*' %}
 
@@ -58,11 +45,13 @@ TODO: Figure out the responsive on >1400px
     <div class="property-filter">
         <div class="columns">
             <div class="column is-3">
-                {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
+                <select-filter :options="filters" inline-template>
+                    {% include selectTemplate with { inputClass: selectTemplateClass, options: selectOptions, vue: true  } only %}
+                </select-filter>
             </div>
-            <div class="column is-3">
+            <div class="column is-3" v-if="showSlider">
                 <div class="is-hidden">
-                    {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
+                    {% include selectTemplate with { inputClass: selectTemplateClass, options: sliderOptions  } only %}
                 </div>
                 {% include sliderTemplate with {
                     valueSlider1: initialValueSlider1,
@@ -75,16 +64,16 @@ TODO: Figure out the responsive on >1400px
                     StepSlider2: sliderStep
                 } only %}
             </div>
-            <div class="column is-3 is-hidden">
-                {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
+            <div class="column is-3" v-if="showFilterOptions">
+                <select-filter :options="selectedFilterOptions" inline-template>
+                    {% include selectTemplate with { inputClass: selectTemplateClass, options: selectFilterOptions, vue: true } only %}
+                </select-filter>
             </div>
             <div class="column is-1">
                 {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } only %}
             </div>
             <div class="column is-3">
-                <div class="is-center">
-                    {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } only %}
-                </div>
+                {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } only %}
             </div>
             <div class="column is-2">
                 <div class="columns is-hidden-touch is-gapless">
