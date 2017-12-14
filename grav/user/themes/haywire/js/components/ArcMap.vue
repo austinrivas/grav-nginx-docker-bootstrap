@@ -137,7 +137,25 @@
                 })
             },
             createMarkerContent: function (model) {
-                return `<p>${model.address}</p>`;
+                let _this = this,
+                    templateDOM = _this.parseHTML(`<div class="arcmap-tooltip-container"></div>`),
+                    content = [];
+
+                content.push(`<img src="${model.imageUrl}" />`);
+                content.push(`<p>${model.address}</p>`);
+                content.push(`<p>${model.subdivision}</p>`);
+                content.push(`<p>${_this.$options.filters.currency(model.totalPrice)}</p>`);
+                content.push(`<p>${model.acres} Acres</p>`);
+                content.push(`<p>${model.type}</p>`);
+                content.push(`<p>${model.status}</p>`);
+                content.push(`<p>${_this.$options.filters.currency(model.pricePerSqft)} PSF</p>`);
+
+                return content.reduce((accumulator, elementHTML) => {
+                    if (accumulator && accumulator.appendChild) {
+                        accumulator.appendChild(_this.parseHTML(elementHTML));
+                    }
+                    return accumulator;
+                }, templateDOM);
             },
             getMapCenter: async function (collection) {
                 const center = await collection.reduce((accumulator, model) => {
@@ -147,6 +165,12 @@
                 }, {longitude: 0, latitude: 0});
 
                 return [center.longitude / collection.length, center.latitude / collection.length];
+            },
+            getModel: async function (id) {
+                return await Properties.findPropertyById(id);
+            },
+            parseHTML: function (html) {
+                return new DOMParser().parseFromString(html, "text/html").documentElement;
             },
             removeAllMarkers: function () {
                 let _this = this;
