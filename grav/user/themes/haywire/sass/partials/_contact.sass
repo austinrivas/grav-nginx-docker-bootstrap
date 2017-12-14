@@ -1,0 +1,39 @@
+.contact
+    padding: 0.75em
+    .form-container
+        padding: 4em 3.5em
+        input
+            @extend .type__placeholder
+        @include break-max($tablet)
+            padding: 2em .5em
+        .form-submit
+            align-items: center
+            margin-top: 2.5em
+        .is-right
+            @include is-right
+            @include break-max($tablet)
+                display: block
+        h2
+            margin-bottom: 2em
+            @include break-max($tablet)
+                text-align: center
+    h2
+        @extend .type__content-section--heading
+        @extend .is-blue-dark
+    label.label
+        @extend .is-blue-dark
+        @extend .type__contact-form--label
+        font-weight: $weight-normal
+    aside.section
+        padding: 0 2.5rem
+        @include break-max($tablet)
+            padding: 0 1.5em 3em
+        h2
+            @extend .type__contact-us-section--heading
+            @extend .is-blue-dark
+            margin: 1.5em 0 1em
+        p,a
+            @extend .type__contact-us-section--content
+            @extend .is-blue-dark
+        p
+            margin: 2em 0 0

@@ -2,21 +2,31 @@
     background: rgba(36, 55, 70, 0.6)
     color: #ffffff
     text-align: center
+    height: 529px // workaround for IE 11 align-items center with a min-height bug
     min-height: 530px
     justify-content: center
     align-items: center
     flex-direction: row
+    position: relative
     @include break-max($tablet)
         min-height: 400px
-        align-items: flex-start
+        height: auto
     .hero-p
         padding: 2em 0 0
         max-width: 60rem
         margin: 0 auto
         word-wrap: break-word
-        &:after
-            @include hero-arrow-down
+        // &:after
+        //     @include hero-arrow-down
+    &:after
+        @include hero-arrow-down
     .hero-body
         flex-shrink: 1
     h1
-        color: #fff
+        @extend .is-uppercase
+        color: $white
+body.nofound
+    .hero.lwrc
+        .hero-p
+            &:after
+                display: none

@@ -2,40 +2,46 @@
     export default {
         props: ['id'],
 
-        async mounted() {
-            this.model.id = JSON.parse(this.id);
-            this.favorite = await FavoriteProperties.exists(this.model.id);
-        },
-
         data() {
             return {
-                favorite: null,
-                model: {
-                    id: null
-                },
-                toggling: false
+                toggling: false,
+                favorite: false
             }
         },
 
         computed: {
             isFavorite: function () {
-                return !this.toggling && this.favorite;
+                return this.favorite;
+            },
+            loaded: function () {
+                return !!this.id;
+            }
+        },
+
+        watch: {
+            id: async function () {
+                this.favorite = !this.toggling && await FavoriteProperties.exists(this.id);
             }
         },
 
         methods: {
             toggleFavorite: async function (e) {
+
                 e.preventDefault();
-                if (!this.toggling) {
+
+                if (!this.toggling && this.id) {
+
                     this.toggling = true;
-                    const isFavorite = await FavoriteProperties.exists(this.model.id);
-                    if (isFavorite) {
-                        this.favorite = !(await FavoriteProperties.remove(this.model) === true);
+
+                    const model = {id: this.id};
+
+                    if (this.isFavorite) {
+                        this.favorite = !(await FavoriteProperties.remove(model) === true);
                     } else {
-                        this.favorite = await FavoriteProperties.add(this.model) === true;
+                        this.favorite = await FavoriteProperties.add(model) === true;
                     }
+
                     this.toggling = false;
-                    return true;
                 }
             }
         }

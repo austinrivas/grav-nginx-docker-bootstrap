@@ -289,7 +289,8 @@ $sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7
 
 .type__data-section--value
     font-family: $proxima-nova-bold-family
-    font-size: 4.5vmax;
+    // font-size: 4.5vmax;
+    @include font-size-vmax(4.5)
     letter-spacing: 4.28px
     line-height: 98px
     @include break-max($tablet)
@@ -497,6 +498,17 @@ $sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7
     font-size: 20px
     letter-spacing: 0
     line-height: 32px
+
+// share
+.type__share--title
+    font-family: $proxima-nova-bold-family
+    font-size: 14px
+    letter-spacing: 1px
+    line-height: 17px
+    @include break-max($tablet)
+        font-size: 10.5px
+        letter-spacing: 0.75px
+        line-height: 12px
 
 // placeholder
 .type__placeholder

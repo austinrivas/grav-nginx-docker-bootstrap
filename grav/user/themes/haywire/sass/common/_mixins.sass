@@ -7,46 +7,72 @@
         @content
 
 @mixin hero-arrow-down
-    border: 1px solid #3273dc;
-    border-right: 0;
-    border-top: 0;
-    content: " ";
-    display: block;
-    height: 0.5em;
-    pointer-events: none;
-    position: absolute;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    -webkit-transform-origin: center;
-    transform-origin: center;
-    width: 0.5em;
-    margin-top: -0.375em;
-    right: 50%;
-    top: 250px;
-    z-index: 4;
-    border: 2px solid $white
+    content: " "
+    display: block
+    pointer-events: none
+    position: absolute
+    -webkit-transform: rotate(-45deg) translate(-50%, -50%)
+    transform: rotate(-45deg) translate(-50%, -50%)
+    -webkit-transform-origin: center
+    transform-origin: center
+    z-index: 4
+    border: 2px solid $white-rock
     border-right: 0
     border-top: 0
     height: 25px
     width: 25px
-    margin-top: -6px
-    margin-right: 6px
+    left: 50%
+    top: auto
+    bottom: 3rem
     @include break-max($tablet)
         height: 17px
         width: 17px
         margin-top: -5px
         margin-right: 0
+        bottom: 1.5rem
 
 @mixin is-center
     display: flex
     justify-content: center
 
+@mixin is-right
+    display: flex
+    justify-content: flex-end
+
 @mixin is-mobile-button
     @include break-max($tablet)
         width: 95%
 
-@mixn is-hidden
+@mixin is-hidden
     display: none
+
+// optimization will be needed
+
+@mixin is-share-block
+    display: flex
+    flex-direction: column
+    max-width: 105px
+    margin-right: 0
+    margin-left: auto
+    border: 1px solid $blue-tiffany
+    h4
+        @extend .type__share--title
+        @extend .is-uppercase
+        @extend .is-blue-dark
+        @extend .has-text-centered
+        @extend .is-bg-blue-tiffany
+        padding: 0.7em 0
+    .icon-block
+        svg
+            fill: $blue-dark
+        .button
+            border: 0
+        .icon__mail
+            height: 33px
+            width: 29px
+        .icon__link
+            height: 33px
+            width: 23px
 
 @mixin is-range-slider($width, $height, $input-top, $input-bg-color, $input-thumb-color, $float: none, $input-height: 20px, $input-border-radius: 14px)
     position: relative
@@ -149,3 +175,6 @@
 	@supports (object-fit: cover)
 		img
 			object-fit: cover
+
+@mixin font-size-vmax($scalar)
+    font-size: calc(#{$scalar} * (1vw + 1vh - 1vmin))
