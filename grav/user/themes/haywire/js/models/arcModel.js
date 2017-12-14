@@ -11,11 +11,11 @@ export default class ArcModel {
         this.featureServerUrl = ArcModel.getArcGISFeatureServerUrl();
     }
 
-    get featureServerUrl() {
+    get featureServerUrl () {
         return this._featureServerUrl;
     }
 
-    set featureServerUrl(url) {
+    set featureServerUrl (url) {
         this._featureServerUrl = url;
     }
 
@@ -49,9 +49,9 @@ export default class ArcModel {
 
     // the request precallback is responsible for adding the returnDistinctValues option to the query params if the
     // query structure supports distinct results
-    static requestPreCallback (arcArgs){
+    static requestPreCallback (arcArgs) {
         // test if we're sending the request to a mapservice query
-        if(/query\/?$/.test(arcArgs.url)){
+        if (/query\/?$/.test(arcArgs.url)) {
             // if not requesting ObjectIds, count, or querying with a list of ObjectIDs, return distinct values.
             if (arcArgs.content && !arcArgs.content.returnIdsOnly && !arcArgs.content.returnCountOnly && !arcArgs.content.objectIds) {
                 arcArgs.content.returnDistinctValues = true;
@@ -61,7 +61,7 @@ export default class ArcModel {
     }
 
     // async method that loads esri modules and executes a QueryTask with the query parameters
-    async executeQuery(queryOutfields, queryWhere, distinctResultsOnly) {
+    async executeQuery (queryOutfields, queryWhere, distinctResultsOnly) {
         const options = {},
             modules = ["esri/tasks/QueryTask", "esri/tasks/support/Query", "esri/request"],
             lwrCommercialParcelsFeatureServer = {url: this.featureServerUrl};
@@ -91,7 +91,7 @@ export default class ArcModel {
     }
 
     // an async debug method for running queries and logging the result to console
-    async logArcFeatures(queryOutfields, queryWhere, distinctResultsOnly) {
+    async logArcFeatures (queryOutfields, queryWhere, distinctResultsOnly) {
         const response = await this.executeQuery(queryOutfields, queryWhere, distinctResultsOnly);
 
         response.forEach((feature) => {

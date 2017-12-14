@@ -7,8 +7,6 @@
             return {
                 collection: null
             }
-        },
-        computed: {},
-        methods: {}
+        }
     }
 </script>
