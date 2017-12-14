@@ -15,4 +15,4 @@ summary:
   size: 300
   delimiter: '==='
 blog:
-  route: /blog
+  route: /press

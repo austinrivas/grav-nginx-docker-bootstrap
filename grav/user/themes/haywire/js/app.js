@@ -28,6 +28,7 @@ Vue.component('favorite-icon', require('./components/FavoriteIcon.vue'));
 Vue.component('featured-project', require('./components/FeaturedProject.vue'));
 Vue.component('featured-projects', require('./components/FeaturedProjects.vue'));
 Vue.component('navbar', require('./components/Navbar.vue'));
+Vue.component('articles', require('./components/Articles.vue'));
 
 Vue.use(VueCurrencyFilter, {
     symbol : '$',
