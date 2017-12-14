@@ -1,0 +1,36 @@
+{# Templates #}
+{% set buttonTemplate  = 'partials/elements/button.html.twig' %}
+
+{# Classes #}
+{% set buttonClass     = 'is-primary' %}
+
+{# Labels #}
+{% set buttonHref      = '/contact-us' %}
+{% set buttonLabel     = 'Get in Touch' %}
+{% set propDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce congue at mi nec pellentesque. Sed aliquam id enim nec consectetur. Pellentesque condimentum, libero eu mollis commodo, lacus urna finibus nisi, et posuere arcu sapien sed enim. Phasellus pharetra ipsum sed ligula volutpat ultrices sed id tellus. Nunc urna tortor, bibendum efficitur nibh auctor, scelerisque hendrerit ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum malesuada rutrum elit, eget lacinia augue. In dapibus ultrices condimentum. Aenean nunc neque, cursus sed velit sit amet, porttitor pharetra erat.
+Vivamus blandit dignissim placerat. Suspendisse ex arcu, suscipit ut finibus sed, feugiat in massa. Donec pharetra risus augue, sed mattis velit vulputate quis. Proin malesuada posuere tristique. Mauris lobortis dapibus ligula eget dignissim. Vestibulum elementum congue magna vitae tincidunt. Etiam hendrerit metus ut ex dictum sagittis. Donec finibus efficitur interdum.
+' %}
+{% set contactName     = 'John Doe' %}
+{% set contactPhone    = '222-333-4444' %}
+
+<section class="property-description">
+    <div class="container">
+        <div class="property-description-content">
+            <div class="columns">
+                <div class="column">
+                    <h2>Property Description</h2>
+                    <p>{{ propDescription }}</p>
+                    <h2>For More Information</h2>
+                    <div class="property-contact-info">
+                        {{ contactName }}<br>
+                        <a href="tel:{{ contactPhone }}">{{ contactPhone }}</a>
+                        {% include buttonTemplate with { content: buttonLabel, class: buttonClass, href: buttonHref } only %}
+                    </div>
+                </div>
+                <div class="column">
+                    map goes here
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

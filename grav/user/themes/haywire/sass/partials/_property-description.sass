@@ -1,0 +1,23 @@
+section.property-description
+    padding: 2.5em 0
+    @include break-max($tablet)
+        padding: 1em
+    .property-description-content
+        padding: 0 3em
+        @include break-max($tablet)
+            padding: 0
+    h2
+        @extend .type__property-description--header
+        @extend .is-uppercase
+        @extend .is-blue-dark
+        margin: 0 0 1em
+    p
+        @extend .type__property-description--content
+        max-width: 500px
+        margin-bottom: 1.5em
+    a
+        @extend .is-blue-dark
+    .button
+        margin: 2.5em 0
+    .property-contact-info
+        @extend .is-blue-dark
