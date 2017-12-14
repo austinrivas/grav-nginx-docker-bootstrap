@@ -3,16 +3,31 @@
 */
 
 import "babel-polyfill";
+
+// Resources and Collections
 import ArcModel from "./models/arcModel";
-import PropertyCollection from "./models/propertyCollection"
-import FavoritePropertiesCollection from "./models/favoritePropertiesCollection"
+import PropertyCollection from "./models/propertyCollection";
+import FavoritePropertiesCollection from "./models/favoritePropertiesCollection";
+
+// Vue and Vue Filters
+import Vue from 'vue';
 import VueCurrencyFilter from "./filters/vueCurrencyFilter";
+
+// Vue Components
+import ArcMap from './components/ArcMap.vue';
+import FavoriteIcon from './components/FavoriteIcon.vue';
+import FeaturedProject from './components/FeaturedProject.vue';
+import FeaturedProjects from './components/FeaturedProjects.vue';
+import Navbar from './components/Navbar.vue';
 
 /**
  * Load all of this project's JavaScript dependencies including Vue
  */
 
-window.Vue = require('vue');
+// For easy reference
+window.Vue = Vue;
+
+// Create Resource and Collection Singletons
 window.ArcModel = new ArcModel();
 window.ArcModelClass = ArcModel;
 window.Properties = new PropertyCollection();
@@ -24,12 +39,6 @@ window.FavoriteProperties = new FavoritePropertiesCollection();
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('arcmap', require('./components/ArcMap.vue'));
-Vue.component('favorite-icon', require('./components/FavoriteIcon.vue'));
-Vue.component('featured-project', require('./components/FeaturedProject.vue'));
-Vue.component('featured-projects', require('./components/FeaturedProjects.vue'));
-Vue.component('navbar', require('./components/Navbar.vue'));
-
 Vue.use(VueCurrencyFilter, {
     symbol : '$',
     thousandsSeparator: ',',
@@ -39,7 +48,14 @@ Vue.use(VueCurrencyFilter, {
     symbolSpacing: true
 });
 
-const app = new Vue({
+window.App = new Vue({
+    components: {
+        'arcmap': ArcMap,
+        'favorite-icon': FavoriteIcon,
+        'featured-project': FeaturedProject,
+        'featured-projects': FeaturedProjects,
+        'navbar': Navbar
+    },
     delimiters: ['${', '}'],
     el: '#app'
 });
