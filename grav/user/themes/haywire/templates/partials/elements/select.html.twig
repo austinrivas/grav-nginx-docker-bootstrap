@@ -5,5 +5,8 @@
                     {% if option.selected %} selected{% endif %}
                     {% if option.disabled %} disabled{% endif %}>{{ option.text }}</option>
         {% endfor %}
+        {% if vue %}
+            <option v-for="option in options" v-bind:value="option.value" v-bind:disabled="options.disabled" v-bind:selected="option.selected">${ option.text }</option>
+        {% endif %}
     </select>
 </div>
