@@ -1,0 +1,35 @@
+{# Vue sortable tables component -
+https://www.npmjs.com/package/vue-bulma-tables-2
+https://github.com/daenuprobst/vue-tables-2#vue-component
+#}
+{# Vars #}
+{% set propPrice = '$1,300,00' %}
+{% set propAcres = '5' %}
+{% set propPriceSqft = '$15.00' %}
+{% set propPdi = 'Applicable uses' %}
+{% set propId = '12345' %}
+
+<section class="property-info-table">
+    <div class="container">
+        <table class="table is-fullwidth is-bordered">
+        <thead>
+            <tr>
+            <th>Properties</th>
+            <th>Acres</th>
+            <th>Price per sq. ft.</th>
+            <th>PDI</th>
+            <th>Parcel ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>{{ propPrice }}</td>
+            <td>{{ propAcres }}</td>
+            <td>{{ propPriceSqft }}</td>
+            <td>{{ propPdi }}</td>
+            <td>{{ propId }}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</section>

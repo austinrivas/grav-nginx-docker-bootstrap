@@ -1,0 +1,20 @@
+.pagination.lwrc-pagination
+    max-width: 600px
+    margin: 0 auto
+    a
+        @extend .type__pagination--page-number
+        @extend .is-blue-dark
+        border: none
+    .is-current
+        background-color: transparent
+        font-weight: bold
+    .pagination-next
+        text-indent: -99999px
+        &:after
+            content: '\003e'
+            text-indent: 0
+    .pagination-previous
+        text-indent: -99999px
+        &:after
+            content: '\003c'
+            text-indent: 0

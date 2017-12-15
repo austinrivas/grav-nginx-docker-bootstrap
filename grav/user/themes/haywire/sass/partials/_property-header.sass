@@ -1,0 +1,18 @@
+section.property-header
+    margin: 2.5em 0
+    @include break-max($tablet)
+        padding: 0 1em
+        margin: 1em 0
+    .is-center
+        @include is-center
+    h2
+        @extend .type__property-page--headline
+        @extend .is-blue-dark
+        margin: 0 0 1em
+    p
+        @extend .type__property-page--subheading
+        color: $grey
+    strong
+        color: $grey
+    .share-block
+        @include is-share-block
