@@ -1,5 +1,6 @@
 <script>
     export default {
+
         props: ['id'],
 
         data() {
@@ -19,13 +20,13 @@
         },
 
         watch: {
-            id: async function () {
+            async id() {
                 this.favorite = !this.toggling && await FavoriteProperties.exists(this.id);
             }
         },
 
         methods: {
-            toggleFavorite: async function (e) {
+            async toggleFavorite(e) {
 
                 e.preventDefault();
 

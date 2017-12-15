@@ -1,229 +1,197 @@
 <script>
     import * as esriLoader from 'esri-loader'
-
-    let PropertyMap = function (areas) {
-
-        console.log('PropertyMap init', areas);
-
-        let map = {}, view = {}, layers = [], graphics = [];
-
-        // first, we use Dojo's loader to require the map class
-        esriLoader.dojoRequire([
-            "esri/Map",
-            "esri/views/MapView",
-            "esri/layers/FeatureLayer",
-            "esri/symbols/SimpleMarkerSymbol",
-            "esri/geometry/Point",
-            "esri/geometry/Polygon",
-            "esri/Graphic",
-            "esri/tasks/QueryTask",
-            "esri/tasks/support/Query"],
-            (Map, MapView, FeatureLayer, SimpleMarkerSymbol, Point, Polygon, Graphic, QueryTask, Query) => {
-
-
-            function removeAllMarkers() {
-                for (let i = graphics.length - 1; i >= 0; i--) {
-                    view.graphics.remove(graphics[i].graphic)
-                }
-            }
-
-            function createMarkerContent(popupData) {
-                return '<p>Test</p>'
-            }
-
-            function addMapMarkerToDisplay(featureLayer, lonLat, filter, name, popupData, boundaryVertexes) {
-
-                // [-82.4285, 27.4417]
-                let pnt = new Point({
-                    longitude: lonLat[0],
-                    latitude: lonLat[1]
-                });
-
-                let gr = new Graphic({
-                    geometry: pnt,
-                    symbol: new SimpleMarkerSymbol({
-                        path: "M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z",
-                        size: "24px",
-                        color: [200, 25, 25, 0.8],
-                        outline: {
-                            color: [200, 25, 25, 0.8],
-                            width: "0.5px"
-                        }
-                    }),
-                    layer: featureLayer,
-                    popupTemplate: {
-                        title: name,
-                        content: createMarkerContent(popupData)
-                    }
-                });
-
-                if (boundaryVertexes && boundaryVertexes.length) {
-                    let boundary = new Polygon(boundaryVertexes);
-                }
-
-                graphics.push({graphic: gr, 'filter': filter});
-                view.graphics.add(gr)
-
-            }
-
-
-            map = new Map({
-                basemap: "hybrid"
-            });
-
-            let featureServerUrl = 'https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0';
-
-            let lwrCommercialParcelsFeatureServer = {url: featureServerUrl};
-
-            let parcelsFeatureLayer = new FeatureLayer(lwrCommercialParcelsFeatureServer);
-            let queryTask = new QueryTask(lwrCommercialParcelsFeatureServer);
-
-            let query = new Query();
-            query.returnGeometry = true;
-            query.outFields = ["*"];
-            query.where = "Feat_Prop = 'TRUE'";
-            //https://lwrcommercial.local/app/uploads/2017/08/678111-map-marker-256.png
-
-            // LWR lng, lat: 27.411704, -82.428515
-            view = new MapView({
-                container: "mapNode",
-                map: map,
-                zoom: 13,
-                center: [-82.4285, 27.4417] // longitude, latitude
-            });
-
-            view.on("mouse-wheel", function (evt) {
-                evt.stopPropagation();
-            });
-
-            for (let i = areas.length - 1; i >= 0; i--) {
-                // addMapMarkerToDisplay([areas[i].latitude, areas[i].longitude], areas[i].name, areas[i].data)
-                for (let ii = areas[i].properties.length - 1; ii >= 0; ii--) {
-                    addMapMarkerToDisplay(
-                        parcelsFeatureLayer,
-                        [areas[i].properties[ii].latitude, areas[i].properties[ii].longitude],
-                        areas[i].name,
-                        areas[i].properties[ii].name,
-                        areas[i].properties[ii].data,
-                        areas[i].properties[ii].boundaryVertexes
-                    );
-                }
-            }
-
-
-            map.layers.add(parcelsFeatureLayer);
-
-
-//            // Bind to all filters
-//            $("#map-filters li input").on('change', function (e) {
-//
-//                removeAllMarkers();
-//
-//                let filtered = [];
-//                // Get all markers in filters
-//                $("#map-filters li input:checked").each(function () {
-//                    let vl = $(this).val();
-//                    graphics.map(function (gr) {
-//                        if (gr.filter === vl) {
-//                            filtered.push(gr)
-//                        }
-//                    })
-//                });
-//
-//                filtered.map(function (gr) {
-//                    view.graphics.add(gr.graphic)
-//                });
-//
-//                queryTask.execute(query)
-//                    .then((results)=>{
-//                        console.log('query results', results);
-//                    }, (error) => {
-//                        console.log('query error', error);
-//                    });
-//
-//
-//            });
-
-        });
-
-    };
+    import ArcModelClass from '../models/arcModel'
+    import RetargetMouseScroll from '../event-handlers/retarget-mouse-scroll'
 
     export default {
-        mounted: () => {
-            let areas = [
-                {
-                    name: "1 to 2 Ancres",
-                    properties: [
-                        {
-                            latitude: -82.43,
-                            longitude: 27.4417,
-                            name: "Test Property",
-                            data: {
-                                rooms: 3,
-                                bathrooms: 4,
-                                sqft: 3087,
-                                price: 408857
-                            }
-                        },
-                        {
-                            latitude: -82.44,
-                            longitude: 27.4417,
-                            name: "Test Property",
-                            data: {
-                                rooms: 3,
-                                bathrooms: 4,
-                                sqft: 3087,
-                                price: 408857
-                            }
-                        }
-                    ]
-                },
-                {
-                    name: "5 to 10 Ancres",
-                    properties: [
-                        {
-                            latitude: -82.435,
-                            longitude: 27.4417,
-                            name: "Testa Property",
-                            data: {
-                                rooms: 3,
-                                bathrooms: 4,
-                                sqft: 3087,
-                                price: 408857
-                            }
-                        },
-                        {
-                            latitude: -82.445,
-                            longitude: 27.4417,
-                            name: "Testa Property",
-                            data: {
-                                rooms: 3,
-                                bathrooms: 4,
-                                sqft: 3087,
-                                price: 408857
-                            }
-                        }
-                    ]
-                }
-            ];
+        props: ['collection'],
 
-            // has the ArcGIS API been added to the page?
-            if (esriLoader.isLoaded()) {
-                // ArcGIS API is already loaded, just create the map
-                new PropertyMap(areas)
-            } else {
-                // no, lazy load it the ArcGIS API before using its classes
-                esriLoader.bootstrap((err) => {
-                    if (err) {
-                        console.error(err);
-                    } else {
-                        // once it's loaded, create the map
-                        new PropertyMap(areas)
-                    }
-                }, {
-                    // use a specific version instead of latest 4.x
-                    url: 'https://js.arcgis.com/4.4/'
+        async mounted() {
+            let _this = this;
+
+            const basemap = "hybrid",
+                options = {},
+                modules = [
+                    "esri/geometry/Extent",
+                    "esri/layers/FeatureLayer",
+                    "esri/Graphic",
+                    "esri/Map",
+                    "esri/views/MapView",
+                    "esri/geometry/Point",
+                    "esri/symbols/SimpleMarkerSymbol"
+                ];
+
+            _this.mapNodeSelector = "mapNode";
+
+            RetargetMouseScroll({
+                element: document.getElementById(_this.mapNodeSelector)
+            });
+
+            await esriLoader.loadModules(modules, options)
+                .then(([Extent, FeatureLayer, Graphic, Map, MapView, Point, SimpleMarkerSymbol]) => {
+
+                    _this.Extent = Extent;
+                    _this.FeatureLayer = FeatureLayer;
+                    _this.Graphic = Graphic;
+                    _this.Map = Map;
+                    _this.MapView = MapView;
+                    _this.Point = Point;
+                    _this.SimpleMarkerSymbol = SimpleMarkerSymbol;
+
                 });
+
+            _this.map = new _this.Map({basemap: basemap});
+
+            _this.featureServer.url = ArcModelClass.getArcGISFeatureServerUrl();
+
+            _this.featureLayer = new _this.FeatureLayer(_this.featureServer);
+
+            _this.map.layers.add(_this.featureLayer);
+        },
+
+        data() {
+            return {
+                Extent: null,
+                FeatureLayer: null,
+                Graphic: null,
+                Map: null,
+                MapView: null,
+                Point: null,
+                SimpleMarkerSymbol: null,
+                extent: null,
+                featureLayer: null,
+                featureServer: {url: null},
+                graphics: [],
+                map: null,
+                mapNodeSelector: null,
+                mapView: null
+            };
+        },
+
+        watch: {
+            async collection() {
+                const _this = this,
+                    mouseWheelEvent = "mouse-wheel";
+
+                if (_this.collection && _this.collection.length) {
+                    _this.extent = {
+                        xmin: null,
+                        ymin: null,
+                        xmax: null,
+                        ymax: null
+                    };
+
+                    _this.graphics = _this.removeAllMarkers(_this.graphics, _this.mapView);
+
+                    _this.mapView = new _this.MapView({
+                        container: _this.mapNodeSelector,
+                        map: _this.map,
+                        center: await _this.getMapCenter(_this.collection)
+                    });
+
+                    _this.mapView.on(mouseWheelEvent, _this.stopPropagation);
+
+                    await _this.collection.forEach(_this.addModelToMap);
+
+                    _this.mapView.extent = _this.extent;
+                }
+            }
+        },
+
+        methods: {
+            async getMapCenter(collection) {
+                const center = await collection.reduce((accumulator, model) => {
+                    accumulator.longitude += model.centroid.longitude;
+                    accumulator.latitude += model.centroid.latitude;
+                    return accumulator;
+                }, {longitude: 0, latitude: 0});
+
+                return [center.longitude / collection.length, center.latitude / collection.length];
+            },
+            addModelToMap(model) {
+                let _this = this,
+                    gr = _this.createMarker(model);
+
+                _this.extent = _this.getMapExtent(model, _this.extent);
+
+                _this.graphics.push({graphic: gr});
+                _this.mapView.graphics.add(gr);
+            },
+            createMarker(model) {
+                let _this = this,
+                    markerColor = [200, 25, 25, 0.8],
+                    markerOutlineWidth = "0.5px",
+                    markerPath = "M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z",
+                    markerSize = "24px";
+
+                return new _this.Graphic({
+                    geometry: new _this.Point({
+                        longitude: model.centroid.longitude,
+                        latitude: model.centroid.latitude
+                    }),
+                    symbol: new _this.SimpleMarkerSymbol({
+                        path: markerPath,
+                        size: markerSize,
+                        color: markerColor,
+                        outline: {
+                            color: markerColor,
+                            width: markerOutlineWidth
+                        }
+                    }),
+                    layer: _this.featureLayer,
+                    popupTemplate: {
+                        title: model.address,
+                        content: _this.createMarkerContent(model)
+                    }
+                })
+            },
+            createMarkerContent(model) {
+                let _this = this,
+                    tooltipContainer = _this.parseHTML(`<div class="arcmap-tooltip-container"></div>`),
+                    content = [];
+
+                content.push(`<img src="${model.imageUrl}" />`);
+                content.push(`<p>${model.address}</p>`);
+                content.push(`<p>${model.subdivision}</p>`);
+                content.push(`<p>${_this.$options.filters.currency(model.totalPrice)}</p>`);
+                content.push(`<p>${model.acres} Acres</p>`);
+                content.push(`<p>${model.type}</p>`);
+                content.push(`<p>${model.status}</p>`);
+                content.push(`<p>${_this.$options.filters.currency(model.pricePerSqft)} PSF</p>`);
+
+                return content.reduce((accumulator, elementHTML) => {
+                    if (accumulator && accumulator.appendChild) {
+                        accumulator.appendChild(_this.parseHTML(elementHTML));
+                    }
+                    return accumulator;
+                }, tooltipContainer);
+            },
+            parseHTML: function (htmlString) {
+                const contentType = 'text/html';
+
+                return new DOMParser().parseFromString(htmlString, contentType).documentElement;
+            },
+            removeAllMarkers(graphics, mapView) {
+                if (graphics && graphics.length && mapView && mapView.graphics && mapView.graphics.length) {
+                    for (let i = graphics.length - 1; i >= 0; i--) {
+                        mapView.graphics.remove(graphics[i].graphic)
+                    }
+                }
+
+                return [];
+            },
+            stopPropagation(e) {
+                if (e && e.stopPropagation) {
+                    e.stopPropagation();
+                }
+            },
+            getMapExtent(model, extent) {
+                return {
+                    xmin: !extent.xmin || model.centroid.longitude < extent.xmin ? model.centroid.longitude : extent.xmin,
+                    xmax: !extent.xmax || model.centroid.longitude > extent.xmax ? model.centroid.longitude : extent.xmax,
+                    ymin: !extent.ymin || model.centroid.latitude < extent.ymin ? model.centroid.latitude : extent.ymin,
+                    ymax: !extent.ymax || model.centroid.latitude > extent.ymax ? model.centroid.latitude : extent.ymax
+                };
             }
         }
     }
