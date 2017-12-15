@@ -10,9 +10,12 @@
         created() {
             let _this = this;
 
-            EventBus.$on(_this.filterChangeEvent, _this.filterChangeHandler);
-            EventBus.$on(_this.filterValueChangeEvent, _this.filterValueChangeHandler);
-            EventBus.$on(_this.rangeSliderChangeEvent, _this.rangeSliderChangeHandler);
+            if (EventBus && EventBus.$on && EventBus.$emit) {
+                _this.eventBus = EventBus;
+                _this.eventBus.$on(_this.filterChangeEvent, _this.filterChangeHandler);
+                _this.eventBus.$on(_this.filterValueChangeEvent, _this.filterValueChangeHandler);
+                _this.eventBus.$on(_this.rangeSliderChangeEvent, _this.rangeSliderChangeHandler);
+            }
         },
 
         async mounted() {
@@ -33,6 +36,7 @@
             return {
                 defaultUnselectedValue: defaultUnselectedValue,
                 enumerableFilterFields: [],
+                eventBus: null,
                 filterChangeEvent: 'filterChanged',
                 filterValueChangeEvent: 'filterValueChanged',
                 filterFields: [],
@@ -158,8 +162,6 @@
                 }
             },
             isFieldOfType(fieldArray, field) {
-                let _this = this;
-
                 return fieldArray && fieldArray.length && field && field.length && _includes(fieldArray, field);
             },
             rangeSliderChangeHandler(value) {

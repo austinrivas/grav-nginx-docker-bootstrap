@@ -1,9 +1,8 @@
 <script>
-    import EventBus from '../event-handlers/event-bus';
-
     export default {
         props: [
             'changeEvent',
+            'parentEventBus',
             'values',
             'minValue',
             'maxValue',
@@ -16,6 +15,10 @@
 
             if (_this.outputFunction && typeof _this.outputFunction === 'function') {
                 _this.outputFactory = _this.outputFunction;
+            }
+
+            if (_this.parentEventBus && _this.parentEventBus.$on && _this.parentEventBus.$emit) {
+                _this.eventBus = _this.parentEventBus;
             }
         },
 
@@ -31,7 +34,17 @@
         },
 
         data() {
+            let _this = this;
+
             return {
+                eventBus: {
+                    $on() {
+                        console.log('No parent event bus defined', _this.parentEventBus);
+                    },
+                    $emit() {
+                        console.log('No parent event bus defined', _this.parentEventBus);
+                    }
+                },
                 minSliderValue: null,
                 maxSliderValue: null,
                 outputFactory(values) { console.log('No output function for range slider', values) },
@@ -94,7 +107,7 @@
             handleChange(e) {
                 let _this = this;
 
-                EventBus.$emit(_this.changeEvent, _this.sliderValues);
+                _this.eventBus.$emit(_this.changeEvent, _this.sliderValues);
             }
         }
     }

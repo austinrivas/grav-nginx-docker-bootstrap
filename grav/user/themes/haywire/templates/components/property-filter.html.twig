@@ -45,28 +45,31 @@ TODO: Figure out the responsive on >1400px
     <div class="property-filter">
         <div class="columns">
             <div class="column is-3">
-                <select-filter :options="filterOptions"
+                <select-filter :change-event="filterChangeEvent"
+                               :options="filterOptions"
+                               :parent-event-bus="eventBus"
                                :selected="selectedFilterField"
-                               :change-event="filterChangeEvent"
                                inline-template>
                     {% include selectTemplate with { inputClass: selectTemplateClass, options: selectOptions, vue: true } only %}
                 </select-filter>
             </div>
             <div class="column is-3" v-if="showSlider">
                 <range-slider :change-event="rangeSliderChangeEvent"
-                              :values="rangeSliderValues"
                               :max-value="rangeSliderMaxValue"
                               :min-value="rangeSliderMinValue"
                               :output-function="rangeSliderOutputFunction"
+                              :parent-event-bus="eventBus"
                               :step="rangeSliderStep"
+                              :values="rangeSliderValues"
                               inline-template>
                     {% include sliderTemplate %}
                 </range-slider>
             </div>
             <div class="column is-3" v-if="showFilterOptions">
-                <select-filter :options="selectedFilterOptions"
+                <select-filter :change-event="filterValueChangeEvent"
+                               :options="selectedFilterOptions"
+                               :parent-event-bus="eventBus"
                                :selected="selectedFilterValue"
-                               :change-event="filterValueChangeEvent"
                                inline-template>
                     {% include selectTemplate with { inputClass: selectTemplateClass, options: selectFilterOptions, vue: true } only %}
                 </select-filter>
