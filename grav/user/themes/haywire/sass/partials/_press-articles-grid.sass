@@ -1,4 +1,12 @@
 section.press
+	
+	&:not(.related)
+		.article-grid
+			article:first-child
+				@extend .is-8;
+			article:not(:first-child)
+				@extend .is-4;
+
 	background: #F5F8F7;
 	padding: 40px 0;
 
@@ -18,10 +26,6 @@ section.press
 		align-items: center;
 
 	.article-grid
-		article:first-child
-			@extend .is-8;
-		article:not(:first-child)
-			@extend .is-4;
 		article
 			.article-container
 				border: 1px solid $blue-tiffany;
@@ -69,6 +73,14 @@ section.press
 			color: #7c7e72;
 		a 
 			color: #33648a;
+
+	&.related
+		background-color: $white;
+
+		.press-body .container > h2 
+			text-align: center;
+			margin: 1em 0 2em 0;
+			color: $blue-secondary;
 
 @include break-max($tablet)
 	section.press .article-grid article .article-container a.article-photo

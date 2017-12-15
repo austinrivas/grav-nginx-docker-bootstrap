@@ -76,4 +76,26 @@
 
     </section>
 
+    <section class="press related lwrc">
+
+        <div class="press-body">
+
+            <div class="container">
+
+                <h2 class="is-proxima-nova-bold type__data-section--heading is-uppercase">Related Articles</h2>
+
+                <div class="article-grid columns is-multiline">
+                    {% for related_path, score in related_pages %}
+                        {% set post = grav['pages'].get(related_path) %}
+                        {% if post %}
+                            {% include 'partials/article.html.twig' with {'loop': loop, 'post': post} %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 {% endblock %}
