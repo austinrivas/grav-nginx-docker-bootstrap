@@ -16,10 +16,10 @@
 
         computed: {
             showGrid() {
-                return false;
+                return true;
             },
             showTable() {
-                return true;
+                return false;
             }
         },
 
