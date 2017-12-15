@@ -2,12 +2,22 @@
     export default {
 
         async mounted() {
-            this.collection = await Properties.findAllProperties();
+            let _this = this;
+
+            _this.collection = await Properties.findAllProperties();
         },
 
         data() {
             return {
                 collection: null
+            }
+        },
+
+        methods: {
+            async handleQueryChange() {
+                let _this = this;
+
+                // handle query result and fetch data from ArcModel
             }
         }
 
