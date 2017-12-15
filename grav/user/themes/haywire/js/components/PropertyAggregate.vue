@@ -14,6 +14,15 @@
             }
         },
 
+        computed: {
+            showGrid() {
+                return false;
+            },
+            showTable() {
+                return true;
+            }
+        },
+
         methods: {
             async handleQueryChange() {
                 let _this = this;
