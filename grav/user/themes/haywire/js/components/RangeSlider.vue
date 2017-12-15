@@ -3,27 +3,26 @@
 
     export default {
         props: [
-            'initialValues',
-            'step',
+            'changeEvent',
+            'values',
             'minValue',
-            'maxValue'
+            'maxValue',
+            'step'
         ],
 
-        mounted() {
+        async mounted() {
             let _this = this;
 
-            _this.valueSliderA = 1;
-            _this.valueSliderB = 4;
-            _this.sliderStep = _this.sliderStep || 1;
+            _this.sliderStep = _this.step || 1;
             _this.minSliderValue = _this.minValue || 0;
             _this.maxSliderValue = _this.maxValue || 5;
-            _this.changeEvent = 'sliderChange';
-
+            _this.valueSliderA = _this.values && _this.values.length === 2 ? _this.values[0] : _this.minSliderValue;
+            _this.valueSliderB = _this.values && _this.values.length === 2 ? _this.values[1] : _this.maxSliderValue;
+            _this.sliderValues = await _this.getSliderValues([_this.valueSliderA, _this.valueSliderB]);
         },
 
         data() {
             return {
-                changeEvent: null,
                 minSliderValue: null,
                 maxSliderValue: null,
                 sliderStep: null,
@@ -41,27 +40,37 @@
         },
 
         watch: {
+            async values() {
+                let _this = this;
+
+                if (_this.values && _this.values.length === 2) {
+                    _this.valueSliderA = _this.values[0];
+                    _this.valueSliderB = _this.values[1];
+                }
+            },
             async valueSliderA() {
                 let _this = this;
 
-                _this.sliderValues = await _this.getSliderValues([_this.valueSliderA, _this.valueSliderB]);
+                _this.sliderValues = await _this.getSliderValues();
             },
             async valueSliderB() {
                 let _this = this;
 
-                _this.sliderValues = await _this.getSliderValues([_this.valueSliderA, _this.valueSliderB]);
+                _this.sliderValues = await _this.getSliderValues();
             }
         },
 
         methods: {
-            async getSliderValues(array) {
-                let _this = this;
-
-                return await _this.bitwiseArraySwap(array)
-                    .reduce((accumulator, value) => {
+            async getSliderValues() {
+                let _this = this,
+                    array = await [_this.valueSliderA, _this.valueSliderB].reduce((accumulator, value) => {
                         accumulator.push(JSON.parse(value));
                         return accumulator;
                     }, []);
+
+                return _this.bitwiseArraySwap(array);
+
+
             },
             bitwiseArraySwap(array) {
                 if (array && array.length === 2) {

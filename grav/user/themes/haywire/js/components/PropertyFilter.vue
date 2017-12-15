@@ -12,6 +12,7 @@
 
             EventBus.$on(_this.filterChangeEvent, _this.filterChangeHandler);
             EventBus.$on(_this.filterValueChangeEvent, _this.filterValueChangeHandler);
+            EventBus.$on(_this.rangeSliderChangeEvent, _this.rangeSliderChangeHandler);
         },
 
         async mounted() {
@@ -41,6 +42,11 @@
                 ],
                 filterOptions: [],
                 nonRangeFilterFields: [],
+                rangeSliderChangeEvent: 'rangeSliderChanged',
+                rangeSliderValues: [1, 10],
+                rangeSliderMinValue: 0,
+                rangeSliderMaxValue: 20,
+                rangeSliderStep: 1,
                 selectedFilterField: defaultUnselectedValue,
                 selectedFilterOptions: [],
                 selectedFilterValue: defaultUnselectedValue
@@ -131,6 +137,13 @@
 
                 if (value && value.length) {
                     _this.selectedFilterValue = value;
+                }
+            },
+            rangeSliderChangeHandler(value) {
+                let _this = this;
+
+                if (value && value.length === 2) {
+                    _this.rangeSliderValues = value;
                 }
             }
         }
