@@ -90,7 +90,7 @@
                     return _this.selectedFilterValue !== _this.defaultUnselectedValue;
 
                 } else if (_this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField)) {
-                    
+
                     return _this.rangeSliderValues && _this.rangeSliderValues.length === 2;
 
                 }

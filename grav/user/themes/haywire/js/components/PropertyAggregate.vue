@@ -1,5 +1,6 @@
 <script>
     import EventBus from '../event-handlers/event-bus';
+    import PROPERTY_FIELDS from '../models/propertyFields';
 
     export default {
 
@@ -59,7 +60,25 @@
             async executeQuery(query) {
                 let _this = this;
 
-                console.log(query);
+                if (query.field && query.value) {
+
+                    switch (query.field) {
+                        case PROPERTY_FIELDS.acres:
+                            if (query.value.length === 2 && query.value[0] && query.value[1]) {
+                                _this.collection = await Properties.findPropertiesByAcreageRange(query.value[0], query.value[1]);
+                            }
+                        case PROPERTY_FIELDS.subdivision:
+                            _this.collection = await Properties.findPropertiesBySubdivision(query.value);
+                            break;
+                        case PROPERTY_FIELDS.status:
+                            _this.collection = await Properties.findPropertiesByType(query.type);
+                            break;
+                        case PROPERTY_FIELDS.type:
+                            _this.collection = await Properties.findPropertiesByType(query.value);
+                            break;
+                    }
+
+                }
             },
             handleListViewChange(type) {
                 let _this = this;
