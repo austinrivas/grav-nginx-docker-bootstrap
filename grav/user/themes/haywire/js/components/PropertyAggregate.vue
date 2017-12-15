@@ -1,5 +1,15 @@
 <script>
+    import EventBus from '../event-handlers/event-bus'
+
     export default {
+
+        created() {
+            let _this = this;
+
+            if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
+                _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange)
+            }
+        },
 
         async mounted() {
             let _this = this;
@@ -10,16 +20,21 @@
         data() {
             return {
                 collection: null,
-                gridItemsInRow: 3
+                eventBus: EventBus,
+                gridItemsInRow: 3,
+                listView: 'grid',
+                listViewChangeEvent: 'listViewChange'
             }
         },
 
         computed: {
             showGrid() {
-                return false;
+                let _this = this;
+                return _this.listView === 'grid';
             },
             showTable() {
-                return true;
+                let _this = this;
+                return _this.listView === 'table';
             }
         },
 
@@ -28,6 +43,13 @@
                 let _this = this;
 
                 // handle query result and fetch data from ArcModel
+            },
+            handleListViewChange(type) {
+                let _this = this;
+
+                if (type === 'grid' || type === 'table') {
+                    _this.listView = type;
+                }
             }
         }
 

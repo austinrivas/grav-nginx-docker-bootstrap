@@ -6,6 +6,7 @@
     import PROPERTY_LABELS from '../models/propertyLabels';
 
     export default {
+        props: ['listViewChangeEvent', 'listView'],
 
         created() {
             let _this = this;
@@ -67,6 +68,16 @@
         },
 
         computed: {
+            isGridListViewActive() {
+                let _this = this;
+
+                return _this.listView === 'grid';
+            },
+            isTableListViewActive() {
+                let _this = this;
+
+                return _this.listView === 'table';
+            },
             showSlider() {
                 let _this = this;
                 return _this.rangeSliderMinValue && _this.rangeSliderMaxValue && _this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField);
@@ -194,6 +205,13 @@
             },
             isFieldOfType(fieldArray, field) {
                 return fieldArray && fieldArray.length && field && field.length && _includes(fieldArray, field);
+            },
+            listViewChangeHandler(listView) {
+              let _this = this;
+
+              if (listView !== _this.listView) {
+                  _this.eventBus.$emit(_this.listViewChangeEvent, listView);
+              }
             },
             rangeSliderChangeHandler(value) {
                 let _this = this;
