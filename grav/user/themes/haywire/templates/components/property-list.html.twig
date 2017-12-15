@@ -1,4 +1,12 @@
+{% set featuredProjectTemplate = 'partials/featured-project.html.twig' %}
+
 <div class="property-list-container">
-    <h1>${ properties }</h1>
+    <div class="columns is-variable is-9" v-for="row in rows">
+        <div class="column card" v-for="model in row">
+            <featured-project v-if="model" :model="model" inline-template>
+                {% include featuredProjectTemplate only %}
+            </featured-project>
+        </div>
+    </div>
 </div>
 
