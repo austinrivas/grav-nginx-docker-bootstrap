@@ -16,7 +16,7 @@
         <tbody>
             <tr v-for="model in collection">
             <td>{% include favoriteIconTemplate only %}</td>
-            <td>${model.address | capitalize}, ${model.city | lowercase}, FL, ${model.zip}</td>
+            <td>${model.address}, ${model.city}, FL, ${model.zip}</td>
             <td>${model.subdivision}</td>
             <td>${model.totalPrice | currency}</td>
             <td>${model.pricePerSqft | currency}</td>
