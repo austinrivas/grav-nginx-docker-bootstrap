@@ -26,8 +26,8 @@
             let _this = this;
 
             _this.sliderStep = _this.step || 1;
-            _this.minSliderValue = _this.minValue || 0;
-            _this.maxSliderValue = _this.maxValue || 5;
+            _this.minSliderValue = _this.minValue;
+            _this.maxSliderValue = _this.maxValue;
             _this.valueSliderA = _this.values && _this.values.length === 2 ? _this.values[0] : _this.minSliderValue;
             _this.valueSliderB = _this.values && _this.values.length === 2 ? _this.values[1] : _this.maxSliderValue;
             _this.sliderValues = await _this.getSliderValues([_this.valueSliderA, _this.valueSliderB]);
@@ -63,6 +63,24 @@
         },
 
         watch: {
+            maxValue() {
+                let _this = this;
+
+                _this.maxSliderValue = _this.maxValue;
+
+                if (!_this.valueSliderB) {
+                    _this.valueSliderB = _this.maxValue;
+                }
+            },
+            minValue() {
+                let _this = this;
+
+                _this.minSliderValue = _this.minValue;
+
+                if (!_this.valueSliderA) {
+                    _this.valueSliderA = _this.minValue;
+                }
+            },
             async values() {
                 let _this = this;
 

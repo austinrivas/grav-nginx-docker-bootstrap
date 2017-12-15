@@ -49,9 +49,9 @@
                 filterOptions: [],
                 rangeFilterFields: [],
                 rangeSliderChangeEvent: 'rangeSliderChanged',
-                rangeSliderValues: [1, 10],
-                rangeSliderMinValue: 0,
-                rangeSliderMaxValue: 20,
+                rangeSliderValues: null,
+                rangeSliderMinValue: null,
+                rangeSliderMaxValue: null,
                 rangeSliderOutputFunction(values) {
                     if (values && values.length === 2) {
                         return `${values[0]} to ${values[1]} Acres`;
@@ -69,7 +69,7 @@
         computed: {
             showSlider() {
                 let _this = this;
-                return _this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField);
+                return _this.rangeSliderMinValue && _this.rangeSliderMaxValue && _this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField);
             },
             showFilterOptions() {
                 let _this = this;
@@ -84,17 +84,14 @@
 
                 if (features && features.length) {
                     if (_this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField)) {
-                        _this.selectedFilterOptions = await features.reduce((accumulator, feature) => {
-                            let filterValue = feature.attributes[_this.selectedFilterField];
-
-                            if (filterValue) {
-                                accumulator.push({text: filterValue, value: filterValue});
-                            }
-
-                            return accumulator;
-                        }, []);
+                        _this.selectedFilterOptions = await _this.getSelectedFilterOptions(features, _this.selectedFilterField);
                     } else if (_this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField)) {
-                        console.log('is range field');
+                        let range = await _this.getSelectedFilterRange(features, _this.selectedFilterField);
+
+                        if (range && range.length === 2) {
+                            _this.rangeSliderMinValue = range[0];
+                            _this.rangeSliderMaxValue = range[1];
+                        }
                     }
                 }
             },
@@ -143,6 +140,40 @@
                 return fields && fields.length ? await _filter(fields, (field) => {
                     return field === PROPERTY_FIELDS.acres;
                 }) : [];
+            },
+            async getSelectedFilterOptions(features, field) {
+                if (features && features.length && field && field.length) {
+                    return await features.reduce((accumulator, feature) => {
+                        let filterValue = feature.attributes[field];
+
+                        if (filterValue) {
+                            accumulator.push({text: filterValue, value: filterValue});
+                        }
+
+                        return accumulator;
+                    }, []);
+                } else {
+                    return [];
+                }
+            },
+            async getSelectedFilterRange(features, field) {
+                if (features && features.length && field && field.length) {
+                    return await features.reduce((accumulator, feature) => {
+                        let value = feature.attributes[field];
+
+                        if (value) {
+                            if (!accumulator[0] || value < accumulator[0]) {
+                                accumulator[0] = Math.floor(JSON.parse(value));
+                            } else if (!accumulator[1] || value > accumulator[1]) {
+                                accumulator[1] = Math.ceil(JSON.parse(value));
+                            }
+                        }
+
+                        return accumulator;
+                    }, [null, null]);
+                } else {
+                    return [0, 1];
+                }
             },
             createFilterLabel(label) {
                 return `Filter by ${label}`
