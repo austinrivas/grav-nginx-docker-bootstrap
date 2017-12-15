@@ -98,4 +98,8 @@
         </div>
 
     </section>
+
+    {% for m in page.find('/press').collection('modules') if m.template == 'modular/contact-cta' %}
+        {{ m.content }}
+    {% endfor %}
 {% endblock %}
