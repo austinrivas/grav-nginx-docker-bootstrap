@@ -40,6 +40,7 @@
                     'acres'
                 ],
                 filterOptions: [],
+                nonRangeFilterFields: [],
                 selectedFilterField: defaultUnselectedValue,
                 selectedFilterOptions: [],
                 selectedFilterValue: defaultUnselectedValue

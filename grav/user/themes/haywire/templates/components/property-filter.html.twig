@@ -2,7 +2,7 @@
 {% set iconTemplate          = 'partials/svg-icon.html.twig' %}
 {% set buttonTemplate        = 'partials/elements/button.html.twig' %}
 {% set selectTemplate        = 'partials/elements/select.html.twig' %}
-{% set sliderTemplate        = 'partials/elements/slider.html.twig' %}
+{% set sliderTemplate        = 'partials/elements/range-slider.html.twig' %}
 
 {# Classes #}
 {% set iconFavId             = 'icon__favorite-selected' %}
@@ -50,19 +50,18 @@ TODO: Figure out the responsive on >1400px
                 </select-filter>
             </div>
             <div class="column is-3" v-if="showSlider">
-                <div class="is-hidden">
-                    {% include selectTemplate with { inputClass: selectTemplateClass, options: sliderOptions } only %}
-                </div>
-                {% include sliderTemplate with {
-                    valueSlider1: initialValueSlider1,
-                    minValueSlider1: minSliderValue,
-                    maxValueSlider1: maxSliderValue,
-                    StepSlider1: sliderStep,
-                    valueSlider2: initialValueSlider2,
-                    minValueSlider2: minSliderValue,
-                    maxValueSlider2: maxSliderValue,
-                    StepSlider2: sliderStep
-                } only %}
+                <range-slider inline-template>
+                    {% include sliderTemplate with {
+                        valueSlider1: initialValueSlider1,
+                        minValueSlider1: minSliderValue,
+                        maxValueSlider1: maxSliderValue,
+                        StepSlider1: sliderStep,
+                        valueSlider2: initialValueSlider2,
+                        minValueSlider2: minSliderValue,
+                        maxValueSlider2: maxSliderValue,
+                        StepSlider2: sliderStep
+                    } only %}
+                </range-slider>
             </div>
             <div class="column is-3" v-if="showFilterOptions">
                 <select-filter :options="selectedFilterOptions" :selected="selectedFilterValue" :change-event="filterValueChangeEvent" inline-template>

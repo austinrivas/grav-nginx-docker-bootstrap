@@ -24,6 +24,7 @@ import FeaturedProjects from './components/FeaturedProjects.vue';
 import Navbar from './components/Navbar.vue';
 import PropertyAggregate from './components/PropertyAggregate.vue';
 import PropertyFilter from './components/PropertyFilter.vue';
+import RangeSlider from './components/RangeSlider.vue';
 import SelectFilter from './components/SelectFilter.vue';
 
 // Vue Component declaration
@@ -34,6 +35,7 @@ Vue.component('featured-projects', FeaturedProjects);
 Vue.component('navbar', Navbar);
 Vue.component('property-aggregate', PropertyAggregate);
 Vue.component('property-filter', PropertyFilter);
+Vue.component('range-slider', RangeSlider);
 Vue.component('select-filter', SelectFilter);
 
 /**
