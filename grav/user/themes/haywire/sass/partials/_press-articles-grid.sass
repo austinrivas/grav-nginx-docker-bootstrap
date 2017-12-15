@@ -18,6 +18,10 @@ section.press
 		align-items: center;
 
 	.article-grid
+		article:first-child
+			@extend .is-8;
+		article:not(:first-child)
+			@extend .is-4;
 		article
 			.article-container
 				border: 1px solid $blue-tiffany;
