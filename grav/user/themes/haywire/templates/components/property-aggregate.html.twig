@@ -5,7 +5,7 @@
     <div class="property-aggregate-container">
         {% include filterTemplate with {} only %}
         {% include arcMapTemplate with {} only %}
-        <property-list :properties="collection" inline-template>
+        <property-list :properties="collection" :items-in-row="gridItemsInRow" inline-template>
             {% include propertyListTemplate with {} only %}
         </property-list>
     </div>

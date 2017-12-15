@@ -1,6 +1,6 @@
 <script>
     export default {
-        props: ['properties'],
+        props: ['properties', 'itemsInRow'],
         mounted() {},
         data() {
             return {
@@ -23,7 +23,7 @@
 
                     let currentRow = rows && rows.length > 0 ? rows[rows.length - 1] : [];
 
-                    if (currentRow.length === 3) {
+                    if (currentRow.length === _this.itemsInRow) {
                         let newRow = [];
                         newRow.push(model);
                         rows.push(newRow)
@@ -42,13 +42,15 @@
                 return await _this.fillLastRow(rows);
             },
             async fillLastRow(rows) {
+                let _this = this;
+
                 if (rows &&rows.length > 0) {
                     let lastRow = rows[rows.length - 1];
 
-                    let remainder = lastRow.length % 3;
+                    let remainder = lastRow.length % _this.itemsInRow;
 
                     if (remainder !== 0) {
-                        for (let i = 0; i < 3 - remainder; i++) {
+                        for (let i = 0; i < _this.itemsInRow - remainder; i++) {
                             lastRow.push(null);
                         }
                     }

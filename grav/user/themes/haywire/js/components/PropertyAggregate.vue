@@ -9,7 +9,8 @@
 
         data() {
             return {
-                collection: null
+                collection: null,
+                gridItemsInRow: 3
             }
         },
 
