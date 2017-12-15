@@ -46,6 +46,13 @@
                 rangeSliderValues: [1, 10],
                 rangeSliderMinValue: 0,
                 rangeSliderMaxValue: 20,
+                rangeSliderOutputFunction(values) {
+                    if (values && values.length === 2) {
+                        return `${values[0]} to ${values[1]} Acres`;
+                    } else {
+                        return `Undefined Range`;
+                    }
+                },
                 rangeSliderStep: 1,
                 selectedFilterField: defaultUnselectedValue,
                 selectedFilterOptions: [],

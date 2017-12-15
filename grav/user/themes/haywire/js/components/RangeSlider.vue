@@ -7,8 +7,17 @@
             'values',
             'minValue',
             'maxValue',
+            'outputFunction',
             'step'
         ],
+
+        created() {
+            let _this = this;
+
+            if (_this.outputFunction && typeof _this.outputFunction === 'function') {
+                _this.outputFactory = _this.outputFunction;
+            }
+        },
 
         async mounted() {
             let _this = this;
@@ -25,6 +34,7 @@
             return {
                 minSliderValue: null,
                 maxSliderValue: null,
+                outputFactory(values) { console.log('No output function for range slider', values) },
                 sliderStep: null,
                 sliderValues: [],
                 valueSliderA: null,
@@ -35,7 +45,7 @@
         computed: {
             sliderOutput() {
                 let _this = this;
-                return _this.getSliderOutput(_this.sliderValues);
+                return _this.outputFactory(_this.sliderValues);
             }
         },
 
@@ -80,13 +90,6 @@
                 }
 
                 return array;
-            },
-            getSliderOutput(values) {
-                if (values && values.length === 2) {
-                    return `${values[0]} to ${values[1]} Acres`;
-                } else {
-                    return `Undefined Range`;
-                }
             },
             handleChange(e) {
                 let _this = this;
