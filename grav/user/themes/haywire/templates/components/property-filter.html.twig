@@ -51,16 +51,7 @@ TODO: Figure out the responsive on >1400px
             </div>
             <div class="column is-3" v-if="showSlider">
                 <range-slider inline-template>
-                    {% include sliderTemplate with {
-                        valueSlider1: initialValueSlider1,
-                        minValueSlider1: minSliderValue,
-                        maxValueSlider1: maxSliderValue,
-                        StepSlider1: sliderStep,
-                        valueSlider2: initialValueSlider2,
-                        minValueSlider2: minSliderValue,
-                        maxValueSlider2: maxSliderValue,
-                        StepSlider2: sliderStep
-                    } only %}
+                    {% include sliderTemplate %}
                 </range-slider>
             </div>
             <div class="column is-3" v-if="showFilterOptions">
