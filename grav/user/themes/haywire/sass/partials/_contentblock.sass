@@ -34,11 +34,25 @@
                 @extend .is-blue-dark
 .content-blocks.content-blocks-bottom
     margin-top: 0
+    &.is-tile-gold
+        h2,p
+            @extend .is-gold
+        .left-tile
+            @extend .is-bg-cream
+    &.is-tile-blue
+        h2
+            @extend .is-blue-dark
+        .left-tile
+            background: $white
+            p
+                color: $grey
+        .right-tile
+            @extend .is-bg-blue-tiffany
+            p
+                color: $white
+
     .content-tile
         padding: 8em 0
     h2
         @extend .type__content-bottom-tile--primary-heading
         @extend .is-uppercase
-        @extend .is-gold
-    p
-        @extend .is-gold

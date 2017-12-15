@@ -2,9 +2,24 @@
 
 {% block content %}
     {{ page.content }}
-    {% for module in page.collection() %}
-        <div id="{{ _self.pageLinkName(module.menu) }}"></div>
-        {{ module.content }}
-    {% endfor %}
+
+    {# 
+    	If there is a "modules" key defined then it overrides the default "content" key.
+    	This is so that it doesn't interfere with the press/blog articles filtering 
+    	system. Because the press/blog articles can only use the "content" key.
+    #}
+    {% if page.collection('modules').current() %}
+    	{% for module in page.collection('modules') %}
+	        <div id="{{ _self.pageLinkName(module.menu) }}"></div>
+	        {{ module.content }}
+	    {% endfor %}
+    {% else %}
+
+    	{# Else render normally #}
+	    {% for module in page.collection() %}
+	        <div id="{{ _self.pageLinkName(module.menu) }}"></div>
+	        {{ module.content }}
+	    {% endfor %}
+	{% endif %}
 {% endblock %}
 
