@@ -19,7 +19,8 @@
             let _this = this;
 
             _this.filterFields = await _this.getFilterFields(_this.filterKeys);
-            _this.nonRangeFilterFields = await _this.getNonRangeFilterFields(_this.filterFields);
+            _this.enumerableFilterFields = await _this.getEnumerableFilterFields(_this.filterFields);
+            _this.rangeFilterFields = await _this.getRangeFilterFields(_this.filterFields);
             _this.filterOptions = await _this.getFilterOptions(_this.filterKeys);
 
             if (_this.selectedFilterField && _this.selectedFilterField !== _this.defaultUnselectedValue) {
@@ -31,6 +32,7 @@
             let defaultUnselectedValue = "unselected";
             return {
                 defaultUnselectedValue: defaultUnselectedValue,
+                enumerableFilterFields: [],
                 filterChangeEvent: 'filterChanged',
                 filterValueChangeEvent: 'filterValueChanged',
                 filterFields: [],
@@ -41,7 +43,7 @@
                     'acres'
                 ],
                 filterOptions: [],
-                nonRangeFilterFields: [],
+                rangeFilterFields: [],
                 rangeSliderChangeEvent: 'rangeSliderChanged',
                 rangeSliderValues: [1, 10],
                 rangeSliderMinValue: 0,
@@ -63,11 +65,11 @@
         computed: {
             showSlider() {
                 let _this = this;
-                return _this.selectedFilterField === PROPERTY_FIELDS.acres;
+                return _this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField);
             },
             showFilterOptions() {
                 let _this = this;
-                return _includes(_this.nonRangeFilterFields, _this.selectedFilterField);
+                return _this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField);
             }
         },
 
@@ -77,15 +79,19 @@
                     features = await _this.getDistinctFilterOptions(_this.selectedFilterField);
 
                 if (features && features.length) {
-                    _this.selectedFilterOptions = await features.reduce((accumulator, feature) => {
-                        let filterValue = feature.attributes[_this.selectedFilterField];
+                    if (_this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField)) {
+                        _this.selectedFilterOptions = await features.reduce((accumulator, feature) => {
+                            let filterValue = feature.attributes[_this.selectedFilterField];
 
-                        if (filterValue) {
-                            accumulator.push({text: filterValue, value: filterValue});
-                        }
+                            if (filterValue) {
+                                accumulator.push({text: filterValue, value: filterValue});
+                            }
 
-                        return accumulator;
-                    }, []);
+                            return accumulator;
+                        }, []);
+                    } else if (_this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField)) {
+                        console.log('is range field');
+                    }
                 }
             },
             async selectedFilterValue() {
@@ -124,9 +130,14 @@
                     return accumulator;
                 }, []) : [];
             },
-            async getNonRangeFilterFields(fields) {
+            async getEnumerableFilterFields(fields) {
                 return fields && fields.length ? await _filter(fields, (field) => {
                     return field !== PROPERTY_FIELDS.acres;
+                }) : [];
+            },
+            async getRangeFilterFields(fields) {
+                return fields && fields.length ? await _filter(fields, (field) => {
+                    return field === PROPERTY_FIELDS.acres;
                 }) : [];
             },
             createFilterLabel(label) {
@@ -145,6 +156,11 @@
                 if (value && value.length) {
                     _this.selectedFilterValue = value;
                 }
+            },
+            isFieldOfType(fieldArray, field) {
+                let _this = this;
+
+                return fieldArray && fieldArray.length && field && field.length && _includes(fieldArray, field);
             },
             rangeSliderChangeHandler(value) {
                 let _this = this;
