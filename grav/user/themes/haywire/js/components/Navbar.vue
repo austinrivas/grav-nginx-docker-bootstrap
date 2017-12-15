@@ -1,8 +1,5 @@
 <script>
     export default {
-        mounted() {
-            // 
-        },
 
         data() {
             return {
@@ -11,9 +8,10 @@
         },
 
         methods: {
-            toggleNav(){
-               !this.navIsActive ? this.navIsActive = true : this.navIsActive = false;
+            toggleNav() {
+                !this.navIsActive ? this.navIsActive = true : this.navIsActive = false;
             }
         }
+
     }
 </script>

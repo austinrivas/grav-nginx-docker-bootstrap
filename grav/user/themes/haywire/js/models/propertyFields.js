@@ -20,6 +20,7 @@ export default {
     relatedProperties: "Related_Pr",
     shapeArea: "SHAPE__Area",
     shapeLength: "SHAPE__Length",
+    status: "NOT_IMPLEMENTED_YET",
     subdivision: "Subdivisio",
     totalPrice: "Total_Pric",
     totalSqft: "Total_Squa",

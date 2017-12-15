@@ -43,49 +43,67 @@
 {% set buttonFilterApplyLabel   = 'Apply' %}
 {% set buttonPropLabel          = 'View *prop name*' %}
 
+{# Slider Values #}
+{% set sliderStep = 1 %}
+{% set minSliderValue = 1 %}
+{% set maxSliderValue = 300 %}
+{% set initialValueSlider1 = 20 %}
+{% set initialValueSlider2 = 120 %}
+
 <!-- filter desktop range
 TODO: Figure out the responsive on >1400px
 -->
 
-<div class="property-filter">
-    <div class="columns">
-        <div class="column is-3">
-            {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
-        </div>
-        <div class="column is-3" style="display: none;">
-            <div class="is-hidden">
+<property-filter inline-template>
+    <div class="property-filter">
+        <div class="columns">
+            <div class="column is-3">
                 {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
             </div>
-            {% include sliderTemplate with { valueSlider1: 20, minValueSlider1: 1, maxValueSlider1: 300, StepSlider1: 1, valueSlider2: 120, minValueSlider2: 1, maxValueSlider2: 300, StepSlider2: 1 } only %}
-        </div>
-        <div class="column is-3 is-hidden">
-            {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
-        </div>
-        <div class="column is-1">
-            {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } %}
-        </div>
-        <div class="column is-3">
-            <div class="is-center">
-                {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } %}
-            </div>
-        </div>
-        <div class="column is-2">
-            <div class="columns is-hidden-touch is-gapless">
-                <div class="column is-8">
-                    {% include buttonTemplate with {
-                        class: buttonClassGroup,
-                        addons: [{
-                            iconClass: iconHamId
-                        },{
-                            iconClass: iconGridId,
-                            disabled: true
-                        }]}
-                    %}
+            <div class="column is-3">
+                <div class="is-hidden">
+                    {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
                 </div>
-                <div class="column is-4">
-                    {% include buttonTemplate with { class: buttonClassFav, iconId: iconFavId } %}
+                {% include sliderTemplate with {
+                    valueSlider1: initialValueSlider1,
+                    minValueSlider1: minSliderValue,
+                    maxValueSlider1: maxSliderValue,
+                    StepSlider1: sliderStep,
+                    valueSlider2: initialValueSlider2,
+                    minValueSlider2: minSliderValue,
+                    maxValueSlider2: maxSliderValue,
+                    StepSlider2: sliderStep
+                } only %}
+            </div>
+            <div class="column is-3 is-hidden">
+                {% include selectTemplate with { inputClass: selectTemplateClass, options: selectTemplateOptionsRange  } only %}
+            </div>
+            <div class="column is-1">
+                {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } only %}
+            </div>
+            <div class="column is-3">
+                <div class="is-center">
+                    {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } only %}
+                </div>
+            </div>
+            <div class="column is-2">
+                <div class="columns is-hidden-touch is-gapless">
+                    <div class="column is-8">
+                        {% include buttonTemplate with {
+                            class: buttonClassGroup,
+                            addons: [{
+                                iconClass: iconHamId
+                            },{
+                                iconClass: iconGridId,
+                                disabled: true
+                            }]} only %}
+                    </div>
+                    <div class="column is-4">
+                        {% include buttonTemplate with { class: buttonClassFav, iconId: iconFavId } only %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</property-filter>
+

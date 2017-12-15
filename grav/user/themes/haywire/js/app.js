@@ -1,19 +1,56 @@
 /**
-* Include polyfill for vue (IE)
-*/
+ * Include polyfill for vue (IE)
+ */
 
-import "babel-polyfill";
-import ArcModel from "./models/arcModel";
-import PropertyCollection from "./models/propertyCollection"
-import FavoritePropertiesCollection from "./models/favoritePropertiesCollection"
-import VueCurrencyFilter from "./filters/vueCurrencyFilter";
+import 'babel-polyfill';
+
+// Resources and Collections
+import ArcModel from './models/arcModel';
+import PropertyCollection from './models/propertyCollection';
+import FavoritePropertiesCollection from './models/favoritePropertiesCollection';
+
+// Vue and Vue Filters
+import Vue from 'vue';
+import VueCurrencyFilter from './filters/vue-currency-filter';
+
+// Vue Event Bus
+import EventBus from './event-handlers/event-bus';
+
+// Vue Components
+import ArcMap from './components/ArcMap.vue';
+import FavoriteIcon from './components/FavoriteIcon.vue';
+import FeaturedProject from './components/FeaturedProject.vue';
+import FeaturedProjects from './components/FeaturedProjects.vue';
+import Navbar from './components/Navbar.vue';
+import PropertyAggregate from './components/PropertyAggregate.vue';
+import PropertyFilter from './components/PropertyFilter.vue';
+import PropertyList from './components/PropertyList.vue';
+import RangeSlider from './components/RangeSlider.vue';
+import SelectFilter from './components/SelectFilter.vue';
+
+// Vue Component declaration
+Vue.component('arcmap', ArcMap);
+Vue.component('favorite-icon', FavoriteIcon);
+Vue.component('featured-project', FeaturedProject);
+Vue.component('featured-projects', FeaturedProjects);
+Vue.component('navbar', Navbar);
+Vue.component('property-aggregate', PropertyAggregate);
+Vue.component('property-filter', PropertyFilter);
+Vue.component('property-list', PropertyList);
+Vue.component('range-slider', RangeSlider);
+Vue.component('select-filter', SelectFilter);
 
 /**
  * Load all of this project's JavaScript dependencies including Vue
  */
 
-window.Vue = require('vue');
+// For easy reference
+window.Vue = Vue;
+window.VueEventBus = EventBus;
+
+// Create Resource and Collection Singletons
 window.ArcModel = new ArcModel();
+window.ArcModelClass = ArcModel;
 window.Properties = new PropertyCollection();
 window.FavoriteProperties = new FavoritePropertiesCollection();
 
@@ -23,15 +60,8 @@ window.FavoriteProperties = new FavoritePropertiesCollection();
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('arcmap', require('./components/ArcMap.vue'));
-Vue.component('favorite-icon', require('./components/FavoriteIcon.vue'));
-Vue.component('featured-project', require('./components/FeaturedProject.vue'));
-Vue.component('featured-projects', require('./components/FeaturedProjects.vue'));
-Vue.component('navbar', require('./components/Navbar.vue'));
-Vue.component('articles', require('./components/Articles.vue'));
-
 Vue.use(VueCurrencyFilter, {
-    symbol : '$',
+    symbol: '$',
     thousandsSeparator: ',',
     fractionCount: 0,
     fractionSeparator: '.',
@@ -39,7 +69,7 @@ Vue.use(VueCurrencyFilter, {
     symbolSpacing: true
 });
 
-const app = new Vue({
+window.App = new Vue({
     delimiters: ['${', '}'],
     el: '#app'
 });

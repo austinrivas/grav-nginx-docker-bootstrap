@@ -1,6 +1,6 @@
 {% extends "partials/base.html.twig" %}
 
-{% set filterTemplate =  'partials/properties/filter.html.twig' %}
+{% set propertyAggregateTemplate = 'components/property-aggregate.html.twig' %}
 
 {% block head %}
     {{ parent() }}
@@ -8,12 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include filterTemplate with {} only %}
-    <arcmap inline-template>
-        <div class="arc-map-container">
-            <div id="mapNode"></div>
-        </div>
-    </arcmap>
+    {% include propertyAggregateTemplate with {} only %}
 {% endblock %}
 
 {% block bottom %}
