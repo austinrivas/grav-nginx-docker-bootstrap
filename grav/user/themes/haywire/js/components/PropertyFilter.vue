@@ -6,7 +6,12 @@
     import PROPERTY_LABELS from '../models/propertyLabels';
 
     export default {
-        props: ['listViewChangeEvent', 'listView'],
+        props: [
+            'gridView',
+            'listViewChangeEvent',
+            'listView',
+            'tableView'
+        ],
 
         created() {
             let _this = this;
@@ -206,12 +211,19 @@
             isFieldOfType(fieldArray, field) {
                 return fieldArray && fieldArray.length && field && field.length && _includes(fieldArray, field);
             },
-            listViewChangeHandler(listView) {
-              let _this = this;
+            showTableListViewHandler() {
+                let _this = this;
 
-              if (listView !== _this.listView) {
-                  _this.eventBus.$emit(_this.listViewChangeEvent, listView);
-              }
+                if (_this.listView !== _this.tableView) {
+                    _this.eventBus.$emit(_this.listViewChangeEvent, _this.tableView);
+                }
+            },
+            showGridListViewHandler() {
+                let _this = this;
+
+                if (_this.listView !== _this.gridView) {
+                    _this.eventBus.$emit(_this.listViewChangeEvent, _this.gridView);
+                }
             },
             rangeSliderChangeHandler(value) {
                 let _this = this;

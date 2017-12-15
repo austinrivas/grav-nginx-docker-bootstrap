@@ -18,23 +18,28 @@
         },
 
         data() {
+            let gridView = 'grid',
+                tableView = 'table';
+
             return {
                 collection: null,
                 eventBus: EventBus,
                 gridItemsInRow: 3,
-                listView: 'grid',
-                listViewChangeEvent: 'listViewChange'
+                gridView: gridView,
+                listView: gridView,
+                listViewChangeEvent: 'listViewChange',
+                tableView: tableView
             }
         },
 
         computed: {
             showGrid() {
                 let _this = this;
-                return _this.listView === 'grid';
+                return _this.listView === _this.gridView;
             },
             showTable() {
                 let _this = this;
-                return _this.listView === 'table';
+                return _this.listView === _this.tableView;
             }
         },
 
@@ -47,7 +52,7 @@
             handleListViewChange(type) {
                 let _this = this;
 
-                if (type === 'grid' || type === 'table') {
+                if (type === _this.gridView || type === _this.tableView) {
                     _this.listView = type;
                 }
             }

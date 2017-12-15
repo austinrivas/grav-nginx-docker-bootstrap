@@ -4,7 +4,13 @@
 {% set propertyListTableTemplate = 'components/property-list-table.html.twig' %}
 <property-aggregate inline-template>
     <div class="property-aggregate-container">
-        <property-filter :event-bus="eventBus" :list-view-change-event="listViewChangeEvent" :list-view="listView" inline-template>
+        <property-filter
+            :event-bus="eventBus"
+            :grid-view="gridView"
+            :list-view-change-event="listViewChangeEvent"
+            :list-view="listView"
+            :table-view="tableView"
+            inline-template>
             {% include filterTemplate with {} only %}
         </property-filter>
         <arcmap :collection="collection" inline-template>
