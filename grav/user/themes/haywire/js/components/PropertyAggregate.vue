@@ -1,5 +1,5 @@
 <script>
-    import EventBus from '../event-handlers/event-bus'
+    import EventBus from '../event-handlers/event-bus';
 
     export default {
 
@@ -7,7 +7,9 @@
             let _this = this;
 
             if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
-                _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange)
+                _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange);
+                _this.eventBus.$on(_this.executeQueryEvent, _this.executeQuery);
+
             }
         },
 
@@ -24,10 +26,15 @@
             return {
                 collection: null,
                 eventBus: EventBus,
+                executeQueryEvent: 'executeQuery',
                 gridItemsInRow: 3,
                 gridView: gridView,
                 listView: gridView,
                 listViewChangeEvent: 'listViewChange',
+                query: {
+                    outFields: ArcModelClass.queryOutfieldsSelectAll(),
+                    where: ArcModelClass.queryWhereSelectAll()
+                },
                 tableView: tableView
             }
         },
@@ -48,6 +55,11 @@
                 let _this = this;
 
                 // handle query result and fetch data from ArcModel
+            },
+            async executeQuery(query) {
+                let _this = this;
+
+                console.log(query);
             },
             handleListViewChange(type) {
                 let _this = this;

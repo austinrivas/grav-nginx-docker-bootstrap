@@ -35,6 +35,8 @@
 {% set gridListViewChangeHandler = "showGridListViewHandler" %}
 {% set isListComputed = 'isTableListViewActive' %}
 {% set isGridComputed = 'isGridListViewActive' %}
+{% set executeQueryHandler = 'executeQueryHandler' %}
+{% set showApplyButton = 'showApplyButton' %}
 
 <div class="property-filter">
     <div class="columns">
@@ -69,7 +71,12 @@
             </select-filter>
         </div>
         <div class="column is-1">
-            {% include buttonTemplate with { class: buttonClassGold, content: buttonFilterApplyLabel } only %}
+            {% include buttonTemplate with {
+                class: buttonClassGold,
+                content: buttonFilterApplyLabel,
+                vueIf: showApplyButton,
+                vueClick: executeQueryHandler
+            } only %}
         </div>
         <div class="column is-3">
             {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } only %}
