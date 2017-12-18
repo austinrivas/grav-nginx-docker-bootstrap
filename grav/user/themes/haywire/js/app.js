@@ -26,6 +26,7 @@ import Navbar from './components/Navbar.vue';
 import PropertyAggregate from './components/PropertyAggregate.vue';
 import PropertyFilter from './components/PropertyFilter.vue';
 import PropertyList from './components/PropertyList.vue';
+import PropertyListTable from './components/PropertyListTable.vue';
 import RangeSlider from './components/RangeSlider.vue';
 import SelectFilter from './components/SelectFilter.vue';
 
@@ -38,6 +39,7 @@ Vue.component('navbar', Navbar);
 Vue.component('property-aggregate', PropertyAggregate);
 Vue.component('property-filter', PropertyFilter);
 Vue.component('property-list', PropertyList);
+Vue.component('property-list-table', PropertyListTable);
 Vue.component('range-slider', RangeSlider);
 Vue.component('select-filter', SelectFilter);
 Vue.component('articles', Articles);
