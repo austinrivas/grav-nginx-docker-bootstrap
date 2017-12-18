@@ -27,6 +27,7 @@ composer --version
 echo "=================== Dependencies ==================="
 cd grav/
 bin/grav install
+composer install
 
 echo "====================== Build ======================="
 cd ../theme
