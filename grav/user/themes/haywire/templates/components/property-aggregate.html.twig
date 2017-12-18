@@ -4,8 +4,19 @@
 {% set propertyListTableTemplate = 'components/property-list-table.html.twig' %}
 <property-aggregate inline-template>
     <div class="property-aggregate-container">
-        {% include filterTemplate with {} only %}
-        {% include arcMapTemplate with {} only %}
+        <property-filter
+            :event-bus="eventBus"
+            :execute-query-event="executeQueryEvent"
+            :grid-view="gridView"
+            :list-view-change-event="listViewChangeEvent"
+            :list-view="listView"
+            :table-view="tableView"
+            inline-template>
+            {% include filterTemplate with {} only %}
+        </property-filter>
+        <arcmap :collection="collection" inline-template>
+            {% include arcMapTemplate with {} only %}
+        </arcmap>
         <property-list v-if="showGrid" :properties="collection" :items-in-row="gridItemsInRow" inline-template>
             {% include propertyListTemplate with {} only %}
         </property-list>
