@@ -1,12 +1,19 @@
 <script>
     export default {
         props: ['properties', 'itemsInRow'],
-        mounted() {},
+
+        async mounted() {
+            let _this = this;
+
+            _this.rows = await _this.createRows(_this.properties);
+        },
+
         data() {
             return {
                 rows: []
             }
         },
+
         watch: {
             async properties() {
                 let _this = this;
@@ -16,35 +23,42 @@
                 }
             }
         },
+
         methods: {
             async createRows(collection) {
-                let _this = this,
-                    rows = await collection.reduce((rows, model) => {
+                let _this = this;
 
-                    let currentRow = rows && rows.length > 0 ? rows[rows.length - 1] : [];
+                if (collection && collection.length) {
 
-                    if (currentRow.length === _this.itemsInRow) {
-                        let newRow = [];
-                        newRow.push(model);
-                        rows.push(newRow)
-                    } else {
-                        currentRow.push(model);
-                        if (rows.length > 0) {
-                            rows[rows.length - 1] = currentRow;
+                    let rows = await collection.reduce((rows, model) => {
+
+                        let currentRow = rows && rows.length > 0 ? rows[rows.length - 1] : [];
+
+                        if (currentRow.length === _this.itemsInRow) {
+                            let newRow = [];
+                            newRow.push(model);
+                            rows.push(newRow)
                         } else {
-                            rows.push(currentRow);
+                            currentRow.push(model);
+                            if (rows.length > 0) {
+                                rows[rows.length - 1] = currentRow;
+                            } else {
+                                rows.push(currentRow);
+                            }
                         }
-                    }
 
-                    return rows;
-                }, []);
+                        return rows;
+                    }, []);
 
-                return await _this.fillLastRow(rows);
+                    return await _this.fillLastRow(rows);
+                } else {
+                    return [];
+                }
             },
             async fillLastRow(rows) {
                 let _this = this;
 
-                if (rows &&rows.length > 0) {
+                if (rows && rows.length > 0) {
                     let lastRow = rows[rows.length - 1];
 
                     let remainder = lastRow.length % _this.itemsInRow;

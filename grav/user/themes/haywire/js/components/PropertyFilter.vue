@@ -1,17 +1,23 @@
 <script>
     import _filter from 'lodash/filter';
     import _includes from 'lodash/includes';
-    import EventBus from '../event-handlers/event-bus';
     import PROPERTY_FIELDS from '../models/propertyFields';
     import PROPERTY_LABELS from '../models/propertyLabels';
 
     export default {
+        props: [
+            'eventBus',
+            'executeQueryEvent',
+            'gridView',
+            'listViewChangeEvent',
+            'listView',
+            'tableView'
+        ],
 
         created() {
             let _this = this;
 
-            if (EventBus && EventBus.$on && EventBus.$emit) {
-                _this.eventBus = EventBus;
+            if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
                 _this.eventBus.$on(_this.filterChangeEvent, _this.filterChangeHandler);
                 _this.eventBus.$on(_this.filterValueChangeEvent, _this.filterValueChangeHandler);
                 _this.eventBus.$on(_this.rangeSliderChangeEvent, _this.rangeSliderChangeHandler);
@@ -36,7 +42,6 @@
             return {
                 defaultUnselectedValue: defaultUnselectedValue,
                 enumerableFilterFields: [],
-                eventBus: null,
                 filterChangeEvent: 'filterChanged',
                 filterValueChangeEvent: 'filterValueChanged',
                 filterFields: [],
@@ -67,6 +72,29 @@
         },
 
         computed: {
+            isGridListViewActive() {
+                let _this = this;
+
+                return _this.listView === _this.gridView;
+            },
+            isTableListViewActive() {
+                let _this = this;
+
+                return _this.listView === _this.tableView;
+            },
+            showApplyButton() {
+                let _this = this;
+
+                if (_this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField)) {
+
+                    return _this.selectedFilterValue !== _this.defaultUnselectedValue;
+
+                } else if (_this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField)) {
+
+                    return _this.rangeSliderValues && _this.rangeSliderValues.length === 2;
+
+                }
+            },
             showSlider() {
                 let _this = this;
                 return _this.rangeSliderMinValue && _this.rangeSliderMaxValue && _this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField);
@@ -83,21 +111,27 @@
                     features = await _this.getDistinctFilterOptions(_this.selectedFilterField);
 
                 if (features && features.length) {
+
                     if (_this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField)) {
+
+                        _this.selectedFilterValue = _this.defaultUnselectedValue;
                         _this.selectedFilterOptions = await _this.getSelectedFilterOptions(features, _this.selectedFilterField);
+
                     } else if (_this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField)) {
+
                         let range = await _this.getSelectedFilterRange(features, _this.selectedFilterField);
 
                         if (range && range.length === 2) {
                             _this.rangeSliderMinValue = range[0];
                             _this.rangeSliderMaxValue = range[1];
+
+                            if (!_this.rangeSliderValues) {
+                                _this.rangeSliderValues = range;
+                            }
                         }
                     }
+
                 }
-            },
-            async selectedFilterValue() {
-                let _this = this;
-                console.log('watch value', _this.selectedFilterValue);
             }
         },
 
@@ -178,6 +212,27 @@
             createFilterLabel(label) {
                 return `Filter by ${label}`
             },
+            executeQueryHandler() {
+                let _this = this,
+                    value = null;
+
+                if (_this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField) && _this.selectedFilterValue !== _this.defaultUnselectedValue) {
+
+                    value = _this.selectedFilterValue;
+
+                } else if (_this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField) && _this.rangeSliderValues && _this.rangeSliderValues.length === 2) {
+
+                    value = _this.rangeSliderValues;
+
+                }
+
+                if (_this.selectedFilterField && value) {
+                    _this.eventBus.$emit(_this.executeQueryEvent, {
+                        field: _this.selectedFilterField,
+                        value: value
+                    });
+                }
+            },
             filterChangeHandler(filter) {
                 let _this = this;
 
@@ -194,6 +249,20 @@
             },
             isFieldOfType(fieldArray, field) {
                 return fieldArray && fieldArray.length && field && field.length && _includes(fieldArray, field);
+            },
+            showTableListViewHandler() {
+                let _this = this;
+
+                if (_this.listView !== _this.tableView) {
+                    _this.eventBus.$emit(_this.listViewChangeEvent, _this.tableView);
+                }
+            },
+            showGridListViewHandler() {
+                let _this = this;
+
+                if (_this.listView !== _this.gridView) {
+                    _this.eventBus.$emit(_this.listViewChangeEvent, _this.gridView);
+                }
             },
             rangeSliderChangeHandler(value) {
                 let _this = this;

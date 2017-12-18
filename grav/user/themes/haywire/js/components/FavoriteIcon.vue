@@ -15,34 +15,40 @@
                 return this.favorite;
             },
             loaded: function () {
-                return !!this.id;
+                let _this = this;
+
+                return !!_this.id;
             }
         },
 
         watch: {
             async id() {
-                this.favorite = !this.toggling && await FavoriteProperties.exists(this.id);
+                let _this = this;
+
+                _this.favorite = !_this.toggling && await FavoriteProperties.exists(_this.id);
             }
         },
 
         methods: {
             async toggleFavorite(e) {
 
+                let _this = this;
+
                 e.preventDefault();
 
-                if (!this.toggling && this.id) {
+                if (!_this.toggling && _this.id) {
 
-                    this.toggling = true;
+                    _this.toggling = true;
 
-                    const model = {id: this.id};
+                    const model = {id: _this.id};
 
-                    if (this.isFavorite) {
-                        this.favorite = !(await FavoriteProperties.remove(model) === true);
+                    if (_this.isFavorite) {
+                        _this.favorite = !(await FavoriteProperties.remove(model) === true);
                     } else {
-                        this.favorite = await FavoriteProperties.add(model) === true;
+                        _this.favorite = await FavoriteProperties.add(model) === true;
                     }
 
-                    this.toggling = false;
+                    _this.toggling = false;
                 }
             }
         }
