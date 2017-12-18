@@ -3,6 +3,10 @@
     import * as EsriLoader from 'esri-loader'
     // the ArcModelClass that defines the static query methods
     import ArcModelClass from '../models/arcModel'
+    // the property field definitions for the arcgis feature layer
+    import PROPERTY_FIELDS from '../models/propertyFields';
+    // the model definition for a arc gis property feature
+    import PropertyModel from '../models/propertyModel';
     // a pile of js that I had to write in order to retarget scroll events away from the map and back to the dom
     import RetargetMouseScroll from '../event-handlers/retarget-mouse-scroll'
 
@@ -99,49 +103,12 @@
         },
 
         methods: {
-            addModelToMap(model) {
-                let _this = this,
-                    gr = _this.createMarker(model);
-
-                _this.extent = _this.getMapExtent(model, _this.extent);
-
-                _this.graphics.push({graphic: gr});
-                _this.mapView.graphics.add(gr);
-            },
-            createMarker(model) {
-                let _this = this,
-                    markerColor = [200, 25, 25, 0.8],
-                    markerOutlineWidth = "0.5px",
-                    markerPath = "M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z",
-                    markerSize = "24px";
-
-                return new _this.Graphic({
-                    geometry: new _this.Point({
-                        longitude: model.centroid.longitude,
-                        latitude: model.centroid.latitude
-                    }),
-                    symbol: new _this.SimpleMarkerSymbol({
-                        path: markerPath,
-                        size: markerSize,
-                        color: markerColor,
-                        outline: {
-                            color: markerColor,
-                            width: markerOutlineWidth
-                        }
-                    }),
-                    layer: _this.featureLayer,
-                    popupTemplate: {
-                        title: model.address,
-                        content: _this.createMarkerContent(model)
-                    }
-                })
-            },
-            createMarkerContent(model) {
+            async createMarkerContent(model) {
                 let _this = this,
                     tooltipContainer = _this.parseHTML(`<div class="arcmap-tooltip-container"></div>`),
                     content = [];
 
-                content.push(`<img src="${model.imageUrl}" />`);
+                if (model.imageUrl) { content.push(`<img src="${model.imageUrl}" />`); }
                 content.push(`<p>${model.address}</p>`);
                 content.push(`<p>${model.subdivision}</p>`);
                 content.push(`<p>${_this.$options.filters.currency(model.totalPrice)}</p>`);
@@ -157,6 +124,61 @@
                     return accumulator;
                 }, tooltipContainer);
             },
+            // an iterator function that takes a model and adds it to the arc map
+            addModelToMap(model) {
+                let _this = this,
+                    // create an svg graphic marker from the model
+                    graphic = _this.createMarker(model);
+                // add the graphic marker to the graphics array
+                _this.graphics.push({graphic: graphic});
+                // add the graphic to the map view
+                _this.mapView.graphics.add(graphic);
+                // update the extent of the map with the new model
+                _this.extent = _this.getMapExtent(model, _this.extent);
+            },
+            createMarker(model) {
+                let _this = this,
+                    // marker rgba color value
+                    markerColor = [200, 25, 25, 0.8],
+                    // marker outline width
+                    markerOutlineWidth = "0.5px",
+                    // marker svg path
+                    markerPath = "M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z",
+                    // marker size
+                    markerSize = "24px",
+                    // function for generating the marker tooltip
+                    tooltipContent = async function () {
+                        // locally scope context of function to the current execution context
+                        return await _this.createMarkerContent(model);
+                    };
+
+                // create a new graphic element
+                return new _this.Graphic({
+                    // position the marker at the centroid of the model geometry
+                    geometry: new _this.Point({
+                        longitude: model.centroid.longitude,
+                        latitude: model.centroid.latitude
+                    }),
+                    // create the marker symbol
+                    symbol: new _this.SimpleMarkerSymbol({
+                        path: markerPath,
+                        size: markerSize,
+                        color: markerColor,
+                        outline: {
+                            color: markerColor,
+                            width: markerOutlineWidth
+                        }
+                    }),
+                    // define the feature layer the marker exists in
+                    layer: _this.featureLayer,
+                    // define the tooltip for the marker
+                    popupTemplate: {
+                        title: model.address,
+                        content: tooltipContent
+                    }
+                })
+            },
+            // returns an empty map extent
             getInitialExtent() {
                 return {
                     xmin: null,
@@ -165,11 +187,13 @@
                     ymax: null
                 };
             },
+            // parses a string into a dom element
             parseHTML: function (htmlString) {
                 const contentType = 'text/html';
 
                 return new DOMParser().parseFromString(htmlString, contentType).documentElement;
             },
+            // removes all graphic markers from a mapview
             removeAllMarkers(graphics, mapView) {
                 if (graphics && graphics.length && mapView && mapView.graphics && mapView.graphics.length) {
                     for (let i = graphics.length - 1; i >= 0; i--) {
@@ -179,11 +203,11 @@
 
                 return [];
             },
+            // used to stop scroll event propagation on the esri map
             stopPropagation(e) {
-                if (e && e.stopPropagation) {
-                    e.stopPropagation();
-                }
+                if (e && e.stopPropagation) { e.stopPropagation(); }
             },
+            // updates an extent with a new model
             getMapExtent(model, extent) {
                 return {
                     xmin: !extent.xmin || model.centroid.longitude < extent.xmin ? model.centroid.longitude : extent.xmin,
