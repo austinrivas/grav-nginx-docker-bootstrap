@@ -1,11 +1,18 @@
 <script>
     export default {
-        props: ['properties', 'itemsInRow'],
+        props: [
+            'itemsInRow',
+            'collection'
+        ],
 
         async mounted() {
             let _this = this;
 
-            _this.rows = await _this.createRows(_this.properties);
+            if (_this.collection && _this.collection.length) {
+                _this.rows = await _this.createRows(_this.collection);
+            }
+
+            _this.rowLength = _this.itemsInRow || 3;
         },
 
         data() {
@@ -15,11 +22,11 @@
         },
 
         watch: {
-            async properties() {
+            async collection() {
                 let _this = this;
 
-                if (_this.properties && _this.properties.length) {
-                    _this.rows = await _this.createRows(_this.properties);
+                if (_this.collection && _this.collection.length) {
+                    _this.rows = await _this.createRows(_this.collection);
                 }
             }
         },
@@ -29,17 +36,18 @@
                 let _this = this;
 
                 if (collection && collection.length) {
-
                     let rows = await collection.reduce((rows, model) => {
 
                         let currentRow = rows && rows.length > 0 ? rows[rows.length - 1] : [];
 
-                        if (currentRow.length === _this.itemsInRow) {
+                        if (currentRow.length === _this.rowLength) {
                             let newRow = [];
+
                             newRow.push(model);
                             rows.push(newRow)
                         } else {
                             currentRow.push(model);
+
                             if (rows.length > 0) {
                                 rows[rows.length - 1] = currentRow;
                             } else {
@@ -59,12 +67,11 @@
                 let _this = this;
 
                 if (rows && rows.length > 0) {
-                    let lastRow = rows[rows.length - 1];
-
-                    let remainder = lastRow.length % _this.itemsInRow;
+                    let lastRow = rows[rows.length - 1],
+                        remainder = lastRow.length % _this.rowLength;
 
                     if (remainder !== 0) {
-                        for (let i = 0; i < _this.itemsInRow - remainder; i++) {
+                        for (let i = 0; i < _this.rowLength - remainder; i++) {
                             lastRow.push(null);
                         }
                     }
