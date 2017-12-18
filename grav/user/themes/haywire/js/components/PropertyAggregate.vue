@@ -67,6 +67,7 @@
                             if (query.value.length === 2 && query.value[0] && query.value[1]) {
                                 _this.collection = await Properties.findPropertiesByAcreageRange(query.value[0], query.value[1]);
                             }
+                            break;
                         case PROPERTY_FIELDS.subdivision:
                             _this.collection = await Properties.findPropertiesBySubdivision(query.value);
                             break;
