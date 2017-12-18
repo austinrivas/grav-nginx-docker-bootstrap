@@ -1,15 +1,18 @@
 <script>
     // import the event bus to be shared between the child components of this page state
     import EventBus from '../event-handlers/event-bus'
+
     // a reusable component that maintains the page state via url params
     export default {
-        props: [],
-
         // runs when component is declared in memory
         async created() {
             let _this = this;
             // set the value of urlParams to be the result or parsing the url
             _this.urlParams = await _this.getUrlParams(window.location.search);
+            // duck type the eventBus before binding events to it
+            if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
+                _this.eventBus.$on(_this.updateUrlParamsEvent, _this.handleUpdateUrlParams);
+            }
         },
 
         // runs when component is attached to DOM
@@ -19,7 +22,8 @@
         data() {
             return {
                 eventBus: EventBus, // shared event bus
-                urlParams: {} // initial url param state
+                updateUrlParamsEvent: 'updateUrlParams', // named update url params event
+                urlParams: {} // initial url param state,
             }
         },
 
@@ -45,10 +49,61 @@
                         // reduce the resulting array of keys into a key value map
                         .reduce((params, hash) => {
                             let [key, value] = hash.split(valueSeparator);
-                            params[key] = decodeURIComponent(value);
+                            params[key] = window.decodeURIComponent(value);
                             return params;
                         }, initialParams);
                 } else return initialParams;
+            },
+            // event handler for updateUrlParams event
+            handleUpdateUrlParams(params) {
+                let _this = this;
+                // if params are defined
+                if (params) {
+                    // reduce the params into a urlParams map of key value pairs
+                    _this.urlParams = Object.keys(params).reduce((urlParams, key) => {
+                        urlParams[key] = params[key];
+                        return urlParams;
+                    }, _this.urlParams);
+                    // reduce the current url into a mapped state of the query params and replace the current url state in history
+                    window.history.replaceState({}, null, Object.keys(_this.urlParams).reduce((accumulator, key) => {
+                        return _this.updateQueryString(key, _this.urlParams[key], accumulator);
+                    }, window.location.href));
+                }
+            },
+            // function that takes a key value pair and creates a url from an existing url that includes the serialized key value pair as query params
+            updateQueryString(key, value, url) {
+                // create a param'd regex for query params
+                let re = new RegExp("([?&])" + key + "=.*?(&|#|$)(.*)", "gi"),
+                    hash;
+
+                if (re.test(url)) {
+                    // if the value to be added is not undefined or null add it ot the url
+                    if (typeof value !== 'undefined' && value !== null) {
+                        return url.replace(re, '$1' + key + "=" + value + '$2$3');
+                    // else remove the null param from the url
+                    } else {
+                        hash = url.split('#');
+                        url = hash[0].replace(re, '$1$3').replace(/(&|\?)$/, '');
+                        if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
+                            url += '#' + hash[1];
+                        }
+                        return url;
+                    }
+                } else {
+                    // if the value to be added is not undefined or null add it to the url
+                    if (typeof value !== 'undefined' && value !== null) {
+                        let separator = url.indexOf('?') !== -1 ? '&' : '?';
+                        hash = url.split('#');
+                        url = hash[0] + separator + key + '=' + value;
+                        if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
+                            url += '#' + hash[1];
+                        }
+                        return url;
+                    // return the unchanged url
+                    } else {
+                        return url;
+                    }
+                }
             }
         }
     }
