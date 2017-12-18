@@ -2,14 +2,14 @@
     export default {
         props: [
             'itemsInRow',
-            'properties'
+            'collection'
         ],
 
         async mounted() {
             let _this = this;
 
-            if (_this.properties && _this.properties.length) {
-                _this.rows = await _this.createRows(_this.properties);
+            if (_this.collection && _this.collection.length) {
+                _this.rows = await _this.createRows(_this.collection);
             }
 
             _this.rowLength = _this.itemsInRow || 3;
@@ -22,11 +22,11 @@
         },
 
         watch: {
-            async properties() {
+            async collection() {
                 let _this = this;
 
-                if (_this.properties && _this.properties.length) {
-                    _this.rows = await _this.createRows(_this.properties);
+                if (_this.collection && _this.collection.length) {
+                    _this.rows = await _this.createRows(_this.collection);
                 }
             }
         },

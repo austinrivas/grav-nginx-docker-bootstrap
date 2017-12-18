@@ -17,10 +17,15 @@
         <arcmap :collection="collection" inline-template>
             {% include arcMapTemplate with {} only %}
         </arcmap>
-        <property-list v-if="showGrid" :properties="collection" :items-in-row="gridItemsInRow" inline-template>
+        <property-list-grid v-if="showGrid"
+                       :collection="collection"
+                       :items-in-row="gridItemsInRow"
+                       inline-template>
             {% include propertyListTemplate with {} only %}
-        </property-list>
-        <property-list-table v-if="showTable" :collection="collection" inline-template>
+        </property-list-grid>
+        <property-list-table v-if="showTable"
+                             :collection="collection"
+                             inline-template>
             {% include propertyListTableTemplate with {} only %}
         </property-list-table>
     </div>
