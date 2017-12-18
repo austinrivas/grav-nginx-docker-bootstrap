@@ -9,16 +9,10 @@
 
 
 <div class="field has-addons inline-form">
-      <div class="columns is-gapless">
-            <div class="column">
-                  <div class="control">
-                        {% include inputTemplate with { inputType: 'text', class: inputClass, validationClass: validationDanger, placeholder: 'enter email' } only %}
-                  </div>
-            </div>
-            <div class="column">
-                  <div class="control">
-                        {% include buttonTemplate with { content: 'Submit', class: buttonClass, type: 'submit'  } only %}
-                  </div>
-            </div>
+      <div class="control">
+            {% include inputTemplate with { inputType: 'text', class: inputClass, validationClass: validationDanger, placeholder: 'enter email' } only %}
+      </div>
+      <div class="control">
+            {% include buttonTemplate with { content: 'Submit', class: buttonClass, type: 'submit'  } only %}
       </div>
 </div>
