@@ -1,0 +1,12 @@
+{% set propertyTileTemplate = 'components/property-tile.html.twig' %}
+
+<div class="property-list-container">
+    <div class="columns is-variable is-9" v-for="row in rows">
+        <div class="column card" v-for="model in row">
+            <property-tile v-if="model" :model="model" inline-template>
+                {% include propertyTileTemplate with {} only %}
+            </property-tile>
+        </div>
+    </div>
+</div>
+

@@ -19,7 +19,7 @@ import EventBus from './event-handlers/event-bus';
 // Vue Components
 import ArcMap from './components/ArcMap.vue';
 import FavoriteIcon from './components/FavoriteIcon.vue';
-import FeaturedProject from './components/FeaturedProject.vue';
+import PropertyTile from './components/PropertyTile.vue';
 import FeaturedProjects from './components/FeaturedProjects.vue';
 import Navbar from './components/Navbar.vue';
 import PropertyAggregate from './components/PropertyAggregate.vue';
@@ -32,7 +32,7 @@ import SelectFilter from './components/SelectFilter.vue';
 // Vue Component declaration
 Vue.component('arcmap', ArcMap);
 Vue.component('favorite-icon', FavoriteIcon);
-Vue.component('featured-project', FeaturedProject);
+Vue.component('property-tile', PropertyTile);
 Vue.component('featured-projects', FeaturedProjects);
 Vue.component('navbar', Navbar);
 Vue.component('property-aggregate', PropertyAggregate);

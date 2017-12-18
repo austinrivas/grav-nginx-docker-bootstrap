@@ -1,17 +1,12 @@
 {# Templates #}
 {% set buttonTemplate = 'partials/elements/button.html.twig' %}
-{% set featuredProjectTemplate = 'partials/featured-project.html.twig' %}
+{% set propertyTileTemplate = 'components/property-tile.html.twig' %}
 
 {# Labels #}
 {% set buttonLabel = 'View All Properties' %}
 
 {# Classes #}
 {% set buttonClass = 'is-primary' %}
-
-{# Vars #}
-{% set propTitle = 'Name of property goes here - Lot 10 $1,300,000' %}
-{% set propSubTitle = 'FPO: Text callout development site' %}
-{% set propDetails = '5 Acres | Raw Land | For Sale | $15 PS' %}
 
 {# Routes #}
 {% set mapUrl = '/map' %}
@@ -26,21 +21,27 @@
             <div class="columns is-variable is-9">
 
                 <div class="column card">
-                    <featured-project :model="first" inline-template>
-                        {% include featuredProjectTemplate only %}
-                    </featured-project>
+                    <property-tile
+                        :model="first"
+                        inline-template>
+                        {% include propertyTileTemplate with {} only %}
+                    </property-tile>
                 </div>
 
                 <div class="column card">
-                    <featured-project :model="second" inline-template>
-                        {% include featuredProjectTemplate only %}
-                    </featured-project>
+                    <property-tile
+                        :model="second"
+                        inline-template>
+                        {% include propertyTileTemplate with {} only %}
+                    </property-tile>
                 </div>
 
                 <div class="column card">
-                    <featured-project :model="third" inline-template>
-                        {% include featuredProjectTemplate only %}
-                    </featured-project>
+                    <property-tile
+                        :model="third"
+                        inline-template>
+                        {% include propertyTileTemplate with {} only %}
+                    </property-tile>
                 </div>
 
             </div>
