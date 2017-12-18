@@ -1,16 +1,19 @@
 .inline-form
-    max-width: 460px
+    max-width: 450px
     margin: 2rem auto
     @include break-max($tablet)
-        max-width: 345px
+        max-width: 100%
+        .columns
+            width: 100%
     input
         height: 60px
         min-width: 300px
         @include break-max($tablet)
             height: 45px
             min-width: 185px
-    .button.is-primary
+    .button
         margin: 0
         width: 160px
-        color: $black
-        @extend .is-bg-blue-tiffany
+        @include break-max($tablet)
+            width: 200px
+            margin: .5em auto 0 !important

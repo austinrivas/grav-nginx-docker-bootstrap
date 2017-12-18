@@ -1,10 +1,13 @@
-<!-- Templates -->
+{# Templates #}
 {% set iconTemplate = 'partials/svg-icon.html.twig' %}
 {% set formTemplate = 'partials/forms/inline-form.html.twig' %}
 
 
-<!-- Classes -->
+{# Classes #}
 {% set iconLogoId = 'icon__logo--footer' %}
+
+{# Labels #}
+{% set formSuccess = 'Thank You!' %}
 
 <footer class="footer lwrc-footer">
     <div class="container">
@@ -15,10 +18,11 @@
             <form action="" method="">
                 {% include formTemplate only %}
             </form>
+            <h3 class="form-success">{{ formSuccess }}</h3>
             <ul>
-                <li><a href="#">Press</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
+                <li><a href="/press">Press</a></li>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/terms-of-service">Terms of Service</a></li>
             </ul>
             <p class="is-size-12">
                 &copy; 2017 Lakewood Ranch Commercial

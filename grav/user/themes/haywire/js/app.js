@@ -18,13 +18,14 @@ import EventBus from './event-handlers/event-bus';
 
 // Vue Components
 import ArcMap from './components/ArcMap.vue';
+import Articles from './components/Articles.vue';
 import FavoriteIcon from './components/FavoriteIcon.vue';
-import FeaturedProject from './components/FeaturedProject.vue';
+import PropertyTile from './components/PropertyTile.vue';
 import FeaturedProjects from './components/FeaturedProjects.vue';
 import Navbar from './components/Navbar.vue';
 import PropertyAggregate from './components/PropertyAggregate.vue';
 import PropertyFilter from './components/PropertyFilter.vue';
-import PropertyList from './components/PropertyList.vue';
+import PropertyListGrid from './components/PropertyListGrid.vue';
 import PropertyListTable from './components/PropertyListTable.vue';
 import RangeSlider from './components/RangeSlider.vue';
 import SelectFilter from './components/SelectFilter.vue';
@@ -32,15 +33,16 @@ import SelectFilter from './components/SelectFilter.vue';
 // Vue Component declaration
 Vue.component('arcmap', ArcMap);
 Vue.component('favorite-icon', FavoriteIcon);
-Vue.component('featured-project', FeaturedProject);
+Vue.component('property-tile', PropertyTile);
 Vue.component('featured-projects', FeaturedProjects);
 Vue.component('navbar', Navbar);
 Vue.component('property-aggregate', PropertyAggregate);
 Vue.component('property-filter', PropertyFilter);
-Vue.component('property-list', PropertyList);
+Vue.component('property-list-grid', PropertyListGrid);
 Vue.component('property-list-table', PropertyListTable);
 Vue.component('range-slider', RangeSlider);
 Vue.component('select-filter', SelectFilter);
+Vue.component('articles', Articles);
 
 /**
  * Load all of this project's JavaScript dependencies including Vue
