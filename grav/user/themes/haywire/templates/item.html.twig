@@ -2,25 +2,104 @@
 
 {% block content %}
 
-    <div class="columns">
-        <div class="column is-8 is-offset-2">
+    <section class="press lwrc {{ page.header.classes }}">
 
-            <div class="columns is-multiline post">
-                <div class="column is-2 is-4-mobile">
-                    <img class="image is-rounded" src="{{ page.url }}/{{ page.header.featured_image }}">
+        <div class="press-body">
+
+            <div class="press-heading columns is-mobile is-multiline">
+
+                <div class="column is-full press-title">
+                    <h1 class="type__media-tile--heading-featured is-uppercase">Press</h1>
                 </div>
 
-                <div class="column is-12">
-                    <h1 class="title">
-                        {{ page.title }}
-                    </h1>
-                    <div class="content">
-                        {{ page.content }}
-                        <small class="is-size-7">Published {{ page.header.publish_date }}</small>
-                    </div>
-                </div>
             </div>
-        </div>
-    </div>
 
+
+            <article id="article-content" class="container">
+
+                <header class="columns">
+
+                    <div class="column is-10">
+
+                        <time pubdate datetime="{{ page.header.publish_date|date('Y-m-d H:i') }}" title="{{ page.header.publish_date|date('F j, Y') }}" class="is-proxima-nova-regular">{{ page.header.publish_date|date('F j, Y') }}</time>
+
+                        <h1>{{ page.title }}</h1>
+                        <address class="author">
+                            {% if page.header.metadata.author and page.header.metadata.author_link %}
+                                <a href="{{ page.header.metadata.author_link }}">{{ page.header.metadata.author }}</a>
+                            {% endif %}
+
+                            {% if page.header.metadata.author and not page.header.metadata.author_link %}
+                                <span>{{ page.header.metadata.author }}</span>
+                            {% endif %}
+
+                            {% if page.header.metadata.publication_source %}
+                                <span class="divider">&bull;</span><a class="publication-source" href="{{ page.header.metadata.publication_source }}">{{ page.header.metadata.publication_source }}</a>
+                            {% endif %}
+                        </address>
+
+                    </div>
+
+                    <div class="column is-2 share-icons">
+
+                        {% include 'partials/share-block.html.twig' %}
+
+                    </div>
+
+                </header>
+
+                {% if page.header.featured_image %}
+                    <a class="featured-photo" href="#" style="background-image: url({{ page.media[page.header.featured_image].url }})"></a>
+                {% endif %}
+
+                <div class="content">
+                    {{ page.content }}
+                </div>
+
+                {% if page.header.taxonomy.tags|length > 0 %}
+                    <footer>
+
+                        <p class="is-uppercase">Tags:</p>
+
+                        <ul>
+                            {% for tag in page.header.taxonomy.tags %}
+                                <li><a href="/press/tag:{{ tag }}">{{ tag }}</a></li>
+                            {% endfor %}
+                        </ul>
+
+                    </footer>
+                {% endif %}
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <section class="press related lwrc">
+
+        <div class="press-body">
+
+            <div class="container">
+
+                <h2 class="is-proxima-nova-bold type__data-section--heading is-uppercase">Related Articles</h2>
+
+                <div class="article-grid columns is-multiline">
+                    {% for related_path, score in related_pages %}
+                        {% set post = grav['pages'].get(related_path) %}
+                        {% if post %}
+                            {% include 'partials/article.html.twig' with {'loop': loop, 'post': post} %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    {% for m in page.find('/press').collection('modules') if m.template == 'modular/contact-cta' %}
+        {{ m.content }}
+    {% endfor %}
 {% endblock %}

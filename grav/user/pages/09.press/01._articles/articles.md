@@ -8,7 +8,7 @@ content:
         - '@page.children': '/press'
     order:
         by: basename
-        dir: asc
+        dir: desc
 
 modules:
     items: '@self.modular'

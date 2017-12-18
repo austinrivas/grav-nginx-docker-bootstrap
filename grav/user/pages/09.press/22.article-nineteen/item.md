@@ -2,8 +2,16 @@
 title: 'Article Number Nineteen'
 published: true
 publish_date: '08-12-2017 17:30'
+metadata:
+    author: 'Justin Workman'
+    author_link: 'https://google.com'
+    publication_source: 'https://google.com?q=asdf'
 taxonomy:
     category: Resources
+    tags:
+        - Nineteen
+        - Articles
+        - 'Lakewood Ranch Commercial'
 ---
 
 What is Lorem Ipsum?

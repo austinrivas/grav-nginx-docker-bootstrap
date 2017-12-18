@@ -18,6 +18,7 @@ import EventBus from './event-handlers/event-bus';
 
 // Vue Components
 import ArcMap from './components/ArcMap.vue';
+import Articles from './components/Articles.vue';
 import FavoriteIcon from './components/FavoriteIcon.vue';
 import FeaturedProject from './components/FeaturedProject.vue';
 import FeaturedProjects from './components/FeaturedProjects.vue';
@@ -41,6 +42,7 @@ Vue.component('property-list', PropertyList);
 Vue.component('property-list-table', PropertyListTable);
 Vue.component('range-slider', RangeSlider);
 Vue.component('select-filter', SelectFilter);
+Vue.component('articles', Articles);
 
 /**
  * Load all of this project's JavaScript dependencies including Vue
