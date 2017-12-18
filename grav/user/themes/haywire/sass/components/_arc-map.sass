@@ -8,3 +8,31 @@
         width: 100%
         .esri-attribution
             display: none
+    .esri-view-width-xlarge .esri-popup__main-container
+        width: 640px
+        max-height: 203px
+    .esri-popup__position-container
+        border: 2px solid $blue-dark
+        header
+            display: none
+        article
+            padding: 15px
+        p
+            @extend .is-blue-dark
+            @extend .type__property-description--toggle
+            font-size: 13px
+            margin: 0
+            display: flex
+            justify-content: flex-end
+            line-height: 23px
+        .esri-popup-renderer img
+            position: absolute
+            left: 0
+            top: 0
+            height: 203px
+        .esri-popup__feature-buttons
+            position: absolute
+            bottom: 0
+        .esri-popup__button
+            color: $white
+            font-weight: 600
