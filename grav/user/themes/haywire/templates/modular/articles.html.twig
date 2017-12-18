@@ -27,26 +27,7 @@
                 	<div class="article-grid columns is-multiline">
 
                 		{% for post in collection %}
-                		<article class="column {% if loop.first %}is-8{% else %}is-4{% endif %} is-news">
-
-                			<div class="article-container">
-        	        			<a class="article-photo" href="#" style="background-image: url(http://via.placeholder.com/350x350)"></a>
-
-        	        			<div class="article-meta">
-        	        				<time>{{ post.header.publish_date|date('F j, Y') }}</time>
-        	        				
-        	        				<h2 class="type__media-tile--heading-featured"><a href="#">{{ post.title }}</a></h2>
-
-        	        				<p>
-        	        					{{ post.content|length > 50 ? post.content|striptags|slice(0, 160) ~ '...' : post.content  }}
-        	        				</p>
-
-        	        				<a class="button is-primary" href="{{ post.url }}">Read More</a>
-
-        	        			</div>
-        	        		</div>
-
-                		</article>
+                		    {% include 'partials/article.html.twig' with {'loop': loop, 'post': post} %}
                 		{% endfor %}
 
                 	</div>
