@@ -9,8 +9,8 @@
             'eventBus',
             'executeQueryEvent',
             'gridView',
-            'listViewChangeEvent',
             'listView',
+            'listViewChangeEvent',
             'tableView'
         ],
 
