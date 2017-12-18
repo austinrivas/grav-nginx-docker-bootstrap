@@ -1,16 +1,22 @@
 <script>
-    // shared event bus import
-    import EventBus from '../event-handlers/event-bus';
     // property field definitions TODO: MOVE INTO CMS
     import PROPERTY_FIELDS from '../models/propertyFields';
 
     // This is a parent component that is responsible for maintaining the state of the map aggregate page
     // it fetches data from the local collections / arc api and feeds the data into the filter / map / list child components
     export default {
+        props: [
+            'parentEventBus', // the shared event bus,
+            'urlParams' // the current page state described as url params
+        ],
 
         // runs when component is declared in memory
         created() {
             let _this = this;
+            // duck type parent event bus before assignment
+            if (_this.parentEventBus && _this.parentEventBus.$on && _this.parentEventBus.$emit) {
+                _this.eventBus = _this.parentEventBus;
+            }
             // duck type the eventBus before binding events to it
             if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
                 _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange);
@@ -19,10 +25,8 @@
         },
 
         // runs when component is attached to DOM
-        async mounted() {
+        mounted() {
             let _this = this;
-            // set initial state of the collection
-            _this.collection = await Properties.findAllProperties();
         },
 
         // provides the data context for the component
@@ -33,8 +37,21 @@
                 tableView = 'table';
             return {
                 collection: null, // initial collection state
-                eventBus: EventBus, // reusable eventBus declaration
+                eventBus: { // mock event bus
+                    $on() {
+                        console.log('No parent event bus defined', _this.parentEventBus);
+                    },
+                    $emit() {
+                        console.log('No parent event bus defined', _this.parentEventBus);
+                    }
+                },
                 executeQueryEvent: 'executeQuery', // named event for triggering query execution from child components
+                filterKeys: [ // the PropertyModel keys being filtered
+                    'acres',
+                    'type',
+                    'status',
+                    'subdivision'
+                ],
                 gridItemsInRow: 3, // default row length for grid list view
                 gridView: gridView, // named grid list view
                 listView: gridView, // default list view
@@ -57,6 +74,20 @@
             showTable() {
                 let _this = this;
                 return _this.listView === _this.tableView;
+            }
+        },
+
+        watch: {
+            async urlParams() {
+                let _this = this;
+                if (_this.urlParams && _this.urlParams.filter && _this.urlParams.value) {
+                    _this.collection = await _this.executeQuery({
+                        field: PROPERTY_FIELDS[_this.urlParams.filter],
+                        value: _this.urlParams.value
+                    });
+                } else {
+                    _this.collection = await Properties.findAllProperties();
+                }
             }
         },
 

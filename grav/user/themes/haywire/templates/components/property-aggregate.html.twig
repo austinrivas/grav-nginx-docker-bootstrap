@@ -2,31 +2,30 @@
 {% set arcMapTemplate = 'components/arcmap.html.twig' %}
 {% set propertyListGridTemplate = 'components/property-list-grid.html.twig' %}
 {% set propertyListTableTemplate = 'components/property-list-table.html.twig' %}
-<property-aggregate inline-template>
-    <div class="property-aggregate-container">
-        <property-filter
-            :execute-query-event="executeQueryEvent"
-            :grid-view="gridView"
-            :list-view-change-event="listViewChangeEvent"
-            :list-view="listView"
-            :parent-event-bus="eventBus"
-            :table-view="tableView"
-            inline-template>
-            {% include filterTemplate with {} only %}
-        </property-filter>
-        <arcmap :collection="collection" inline-template>
-            {% include arcMapTemplate with {} only %}
-        </arcmap>
-        <property-list-grid v-if="showGrid"
-                       :collection="collection"
-                       :items-in-row="gridItemsInRow"
-                       inline-template>
-            {% include propertyListGridTemplate with {} only %}
-        </property-list-grid>
-        <property-list-table v-if="showTable"
-                             :collection="collection"
-                             inline-template>
-            {% include propertyListTableTemplate with {} only %}
-        </property-list-table>
-    </div>
-</property-aggregate>
+<div class="property-aggregate-container">
+    <property-filter
+        :execute-query-event="executeQueryEvent"
+        :grid-view="gridView"
+        :filter-keys="filterKeys"
+        :list-view-change-event="listViewChangeEvent"
+        :list-view="listView"
+        :parent-event-bus="eventBus"
+        :table-view="tableView"
+        inline-template>
+        {% include filterTemplate with {} only %}
+    </property-filter>
+    <arcmap :collection="collection" inline-template>
+        {% include arcMapTemplate with {} only %}
+    </arcmap>
+    <property-list-grid v-if="showGrid"
+                   :collection="collection"
+                   :items-in-row="gridItemsInRow"
+                   inline-template>
+        {% include propertyListGridTemplate with {} only %}
+    </property-list-grid>
+    <property-list-table v-if="showTable"
+                         :collection="collection"
+                         inline-template>
+        {% include propertyListTableTemplate with {} only %}
+    </property-list-table>
+</div>

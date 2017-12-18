@@ -8,7 +8,14 @@
 {% endblock %}
 
 {% block content %}
-    {% include propertyAggregateTemplate with {} only %}
+    <page-state inline-template>
+        <property-aggregate
+            :parent-event-bus="eventBus"
+            :url-params="urlParams"
+            inline-template>
+            {% include propertyAggregateTemplate with {} only %}
+        </property-aggregate>
+    </page-state>
 {% endblock %}
 
 {% block bottom %}

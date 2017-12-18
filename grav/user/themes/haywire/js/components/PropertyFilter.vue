@@ -9,6 +9,7 @@
     export default {
         props: [
             'executeQueryEvent', // named event for executing arc query
+            'filterKeys', // list of filterable keys on the PropertyModel
             'gridView', // named grid view
             'listView', // current list view state
             'listViewChangeEvent', // named event for changing list view
@@ -66,12 +67,6 @@
                 filterChangeEvent: 'filterChanged', // named event for a top level filter change
                 filterValueChangeEvent: 'filterValueChanged', // named event for the value of a filter changing
                 filterFields: [], // initial filter fields
-                filterKeys: [ // the PropertyModel keys being filtered
-                    'subdivision',
-                    'type',
-                    'status',
-                    'acres'
-                ],
                 filterOptions: [], // initial filter options
                 rangeFilterFields: [], // initial range filterable fields
                 rangeSliderChangeEvent: 'rangeSliderChanged', // named event for range slider change
