@@ -1,35 +1,42 @@
 <script>
-    import * as esriLoader from 'esri-loader'
+    // the EsriLoader that is responsible for loading the ESRI map modules
+    import * as EsriLoader from 'esri-loader'
+    // the ArcModelClass that defines the static query methods
     import ArcModelClass from '../models/arcModel'
+    // a pile of js that I had to write in order to retarget scroll events away from the map and back to the dom
     import RetargetMouseScroll from '../event-handlers/retarget-mouse-scroll'
 
     export default {
-        props: ['collection'],
+        props: [
+            'collection' // the collection that is providing the models to render into the map
+        ],
 
+        // runs when component is attached to the DOM
         async mounted() {
             let _this = this;
 
+            // the basemap styles being used in the map TODO: set in CMS
             const basemap = "hybrid",
+                // default options for EsriLoader
                 options = {},
+                // the Esri module dependencies for the map
                 modules = [
-                    "esri/geometry/Extent",
-                    "esri/layers/FeatureLayer",
-                    "esri/Graphic",
-                    "esri/Map",
-                    "esri/views/MapView",
-                    "esri/geometry/Point",
-                    "esri/symbols/SimpleMarkerSymbol"
+                    "esri/geometry/Extent", // set the map extent / zoom on load
+                    "esri/layers/FeatureLayer", // Esri FeatureLayer interactions with the FeatureServer
+                    "esri/Graphic", // Graphic rendering
+                    "esri/Map", // Map rendering
+                    "esri/views/MapView", // MapView for adding features to map
+                    "esri/geometry/Point", // Point rendering
+                    "esri/symbols/SimpleMarkerSymbol" // Symbol rendering
                 ];
-
+            // id of the map container
             _this.mapNodeSelector = "mapNode";
-
-            RetargetMouseScroll({
-                element: document.getElementById(_this.mapNodeSelector)
-            });
-
-            await esriLoader.loadModules(modules, options)
+            // retarget scroll events to the dom instead of the map
+            RetargetMouseScroll({ element: document.getElementById(_this.mapNodeSelector) });
+            // fetch Esri Modules
+            await EsriLoader.loadModules(modules, options)
                 .then(([Extent, FeatureLayer, Graphic, Map, MapView, Point, SimpleMarkerSymbol]) => {
-
+                    // Set the fetched modules to component properties so that Vue methods can access them
                     _this.Extent = Extent;
                     _this.FeatureLayer = FeatureLayer;
                     _this.Graphic = Graphic;
@@ -37,77 +44,61 @@
                     _this.MapView = MapView;
                     _this.Point = Point;
                     _this.SimpleMarkerSymbol = SimpleMarkerSymbol;
-
                 });
-
-            _this.map = new _this.Map({basemap: basemap});
-
+            // initialize the map
+            _this.map = new _this.Map({ basemap: basemap });
+            // set the feature server url
             _this.featureServer.url = ArcModelClass.getArcGISFeatureServerUrl();
-
+            // initialize the feature layer
             _this.featureLayer = new _this.FeatureLayer(_this.featureServer);
-
+            // add the featureLayer to the map
             _this.map.layers.add(_this.featureLayer);
         },
 
         data() {
             return {
-                Extent: null,
-                FeatureLayer: null,
-                Graphic: null,
-                Map: null,
-                MapView: null,
-                Point: null,
-                SimpleMarkerSymbol: null,
-                extent: null,
-                featureLayer: null,
-                featureServer: {url: null},
-                graphics: [],
-                map: null,
-                mapNodeSelector: null,
-                mapView: null
+                Extent: null, // esri module
+                FeatureLayer: null, // esri module
+                Graphic: null, // esri module
+                Map: null, // esri module
+                MapView: null, // esri module
+                Point: null, // esri module
+                SimpleMarkerSymbol: null, // esri module
+                extent: null, // the current map extent / zoom
+                featureLayer: null, // the current featureLayer
+                featureServer: {url: null}, // the featureServer initialization object
+                graphics: [], // the current graphics being rendered
+                map: null, // the current map
+                mapNodeSelector: null, // the id of the map container
+                mapView: null // the current map view
             };
         },
 
         watch: {
+            // watch the collection for changes and rerender the map with the new models
             async collection() {
                 const _this = this,
+                    // named mouse-wheel event
                     mouseWheelEvent = "mouse-wheel";
-
+                // if collection is defined and it contains models
                 if (_this.collection && _this.collection.length) {
-                    _this.extent = {
-                        xmin: null,
-                        ymin: null,
-                        xmax: null,
-                        ymax: null
-                    };
-
+                    // reset the extent
+                    _this.extent = _this.getInitialExtent();
+                    // reset the currently rendered graphics and remove them from the map
                     _this.graphics = _this.removeAllMarkers(_this.graphics, _this.mapView);
-
-                    _this.mapView = new _this.MapView({
-                        container: _this.mapNodeSelector,
-                        map: _this.map,
-                        center: await _this.getMapCenter(_this.collection)
-                    });
-
+                    // initialize a new map view using the current map and container
+                    _this.mapView = new _this.MapView({ container: _this.mapNodeSelector, map: _this.map });
+                    // stop propagation of mouse-wheel events to prevent esri from breaking itself
                     _this.mapView.on(mouseWheelEvent, _this.stopPropagation);
-
+                    // add the collection models to the map
                     await _this.collection.forEach(_this.addModelToMap);
-
+                    // set the new map extent defined during the collection -> addModelToMap loop
                     _this.mapView.extent = _this.extent;
                 }
             }
         },
 
         methods: {
-            async getMapCenter(collection) {
-                const center = await collection.reduce((accumulator, model) => {
-                    accumulator.longitude += model.centroid.longitude;
-                    accumulator.latitude += model.centroid.latitude;
-                    return accumulator;
-                }, {longitude: 0, latitude: 0});
-
-                return [center.longitude / collection.length, center.latitude / collection.length];
-            },
             addModelToMap(model) {
                 let _this = this,
                     gr = _this.createMarker(model);
@@ -165,6 +156,14 @@
                     }
                     return accumulator;
                 }, tooltipContainer);
+            },
+            getInitialExtent() {
+                return {
+                    xmin: null,
+                    ymin: null,
+                    xmax: null,
+                    ymax: null
+                };
             },
             parseHTML: function (htmlString) {
                 const contentType = 'text/html';
