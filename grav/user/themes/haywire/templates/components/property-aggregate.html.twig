@@ -5,11 +5,11 @@
 <property-aggregate inline-template>
     <div class="property-aggregate-container">
         <property-filter
-            :event-bus="eventBus"
             :execute-query-event="executeQueryEvent"
             :grid-view="gridView"
             :list-view-change-event="listViewChangeEvent"
             :list-view="listView"
+            :parent-event-bus="eventBus"
             :table-view="tableView"
             inline-template>
             {% include filterTemplate with {} only %}

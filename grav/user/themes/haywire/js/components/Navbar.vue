@@ -1,4 +1,5 @@
 <script>
+    // reusable nav component that toggles its own open close state
     export default {
 
         data() {
@@ -8,8 +9,10 @@
         },
 
         methods: {
+            // method that toggles the nav active state between true / false
             toggleNav() {
-                !this.navIsActive ? this.navIsActive = true : this.navIsActive = false;
+                let _this = this;
+                _this.navIsActive = !_this.navIsActive;
             }
         }
 
