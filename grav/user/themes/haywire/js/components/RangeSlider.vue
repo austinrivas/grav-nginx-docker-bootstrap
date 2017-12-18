@@ -2,12 +2,12 @@
     export default {
         props: [
             'changeEvent',
-            'parentEventBus',
-            'values',
-            'minValue',
             'maxValue',
+            'minValue',
             'outputFunction',
-            'step'
+            'parentEventBus',
+            'step',
+            'values'
         ],
 
         created() {
@@ -125,7 +125,9 @@
             handleChange(e) {
                 let _this = this;
 
-                _this.eventBus.$emit(_this.changeEvent, _this.sliderValues);
+                if (_this.changeEvent && _this.changeEvent.length) {
+                    _this.eventBus.$emit(_this.changeEvent, _this.sliderValues);
+                }
             }
         }
     }

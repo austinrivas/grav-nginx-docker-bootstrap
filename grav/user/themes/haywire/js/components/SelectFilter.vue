@@ -1,10 +1,10 @@
 <script>
     export default {
         props: [
-            'parentEventBus',
+            'changeEvent',
             'options',
-            'selected',
-            'changeEvent'
+            'parentEventBus',
+            'selected'
         ],
 
         created() {
@@ -40,7 +40,6 @@
         watch: {
             selected() {
                 let _this = this;
-
                 _this.selectedOption = _this.selected;
             }
         },
@@ -49,7 +48,9 @@
             handleSelectChange(e) {
                 let _this = this;
 
-                _this.eventBus.$emit(_this.changeEvent, _this.selectedOption);
+                if (_this.changeEvent && _this.changeEvent.length) {
+                    _this.eventBus.$emit(_this.changeEvent, _this.selectedOption);
+                }
             }
         }
     }

@@ -1,6 +1,6 @@
 {% set filterTemplate =  'components/property-filter.html.twig' %}
 {% set arcMapTemplate = 'components/arcmap.html.twig' %}
-{% set propertyListTemplate = 'components/property-list.html.twig' %}
+{% set propertyListGridTemplate = 'components/property-list-grid.html.twig' %}
 {% set propertyListTableTemplate = 'components/property-list-table.html.twig' %}
 <property-aggregate inline-template>
     <div class="property-aggregate-container">
@@ -17,10 +17,15 @@
         <arcmap :collection="collection" inline-template>
             {% include arcMapTemplate with {} only %}
         </arcmap>
-        <property-list v-if="showGrid" :properties="collection" :items-in-row="gridItemsInRow" inline-template>
-            {% include propertyListTemplate with {} only %}
-        </property-list>
-        <property-list-table v-if="showTable" :collection="collection" inline-template>
+        <property-list-grid v-if="showGrid"
+                       :collection="collection"
+                       :items-in-row="gridItemsInRow"
+                       inline-template>
+            {% include propertyListGridTemplate with {} only %}
+        </property-list-grid>
+        <property-list-table v-if="showTable"
+                             :collection="collection"
+                             inline-template>
             {% include propertyListTableTemplate with {} only %}
         </property-list-table>
     </div>

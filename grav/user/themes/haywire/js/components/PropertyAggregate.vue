@@ -10,7 +10,6 @@
             if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
                 _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange);
                 _this.eventBus.$on(_this.executeQueryEvent, _this.executeQuery);
-
             }
         },
 
@@ -52,15 +51,10 @@
         },
 
         methods: {
-            async handleQueryChange() {
-                let _this = this;
-
-                // handle query result and fetch data from ArcModel
-            },
             async executeQuery(query) {
                 let _this = this;
 
-                if (query.field && query.value) {
+                if (query && query.field && query.value) {
 
                     switch (query.field) {
                         case PROPERTY_FIELDS.acres:
