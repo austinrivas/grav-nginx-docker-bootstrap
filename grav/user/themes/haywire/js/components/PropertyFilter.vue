@@ -8,7 +8,7 @@
 
     export default {
         props: [
-            'executeQueryEvent', // named event for executing arc query
+            'applyFilterEvent', // named event for applying the current filter
             'filterKeys', // list of filterable keys on the PropertyModel
             'gridView', // named grid view
             'listView', // current list view state
@@ -264,7 +264,7 @@
                 // if there is a currently selected field with a valid value
                 if (_this.selectedFilterField && value) {
                     // use the shared event bus to emit a query execution event using the current field and value
-                    _this.eventBus.$emit(_this.executeQueryEvent, {
+                    _this.eventBus.$emit(_this.applyFilterEvent, {
                         field: _this.selectedFilterField,
                         value: value
                     });

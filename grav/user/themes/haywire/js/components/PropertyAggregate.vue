@@ -6,8 +6,8 @@
     // it fetches data from the local collections / arc api and feeds the data into the filter / map / list child components
     export default {
         props: [
-            'parentEventBus', // the shared event bus,
-            'urlParams' // the current page state described as url params
+            'parentEventBus', // the shared event bus
+            'updateUrlParamsEvent' // named event to update the page state url params
         ],
 
         // runs when component is declared in memory
@@ -20,13 +20,14 @@
             // duck type the eventBus before binding events to it
             if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
                 _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange);
-                _this.eventBus.$on(_this.executeQueryEvent, _this.executeQueryHandler);
+                _this.eventBus.$on(_this.applyFilterEvent, _this.handleApplyFilter);
             }
         },
 
         // runs when component is attached to DOM
-        mounted() {
+        async mounted() {
             let _this = this;
+            _this.collection = await _this.executeQuery({});
         },
 
         // provides the data context for the component
@@ -45,7 +46,7 @@
                         console.log('No parent event bus defined', _this.parentEventBus);
                     }
                 },
-                executeQueryEvent: 'executeQuery', // named event for triggering query execution from child components
+                applyFilterEvent: 'applyFilter', // named event for triggering query execution from child components
                 filterKeys: [ // the PropertyModel keys being filtered
                     'acres',
                     'type',
@@ -56,10 +57,6 @@
                 gridView: gridView, // named grid list view
                 listView: gridView, // default list view
                 listViewChangeEvent: 'listViewChange', // named event for triggering list view change
-                query: { // object that maintains the current query state
-                    outFields: ArcModelClass.queryOutfieldsSelectAll(), // default outfields is all fields
-                    where: ArcModelClass.queryWhereSelectAll() // default where clause is all properties
-                },
                 tableView: tableView // named table list view
             }
         },
@@ -77,43 +74,53 @@
             }
         },
 
-        watch: {
-            async urlParams() {
-                let _this = this;
-                if (_this.urlParams && _this.urlParams.filter && _this.urlParams.value) {
-                    _this.collection = await _this.executeQuery({
-                        field: PROPERTY_FIELDS[_this.urlParams.filter],
-                        value: _this.urlParams.value
-                    });
-                } else {
-                    _this.collection = await Properties.findAllProperties();
-                }
-            }
-        },
+        watch: {},
 
         methods: {
             // execute the given query and return the result async
             async executeQuery(query) {
-                let result = [];
+                let _this = this,
+                    result = [];
                 // if the query is defined with a field and value
-                if (query && query.field && query.value) {
+                if (query) {
                     // retrieve the query result by accessing the Properties collection methods for the field
                     switch (query.field) {
                         case PROPERTY_FIELDS.acres:
-                            if (query.value.length === 2 && query.value[0] && query.value[1]) {
+                            if (query.value && query.value.length === 2 && query.value[0] && query.value[1]) {
                                 result = await Properties.findPropertiesByAcreageRange(query.value[0], query.value[1]);
+                                _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                                    filter: 'acres',
+                                    filterValue: query.value
+                                });
                             }
                             break;
                         case PROPERTY_FIELDS.subdivision:
                             result = await Properties.findPropertiesBySubdivision(query.value);
+                            _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                                filter: 'subdivision',
+                                filterValue: query.value
+                            });
                             break;
                         case PROPERTY_FIELDS.status:
                             result = await Properties.findPropertiesByType(query.value);
+                            _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                                filter: 'status',
+                                filterValue: query.value
+                            });
                             break;
                         case PROPERTY_FIELDS.type:
                             result = await Properties.findPropertiesByType(query.value);
+                            _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                                filter: 'type',
+                                filterValue: query.value
+                            });
                             break;
                         default:
+                            result = await Properties.findAllProperties();
+                            _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                                filter: null,
+                                filterValue: null
+                            });
                             break;
                     }
                 }
@@ -121,7 +128,7 @@
                 return result;
             },
             // handle the executeQuery event
-            async executeQueryHandler(query) {
+            async handleApplyFilter(query) {
                 let _this = this;
                 // set the collection property to the result of executing the query
                 _this.collection = await _this.executeQuery(query);

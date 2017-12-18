@@ -4,7 +4,7 @@
 {% set propertyListTableTemplate = 'components/property-list-table.html.twig' %}
 <div class="property-aggregate-container">
     <property-filter
-        :execute-query-event="executeQueryEvent"
+        :apply-filter-event="applyFilterEvent"
         :grid-view="gridView"
         :filter-keys="filterKeys"
         :list-view-change-event="listViewChangeEvent"
