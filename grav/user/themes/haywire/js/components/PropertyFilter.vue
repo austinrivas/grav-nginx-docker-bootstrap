@@ -11,7 +11,9 @@
             'applyFilterEvent', // named event for applying the current filter
             'enumerableType', // named type for enumerable filters
             'eventBus', // shared eventBus
+            'filter', // name of the selected filter
             'filters', // list of filterable keys on the PropertyModel
+            'filterValue', // the value for the selectedFilter
             'gridView', // named grid view
             'listView', // current list view state
             'listViewChangeEvent', // named event for changing list view
@@ -39,10 +41,8 @@
             // get the labels for the top level filters to be displayed as select options
             _this.filterOptions = await _this.getFilterOptions(_this.filters);
             // if there is a selected filter field and its value is not the unselected option
-            if (_this.selectedFilterField && _this.selectedFilterField !== _this.defaultUnselectedValue) {
-                // get the distinct values for the filter enumerable options
-                _this.selectedFilterOptions = await _this.getDistinctFilterOptions(_this.selectedFilterField);
-            }
+            _this.selectedFilterField = _this.filter && _this.filters[_this.filter] ? _this.filters[_this.filter].field : _this.defaultUnselectedValue;
+            _this.selectedFilterValue = _this.filterValue ? _this.filterValue : _this.defaultUnselectedValue;
         },
 
         data() {
@@ -67,9 +67,9 @@
                     }
                 },
                 rangeSliderStep: 1, // default range slider step
-                selectedFilterField: defaultUnselectedValue, // initial unselected value for filter field
+                selectedFilterField: null, // initial unselected value for filter field
                 selectedFilterOptions: [], // initial value for selected filter field options
-                selectedFilterValue: defaultUnselectedValue // initial unselected value for selected filter value
+                selectedFilterValue: null // initial unselected value for selected filter value
             }
         },
 
@@ -115,15 +115,18 @@
         watch: {
             // watch the selected filter field and async update the options / range depeding the field selection
             async selectedFilterField() {
+                console.log('watch');
                 let _this = this,
                     // get the distinct enumerable options for the selected filter field
-                    distinctOptions = await _this.getDistinctFilterOptions(_this.selectedFilterField);
+                    distinctOptions = await _this.getDistinctFilterOptions(_this.selectedFilterField, _this.defaultUnselectedValue);
                 // if there are distinct options for the selected field
                 if (distinctOptions && distinctOptions.length) {
                     // if the selected field is an enumerable field
                     if (_this.isFieldOfType(_this.enumerableType, _this.selectedFilterField, _this.fields)) {
                         // set the selected value to be the default unselected value
-                        _this.selectedFilterValue = _this.defaultUnselectedValue;
+                        if (_this.filter && _this.filters[_this.filter] && _this.filters[_this.filter].field !== _this.selectedFilterField) {
+                            _this.selectedFilterValue = _this.defaultUnselectedValue;
+                        }
                         // set the enumerable options to be the distinct enumerable options
                         _this.selectedFilterOptions = await _this.getSelectedFilterOptions(distinctOptions, _this.selectedFilterField);
                     // if the field is a range field
@@ -150,9 +153,13 @@
 
         methods: {
             // get the distinct values for a given arc property
-            async getDistinctFilterOptions(field) {
-                let features = await ArcModel.executeQuery([field], ArcModelClass.queryWhereSelectAll(), true);
-                return features && features.length > 0 ? features : [];
+            async getDistinctFilterOptions(field, unselectedValue) {
+                if (field !== unselectedValue) {
+                    let features = await ArcModel.executeQuery([field], ArcModelClass.queryWhereSelectAll(), true);
+                    return features && features.length > 0 ? features : [];
+                } else {
+                    return [];
+                }
             },
             // create a map of arc fields to filters
             async getFilterFields(filters) {
