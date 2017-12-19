@@ -16,6 +16,9 @@
         @extend .is-gold
         &.form-success
             @extend .is-blue-tiffany
+        &.form-error
+            @extend .is-blue-tiffany
+            color: $red;
     ul
         display: flex
         text-align: center
@@ -42,3 +45,12 @@
     p
         max-width: 460px
         margin: 0 auto
+
+    form#newsletter
+        display: flex;
+        justify-content: center;
+        max-width: 780px;
+        margin: 2em auto;
+
+        .form-label 
+            display: none;
