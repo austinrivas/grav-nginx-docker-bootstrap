@@ -6,7 +6,7 @@
     <property-filter
         :apply-filter-event="applyFilterEvent"
         :event-bus="eventBus"
-        :filter-keys="filterKeys"
+        :filters="filters"
         :grid-view="gridView"
         :list-view-change-event="listViewChangeEvent"
         :list-view="listView"
@@ -14,7 +14,9 @@
         inline-template>
         {% include filterTemplate with {} only %}
     </property-filter>
-    <arcmap :collection="collection" inline-template>
+    <arcmap
+        :collection="collection"
+        inline-template>
         {% include arcMapTemplate with {} only %}
     </arcmap>
     <property-list-grid v-if="showGrid"

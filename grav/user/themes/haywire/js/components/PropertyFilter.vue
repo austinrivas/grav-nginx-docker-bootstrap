@@ -10,7 +10,7 @@
         props: [
             'applyFilterEvent', // named event for applying the current filter
             'eventBus', // shared eventBus
-            'filterKeys', // list of filterable keys on the PropertyModel
+            'filters', // list of filterable keys on the PropertyModel
             'gridView', // named grid view
             'listView', // current list view state
             'listViewChangeEvent', // named event for changing list view
@@ -31,14 +31,11 @@
         // runs when component is attached to the DOM
         async mounted() {
             let _this = this;
+
             // get the arc field names based on the filterable keys
-            _this.filterFields = await _this.getFilterFields(_this.filterKeys);
-            // determine which fields are enumerable properties
-            _this.enumerableFilterFields = await _this.getEnumerableFilterFields(_this.filterFields);
-            // determine which fields are value ranges
-            _this.rangeFilterFields = await _this.getRangeFilterFields(_this.filterFields);
+            _this.fields = await _this.getFilterFields(_this.filters);
             // get the labels for the top level filters to be displayed as select options
-            _this.filterOptions = await _this.getFilterOptions(_this.filterKeys);
+            _this.filterOptions = await _this.getFilterOptions(_this.filters);
             // if there is a selected filter field and its value is not the unselected option
             if (_this.selectedFilterField && _this.selectedFilterField !== _this.defaultUnselectedValue) {
                 // get the distinct values for the filter enumerable options
@@ -51,9 +48,10 @@
             return {
                 defaultUnselectedValue: defaultUnselectedValue, // the value of the default unselected option
                 enumerableFilterFields: [], // initial enumerable filterable fields
+                enumerableType: 'enumerable',
+                fields: {},
                 filterChangeEvent: 'filterChanged', // named event for a top level filter change
                 filterValueChangeEvent: 'filterValueChanged', // named event for the value of a filter changing
-                filterFields: [], // initial filter fields
                 filterOptions: [], // initial filter options
                 rangeFilterFields: [], // initial range filterable fields
                 rangeSliderChangeEvent: 'rangeSliderChanged', // named event for range slider change
@@ -68,6 +66,7 @@
                     }
                 },
                 rangeSliderStep: 1, // default range slider step
+                rangeType: 'range',
                 selectedFilterField: defaultUnselectedValue, // initial unselected value for filter field
                 selectedFilterOptions: [], // initial value for selected filter field options
                 selectedFilterValue: defaultUnselectedValue // initial unselected value for selected filter value
@@ -89,11 +88,11 @@
             showApplyButton() {
                 let _this = this;
                 // if the currently selected field is an enumerable property
-                if (_this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField)) {
+                if (_this.isFieldOfType(_this.enumerableType, _this.selectedFilterField, _this.fields)) {
                     // show the apply button as long as the selected value is not the default unselected value
                     return _this.selectedFilterValue !== _this.defaultUnselectedValue;
                 // if the currently selected field is a range property
-                } else if (_this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField)) {
+                } else if (_this.isFieldOfType(_this.rangeType, _this.selectedFilterField, _this.fields)) {
                     // show the apply button as long as the range value contains to values
                     return _this.rangeSliderValues && _this.rangeSliderValues.length === 2;
                 }
@@ -102,13 +101,13 @@
             showSlider() {
                 let _this = this;
                 // if the slider has a min / max defined and the currently selected field is a range field
-                return _this.rangeSliderMinValue && _this.rangeSliderMaxValue && _this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField);
+                return _this.rangeSliderMinValue && _this.rangeSliderMaxValue && _this.isFieldOfType(_this.rangeType, _this.selectedFilterField, _this.fields);
             },
             // computed property for showing / hiding the enumerable select options
             showFilterOptions() {
                 let _this = this;
                 // if the currently selected field is an enumerable field show the options
-                return _this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField);
+                return _this.isFieldOfType(_this.enumerableType, _this.selectedFilterField, _this.fields);
             }
         },
 
@@ -122,13 +121,13 @@
                 // if there are distinct options for the selected field
                 if (distinctOptions && distinctOptions.length) {
                     // if the selected field is an enumerable field
-                    if (_this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField)) {
+                    if (_this.isFieldOfType(_this.enumerableType, _this.selectedFilterField, _this.fields)) {
                         // set the selected value to be the default unselected value
                         _this.selectedFilterValue = _this.defaultUnselectedValue;
                         // set the enumerable options to be the distinct enumerable options
                         _this.selectedFilterOptions = await _this.getSelectedFilterOptions(distinctOptions, _this.selectedFilterField);
                     // if the field is a range field
-                    } else if (_this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField)) {
+                    } else if (_this.isFieldOfType(_this.rangeType, _this.selectedFilterField, _this.fields)) {
                         // get the min / max of the given rangeable field
                         let range = await _this.getSelectedFilterRange(distinctOptions, _this.selectedFilterField);
                         // if a range has be defined
@@ -155,38 +154,34 @@
                 let features = await ArcModel.executeQuery([field], ArcModelClass.queryWhereSelectAll(), true);
                 return features && features.length > 0 ? features : [];
             },
-            // get the arc field names based on the property model key
-            async getFilterFields(keys) {
+            // create a map of arc fields to filters
+            async getFilterFields(filters) {
                 // if keys reduce the array to an array of arc keys
-                return keys && keys.length ? await keys.reduce((accumulator, key) => {
-                    // get the arc field from the PROPERTY_FIELDS map
-                    let arcField = PROPERTY_FIELDS[key];
-                    // if arcField exists add it to the accumulator
-                    if (arcField) { accumulator.push(arcField); }
+                return filters ? await Object.keys(filters).reduce((accumulator, key) => {
+                    let filter = filters[key];
+                    accumulator[filter.field] = {
+                        filter: key,
+                        label: filter.label,
+                        type: filter.type
+                    };
                     return accumulator;
-                }, []) : [];
+                }, {}) : {};
             },
             // get the filter options for an array of arc fields
-            async getFilterOptions(keys) {
+            async getFilterOptions(filters) {
                 let _this = this;
                 // if keys reduce the array to an array of objects with text / value props
-                return keys && keys.length ? await keys.reduce((accumulator, key) => {
-                    let label = _this.createFilterLabel(PROPERTY_LABELS[key]),
-                        value = PROPERTY_FIELDS[key];
-                    if (label && value) { accumulator.push({text: label, value: value}); }
+                return filters ? await Object.keys(filters).reduce((accumulator, key) => {
+                    let label = _this.createFilterLabel(filters[key].label),
+                        field = filters[key] ? filters[key].field : null;
+                    if (label && field) { accumulator.push({text: label, value: field }); }
                     return accumulator;
                 }, []) : [];
             },
-            // get an array of enumerable fields from a given array of arc fields
-            async getEnumerableFilterFields(fields) {
-                return fields && fields.length ? await _filter(fields, (field) => {
-                    return field !== PROPERTY_FIELDS.acres;
-                }) : [];
-            },
-            // get an array of range field from a given array of arc fields
-            async getRangeFilterFields(fields) {
-                return fields && fields.length ? await _filter(fields, (field) => {
-                    return field === PROPERTY_FIELDS.acres;
+            // get an array of fields for a given type from a array of filters
+            async getFieldsOfType(type, filters) {
+                return type && filters ? await _filter(Object.keys(filters), (key) => {
+                    return key && filters[key].type === type;
                 }) : [];
             },
             // get the select option text / value pairs for a given arc field and its distinct options
@@ -233,18 +228,18 @@
             },
             // string interpolator for generating a filter label
             createFilterLabel(label) {
-                return `Filter by ${label}`
+                return `Filter by ${label}`;
             },
             // event handler for filter application to the query handler
             executeQueryHandler() {
                 let _this = this,
                     value = null;
                 // if the currently selected field is enumerable and not the default unselected value
-                if (_this.isFieldOfType(_this.enumerableFilterFields, _this.selectedFilterField) && _this.selectedFilterValue !== _this.defaultUnselectedValue) {
+                if (_this.isFieldOfType(_this.enumerableType, _this.selectedFilterField, _this.fields) && _this.selectedFilterValue !== _this.defaultUnselectedValue) {
                     // set the value of the query to the currently selected value
                     value = _this.selectedFilterValue;
                 // if the currently selected field a rangeable value and not default unselected value
-                } else if (_this.isFieldOfType(_this.rangeFilterFields, _this.selectedFilterField) && _this.rangeSliderValues && _this.rangeSliderValues.length === 2) {
+                } else if (_this.isFieldOfType(_this.rangeType, _this.selectedFilterField, _this.fields) && _this.rangeSliderValues && _this.rangeSliderValues.length === 2) {
                     // set the value of the query to the currently selected value
                     value = _this.rangeSliderValues;
                 }
@@ -268,9 +263,8 @@
                 if (value && value.length) { _this.selectedFilterValue = value; }
             },
             // helper method for determining if a field is of a certain type
-            isFieldOfType(fieldArray, field) {
-                // return true if the field & field array are defined and the fieldArray contains the given field
-                return fieldArray && fieldArray.length && field && field.length && _includes(fieldArray, field);
+            isFieldOfType(type, field, fields) {
+                return fields && field && type && fields[field] && fields[field].type === type;
             },
             // event handler for the showTableListView event
             showTableListViewHandler() {
