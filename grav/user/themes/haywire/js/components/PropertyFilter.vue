@@ -9,11 +9,13 @@
     export default {
         props: [
             'applyFilterEvent', // named event for applying the current filter
+            'enumerableType', // named type for enumerable filters
             'eventBus', // shared eventBus
             'filters', // list of filterable keys on the PropertyModel
             'gridView', // named grid view
             'listView', // current list view state
             'listViewChangeEvent', // named event for changing list view
+            'rangeType', // named type for range filters
             'tableView' // named table view
         ],
 
@@ -48,7 +50,6 @@
             return {
                 defaultUnselectedValue: defaultUnselectedValue, // the value of the default unselected option
                 enumerableFilterFields: [], // initial enumerable filterable fields
-                enumerableType: 'enumerable',
                 fields: {},
                 filterChangeEvent: 'filterChanged', // named event for a top level filter change
                 filterValueChangeEvent: 'filterValueChanged', // named event for the value of a filter changing
@@ -66,7 +67,6 @@
                     }
                 },
                 rangeSliderStep: 1, // default range slider step
-                rangeType: 'range',
                 selectedFilterField: defaultUnselectedValue, // initial unselected value for filter field
                 selectedFilterOptions: [], // initial value for selected filter field options
                 selectedFilterValue: defaultUnselectedValue // initial unselected value for selected filter value

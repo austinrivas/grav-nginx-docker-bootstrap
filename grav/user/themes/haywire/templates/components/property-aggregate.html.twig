@@ -5,11 +5,13 @@
 <div class="property-aggregate-container">
     <property-filter
         :apply-filter-event="applyFilterEvent"
+        :enumerable-type="enumerableType"
         :event-bus="eventBus"
         :filters="filters"
         :grid-view="gridView"
         :list-view-change-event="listViewChangeEvent"
         :list-view="listView"
+        :range-type="rangeType"
         :table-view="tableView"
         inline-template>
         {% include filterTemplate with {} only %}

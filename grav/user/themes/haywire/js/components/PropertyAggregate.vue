@@ -43,28 +43,32 @@
             // names for the grid and table views
             // these names are used by child components to trigger list view changes
             let gridView = 'grid',
-                tableView = 'table';
+                tableView = 'table',
+                enumerableType = 'enumerable',
+                rangeType = 'range';
             return {
-                collection: null, // initial collection state
                 applyFilterEvent: 'applyFilter', // named event for triggering query execution from child components
+                collection: null, // initial collection state
+                enumerableType: enumerableType, // the named type for enumerable filters
                 filters: {
                     acres: {
-                        type: 'range'
+                        type: rangeType
                     },
                     type: {
-                        type: 'enumerable'
+                        type: enumerableType
                     },
                     status: {
-                        type: 'enumerable'
+                        type: enumerableType
                     },
                     subdivision: {
-                        type: 'enumerable'
+                        type: enumerableType
                     }
                 },
                 gridItemsInRow: 3, // default row length for grid list view
                 gridView: gridView, // named grid list view
                 listView: gridView, // default list view
                 listViewChangeEvent: 'listViewChange', // named event for triggering list view change
+                rangeType: rangeType, // the named type for range filters
                 tableView: tableView // named table list view
             }
         },
