@@ -3,6 +3,7 @@
     import _pick from 'lodash/pick';
     // property field definitions TODO: MOVE INTO CMS
     import PROPERTY_FIELDS from '../models/propertyFields';
+    import PROPERTY_LABELS from '../models/propertyLabels';
 
     // This is a parent component that is responsible for maintaining the state of the map aggregate page
     // it fetches data from the local collections / arc api and feeds the data into the filter / map / list child components
@@ -23,7 +24,7 @@
                 _this.eventBus.$on(_this.applyFilterEvent, _this.handleApplyFilter);
             }
             // create a filters map of only the filterable fields
-            _this.filters = _this.createFilterMap(PROPERTY_FIELDS, _this.filters)
+            _this.filters = _this.createFilterMap(PROPERTY_FIELDS, PROPERTY_LABELS, _this.filters)
         },
 
         // runs when component is attached to DOM
@@ -48,19 +49,15 @@
                 applyFilterEvent: 'applyFilter', // named event for triggering query execution from child components
                 filters: {
                     acres: {
-                        field: null,
                         type: 'range'
                     },
                     type: {
-                        field: null,
                         type: 'enumerable'
                     },
                     status: {
-                        field: null,
                         type: 'enumerable'
                     },
                     subdivision: {
-                        field: null,
                         type: 'enumerable'
                     }
                 },
@@ -152,12 +149,15 @@
                 // set the collection property to the result of executing the query
                 _this.collection = await _this.executeQuery(query);
             },
-            createFilterMap(fields, filters) {
+            createFilterMap(fields, labels, filters) {
                 let keys = _pick(fields, Object.keys(filters));
 
                 return Object.keys(keys).reduce((accumulator, key) => {
-                    if (!accumulator[key].field && PROPERTY_FIELDS[key]) {
-                        accumulator[key].field = PROPERTY_FIELDS[key];
+                    if (!accumulator[key].field && fields[key]) {
+                        accumulator[key].field = fields[key];
+                    }
+                    if (!accumulator[key].label && labels[key]) {
+                        accumulator[key].label = labels[key];
                     }
                     return accumulator;
                 }, filters);
