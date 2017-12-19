@@ -29,6 +29,7 @@ import PropertyListGrid from './components/PropertyListGrid.vue';
 import PropertyListTable from './components/PropertyListTable.vue';
 import RangeSlider from './components/RangeSlider.vue';
 import SelectFilter from './components/SelectFilter.vue';
+import NewsletterSignup from './components/NewsletterSignup.vue';
 
 // Vue Component declaration
 Vue.component('arcmap', ArcMap);
@@ -43,6 +44,7 @@ Vue.component('property-list-table', PropertyListTable);
 Vue.component('range-slider', RangeSlider);
 Vue.component('select-filter', SelectFilter);
 Vue.component('articles', Articles);
+Vue.component('newsletter-signup', NewsletterSignup);
 
 /**
  * Load all of this project's JavaScript dependencies including Vue

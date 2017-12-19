@@ -15,10 +15,9 @@
             <p>{% include iconTemplate with { iconId: iconLogoId } only %}</p>
             <h3>Sign Up Get Updates</h3>
             <p class="type__footer-signup--content">Enter your email address for updates and the latest news from Lakewood Ranch Commercial</p>
-            <form action="" method="">
+            <newsletter-signup inline-template>
                 {% include formTemplate only %}
-            </form>
-            <h3 class="form-success">{{ formSuccess }}</h3>
+            </newsletter-signup>
             <ul>
                 <li><a href="/press">Press</a></li>
                 <li><a href="/privacy-policy">Privacy Policy</a></li>
