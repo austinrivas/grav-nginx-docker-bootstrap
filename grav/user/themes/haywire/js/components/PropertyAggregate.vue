@@ -11,7 +11,7 @@
         props: [
             'eventBus', // the shared event bus
             'filter', // the currently selected filter
-            'filterValue', // the current value to filter by
+            'rawFilterValue', // the current value to filter by
             'updateUrlParamsEvent' // named event to update the page state url params
         ],
 
@@ -30,11 +30,20 @@
         // runs when component is attached to DOM
         async mounted() {
             let _this = this;
+
+            if (_this.filter && _this.filters[_this.filter] && _this.filters[_this.filter].type === _this.rangeType) {
+                _this.filterValue = _this.rawFilterValue ? _this.rawFilterValue.split(',').reduce((accumulator, element) => {
+                    accumulator.push(parseInt(element));
+                    return accumulator;
+                }, []) : null;
+            } else {
+                _this.filterValue = _this.rawFilterValue;
+            }
+
             _this.collection = await _this.executeQuery({
                 filter: _this.filter,
                 field: _this.filter ? PROPERTY_FIELDS[_this.filter] : null,
-                value: _this.filterValue,
-                uri: true
+                value: _this.filterValue
             });
         },
 
@@ -64,6 +73,7 @@
                         type: enumerableType
                     }
                 },
+                filterValue: null, // the sanitized filter value
                 gridItemsInRow: 3, // default row length for grid list view
                 gridView: gridView, // named grid list view
                 listView: gridView, // default list view
@@ -96,42 +106,32 @@
                     // retrieve the query result by accessing the Properties collection methods for the field
                     switch (query.field) {
                         case PROPERTY_FIELDS.acres:
-                            let value;
-                            if (query.uri) {
-                                // parse uri value into array of ints [ 1, 2 ]
-                                value = query.value ? query.value.split(',').reduce((accumulator, element) => {
-                                    accumulator.push(parseInt(element));
-                                    return accumulator;
-                                }, []) : null;
-                            } else {
-                                value = query.value;
-                            }
-                            if (value && value.length === 2 && value[0] && value[1]) {
-                                result = await Properties.findPropertiesByAcreageRange(value[0], value[1]);
+                            if (query.value && query.value.length === 2 && query.value[0] && query.value[1]) {
+                                result = await Properties.findPropertiesByAcreageRange(query.value[0], query.value[1]);
                                 _this.eventBus.$emit(_this.updateUrlParamsEvent, {
-                                    filter: 'acres',
-                                    filterValue: value
+                                    filter: query.filter,
+                                    filterValue: query.value
                                 });
                             }
                             break;
                         case PROPERTY_FIELDS.subdivision:
                             result = await Properties.findPropertiesBySubdivision(query.value);
                             _this.eventBus.$emit(_this.updateUrlParamsEvent, {
-                                filter: 'subdivision',
+                                filter: query.filter,
                                 filterValue: query.value
                             });
                             break;
                         case PROPERTY_FIELDS.status:
                             result = await Properties.findPropertiesByType(query.value);
                             _this.eventBus.$emit(_this.updateUrlParamsEvent, {
-                                filter: 'status',
+                                filter: query.filter,
                                 filterValue: query.value
                             });
                             break;
                         case PROPERTY_FIELDS.type:
                             result = await Properties.findPropertiesByType(query.value);
                             _this.eventBus.$emit(_this.updateUrlParamsEvent, {
-                                filter: 'type',
+                                filter: query.filter,
                                 filterValue: query.value
                             });
                             break;
@@ -153,10 +153,10 @@
                 // set the collection property to the result of executing the query
                 _this.collection = await _this.executeQuery(query);
             },
+            // creates a map of filterable fields and their labels
             createFilterMap(fields, labels, filters) {
-                let keys = _pick(fields, Object.keys(filters));
-
-                return Object.keys(keys).reduce((accumulator, key) => {
+                let keys = Object.keys(_pick(fields, Object.keys(filters)));
+                return keys.reduce((accumulator, key) => {
                     if (!accumulator[key].field && fields[key]) {
                         accumulator[key].field = fields[key];
                     }

@@ -41,8 +41,7 @@
             // get the labels for the top level filters to be displayed as select options
             _this.filterOptions = await _this.getFilterOptions(_this.filters);
             // if there is a selected filter field and its value is not the unselected option
-            _this.selectedFilterField = _this.filter && _this.filters[_this.filter] ? _this.filters[_this.filter].field : _this.defaultUnselectedValue;
-            _this.selectedFilterValue = _this.filterValue ? _this.filterValue : _this.defaultUnselectedValue;
+            _this.setSelectedValues(_this.filters, _this.filter, _this.filterValue);
         },
 
         data() {
@@ -115,7 +114,6 @@
         watch: {
             // watch the selected filter field and async update the options / range depeding the field selection
             async selectedFilterField() {
-                console.log('watch');
                 let _this = this,
                     // get the distinct enumerable options for the selected filter field
                     distinctOptions = await _this.getDistinctFilterOptions(_this.selectedFilterField, _this.defaultUnselectedValue);
@@ -255,6 +253,7 @@
                     // use the shared event bus to emit a query execution event using the current field and value
                     _this.eventBus.$emit(_this.applyFilterEvent, {
                         field: _this.selectedFilterField,
+                        filter: _this.fields[_this.selectedFilterField].filter,
                         value: value
                     });
                 }
@@ -278,6 +277,20 @@
                 let _this = this;
                 // if the current list view is not the table view emit an event to change the list view to the table view
                 if (_this.listView !== _this.tableView) { _this.eventBus.$emit(_this.listViewChangeEvent, _this.tableView); }
+            },
+            // set the selected values for the filter components
+            setSelectedValues(filters, filter, filterValue) {
+                let _this = this;
+                // set the currently selected top level filter
+                _this.selectedFilterField = filter && filters[_this.filter] ? filters[filter].field : _this.defaultUnselectedValue;
+                // set the value for the currently selected filter
+                if (filter && filters && filters[filter]) {
+                    if (filters[filter].type === _this.enumerableType) {
+                        _this.selectedFilterValue = filterValue ? filterValue : _this.defaultUnselectedValue;
+                    } else if (filters[filter].type === _this.rangeType) {
+                        _this.rangeSliderValues = filterValue ? filterValue : null;
+                    }
+                }
             },
             // event handler for the showGridListView event
             showGridListViewHandler() {
