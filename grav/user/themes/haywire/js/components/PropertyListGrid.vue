@@ -2,23 +2,27 @@
     // generic component for rendering a collection in a tile view
     export default {
         props: [
-            'itemsInRow', // how many items you want in each row of the grid
-            'collection' // the collection of models to be rendered
+            'collection', // the collection of models to be rendered
+            'rowLength' // how many items you want in each row of the grid
         ],
 
         // runs when component is attached to the DOM
         async mounted() {
             let _this = this;
-            // if itemsInRow set rowLength, else use default value
-            _this.rowLength = _this.itemsInRow ? _this.itemsInRow : _this.rowLength;
             // sort the collection into rows
             _this.rows = await _this.createRows(_this.collection, _this.rowLength);
         },
 
         data() {
             return {
-                rows: [],
-                rowLength: 3
+                rows: []
+            }
+        },
+
+        computed: {
+            resultSize() {
+                let _this = this;
+                return _this.collection ? _this.collection.length : "Loading";
             }
         },
 

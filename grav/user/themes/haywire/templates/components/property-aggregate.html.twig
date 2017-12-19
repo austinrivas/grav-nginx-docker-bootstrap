@@ -19,7 +19,7 @@
     </arcmap>
     <property-list-grid v-if="showGrid"
                    :collection="collection"
-                   :items-in-row="gridItemsInRow"
+                   :row-length="gridItemsInRow"
                    inline-template>
         {% include propertyListGridTemplate with {} only %}
     </property-list-grid>
