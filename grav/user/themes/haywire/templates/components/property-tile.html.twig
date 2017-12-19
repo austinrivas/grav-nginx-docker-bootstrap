@@ -4,7 +4,7 @@
         {% include favoriteIconTemplate only %}
     </favorite-icon>
     <figure class="image is-4by3 is-bg-primary-invert">
-        <img v-bind:src="image" v-if="image">
+        <img :src="image" v-if="image">
     </figure>
     <div class="prop-description">
         <p class="prop-title" v-if="title">${ title }</p>

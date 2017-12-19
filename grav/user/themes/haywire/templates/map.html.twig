@@ -12,6 +12,8 @@
     <page-state inline-template>
         <property-aggregate
             :event-bus="eventBus"
+            :filter="urlParams.filter"
+            :filter-value="urlParams.filterValue"
             :update-url-params-event="updateUrlParamsEvent"
             inline-template>
             {% include propertyAggregateTemplate with {} only %}

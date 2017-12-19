@@ -7,6 +7,8 @@
     export default {
         props: [
             'eventBus', // the shared event bus
+            'filter', // the currently selected filter
+            'filterValue', // the current value to filter by
             'updateUrlParamsEvent' // named event to update the page state url params
         ],
 
@@ -23,7 +25,11 @@
         // runs when component is attached to DOM
         async mounted() {
             let _this = this;
-            _this.collection = await _this.executeQuery({});
+            _this.collection = await _this.executeQuery({
+                field: _this.filter ? PROPERTY_FIELDS[_this.filter] : null,
+                value: _this.filterValue,
+                uri: true
+            });
         },
 
         // provides the data context for the component
@@ -62,8 +68,6 @@
             }
         },
 
-        watch: {},
-
         methods: {
             // execute the given query and return the result async
             async executeQuery(query) {
@@ -74,11 +78,21 @@
                     // retrieve the query result by accessing the Properties collection methods for the field
                     switch (query.field) {
                         case PROPERTY_FIELDS.acres:
-                            if (query.value && query.value.length === 2 && query.value[0] && query.value[1]) {
-                                result = await Properties.findPropertiesByAcreageRange(query.value[0], query.value[1]);
+                            let value;
+                            if (query.uri) {
+                                // parse uri value into array of ints [ 1, 2 ]
+                                value = query.value ? query.value.split(',').reduce((accumulator, element) => {
+                                    accumulator.push(parseInt(element));
+                                    return accumulator;
+                                }, []) : null;
+                            } else {
+                                value = query.value;
+                            }
+                            if (value && value.length === 2 && value[0] && value[1]) {
+                                result = await Properties.findPropertiesByAcreageRange(value[0], value[1]);
                                 _this.eventBus.$emit(_this.updateUrlParamsEvent, {
                                     filter: 'acres',
-                                    filterValue: query.value
+                                    filterValue: value
                                 });
                             }
                             break;

@@ -55,6 +55,16 @@
         },
 
         watch: {
+            // watch the valueSliderA prop
+            async valueSliderA() {
+                let _this = this;
+                _this.sliderValues = await _this.getSliderValues();
+            },
+            // watch the valueSliderB prop
+            async valueSliderB() {
+                let _this = this;
+                _this.sliderValues = await _this.getSliderValues();
+            },
             // watch the maxValue prop
             maxValue() {
                 let _this = this;
@@ -79,16 +89,6 @@
                     _this.valueSliderA = _this.values[0];
                     _this.valueSliderB = _this.values[1];
                 }
-            },
-            // watch the valueSliderA prop
-            async valueSliderA() {
-                let _this = this;
-                _this.sliderValues = await _this.getSliderValues();
-            },
-            // watch the valueSliderB prop
-            async valueSliderB() {
-                let _this = this;
-                _this.sliderValues = await _this.getSliderValues();
             }
         },
 
