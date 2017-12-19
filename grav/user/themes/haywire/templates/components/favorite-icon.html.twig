@@ -1,13 +1,12 @@
 {% set iconFavId = 'icon__favorite-selected' %}
 {% set iconFavUnselectId = 'icon__favorite-unselected' %}
 {% set iconTemplate = 'partials/svg-icon.html.twig' %}
-<favorite-icon :id="id" inline-template>
-    <div class="favorite-icon-container" v-show="loaded">
-        <div v-show="isFavorite" v-on:click="toggleFavorite">
-            {% include iconTemplate with { iconId: iconFavId } only %}
-        </div>
-        <div v-show="!isFavorite" v-on:click="toggleFavorite">
-            {% include iconTemplate with { iconId: iconFavUnselectId } only %}
-        </div>
+
+<div class="favorite-icon-container" v-show="loaded">
+    <div v-show="isFavorite" v-on:click="toggleFavorite">
+        {% include iconTemplate with { iconId: iconFavId } only %}
     </div>
-</favorite-icon>
+    <div v-show="!isFavorite" v-on:click="toggleFavorite">
+        {% include iconTemplate with { iconId: iconFavUnselectId } only %}
+    </div>
+</div>
