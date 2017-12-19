@@ -1,10 +1,10 @@
 ---
-title: Privacy Policy
+title: 'Contact Us'
 content:
     items: '@self.modular'
     order:
         by: default
         dir: asc
-body_classes: privacy-page
+body_classes: contact-page
 ---
 

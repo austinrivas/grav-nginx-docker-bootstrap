@@ -1,9 +1,11 @@
 ---
-title: Contact Us
+title: '404'
 content:
     items: '@self.modular'
     order:
         by: default
         dir: asc
-body_classes: contact-page
+body_classes: nofound
+visible: false
 ---
+

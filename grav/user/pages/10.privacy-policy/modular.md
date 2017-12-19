@@ -1,9 +1,11 @@
 ---
-title: Property Details
+title: 'Privacy Policy'
 content:
     items: '@self.modular'
     order:
         by: default
         dir: asc
-body_classes: property-details-page
+body_classes: privacy-page
+visible: false
 ---
+
