@@ -1,5 +1,15 @@
 .contact
     padding: 0.75em
+
+    form#contact
+        div.buttons
+            width: 100%;
+            margin-top: 3em;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            padding-right: .75rem;
     .form-container
         padding: 4em 3.5em
         input
@@ -17,13 +27,17 @@
             margin-bottom: 2em
             @include break-max($tablet)
                 text-align: center
+        label.checkbox
+            font-size: 14px;
     h2
         @extend .type__content-section--heading
         @extend .is-blue-dark
-    label.label
+    label.label, label.inline
         @extend .is-blue-dark
         @extend .type__contact-form--label
         font-weight: $weight-normal
+        margin: 10px 0;
+        display: inline-block;
     aside.section
         padding: 0 2.5rem
         @include break-max($tablet)

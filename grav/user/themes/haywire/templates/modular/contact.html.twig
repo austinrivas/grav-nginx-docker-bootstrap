@@ -27,10 +27,11 @@ persons:
     <div class="columns">
         <div class="container column is-8 is-bg-blue-light">
             <div class="form-container">
-                <h2>{{ content }}</h2>
-                <form method="" action="">
+                {{ content }}
+                <!-- <form method="" action="">
                     {% include formTemplate only %}
-                </form>
+                </form> -->
+                {% include "forms/form.html.twig" %}
             </div>
         </div>
 

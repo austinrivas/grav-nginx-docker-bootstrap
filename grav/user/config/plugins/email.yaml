@@ -1,0 +1,15 @@
+enabled: true
+from: 'no-reply@mail.lwrcommercial.com'
+from_name: 'No Reply'
+to:
+to_name:
+mailer:
+  engine: smtp
+  smtp:
+    server: smtp.mailgun.org
+    port: 587
+    encryption: tls
+    user: 'no-reply@mail.lwrcommercial.com'
+    password: 'UKPpN3ZE4RFUYh3ov'
+content_type: text/html
+debug: false
