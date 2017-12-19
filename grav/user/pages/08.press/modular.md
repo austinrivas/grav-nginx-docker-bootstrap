@@ -1,14 +1,13 @@
 ---
 title: Press
 content:
+    items: '@self.modular'
+    order:
+        by: folder
+        dir: asc
     limit: 5
     pagination: true
-    items: 
-        - '@page.children': '/press'
-    order:
-        by: basename
-        dir: asc
-
+visible: false
 modules:
     items: '@self.modular'
     order:

@@ -1,9 +1,10 @@
 ---
-title: Terms of Service
+title: 'Property Details'
 content:
     items: '@self.modular'
     order:
         by: default
         dir: asc
-body_classes: terms-of-service-page
+body_classes: property-details-page
 ---
+
