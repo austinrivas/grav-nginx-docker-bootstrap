@@ -1,17 +1,29 @@
-<section class="is-range-slider">
-    <span class="rangeValues"><output>${sliderOutput}</output></span>
-    <input type="range"
-           class="slider-a"
-           @change="handleChange"
-           v-model="valueSliderA"
-           :min="minSliderValue"
-           :max="maxSliderValue"
-           :step="sliderStep" />
-    <input type="range"
-           class="slider-b"
-           @change="handleChange"
-           v-model="valueSliderB"
-           :min="minSliderValue"
-           :max="maxSliderValue"
-           :step="sliderStep" />
-</section>
+<div class="deletethiswhenudoneaustin">
+    <section class="is-range-slider-2">
+        <span class="rangeValues"><output>${sliderOutput}</output></span>
+        <div class="range"
+            :data-min-value="minSliderValue"
+            :data-max-value="maxSliderValue"
+            :data-step="sliderStep">
+            <div class="slider-a" @click="sliderAMouseupHandler" :data-value="valueSliderA" :style="sliderAStyle"></div>
+            <div class="slider-b" @click="sliderBMouseupHandler" :data-value="valueSliderB" :style="sliderBStyle"></div>
+        </div>
+    </section>
+    <section class="is-range-slider">
+        <span class="rangeValues"><output>${sliderOutput}</output></span>
+        <input type="range"
+            class="slider-a"
+            @change="handleChange"
+            v-model="valueSliderA"
+            :min="minSliderValue"
+            :max="maxSliderValue"
+            :step="sliderStep" />
+        <input type="range"
+            class="slider-b"
+            @change="handleChange"
+            v-model="valueSliderB"
+            :min="minSliderValue"
+            :max="maxSliderValue"
+            :step="sliderStep" />
+    </section>
+</div>
