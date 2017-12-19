@@ -5,10 +5,10 @@
     // a reusable component that maintains the page state via url params
     export default {
         // runs when component is declared in memory
-        async created() {
+        created() {
             let _this = this;
             // set the value of urlParams to be the result or parsing the url
-            _this.urlParams = await _this.getUrlParams(window.location.search);
+            _this.urlParams = _this.getUrlParams(window.location.search);
             // duck type the eventBus before binding events to it
             if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
                 _this.eventBus.$on(_this.updateUrlParamsEvent, _this.handleUpdateUrlParams);
@@ -29,7 +29,7 @@
 
         methods: {
             // async function that returns a map of key value pairs
-            async getUrlParams(search) {
+            getUrlParams(search) {
                 // define the initial empty url state
                 let initialParams = {};
                 // if search is defined
@@ -43,7 +43,7 @@
                         // define the array index of the where the query params start
                         index = search.indexOf(querySeparator) + 1;
                     // slice the array at the index of the first query param
-                    return await search.slice(index)
+                    return search.slice(index)
                         // split the resulting array at the key separators
                         .split(keySeparator)
                         // reduce the resulting array of keys into a key value map
