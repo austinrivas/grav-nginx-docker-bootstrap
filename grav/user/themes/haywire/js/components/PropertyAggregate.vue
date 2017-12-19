@@ -6,17 +6,13 @@
     // it fetches data from the local collections / arc api and feeds the data into the filter / map / list child components
     export default {
         props: [
-            'parentEventBus', // the shared event bus
+            'eventBus', // the shared event bus
             'updateUrlParamsEvent' // named event to update the page state url params
         ],
 
         // runs when component is declared in memory
         created() {
             let _this = this;
-            // duck type parent event bus before assignment
-            if (_this.parentEventBus && _this.parentEventBus.$on && _this.parentEventBus.$emit) {
-                _this.eventBus = _this.parentEventBus;
-            }
             // duck type the eventBus before binding events to it
             if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
                 _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange);
@@ -38,14 +34,6 @@
                 tableView = 'table';
             return {
                 collection: null, // initial collection state
-                eventBus: { // mock event bus
-                    $on() {
-                        console.log('No parent event bus defined', _this.parentEventBus);
-                    },
-                    $emit() {
-                        console.log('No parent event bus defined', _this.parentEventBus);
-                    }
-                },
                 applyFilterEvent: 'applyFilter', // named event for triggering query execution from child components
                 filterKeys: [ // the PropertyModel keys being filtered
                     'acres',

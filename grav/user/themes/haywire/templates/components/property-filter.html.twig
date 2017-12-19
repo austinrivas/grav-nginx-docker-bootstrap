@@ -42,8 +42,8 @@
     <div class="columns">
         <div class="column is-3">
             <select-filter :change-event="filterChangeEvent"
+                           :event-bus="eventBus"
                            :options="filterOptions"
-                           :parent-event-bus="eventBus"
                            :selected="selectedFilterField"
                            inline-template>
                 {% include selectTemplate with { inputClass: selectTemplateClass, options: selectOptions, vue: true } only %}
@@ -51,10 +51,10 @@
         </div>
         <div class="column is-3" v-if="showSlider">
             <range-slider :change-event="rangeSliderChangeEvent"
+                          :event-bus="eventBus"
                           :max-value="rangeSliderMaxValue"
                           :min-value="rangeSliderMinValue"
                           :output-function="rangeSliderOutputFunction"
-                          :parent-event-bus="eventBus"
                           :step="rangeSliderStep"
                           :values="rangeSliderValues"
                           inline-template>
@@ -63,8 +63,8 @@
         </div>
         <div class="column is-3" v-if="showFilterOptions">
             <select-filter :change-event="filterValueChangeEvent"
+                           :event-bus="eventBus"
                            :options="selectedFilterOptions"
-                           :parent-event-bus="eventBus"
                            :selected="selectedFilterValue"
                            inline-template>
                 {% include selectTemplate with { inputClass: selectTemplateClass, options: selectFilterOptions, vue: true } only %}

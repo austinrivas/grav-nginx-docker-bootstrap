@@ -9,21 +9,17 @@
     export default {
         props: [
             'applyFilterEvent', // named event for applying the current filter
+            'eventBus', // shared eventBus
             'filterKeys', // list of filterable keys on the PropertyModel
             'gridView', // named grid view
             'listView', // current list view state
             'listViewChangeEvent', // named event for changing list view
-            'parentEventBus', // shared parentEventBus
             'tableView' // named table view
         ],
 
         // runs when component is declared in memory
         created() {
             let _this = this;
-            // duck type parent event bus before assignment
-            if (_this.parentEventBus && _this.parentEventBus.$on && _this.parentEventBus.$emit) {
-                _this.eventBus = _this.parentEventBus;
-            }
             // duck type event bus before event binding
             if (_this.eventBus && _this.eventBus.$on && _this.eventBus.$emit) {
                 _this.eventBus.$on(_this.filterChangeEvent, _this.filterChangeHandler);
@@ -51,19 +47,10 @@
         },
 
         data() {
-            let _this = this,
-                defaultUnselectedValue = "unselected"; // the value of the default unselected option
+            let defaultUnselectedValue = "unselected"; // the value of the default unselected option
             return {
                 defaultUnselectedValue: defaultUnselectedValue, // the value of the default unselected option
                 enumerableFilterFields: [], // initial enumerable filterable fields
-                eventBus: { // mock event bus
-                    $on() {
-                        console.log('No parent event bus defined', _this.parentEventBus);
-                    },
-                    $emit() {
-                        console.log('No parent event bus defined', _this.parentEventBus);
-                    }
-                },
                 filterChangeEvent: 'filterChanged', // named event for a top level filter change
                 filterValueChangeEvent: 'filterValueChanged', // named event for the value of a filter changing
                 filterFields: [], // initial filter fields

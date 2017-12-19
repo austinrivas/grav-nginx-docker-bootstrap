@@ -3,19 +3,10 @@
     export default {
         props: [
             'changeEvent', // name change event
+            'eventBus', // shared eventBus
             'options', // selectable options
-            'parentEventBus', // shared event bus
             'selected' // current selection as defined by parent component
         ],
-
-        // runs when component is declared in memory
-        created() {
-            let _this = this;
-            // duck type parent event bus prop prior to application
-            if (_this.parentEventBus && _this.parentEventBus.$on && _this.parentEventBus.$emit) {
-                _this.eventBus = _this.parentEventBus;
-            }
-        },
 
         // runs when component is attached to the DOM
         mounted() {
@@ -26,16 +17,7 @@
 
 
         data() {
-            let _this = this;
             return {
-                eventBus: { // mock event bus
-                    $on() {
-                        console.log('No parent event bus defined', _this.parentEventBus);
-                    },
-                    $emit() {
-                        console.log('No parent event bus defined', _this.parentEventBus);
-                    }
-                },
                 selectedOption: null // default selected option
             }
         },

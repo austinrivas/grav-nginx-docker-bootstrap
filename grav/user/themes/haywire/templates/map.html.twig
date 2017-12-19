@@ -11,7 +11,7 @@
 {% block content %}
     <page-state inline-template>
         <property-aggregate
-            :parent-event-bus="eventBus"
+            :event-bus="eventBus"
             :update-url-params-event="updateUrlParamsEvent"
             inline-template>
             {% include propertyAggregateTemplate with {} only %}
