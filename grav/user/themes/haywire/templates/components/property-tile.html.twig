@@ -1,6 +1,8 @@
 {% set favoriteIconTemplate = 'components/favorite-icon.html.twig' %}
 <article class="featured-project is-child is-bg-cream">
-    {% include favoriteIconTemplate only %}
+    <favorite-icon :id="id" inline-template>
+        {% include favoriteIconTemplate only %}
+    </favorite-icon>
     <figure class="image is-4by3 is-bg-primary-invert">
         <img v-bind:src="image" v-if="image">
     </figure>
