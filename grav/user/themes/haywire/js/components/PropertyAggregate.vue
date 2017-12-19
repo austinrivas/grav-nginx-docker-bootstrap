@@ -1,4 +1,6 @@
 <script>
+    // creates an object composed of picked object properties
+    import _pick from 'lodash/pick';
     // property field definitions TODO: MOVE INTO CMS
     import PROPERTY_FIELDS from '../models/propertyFields';
 
@@ -20,12 +22,15 @@
                 _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange);
                 _this.eventBus.$on(_this.applyFilterEvent, _this.handleApplyFilter);
             }
+            // create a filters map of only the filterable fields
+            _this.filters = _this.createFilterMap(PROPERTY_FIELDS, _this.filters)
         },
 
         // runs when component is attached to DOM
         async mounted() {
             let _this = this;
             _this.collection = await _this.executeQuery({
+                filter: _this.filter,
                 field: _this.filter ? PROPERTY_FIELDS[_this.filter] : null,
                 value: _this.filterValue,
                 uri: true
@@ -41,12 +46,24 @@
             return {
                 collection: null, // initial collection state
                 applyFilterEvent: 'applyFilter', // named event for triggering query execution from child components
-                filterKeys: [ // the PropertyModel keys being filtered
-                    'acres',
-                    'type',
-                    'status',
-                    'subdivision'
-                ],
+                filters: {
+                    acres: {
+                        field: null,
+                        type: 'range'
+                    },
+                    type: {
+                        field: null,
+                        type: 'enumerable'
+                    },
+                    status: {
+                        field: null,
+                        type: 'enumerable'
+                    },
+                    subdivision: {
+                        field: null,
+                        type: 'enumerable'
+                    }
+                },
                 gridItemsInRow: 3, // default row length for grid list view
                 gridView: gridView, // named grid list view
                 listView: gridView, // default list view
@@ -134,6 +151,16 @@
                 let _this = this;
                 // set the collection property to the result of executing the query
                 _this.collection = await _this.executeQuery(query);
+            },
+            createFilterMap(fields, filters) {
+                let keys = _pick(fields, Object.keys(filters));
+
+                return Object.keys(keys).reduce((accumulator, key) => {
+                    if (!accumulator[key].field && PROPERTY_FIELDS[key]) {
+                        accumulator[key].field = PROPERTY_FIELDS[key];
+                    }
+                    return accumulator;
+                }, filters);
             },
             // handle the listViewChange event
             handleListViewChange(type) {
