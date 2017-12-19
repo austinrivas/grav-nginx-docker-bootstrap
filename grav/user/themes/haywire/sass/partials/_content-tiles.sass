@@ -1,5 +1,6 @@
 section.content-blocks.content-tiles
     margin-top: 0
+
     &.is-inverse
         .columns
             flex-direction: row-reverse
@@ -32,3 +33,35 @@ section.content-blocks.content-tiles
             padding: 0 2em
         strong
             @extend .is-cream
+
+
+section.content-blocks
+    .column 
+        figure 
+            height: 100%;
+            img
+                position: absolute
+                top: 0
+                left: 0
+                font-family: 'object-fit: cover;'
+                width: 100%
+
+            @supports (object-fit: cover)
+                img
+                    object-fit: cover
+
+// Safari specific fix for tiles grid
+@include break-min($tablet)
+    @media only screen and (-webkit-min-device-pixel-ratio: 1)
+        section.content-blocks .columns
+            .column 
+                min-height: 400px;
+                height: 60vmax;
+                max-height: 720px;
+
+        section.content-blocks.content-tiles .columns
+                min-height: 400px;
+                height: 60vmax;
+                max-height: 720px;
+                .column
+                    height: 100%;
