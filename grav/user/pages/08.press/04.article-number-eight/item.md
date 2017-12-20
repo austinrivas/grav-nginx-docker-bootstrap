@@ -3,7 +3,10 @@ title: 'Article Number Eight'
 published: true
 publish_date: '08-12-2017 17:30'
 taxonomy:
-    category: News
+    category: news
+    tag:
+        - news
+        - eight
 ---
 
 What is Lorem Ipsum?
