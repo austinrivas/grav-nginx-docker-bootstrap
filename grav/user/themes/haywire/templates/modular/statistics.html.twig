@@ -4,7 +4,7 @@
 <section class="statistics lwrc">
 {% endif %}
     <div class="statistics-body">
-        <div class="container">
+        <div class="container is-fluid">
         	{% if page.header.title %}
             	<h2 class="is-proxima-nova-bold type__data-section--heading is-uppercase">{{ page.header.title }}</h2>
             {% endif %}
@@ -15,7 +15,7 @@
                 </div>
             {% endif %}
 
-            <div class="columns is-multiline statistics-container">
+            <div class="columns is-multiline statistics-container is-fluid">
 
                 {% for statistic in page.header.statistics %}
                     <div class="column is-4 is-full-mobile is-full-tablet">
