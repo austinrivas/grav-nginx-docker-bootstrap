@@ -1,3 +1,16 @@
+{% if '/press/' in page.url %}
+	<meta name="og:title" property="og:title" content="{{ page.title }}" />
+	<meta name="og:type" property="og:type" content="article" />
+	<meta name="og:url" property="og:url" content="{{ page.url(true) }}" />
+
+	{% if page.header.featured_image and page.media[page.header.featured_image].url %}
+		<meta name="og:image" property="og:image" content="{{ page.media[page.header.featured_image].url }}" />
+	{% else %}
+		<meta name="og:image" property="og:image" content="{{ uri.base() }}/assets/facebook.jpg" />
+	{% endif %}
+{% endif %}
+
+
 {% for meta in page.metadata %}
 <meta {% if meta.name %}name="{{ meta.name }}" {% endif %}{% if meta.http_equiv %}http-equiv="{{ meta.http_equiv }}" {% endif %}{% if meta.charset %}charset="{{ meta.charset }}" {% endif %}{% if meta.property %}property="{{ meta.property }}" {% endif %}{% if meta.content %}content="{{ meta.content }}" {% endif %}/>
 {% endfor %}
