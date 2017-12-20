@@ -36,16 +36,8 @@
                 _this.values && _this.values.length === 2 ? _this.values[1] : _this.maxSliderValue
             ];
             // order the selected slider values [ min, max ]
-            _this.sliderValues = await _this.getSliderValues(_this.valueSliderA, _this.valueSliderB, _this.bitwiseArraySwap);
-
-            Slider.create(document.getElementById('no-ui-slider'), {
-                start: [20, 80],
-                connect: true,
-                range: {
-                    'min': 0,
-                    'max': 100
-                }
-            });
+            _this.sliderValues = [_this.valueSliderA, _this.valueSliderB];
+            _this.sliderConfig = _this.getSliderConfig(_this.maxSliderValue, _this.minSliderValue, _this.sliderValues, _this.sliderStep);
         },
 
         data() {
@@ -53,10 +45,10 @@
                 minSliderValue: null,
                 maxSliderValue: null,
                 outputFactory(values) { console.log('No output function for range slider', values) }, // mock outputFactory
+                slider: null,
+                sliderConfig: null,
                 sliderStep: 1,
                 sliderValues: [], // [ min, max ]
-                sliderAClass: 'slider-a',
-                sliderBClass: 'slider-b',
                 valueSliderA: null,
                 valueSliderB: null
             }
@@ -67,14 +59,6 @@
             sliderOutput() {
                 let _this = this;
                 return _this.outputFactory(_this.sliderValues);
-            },
-            sliderAStyle() {
-                let _this = this;
-                return _this.getSliderStyle(_this.valueSliderA);
-            },
-            sliderBStyle() {
-                let _this = this;
-                return _this.getSliderStyle(_this.valueSliderB);
             }
         },
 
@@ -82,12 +66,12 @@
             // watch the valueSliderA prop
             async valueSliderA() {
                 let _this = this;
-                _this.sliderValues = await _this.getSliderValues(_this.valueSliderA, _this.valueSliderB, _this.bitwiseArraySwap);
+                _this.sliderValues = [_this.valueSliderA, _this.valueSliderB];
             },
             // watch the valueSliderB prop
             async valueSliderB() {
                 let _this = this;
-                _this.sliderValues = await _this.getSliderValues(_this.valueSliderA, _this.valueSliderB, _this.bitwiseArraySwap);
+                _this.sliderValues =[_this.valueSliderA, _this.valueSliderB];
             },
             // watch the maxValue prop
             maxValue() {
@@ -120,49 +104,49 @@
                 if (_this.changeEvent && _this.changeEvent.length) {
                     _this.eventBus.$emit(_this.changeEvent, _this.sliderValues);
                 }
+            },
+            sliderConfig() {
+                let _this = this,
+                    sliderConfig = _this.sliderConfig,
+                    sliderId = 'no-ui-slider',
+                    sliderChangeEvent = 'change',
+                    sliderChangeHandler = _this.sliderChangeHandler;
+                if (sliderId &&
+                    sliderChangeEvent &&
+                    sliderChangeHandler &&
+                    sliderConfig.range.min &&
+                    sliderConfig.range.max &&
+                    sliderConfig.start &&
+                    sliderConfig.start.length === 2 &&
+                    sliderConfig.step) {
+                    _this.slider = _this.createSlider(sliderId, sliderChangeEvent, sliderConfig, sliderChangeHandler)
+                }
             }
         },
 
         methods: {
-            // parse the values for slider A and slider B into an array and then do a bitwise array swap to order the values in [ min, max ] order
-            async getSliderValues(valueA, valueB, sortingFunction) {
-                return sortingFunction(await [valueA, valueB].reduce((accumulator, value) => {
-                    accumulator.push(JSON.parse(value));
-                    return accumulator;
-                }, []));
+            createSlider(id, changeEvent, config, changeHandler) {
+                let slider = document.getElementById(id);
+                Slider.create(slider, config);
+                slider.noUiSlider.on(changeEvent, changeHandler);
+                return slider;
             },
-            // order the 2 elements of a [ number, number ] array in [ min, max ] order
-            bitwiseArraySwap(array) {
-                if (array && array.length === 2) {
-                    if (array[0] > array[1]) {
-                        [array[1], array[0]] = [array[0], array[1]]
-                    }
-                }
-                return array;
-            },
-            getSliderStyle(sliderValue) {
+            getSliderConfig(maxValue, minValue, values, step) {
                 return {
-                    left: `${sliderValue < 2.5 ? 0 : 100}px`
+                    connect: true,
+                    range: {
+                        'min': minValue,
+                        'max': maxValue
+                    },
+                    behaviour: 'drag',
+                    start: values,
+                    step: step
                 }
             },
-            sliderDragstartHandler: _throttle(function (e) {
-                console.log(`dragstart ${e.target.className} slider`, e.clientX);
-            }, 100),
-            sliderDragendHandler: _throttle(function (e) {
-                console.log(`dragend ${e.target.className} slider`, e.clientX);
-            }, 100),
-            sliderTouchmoveHandler: _throttle(function (e) {
-                console.log(`touchmove ${e.target.className} slider`, e.clientX);
-            }, 100),
-            sliderTouchendHandler: _throttle(function (e) {
-                console.log(`touchend ${e.target.className} slider`, e.clientX);
-            }, 100),
-            sliderMousemoveHandler: _throttle(function (e) {
-                console.log(`mousemove ${e.target.className} slider`, e.clientX);
-            }, 100),
-            sliderMouseupHandler: _throttle(function (e) {
-                console.log(`mouseup ${e.target.className} slider`, e.clientX);
-            }, 100)
+            sliderChangeHandler(values, handle, unencoded, tap, positions) {
+                let _this = this;
+                _this.sliderValues = unencoded && unencoded.length === 2 ? unencoded : [];
+            }
         }
     }
 </script>
