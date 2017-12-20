@@ -5,11 +5,6 @@
         div.buttons
             width: 100%;
             margin-top: 3em;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: flex-end;
-            padding-right: .75rem;
     .form-container
         padding: 4em 3.5em
         input
@@ -51,3 +46,10 @@
             @extend .is-blue-dark
         p
             margin: 2em 0 0
+
+@include break-max($tablet)
+    .form-container form .buttons
+        width: 100%;
+        padding-right: 0;
+        > div
+            width: 100%;

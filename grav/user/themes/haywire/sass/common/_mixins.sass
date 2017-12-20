@@ -6,6 +6,18 @@
     @media only screen and (min-width: $size)
         @content
 
+@mixin safari
+    @media only screen and (-webkit-min-device-pixel-ratio: 1)
+        @content
+
+@mixin safari-max($size)
+    @media only screen and (max-width: $size - 1) and (-webkit-min-device-pixel-ratio: 1)
+        @content
+
+@mixin safari-min($size)
+    @media only screen and (min-width: $size) and (-webkit-min-device-pixel-ratio: 1)
+        @content
+
 @mixin hero-arrow-down
     content: " "
     display: block
