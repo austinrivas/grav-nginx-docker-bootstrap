@@ -7,6 +7,7 @@
         // runs when component is declared in memory
         created() {
             let _this = this;
+            _this.urlParts = _this.getUrlParts(window.location.href);
             // set the value of urlParams to be the result or parsing the url
             _this.urlParams = _this.getUrlParams(window.location.search);
             // duck type the eventBus before binding events to it
@@ -23,7 +24,8 @@
             return {
                 eventBus: EventBus, // shared event bus
                 updateUrlParamsEvent: 'updateUrlParams', // named update url params event
-                urlParams: {} // initial url param state,
+                urlParams: {}, // initial url param state,
+                urlParts: []
             }
         },
 
@@ -53,6 +55,11 @@
                             return params;
                         }, initialParams);
                 } else return initialParams;
+            },
+            getUrlParts(url) {
+                if (url) {
+                    return url.split('/');
+                }
             },
             // event handler for updateUrlParams event
             handleUpdateUrlParams(params) {

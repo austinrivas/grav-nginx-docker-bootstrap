@@ -12,27 +12,43 @@
 {% set heroHeadline = 'Property Not Found' %}
 
 {% block content %}
-    <div v-if="urlParams.id">
-        {%- include galleryTemplate with {} only -%}
-        {%- include headerTemplate with {} only -%}
-        {%- include infoTableTemplate with {} only -%}
-        {%- include descriptionTemplate with {} only -%}
-        {%- include accordionTemplate with {} only -%}
+    <property-detail :id="urlParts[4]" inline-template>
+        <div class="property-detail-container">
+            <div v-if="propertyExists && !loading">
+                {%- include galleryTemplate with {} only -%}
+                {%- include headerTemplate with {} only -%}
+                {%- include infoTableTemplate with {} only -%}
+                {%- include descriptionTemplate with {} only -%}
+                {%- include accordionTemplate with {} only -%}
 
-        {% for module in page.collection() %}
-            {{ module.content }}
-        {% endfor %}
-    </div>
+                {% for module in page.collection() %}
+                    {{ module.content }}
+                {% endfor %}
+            </div>
 
-    <div v-if="urlParams.id">
-        {%- include heroTemplate with {
-            page: {
-                header: {
-                    hero: {
-                        headline: heroHeadline
+            <div v-if="!propertyExists">
+                {%- include heroTemplate with {
+                    page: {
+                        header: {
+                            hero: {
+                                headline: heroHeadline
+                            }
+                        }
                     }
-                }
-            }
-        } only -%}
-    </div>
+                } only -%}
+            </div>
+
+            <div v-if="loading">
+                {%- include heroTemplate with {
+                    page: {
+                        header: {
+                            hero: {
+                                headline: 'loading'
+                            }
+                        }
+                    }
+                } only -%}
+            </div>
+        </div>
+    </property-detail>
 {% endblock %}
