@@ -1,5 +1,6 @@
 <script>
     import _throttle from 'lodash/throttle'
+    import Slider from '../vendor/nouiSlider'
 
     // a generic component for a range slider that emits change events on a shared event bus
     export default {
@@ -36,6 +37,15 @@
             ];
             // order the selected slider values [ min, max ]
             _this.sliderValues = await _this.getSliderValues(_this.valueSliderA, _this.valueSliderB, _this.bitwiseArraySwap);
+
+            Slider.create(document.getElementById('no-ui-slider'), {
+                start: [20, 80],
+                connect: true,
+                range: {
+                    'min': 0,
+                    'max': 100
+                }
+            });
         },
 
         data() {
@@ -137,22 +147,22 @@
             },
             sliderDragstartHandler: _throttle(function (e) {
                 console.log(`dragstart ${e.target.className} slider`, e.clientX);
-            }, 100, {
-                leading: true,
-                trailing: false
-            }),
-            sliderDragHandler: _throttle(function (e) {
-                console.log(`drag ${e.target.className} slider`, e.clientX);
-            }, 100, {
-                leading: true,
-                trailing: false
-            }),
+            }, 100),
             sliderDragendHandler: _throttle(function (e) {
                 console.log(`dragend ${e.target.className} slider`, e.clientX);
-            }, 100, {
-                leading: false,
-                trailing: true
-            })
+            }, 100),
+            sliderTouchmoveHandler: _throttle(function (e) {
+                console.log(`touchmove ${e.target.className} slider`, e.clientX);
+            }, 100),
+            sliderTouchendHandler: _throttle(function (e) {
+                console.log(`touchend ${e.target.className} slider`, e.clientX);
+            }, 100),
+            sliderMousemoveHandler: _throttle(function (e) {
+                console.log(`mousemove ${e.target.className} slider`, e.clientX);
+            }, 100),
+            sliderMouseupHandler: _throttle(function (e) {
+                console.log(`mouseup ${e.target.className} slider`, e.clientX);
+            }, 100)
         }
     }
 </script>
