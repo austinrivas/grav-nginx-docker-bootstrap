@@ -9,12 +9,25 @@
 {% set accordionTemplate = 'components/property-accordion.html.twig' %}
 
 {# Content #}
-{% set heroHeadline = 'Property Not Found' %}
+{% set loadingHeadline = 'Loading Property Details' %}
+{% set notFoundHeadline = 'Property Not Found' %}
 
 {% block content %}
     <property-detail :id="urlParts[4]" inline-template>
         <div class="property-detail-container">
-            <div v-if="propertyExists && !loading">
+            <div v-if="loading">
+                {%- include heroTemplate with {
+                    page: {
+                        header: {
+                            hero: {
+                                headline: loadingHeadline
+                            }
+                        }
+                    }
+                } only -%}
+            </div>
+
+            <div class="property-details" v-if="propertyExists">
                 {%- include galleryTemplate with {} only -%}
                 {%- include headerTemplate with {} only -%}
                 {%- include infoTableTemplate with {} only -%}
@@ -26,24 +39,12 @@
                 {% endfor %}
             </div>
 
-            <div v-if="!propertyExists">
+            <div v-if="!propertyExists && !loading">
                 {%- include heroTemplate with {
                     page: {
                         header: {
                             hero: {
-                                headline: heroHeadline
-                            }
-                        }
-                    }
-                } only -%}
-            </div>
-
-            <div v-if="loading">
-                {%- include heroTemplate with {
-                    page: {
-                        header: {
-                            hero: {
-                                headline: 'loading'
+                                headline: notFoundHeadline
                             }
                         }
                     }

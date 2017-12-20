@@ -1,4 +1,6 @@
 <script>
+    import PropertyModel from '../models/propertyModel'
+
     export default {
         props: ['id'],
 
@@ -17,14 +19,14 @@
         watch: {
             property() {
                 let _this = this;
-                _this.loading = !(!!_this.id && !!_this.property) && (typeof _this.property === 'boolean');
+                _this.loading = false;
             }
         },
 
         computed: {
             propertyExists() {
                 let _this = this;
-                return !(typeof _this.property === 'undefined');
+                return !_this.loading && _this.property instanceof PropertyModel;
             }
         }
     }
