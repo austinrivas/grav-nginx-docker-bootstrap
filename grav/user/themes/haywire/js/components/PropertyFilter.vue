@@ -54,6 +54,7 @@
                 filterValueChangeEvent: 'filterValueChanged', // named event for the value of a filter changing
                 filterOptions: [], // initial filter options
                 rangeFilterFields: [], // initial range filterable fields
+                rangeSliderId: 'range-slider-dom-target',
                 rangeSliderChangeEvent: 'rangeSliderChanged', // named event for range slider change
                 rangeSliderValues: null, // initial range slider value
                 rangeSliderMinValue: null, // initial range slider min value

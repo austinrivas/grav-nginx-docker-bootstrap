@@ -1,5 +1,4 @@
 <script>
-    import _throttle from 'lodash/throttle'
     import Slider from '../vendor/nouiSlider'
 
     // a generic component for a range slider that emits change events on a shared event bus
@@ -10,6 +9,7 @@
             'maxValue', // max value of range slider
             'minValue', // min value of the range slider
             'outputFunction', // function for generating the output label of the range slider
+            'sliderId', // the id of the nouiSlider dom target
             'step', // range step value
             'values' // selected values as defined by the parent component
         ],
@@ -108,7 +108,7 @@
             sliderConfig() {
                 let _this = this,
                     sliderConfig = _this.sliderConfig,
-                    sliderId = 'no-ui-slider',
+                    sliderId = _this.sliderId,
                     sliderChangeEvent = 'change',
                     sliderChangeHandler = _this.sliderChangeHandler;
                 if (sliderId &&
