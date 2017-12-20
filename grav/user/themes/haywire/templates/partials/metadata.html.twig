@@ -3,7 +3,6 @@
 	<meta name="og:type" property="og:type" content="article" />
 	<meta name="og:url" property="og:url" content="{{ page.url(true) }}" />
 	<meta name="og:description" property="og:description" content="{{ page.content|length > 50 ? page.content|striptags|slice(0, 100) ~ '...' : page.content  }}" />
-	{{ dump(page.media[page.header.featured_image].cropResize(600, 315).html()) }}
 	{% if page.header.featured_image and page.media[page.header.featured_image].url %}
 		<meta name="og:image" property="og:image" content="{{ uri.base() }}{{ page.media[page.header.featured_image].cropResize(600, 315).url }}" />
 	{% else %}
