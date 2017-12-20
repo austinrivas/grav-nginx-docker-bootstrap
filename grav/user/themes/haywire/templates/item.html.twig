@@ -56,13 +56,13 @@
                     {{ page.content }}
                 </div>
 
-                {% if page.header.taxonomy.tags|length > 0 %}
+                {% if page.header.taxonomy.tag|length > 0 %}
                     <footer>
 
                         <p class="is-uppercase">Tags:</p>
 
                         <ul>
-                            {% for tag in page.header.taxonomy.tags %}
+                            {% for tag in page.header.taxonomy.tag %}
                                 <li><a href="/press/tag:{{ tag }}">{{ tag }}</a></li>
                             {% endfor %}
                         </ul>
