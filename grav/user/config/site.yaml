@@ -16,3 +16,5 @@ summary:
   delimiter: '==='
 blog:
   route: /press
+routes:
+    /properties/(.*): '/properties'
