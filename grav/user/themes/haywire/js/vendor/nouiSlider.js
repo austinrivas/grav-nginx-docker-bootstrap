@@ -1,4 +1,55 @@
 /*! nouislider - 10.0.0 - 2017-05-28 14:52:48 */
+/* Docs https://refreshless.com/nouislider/ */
+
+// EXAMPLE IMPLEMENTATION
+// var range = document.getElementById('range');
+//
+// range.style.height = '400px';
+// range.style.margin = '0 auto 30px';
+//
+// noUiSlider.create(range, {
+//     start: [ 1450, 2050, 2350, 3000 ], // 4 handles, starting at...
+//     margin: 300, // Handles must be at least 300 apart
+//     limit: 600, // ... but no more than 600
+//     connect: true, // Display a colored bar between the handles
+//     direction: 'rtl', // Put '0' at the bottom of the slider
+//     orientation: 'vertical', // Orient the slider vertically
+//     behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+//     step: 150,
+//     tooltips: true,
+//     format: wNumb({
+//         decimals: 0
+//     }),
+//     range: {
+//         'min': 1300,
+//         'max': 3250
+//     },
+//     pips: { // Show a scale with the slider
+//         mode: 'steps',
+//         stepped: true,
+//         density: 4
+//     }
+// });
+// var valuesDivs = [
+//     document.getElementById('range-value-1'),
+//     document.getElementById('range-value-2'),
+//     document.getElementById('range-value-3'),
+//     document.getElementById('range-value-4')
+// ];
+//
+// var diffDivs = [
+//     document.getElementById('range-diff-1'),
+//     document.getElementById('range-diff-2'),
+//     document.getElementById('range-diff-3')
+// ];
+//
+// // When the slider value changes, update the input and span
+// range.noUiSlider.on('update', function( values, handle ) {
+//     valuesDivs[handle].innerHTML = values[handle];
+//     diffDivs[0].innerHTML = values[1] - values[0];
+//     diffDivs[1].innerHTML = values[2] - values[1];
+//     diffDivs[2].innerHTML = values[3] - values[2];
+// });
 
 (function (factory) {
 
