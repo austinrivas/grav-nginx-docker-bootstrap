@@ -9,7 +9,8 @@ content:
         custom:
             - _hero
             - _featured-projects
-            - _content-block
+            - _content-tiles-1
+            - _content-tiles-2
             - _callouts
             - _content-block-bottom
             - _contact-cta
