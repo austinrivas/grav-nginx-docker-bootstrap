@@ -1,26 +1,14 @@
 <section class="callouts">
     <div class="content-wrapper">
         <div class="columns">
+        {% for callout in page.header.callouts %}
             <div class="column callout">
                 <div class="callout-container">
-                    <h2>SO MUCH TO DO</h2>
-                    <p>With miles of trails, parks and nature preserves, championship golf courses, a bustling Main Street
-    and more, Lakewood Ranch brings in visitors near and far.</p>
+                    <h2>{{ callout.title }}</h2>
+                    <p>{{ callout.description }}</p>
                 </div>
             </div>
-
-            <div class="column callout">
-                <div class="callout-container">
-                    <h2>WHERE BUSINESS GETS BETTER</h2>
-                    <p>Home to nearly 1,400 businesses and top-ranked schools and healthcare facilities, Lakewood Ranch is already an established hub for commercial opportunities.</p>
-                </div>
-            </div>
-            <div class="column callout">
-                <div class="callout-container">
-                    <h2>UNBEATABLE LOCATION</h2>
-                    <p>Lakewood Ranch offers space for ample growth and development just a short distance from major cities, cultural destinations, tourist attractions and international airports.</p>
-                </div>
-            </div>
+        {% endfor %}
         </div>
     </div>
 </section>
