@@ -24,12 +24,13 @@ persons:
 form:
     action: /contact-us
     name: Contact
-    classes: columns is-multiline
+    classes: columns is-multiline is-gapless
     buttons:
         - type: submit
           value: Submit
           classes: form-submit button is-primary
-          outerclasses: is-full
+          outerclasses: is-full columns is-gapless
+          classes: is-full column
     fields:
         - name: firstname
           label: First Name
