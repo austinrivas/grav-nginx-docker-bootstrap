@@ -2,7 +2,7 @@
 title: 'Contact Us'
 contact:
     label: 'Contact Us'
-    link: /contact
+    link: /contact-us
 ---
 
 Contact us directly with any questions or to learn more about commercial real estate opportunities.

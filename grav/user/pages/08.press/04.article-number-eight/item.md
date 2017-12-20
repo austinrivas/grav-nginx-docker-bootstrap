@@ -1,5 +1,6 @@
 ---
 title: 'Article Number Eight'
+featured_image: 000000.gif
 published: true
 publish_date: '08-12-2017 17:30'
 taxonomy:
