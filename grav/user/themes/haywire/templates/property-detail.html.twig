@@ -1,20 +1,38 @@
 {% extends 'partials/base.html.twig' %}
 
-{% block content %}
+{# Templates #}
+{% set heroTemplate = 'modular/hero.html.twig' %}
+{% set galleryTemplate = 'components/property-gallery.html.twig' %}
+{% set headerTemplate = 'components/property-header.html.twig' %}
+{% set infoTableTemplate = 'components/property-info-table.html.twig' %}
+{% set descriptionTemplate = 'components/property-description.html.twig' %}
+{% set accordionTemplate = 'components/property-accordion.html.twig' %}
 
+{# Content #}
+{% set heroHeadline = 'Property Not Found' %}
+
+{% block content %}
     <div v-if="urlParams.id">
-        {% include 'components/property-gallery.html.twig' %}
-        {% include 'components/property-header.html.twig' %}
-        {% include 'components/property-info-table.html.twig' %}
-        {% include 'components/property-description.html.twig' %}
-        {% include 'components/property-accordion.html.twig' %}
+        {%- include galleryTemplate with {} only -%}
+        {%- include headerTemplate with {} only -%}
+        {%- include infoTableTemplate with {} only -%}
+        {%- include descriptionTemplate with {} only -%}
+        {%- include accordionTemplate with {} only -%}
 
         {% for module in page.collection() %}
             {{ module.content }}
         {% endfor %}
     </div>
 
-    <div v-if="!urlParams.id">
-        <h1>Property not found with id: ${urlParams.id}</h1>
+    <div v-if="urlParams.id">
+        {%- include heroTemplate with {
+            page: {
+                header: {
+                    hero: {
+                        headline: heroHeadline
+                    }
+                }
+            }
+        } only -%}
     </div>
 {% endblock %}
