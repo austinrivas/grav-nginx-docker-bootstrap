@@ -1,4 +1,6 @@
 <script>
+    import _throttle from 'lodash/throttle'
+
     // a generic component for a range slider that emits change events on a shared event bus
     export default {
         props: [
@@ -43,6 +45,8 @@
                 outputFactory(values) { console.log('No output function for range slider', values) }, // mock outputFactory
                 sliderStep: 1,
                 sliderValues: [], // [ min, max ]
+                sliderAClass: 'slider-a',
+                sliderBClass: 'slider-b',
                 valueSliderA: null,
                 valueSliderB: null
             }
@@ -128,15 +132,27 @@
             },
             getSliderStyle(sliderValue) {
                 return {
-                    left: `${sliderValue < 2.5 ? 5 : 100}px`
+                    left: `${sliderValue < 2.5 ? 0 : 100}px`
                 }
             },
-            sliderAChangeHandler(e) {
-                console.log('change sliderB', e);
-            },
-            sliderBChangeHandler(e) {
-                console.log('change sliderB', e)
-            }
+            sliderDragstartHandler: _throttle(function (e) {
+                console.log(`dragstart ${e.target.className} slider`, e.offsetX);
+            }, 100, {
+                leading: true,
+                trailing: false
+            }),
+            sliderDragHandler: _throttle(function (e) {
+                console.log(`drag ${e.target.className} slider`, e.offsetX);
+            }, 100, {
+                leading: true,
+                trailing: false
+            }),
+            sliderDragendHandler: _throttle(function (e) {
+                console.log(`dragend ${e.target.className} slider`, e.offsetX);
+            }, 100, {
+                leading: false,
+                trailing: true
+            })
         }
     }
 </script>

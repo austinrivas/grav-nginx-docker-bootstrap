@@ -4,12 +4,18 @@
          :data-min-value="minSliderValue"
          :data-max-value="maxSliderValue"
          :data-step="sliderStep">
-        <div class="slider-a"
-             @click="sliderAChangeHandler"
+        <div :class="sliderAClass"
+             draggable="true"
+             @dragstart="sliderDragstartHandler"
+             @drag="sliderDragHandler"
+             @dragend="sliderDragendHandler"
              :data-value="valueSliderA"
              :style="sliderAStyle"></div>
-        <div class="slider-b"
-             @click="sliderBChangeHandler"
+        <div :class="sliderBClass"
+             draggable="true"
+             @dragstart="sliderDragstartHandler"
+             @drag="sliderDragHandler"
+             @dragend="sliderDragendHandler"
              :data-value="valueSliderB"
              :style="sliderBStyle"></div>
     </div>
