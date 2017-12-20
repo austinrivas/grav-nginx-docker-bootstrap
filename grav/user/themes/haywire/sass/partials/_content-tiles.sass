@@ -50,18 +50,3 @@ section.content-blocks
                 img
                     object-fit: cover
 
-// Safari specific fix for tiles grid
-@include break-min($tablet)
-    @media only screen and (-webkit-min-device-pixel-ratio: 1)
-        section.content-blocks .columns
-            .column 
-                min-height: 400px;
-                height: 60vmax;
-                max-height: 720px;
-
-        section.content-blocks.content-tiles .columns
-                min-height: 400px;
-                height: 60vmax;
-                max-height: 720px;
-                .column
-                    height: 100%;

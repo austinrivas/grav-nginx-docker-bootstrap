@@ -17,12 +17,17 @@ mix.setPublicPath('dist')
     .options({
         processCssUrls: false
     })
-    .browserSync({
-        proxy: 'localhost',
-        port: 8000,
-        files: [
-            'dist/css/{*,**/*}.css',
-            'dist/js/{*,**/*}.js',
-            'templates/{*,**/*}.html.twig'
-        ]
-    });
+    .version();
+
+if (!mix.inProduction()) {
+    mix.webpackConfig({devtool: 'inline-source-map'})
+        .browserSync({
+            proxy: 'localhost',
+            port: 8000,
+            files: [
+                'dist/css/{*,**/*}.css',
+                'dist/js/{*,**/*}.js',
+                'templates/{*,**/*}.html.twig'
+            ]
+        });
+}

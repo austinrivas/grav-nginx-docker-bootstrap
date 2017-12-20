@@ -10,6 +10,7 @@
     // a pile of js that I had to write in order to retarget scroll events away from the map and back to the dom
     import RetargetMouseScroll from '../event-handlers/retarget-mouse-scroll'
 
+    // a reusable component that takes a collection of models with geometries and renders them into a esri map
     export default {
         props: [
             'collection' // the collection that is providing the models to render into the map
@@ -103,6 +104,7 @@
         },
 
         methods: {
+            // async function that creates the tooltip dom
             async createMarkerContent(model) {
                 let _this = this,
                     tooltipContainer = _this.parseHTML(`<div class="arcmap-tooltip-container"></div>`),
@@ -117,6 +119,7 @@
                 content.push(`<p>${model.status}</p>`);
                 content.push(`<p>${_this.$options.filters.currency(model.pricePerSqft)} PSF</p>`);
 
+                // reduce the content array into a dom container and return it
                 return content.reduce((accumulator, elementHTML) => {
                     if (accumulator && accumulator.appendChild) {
                         accumulator.appendChild(_this.parseHTML(elementHTML));

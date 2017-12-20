@@ -3,10 +3,10 @@
     export default {
         props: [
             'changeEvent', // named change event
+            'eventBus', // shared event bus
             'maxValue', // max value of range slider
             'minValue', // min value of the range slider
             'outputFunction', // function for generating the output label of the range slider
-            'parentEventBus', // shared event bus
             'step', // range step value
             'values' // selected values as defined by the parent component
         ],
@@ -17,10 +17,6 @@
             // if outputFunction is defined and a function, set it as the outputFactory
             if (_this.outputFunction && typeof _this.outputFunction === 'function') {
                 _this.outputFactory = _this.outputFunction;
-            }
-            // duck type parentEventBus prior to application
-            if (_this.parentEventBus && _this.parentEventBus.$on && _this.parentEventBus.$emit) {
-                _this.eventBus = _this.parentEventBus;
             }
         },
 
@@ -39,16 +35,7 @@
         },
 
         data() {
-            let _this = this;
             return {
-                eventBus: { // mock event bus
-                    $on() {
-                        console.log('No parent event bus defined', _this.parentEventBus);
-                    },
-                    $emit() {
-                        console.log('No parent event bus defined', _this.parentEventBus);
-                    }
-                },
                 minSliderValue: null,
                 maxSliderValue: null,
                 outputFactory(values) { console.log('No output function for range slider', values) }, // mock outputFactory
@@ -68,6 +55,16 @@
         },
 
         watch: {
+            // watch the valueSliderA prop
+            async valueSliderA() {
+                let _this = this;
+                _this.sliderValues = await _this.getSliderValues();
+            },
+            // watch the valueSliderB prop
+            async valueSliderB() {
+                let _this = this;
+                _this.sliderValues = await _this.getSliderValues();
+            },
             // watch the maxValue prop
             maxValue() {
                 let _this = this;
@@ -92,16 +89,6 @@
                     _this.valueSliderA = _this.values[0];
                     _this.valueSliderB = _this.values[1];
                 }
-            },
-            // watch the valueSliderA prop
-            async valueSliderA() {
-                let _this = this;
-                _this.sliderValues = await _this.getSliderValues();
-            },
-            // watch the valueSliderB prop
-            async valueSliderB() {
-                let _this = this;
-                _this.sliderValues = await _this.getSliderValues();
             }
         },
 

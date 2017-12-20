@@ -1,14 +1,24 @@
 {% extends "partials/base.html.twig" %}
 
 {% set propertyAggregateTemplate = 'components/property-aggregate.html.twig' %}
+{% set esriMapCSS = 'https://js.arcgis.com/4.4/esri/css/main.css' %}
 
 {% block head %}
     {{ parent() }}
-    <link rel="stylesheet" href="https://js.arcgis.com/4.4/esri/css/main.css">
+    <link rel="stylesheet" href="{{ esriMapCSS }}">
 {% endblock %}
 
 {% block content %}
-    {% include propertyAggregateTemplate with {} only %}
+    <page-state inline-template>
+        <property-aggregate
+            :event-bus="eventBus"
+            :filter="urlParams.filter"
+            :raw-filter-value="urlParams.filterValue"
+            :update-url-params-event="updateUrlParamsEvent"
+            inline-template>
+            {% include propertyAggregateTemplate with {} only %}
+        </property-aggregate>
+    </page-state>
 {% endblock %}
 
 {% block bottom %}
