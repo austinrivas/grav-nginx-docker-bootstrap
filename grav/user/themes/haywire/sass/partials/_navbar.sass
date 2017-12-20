@@ -4,6 +4,8 @@
     flex-flow: row wrap
     .page-loader-bar
         @extend .is-bg-blue-tiffany
+        position: absolute
+        bottom: 0
         width: 100%
         height: 8px
     .navbar-burger
@@ -37,6 +39,8 @@
 
     .logo
         margin: 2rem 0
+        a:hover
+            background-color: transparent
     .logo-mobile
         margin: 0.7rem 0
     .fav-buttons-set
@@ -79,6 +83,10 @@
                     @extend .is-blue-tiffany
                     font-weight: 600
                     background-color: transparent
+                    @include break-max($desktop)
+                        color: $blue-dark
+                    &:after
+                        border-left-color: $blue-tiffany
                 @include break-max($desktop)
                     padding: 0.85rem 1.4rem
                 @include break-max($tablet)
@@ -90,16 +98,40 @@
             .navbar-item.has-dropdown
                 padding: 0
                 .navbar-dropdown
+                    @extend .is-bg-blue-tiffany
+                    border-color: transparent
+                    box-shadow: none
+                    left: 40px
+                    @include break-max($widescreen)
+                        left: 18%
+                    @include break-max($fullhd)
+                        left: 16%
                     a
                         justify-content: flex-start
+                        color: $white
+                        font-weight: 600
+                        padding-left: 0.7rem
+                        font-size: 14px
+                        @include break-max($desktop)
+                            color: $blue-dark
+                            font-weight: normal
+                        &:hover
+                            color: $cream
+                        @include break-max($desktop)
+                            color: $blue-dark
             .navbar-dropdown .navbar-item:before
                 @include break-max($desktop)
                     content: "\2014"
+                    color: $blue-dark
             a
                 text-transform: uppercase
                 @extend .is-olive
                 @include break-max($desktop)
                     color: $blue-dark
+                    &.is-active
+                        color: $blue-dark
+                        font-weight: 600
+
                 &:after
                     border-left: 7px solid $olive
                     border-right: 7px solid transparent
