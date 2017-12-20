@@ -9,16 +9,14 @@
 {% endblock %}
 
 {% block content %}
-    <page-state inline-template>
-        <property-aggregate
-            :event-bus="eventBus"
-            :filter="urlParams.filter"
-            :raw-filter-value="urlParams.filterValue"
-            :update-url-params-event="updateUrlParamsEvent"
-            inline-template>
-            {% include propertyAggregateTemplate with {} only %}
-        </property-aggregate>
-    </page-state>
+    <property-aggregate
+        :event-bus="eventBus"
+        :filter="urlParams.filter"
+        :raw-filter-value="urlParams.filterValue"
+        :update-url-params-event="updateUrlParamsEvent"
+        inline-template>
+        {% include propertyAggregateTemplate with {} only %}
+    </property-aggregate>
 {% endblock %}
 
 {% block bottom %}
