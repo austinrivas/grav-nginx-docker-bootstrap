@@ -24,7 +24,7 @@ persons:
 form:
     action: /contact-us
     name: Contact
-    classes: columns is-multiline is-gapless
+    classes: columns is-multiline is-desktop
     buttons:
         - type: submit
           value: Submit

@@ -1,3 +1,8 @@
+{# Templates #}
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+{# Vars #}
 {# Featured Image // last image uploaded for now #}
 {% set rowImage = page.media.images|last %}
 
@@ -7,22 +12,38 @@ no class - default blue bg / white text
 is-tile-white - gold text / on cream bg
 is-tile-blue-tiffany - blue tiff bg / blue-dark text
 is-tile-blue-tiffany-white - blue tiff bg / white text
-
+is-tile-bg-primary-white - blue dark bg / golden titles
+is-tile-bg-invert-blue - blue tiffany bg /  blue titles
 is-inverse - changes content/image tile positions within a row
 #}
 
 <section class="content-blocks content-tiles {{ page.header.class }}">
-    <div class="container">
+    <div class="container is-fluid">
         <div class="columns is-gapless">
             <div class="column is-half">
-                <figure class="image is-square">
+                <figure class="image">
                     {{ rowImage }}
                 </figure>
             </div>
 
             <div class="column is-half is-column-text">
                 <div class="content-tile">
+                    {% if page.header.titles.subtitle %}
+                    <h3>
+                        {{ page.header.titles.subtitle }}
+                    </h3>
+                    {% endif %}
+                    {% if page.header.titles.title %}
+                    <h2>
+                        {{ page.header.titles.title }}
+                    </h2>
+                    {% endif %}
                     {{ content }}
+                    {% if page.header.buttons %}
+                        {% for button in page.header.buttons %}
+                                {% include buttonTemplate with { content: button.label, class: button.class, href: button.link } only %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         </div>

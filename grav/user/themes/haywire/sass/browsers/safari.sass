@@ -3,17 +3,12 @@
     text-align: center;
     justify-content: center;
     align-content: center;
-    display: inline-block !important;
-    flex-direction: column;
+    display: flex !important;
+    justify-content: center;
+    align-content: center;
     align-items: center;
-    padding-top: .8em;
-    &:not(.is-primary-invert)
-        height: 70px;
-
-    &.is-primary-invert
-        padding: 1em;
-        height: auto;
-        line-height: 1.25em;
+    height: auto;
+    padding: 20px 0;
 
 
 // Safari specific fix for tiles grid
@@ -22,12 +17,12 @@
         .column 
             min-height: 400px;
             height: 60vmax;
-            max-height: 720px;
+            max-height: 80vh;
 
     section.content-blocks.content-tiles .columns
         min-height: 400px;
         height: 60vmax;
-        max-height: 720px;
+        max-height: 80vh;
         .column
             height: 100%;
 

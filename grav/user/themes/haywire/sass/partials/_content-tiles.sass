@@ -14,6 +14,32 @@ section.content-blocks.content-tiles
             @extend .is-bg-blue-tiffany
             h3,p,strong
                 @extend .is-blue-dark
+    &.is-tile-bg-primary-white
+        .is-column-text
+            @extend .is-bg-blue-dark
+            h3
+                @extend .is-uppercase
+                @extend .is-gold-light
+            h2
+                @extend .is-uppercase
+                @extend .is-blue-tiffany
+            p
+                @extend .is-white
+            h2, h3, p
+                @extend .has-text-centered
+                width: 100%
+                flex-basis: 50px
+    &.is-tile-bg-invert-blue
+        .is-column-text
+            @extend .is-bg-blue-tiffany
+            h3
+                @extend .is-uppercase
+                @extend .is-gold-light
+            h2
+                @extend .is-uppercase
+                @extend .is-blue-dark
+            p
+                @extend .is-white
     &.is-tile-blue-tiffany-white
         .is-column-text
             @extend .is-bg-blue-tiffany
@@ -34,20 +60,18 @@ section.content-blocks.content-tiles
         strong
             @extend .is-cream
 
-    h1, h2, h3
-        @extend .type__content-tile--secondary-heading
-
 
 section.content-blocks
-    .column 
-        figure 
-            height: 100%;
+    .column
+        figure
+            height: 100%
             img
                 position: absolute
                 top: 0
                 left: 0
                 font-family: 'object-fit: cover;'
                 width: 100%
+                height: 100%
 
             @supports (object-fit: cover)
                 img
