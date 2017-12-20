@@ -69,10 +69,10 @@
             sliderConfig() {
                 let _this = this,
                     sliderConfig = _this.sliderConfig,
-                    sliderId = _this.sliderId,
+                    sliderDomTarget = _this.getSliderDomTarget(_this.sliderId),
                     sliderChangeEvent = _this.noUiSliderChangeEvent,
                     sliderChangeHandler = _this.sliderChangeHandler;
-                if (sliderId &&
+                if (sliderDomTarget &&
                     sliderChangeEvent &&
                     sliderChangeHandler &&
                     sliderConfig.range.min &&
@@ -80,7 +80,7 @@
                     sliderConfig.start &&
                     sliderConfig.start.length === 2 &&
                     sliderConfig.step) {
-                    _this.slider = _this.createSlider(sliderId, sliderChangeEvent, sliderConfig, sliderChangeHandler)
+                    _this.slider = _this.createSlider(sliderDomTarget, sliderChangeEvent, sliderConfig, sliderChangeHandler)
                 }
             },
             // watch the slider values prop and update the noUiSlider instance if it is defined
@@ -94,8 +94,7 @@
 
         methods: {
             // create a noUiSlider component and attach it to the target element
-            createSlider(id, changeEvent, config, changeHandler) {
-                let slider = document.getElementById(id);
+            createSlider(slider, changeEvent, config, changeHandler) {
                 Slider.create(slider, config);
                 slider.noUiSlider.on(changeEvent, changeHandler);
                 return slider;
@@ -112,6 +111,10 @@
                     start: values,
                     step: step
                 }
+            },
+            getSliderDomTarget(id) {
+              let _this = this;
+              return _this.$el.querySelector(`.${id}`);
             },
             // event handler for the noUiSlider change event
             sliderChangeHandler(values, handle, unencoded, tap, positions) {
