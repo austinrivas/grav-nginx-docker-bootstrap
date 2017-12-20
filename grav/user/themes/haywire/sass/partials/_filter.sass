@@ -1,38 +1,13 @@
 .property-filter
     @extend .is-bg-cream
-    .is-range-slider-2
-        .rangeValues
-            @extend .has-text-centered
-            display: block
-        .range
-            @extend .is-bg-gold
-            position: relative
-            top: 10px
-            height: 5px
-            border-radius: 5px
-        .slider-a, .slider-b
-            @extend .is-bg-white
-            height: 20px
-            width: 20px
-            border-radius: 50%
-            position: absolute
-            top: -7px
-            border: 1px solid $gold
-            box-shadow: 0 0 5px rgba(0 ,0, 0, 0.2)
-            &:hover
-                background: $gold
-                cursor: pointer
+    .range-slider
+        @extend .is-range-slider
 
     .columns
         margin-left: 0
         margin-top: 0
         margin-right: 0
         margin-bottom: 0
-    .rangeValues
-        color: $gold
-        font-weight: 600
-        position: relative
-        top: -1px
     .button
         width: 330px
         @include break-max($tablet)

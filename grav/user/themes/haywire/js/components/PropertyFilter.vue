@@ -35,7 +35,6 @@
         // runs when component is attached to the DOM
         async mounted() {
             let _this = this;
-
             // get the arc field names based on the filterable keys
             _this.fields = await _this.getFilterFields(_this.filters);
             // get the labels for the top level filters to be displayed as select options
@@ -54,6 +53,7 @@
                 filterValueChangeEvent: 'filterValueChanged', // named event for the value of a filter changing
                 filterOptions: [], // initial filter options
                 rangeFilterFields: [], // initial range filterable fields
+                rangeSliderId: 'range-slider-dom-target',
                 rangeSliderChangeEvent: 'rangeSliderChanged', // named event for range slider change
                 rangeSliderValues: null, // initial range slider value
                 rangeSliderMinValue: null, // initial range slider min value
@@ -283,7 +283,7 @@
                 let _this = this;
                 // set the currently selected top level filter
                 _this.selectedFilterField = filter && filters[_this.filter] ? filters[filter].field : _this.defaultUnselectedValue;
-                // set the value for the currently selected filter
+                // set the value for the currently selected filters
                 if (filter && filters && filters[filter]) {
                     if (filters[filter].type === _this.enumerableType) {
                         _this.selectedFilterValue = filterValue ? filterValue : _this.defaultUnselectedValue;
