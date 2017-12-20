@@ -3,26 +3,28 @@
 <html lang="{{ grav.language.getLanguage ?: 'en' }}">
 <head>
     {% block head %}
-        {% include 'partials/head.html.twig' %}
+        {%- include 'partials/head.html.twig' -%}
         {%- include 'partials/svg-sprite.html.twig' -%}
     {% endblock %}
 </head>
 <body class="{{ page.header.body_classes }}">
 
-{# Wrapping our content in #app to allow vue components #}
-<div id="app">
+    {# Wrapping our content in #app to allow vue components #}
+    <div id="app">
+        <page-state inline-template>
+            <div class="page-state-wrapper">
+                {%- include 'partials/navbar.html.twig' -%}
 
-    {% include 'partials/navbar.html.twig' %}
+                {% block content %}{% endblock %}
 
-        {% block content %}{% endblock %}
+                {%- include 'partials/footer.html.twig' -%}
+            </div>
+        </page-state>
+    </div>
 
-    {% include 'partials/footer.html.twig' %}
-
-</div>
-
-{% block bottom %}
-    {{ assets.js('bottom') }}
-{% endblock %}
+    {% block bottom %}
+        {{ assets.js('bottom') }}
+    {% endblock %}
 
 </body>
 </html>

@@ -1,0 +1,55 @@
+{% extends 'partials/base.html.twig' %}
+
+{# Templates #}
+{% set heroTemplate = 'modular/hero.html.twig' %}
+{% set galleryTemplate = 'components/property-gallery.html.twig' %}
+{% set headerTemplate = 'components/property-header.html.twig' %}
+{% set infoTableTemplate = 'components/property-info-table.html.twig' %}
+{% set descriptionTemplate = 'components/property-description.html.twig' %}
+{% set accordionTemplate = 'components/property-accordion.html.twig' %}
+
+{# Content #}
+{% set loadingHeadline = 'Loading Property Details' %}
+{% set notFoundHeadline = 'Property Not Found' %}
+
+{% block content %}
+    <property-detail :id="urlParts[4]" inline-template>
+        <div class="property-detail-container">
+            <div v-if="loading">
+                {%- include heroTemplate with {
+                    page: {
+                        header: {
+                            hero: {
+                                headline: loadingHeadline
+                            }
+                        }
+                    }
+                } only -%}
+            </div>
+
+            <div class="property-details" v-if="propertyExists">
+                {%- include galleryTemplate with {} only -%}
+                {%- include headerTemplate with {} only -%}
+                {%- include infoTableTemplate with {} only -%}
+                {%- include descriptionTemplate with {} only -%}
+                {%- include accordionTemplate with {} only -%}
+
+                {% for module in page.collection() %}
+                    {{ module.content }}
+                {% endfor %}
+            </div>
+
+            <div v-if="!propertyExists && !loading">
+                {%- include heroTemplate with {
+                    page: {
+                        header: {
+                            hero: {
+                                headline: notFoundHeadline
+                            }
+                        }
+                    }
+                } only -%}
+            </div>
+        </div>
+    </property-detail>
+{% endblock %}
