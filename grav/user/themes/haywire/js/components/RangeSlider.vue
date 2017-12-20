@@ -1,4 +1,6 @@
 <script>
+    import _throttle from 'lodash/throttle'
+
     // a generic component for a range slider that emits change events on a shared event bus
     export default {
         props: [
@@ -25,13 +27,15 @@
             let _this = this;
             // default slider step
             _this.sliderStep = _this.step ? _this.step : _this.sliderStep;
-            _this.minSliderValue = _this.minValue;
-            _this.maxSliderValue = _this.maxValue;
+            // set the min / max values of the slider based on input props
+            [_this.minSliderValue, _this.maxSliderValue] = [_this.minValue, _this.maxValue];
             // if values are defined use them, else use min / max values for initial selected state
-            _this.valueSliderA = _this.values && _this.values.length === 2 ? _this.values[0] : _this.minSliderValue;
-            _this.valueSliderB = _this.values && _this.values.length === 2 ? _this.values[1] : _this.maxSliderValue;
+            [_this.valueSliderA, _this.valueSliderB] = [
+                _this.values && _this.values.length === 2 ? _this.values[0] : _this.minSliderValue,
+                _this.values && _this.values.length === 2 ? _this.values[1] : _this.maxSliderValue
+            ];
             // order the selected slider values [ min, max ]
-            _this.sliderValues = await _this.getSliderValues([_this.valueSliderA, _this.valueSliderB]);
+            _this.sliderValues = await _this.getSliderValues(_this.valueSliderA, _this.valueSliderB, _this.bitwiseArraySwap);
         },
 
         data() {
@@ -41,6 +45,8 @@
                 outputFactory(values) { console.log('No output function for range slider', values) }, // mock outputFactory
                 sliderStep: 1,
                 sliderValues: [], // [ min, max ]
+                sliderAClass: 'slider-a',
+                sliderBClass: 'slider-b',
                 valueSliderA: null,
                 valueSliderB: null
             }
@@ -51,6 +57,14 @@
             sliderOutput() {
                 let _this = this;
                 return _this.outputFactory(_this.sliderValues);
+            },
+            sliderAStyle() {
+                let _this = this;
+                return _this.getSliderStyle(_this.valueSliderA);
+            },
+            sliderBStyle() {
+                let _this = this;
+                return _this.getSliderStyle(_this.valueSliderB);
             }
         },
 
@@ -58,12 +72,12 @@
             // watch the valueSliderA prop
             async valueSliderA() {
                 let _this = this;
-                _this.sliderValues = await _this.getSliderValues();
+                _this.sliderValues = await _this.getSliderValues(_this.valueSliderA, _this.valueSliderB, _this.bitwiseArraySwap);
             },
             // watch the valueSliderB prop
             async valueSliderB() {
                 let _this = this;
-                _this.sliderValues = await _this.getSliderValues();
+                _this.sliderValues = await _this.getSliderValues(_this.valueSliderA, _this.valueSliderB, _this.bitwiseArraySwap);
             },
             // watch the maxValue prop
             maxValue() {
@@ -86,21 +100,26 @@
                 let _this = this;
                 // when values changes set the valueSliderA, valueSliderB props accordingly
                 if (_this.values && _this.values.length === 2) {
-                    _this.valueSliderA = _this.values[0];
-                    _this.valueSliderB = _this.values[1];
+                    [_this.valueSliderA, _this.valueSliderB] = [_this.values[0], _this.values[1]];
+                }
+            },
+            // watch for changes to sliderValues and emit change events
+            sliderValues() {
+                let _this = this;
+                // if changeEvent is defined emit a change event on the shared event bus using the current values of the slider
+                if (_this.changeEvent && _this.changeEvent.length) {
+                    _this.eventBus.$emit(_this.changeEvent, _this.sliderValues);
                 }
             }
         },
 
         methods: {
             // parse the values for slider A and slider B into an array and then do a bitwise array swap to order the values in [ min, max ] order
-            async getSliderValues() {
-                let _this = this,
-                    array = await [_this.valueSliderA, _this.valueSliderB].reduce((accumulator, value) => {
-                        accumulator.push(JSON.parse(value));
-                        return accumulator;
-                    }, []);
-                return _this.bitwiseArraySwap(array);
+            async getSliderValues(valueA, valueB, sortingFunction) {
+                return sortingFunction(await [valueA, valueB].reduce((accumulator, value) => {
+                    accumulator.push(JSON.parse(value));
+                    return accumulator;
+                }, []));
             },
             // order the 2 elements of a [ number, number ] array in [ min, max ] order
             bitwiseArraySwap(array) {
@@ -111,14 +130,29 @@
                 }
                 return array;
             },
-            // change handler for slider values
-            handleChange(e) {
-                let _this = this;
-                // if changeEvent is defined emit a change event on the shared event bus using the current values of the slider
-                if (_this.changeEvent && _this.changeEvent.length) {
-                    _this.eventBus.$emit(_this.changeEvent, _this.sliderValues);
+            getSliderStyle(sliderValue) {
+                return {
+                    left: `${sliderValue < 2.5 ? 0 : 100}px`
                 }
-            }
+            },
+            sliderDragstartHandler: _throttle(function (e) {
+                console.log(`dragstart ${e.target.className} slider`, e.offsetX);
+            }, 100, {
+                leading: true,
+                trailing: false
+            }),
+            sliderDragHandler: _throttle(function (e) {
+                console.log(`drag ${e.target.className} slider`, e.offsetX);
+            }, 100, {
+                leading: true,
+                trailing: false
+            }),
+            sliderDragendHandler: _throttle(function (e) {
+                console.log(`dragend ${e.target.className} slider`, e.offsetX);
+            }, 100, {
+                leading: false,
+                trailing: true
+            })
         }
     }
 </script>

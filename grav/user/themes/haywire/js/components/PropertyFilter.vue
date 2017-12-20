@@ -283,7 +283,7 @@
                 let _this = this;
                 // set the currently selected top level filter
                 _this.selectedFilterField = filter && filters[_this.filter] ? filters[filter].field : _this.defaultUnselectedValue;
-                // set the value for the currently selected filter
+                // set the value for the currently selected filters
                 if (filter && filters && filters[filter]) {
                     if (filters[filter].type === _this.enumerableType) {
                         _this.selectedFilterValue = filterValue ? filterValue : _this.defaultUnselectedValue;
