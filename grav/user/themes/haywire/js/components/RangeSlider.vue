@@ -136,19 +136,19 @@
                 }
             },
             sliderDragstartHandler: _throttle(function (e) {
-                console.log(`dragstart ${e.target.className} slider`, e.offsetX);
+                console.log(`dragstart ${e.target.className} slider`, e.clientX);
             }, 100, {
                 leading: true,
                 trailing: false
             }),
             sliderDragHandler: _throttle(function (e) {
-                console.log(`drag ${e.target.className} slider`, e.offsetX);
+                console.log(`drag ${e.target.className} slider`, e.clientX);
             }, 100, {
                 leading: true,
                 trailing: false
             }),
             sliderDragendHandler: _throttle(function (e) {
-                console.log(`dragend ${e.target.className} slider`, e.offsetX);
+                console.log(`dragend ${e.target.className} slider`, e.clientX);
             }, 100, {
                 leading: false,
                 trailing: true
