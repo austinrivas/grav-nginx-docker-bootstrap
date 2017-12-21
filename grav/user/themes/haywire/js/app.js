@@ -17,6 +17,7 @@ import VueCurrencyFilter from './filters/vue-currency-filter';
 import EventBus from './event-handlers/event-bus';
 
 // Vue Components
+import Accordion from './components/Accordion';
 import ArcMap from './components/ArcMap.vue';
 import Articles from './components/Articles.vue';
 import FavoriteIcon from './components/FavoriteIcon.vue';
@@ -38,6 +39,7 @@ import SelectFilter from './components/SelectFilter.vue';
 import NewsletterSignup from './components/NewsletterSignup.vue';
 
 // Vue Component declaration
+Vue.component('accordion', Accordion);
 Vue.component('arcmap', ArcMap);
 Vue.component('articles', Articles);
 Vue.component('favorite-icon', FavoriteIcon);

@@ -4,9 +4,7 @@
     export default {
         props: [
             'id',
-            'description',
-            'contactName',
-            'contactPhoneNumber'
+            'description'
         ],
 
         async mounted() {
@@ -24,13 +22,6 @@
             async id() {
                 let _this = this;
                 _this.collection = await _this.createCollection(_this.id);
-            }
-        },
-
-        computed: {
-            phoneNumberHref() {
-                let _this = this;
-                return `tel:${_this.contactPhoneNumber}`
             }
         },
 

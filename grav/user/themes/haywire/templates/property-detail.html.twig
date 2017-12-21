@@ -6,7 +6,7 @@
 {% set headerTemplate = 'components/property-header.html.twig' %}
 {% set infoTableTemplate = 'components/property-info-table.html.twig' %}
 {% set descriptionTemplate = 'components/property-description.html.twig' %}
-{% set accordionTemplate = 'components/property-accordion.html.twig' %}
+{% set accordionTemplate = 'components/accordion.html.twig' %}
 
 {# Content #}
 {% set loadingHeadline = 'Loading Property Details' %}
@@ -57,8 +57,6 @@
                 </property-info-table>
                 <property-description
                     :id="propertyId"
-                    :contact-name="contactName"
-                    :contact-phone-number="contactPhoneNumber"
                     :description="propertyDescription"
                     inline-template>
                     {%- include descriptionTemplate with {
@@ -66,7 +64,11 @@
                         contactPhoneNumber: page.header.contact.phone
                     } only -%}
                 </property-description>
-                {%- include accordionTemplate with {} only -%}
+                <accordion
+                    :tabs="propertyTabs"
+                    inline-template>
+                    {%- include accordionTemplate with {} only -%}
+                </accordion>
 
                 {% for module in page.collection() %}
                     {{ module.content }}

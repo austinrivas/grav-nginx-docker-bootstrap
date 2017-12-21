@@ -1,0 +1,11 @@
+<section class="accordion">
+    <div class="container">
+        <div class="tab" v-for="tab, index in tabs">
+            <input :id="tabId(index)" type="checkbox" name="tabs" />
+            <label :for="tabId(index)">${ tab.label }</label>
+            <div class="tab-content">
+                <p>${ tab.content }</p>
+            </div>
+        </div>
+    </div>
+</section>

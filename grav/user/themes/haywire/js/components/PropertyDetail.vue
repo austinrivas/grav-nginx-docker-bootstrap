@@ -11,8 +11,6 @@
 
         data() {
           return {
-              contactName: 'John Doe',
-              contactPhoneNumber: '407-123-4567',
               loading: true,
               property: false
           }
@@ -102,6 +100,17 @@
                     models.push(_this.property);
                 }
                 return models;
+            },
+            propertyTabs() {
+                return [
+                    {
+                        label: 'Test',
+                        content: 'This accordion needs content.'
+                    },{
+                        label: 'Test2',
+                        content: 'This accordion needs content also.'
+                    }
+                ]
             },
             propertyUses() {
                 let _this = this;
