@@ -69,6 +69,8 @@
                 MapView: null, // esri module
                 Point: null, // esri module
                 SimpleMarkerSymbol: null, // esri module
+                defaultZoom: 16, // default zoom level for a empty or single location map
+                defaultCenter: [0,0], // default center for an empty map
                 extent: null, // the current map extent / zoom
                 featureLayer: null, // the current featureLayer
                 featureServer: {url: null}, // the featureServer initialization object
@@ -82,24 +84,12 @@
         watch: {
             // watch the collection for changes and rerender the map with the new models
             async collection() {
-                const _this = this,
-                    // named mouse-wheel event
-                    mouseWheelEvent = "mouse-wheel";
-                // if collection is defined and it contains models
-                if (_this.collection && _this.collection.length) {
-                    // reset the extent
-                    _this.extent = _this.getInitialExtent();
-                    // reset the currently rendered graphics and remove them from the map
-                    _this.graphics = _this.removeAllMarkers(_this.graphics, _this.mapView);
-                    // initialize a new map view using the current map and container
-                    _this.mapView = new _this.MapView({ container: _this.mapNodeSelector, map: _this.map });
-                    // stop propagation of mouse-wheel events to prevent esri from breaking itself
-                    _this.mapView.on(mouseWheelEvent, _this.stopPropagation);
-                    // add the collection models to the map
-                    await _this.collection.forEach(_this.addModelToMap);
-                    // set the new map extent defined during the collection -> addModelToMap loop
-                    _this.mapView.extent = _this.extent;
-                }
+                let _this = this;
+                await _this.renderMap(_this.collection, _this.MapView, _this.defaultZoom, _this.defaultCenter);
+            },
+            async MapView() {
+                let _this = this;
+                await _this.renderMap(_this.collection, _this.MapView, _this.defaultZoom, _this.defaultCenter);
             }
         },
 
@@ -127,15 +117,43 @@
                     return accumulator;
                 }, tooltipContainer);
             },
+            async renderMap(collection, MapView, zoom, center) {
+                const _this = this,
+                    // named mouse-wheel event
+                    mouseWheelEvent = "mouse-wheel";
+                // if collection is defined and it contains models
+                if (collection && MapView) {
+                    // reset the extent
+                    _this.extent = _this.getInitialExtent();
+                    // reset the currently rendered graphics and remove them from the map
+                    _this.graphics = _this.removeAllMarkers(_this.graphics, _this.mapView);
+                    // initialize a new map view using the current map and container
+                    _this.mapView = new MapView({ container: _this.mapNodeSelector, map: _this.map });
+                    // stop propagation of mouse-wheel events to prevent esri from breaking itself
+                    _this.mapView.on(mouseWheelEvent, _this.stopPropagation);
+                    // add the collection models to the map
+                    await collection.forEach(_this.addModelToMap);
+
+                    if (collection.length > 1) {
+                        // set the new map extent defined during the collection -> addModelToMap loop
+                        _this.mapView.extent = _this.extent;
+                    } else {
+                        _this.mapView.zoom = zoom;
+                        _this.mapView.center = collection.length === 1 ? collection[0].centroid : center;
+                    }
+                }
+            },
             // an iterator function that takes a model and adds it to the arc map
             addModelToMap(model) {
                 let _this = this,
                     // create an svg graphic marker from the model
                     graphic = _this.createMarker(model);
-                // add the graphic marker to the graphics array
-                _this.graphics.push({graphic: graphic});
-                // add the graphic to the map view
-                _this.mapView.graphics.add(graphic);
+                if (graphic) {
+                    // add the graphic marker to the graphics array
+                    _this.graphics.push({graphic: graphic});
+                    // add the graphic to the map view
+                    _this.mapView.graphics.add(graphic);
+                }
                 // update the extent of the map with the new model
                 _this.extent = _this.getMapExtent(model, _this.extent);
             },

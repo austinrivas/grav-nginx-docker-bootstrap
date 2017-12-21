@@ -32,6 +32,10 @@
                 let _this = this;
                 return _this.property && _this.property.dateAvailable ? _this.property.dateAvailable : 'Unknown';
             },
+            propertyDescription() {
+                let _this = this;
+                return _this.property && _this.property.description && _this.property.description.length > 1 ? _this.property.description : "No Description Available";
+            },
             propertyHeaderTitle() {
                 // empty array for holding title elements
                 let _this = this,
@@ -51,6 +55,10 @@
                 }
                 // if model is defined join the title elements into a property title
                 return _this.property && title.length ? title.join(' - ') : false;
+            },
+            propertyId() {
+                let _this = this;
+                return _this.property && _this.property.id ? _this.property.id : null;
             },
             propertyImages() {
                 let _this = this;
@@ -92,6 +100,17 @@
                     models.push(_this.property);
                 }
                 return models;
+            },
+            propertyTabs() {
+                return [
+                    {
+                        label: 'Test',
+                        content: 'This accordion needs content.'
+                    },{
+                        label: 'Test2',
+                        content: 'This accordion needs content also.'
+                    }
+                ]
             },
             propertyUses() {
                 let _this = this;
