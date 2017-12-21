@@ -2,7 +2,7 @@
 
 
 sync_env() {
-	rsync -avc push_dev@lc-www1:~/www.lwrcommercial.com/$1/pages ./pages
+	rsync -avc push_dev@lc-www1:~/www.lwrcommercial.com/$1/grav/user/pages/ ./grav/user/pages
 }
 
 
