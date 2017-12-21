@@ -1,0 +1,37 @@
+{# Templates #}
+{% set arcMapTemplate = 'components/arcmap.html.twig' %}
+{% set buttonTemplate  = 'partials/elements/button.html.twig' %}
+
+{# Classes #}
+{% set buttonClass     = 'is-primary' %}
+
+{# Labels #}
+{% set buttonHref      = '/contact-us' %}
+{% set buttonLabel     = 'Get in Touch' %}
+
+<section class="property-description">
+    <div class="container">
+        <div class="property-description-content">
+            <div class="columns">
+                <div class="column">
+                    <h2>Property Description</h2>
+                    <p>${description}</p>
+                    <h2>For More Information</h2>
+                    <div class="property-contact-info">
+                        {{ contactName }}
+                        <br>
+                        <a href="tel:{{ contactPhoneNumber }}">{{ contactPhoneNumber }}</a>
+                        {% include buttonTemplate with { content: buttonLabel, class: buttonClass, href: buttonHref } only %}
+                    </div>
+                </div>
+                <div class="column">
+                    <arcmap
+                        :collection="collection"
+                        inline-template>
+                        {% include arcMapTemplate with {} only %}
+                    </arcmap>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

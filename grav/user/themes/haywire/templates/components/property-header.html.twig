@@ -11,27 +11,36 @@
 {% set propDescr = 'Retail, Commercial, Residential' %}
 {% set propDateAvailable = 'July 2017' %}
 {% set buttonLabel = 'Request Info' %}
-{% set requestInfoHref = 'google.com' %}
+{% set requestInfoHref = '/contact-us' %}
 
 <section class="property-header">
-    <div class="container is-fluid">
+    <div class="container">
         <div class="columns">
             <div class="column">
-                {% include favPropTemplate only %}
+                <favorite-icon
+                    :id="id"
+                    inline-template>
+                    {% include favPropTemplate only %}
+                </favorite-icon>
             </div>
             <div class="column">
                 {% include shareTemplate only %}
             </div>
         </div>
         <div class="is-center">
-            <h2>{{ propTitle }}</h2>
+            <h2>${title}</h2>
         </div>
         <div class="is-center has-text-centered">
-            <p><strong>Uses: </strong>{{ propDescr }}<br><strong>Available date: </strong>{{ propDateAvailable }}</p>
+            <p>
+                <strong>Uses: </strong>
+                ${uses}
+                <br>
+                <strong>Available date: </strong>
+                ${dateAvailable}
+            </p>
         </div>
         <div class="is-center">
             {% include buttonTemplate with { content: buttonLabel, class: buttonClass, href: requestInfoHref } only %}
-        </div>
         </div>
     </div>
 </section>

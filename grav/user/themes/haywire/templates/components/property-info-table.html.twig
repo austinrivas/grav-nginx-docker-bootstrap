@@ -1,0 +1,21 @@
+{# Vue sortable tables component -
+    https://www.npmjs.com/package/vue-bulma-tables-2
+    https://github.com/daenuprobst/vue-tables-2#vue-component
+#}
+
+<section class="property-info-table">
+    <div class="container">
+        <table class="table is-fullwidth is-bordered">
+        <thead>
+            <tr>
+                <th v-for="header in headers">${header}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="row in rows">
+                <td v-for="value in row">${value}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</section>

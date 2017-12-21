@@ -8,6 +8,8 @@ server {
     server_name localhost;
     ## End - Server Info
 
+    include snippets/redirects.conf;
+
     ## Begin - Index
     # for subfolders, simply adjust:
     # `location /subfolder {`

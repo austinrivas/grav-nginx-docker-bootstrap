@@ -1,0 +1,11 @@
+<section class="property-gallery">
+    <div class="container">
+        <div class="columns is-gapless">
+            <div v-for="imageUrl in imageUrls" class="column">
+                <figure class="image is-4by3">
+                    <img :src="imageUrl">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>

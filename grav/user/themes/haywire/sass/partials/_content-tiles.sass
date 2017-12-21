@@ -78,4 +78,19 @@ section.content-blocks
             @supports (object-fit: cover)
                 img
                     object-fit: cover
+    .button
+        width: 100%;
+        max-width: 300px;
 
+
+// Mobile
+@include break-max($tablet)
+    section.content-blocks.content-tiles
+        .column 
+            width: 100%
+            min-height: 50vmin
+            max-height: 50vh
+            height: 100vh
+
+    section.content-blocks.content-blocks-bottom .content-tile
+        padding: 2em 5%;
