@@ -7,9 +7,8 @@
 {% set linkIconId     = 'icon__link' %}
 
 {# Vars #}
-{% set shareEmailURL  = 'google.com'%}
-{% set shareLinkURL   = 'google.com'%}
-
+{% set shareEmailURL  = "mailto:?subject=Lakewood Ranch Commercial: " ~ page.title ~ "&body=" ~ page.url(true) %}
+{% set shareLinkURL   = "https://www.facebook.com/sharer/sharer.php?u=" ~ page.url(true) %}
 
 <div class="share-block">
     <h4>Share</h4>
@@ -19,7 +18,7 @@
                 {% include buttonTemplate with { iconId: emailIconId, href: shareEmailURL } only %}
             </div>
             <div class="column is-narrow">
-                {% include buttonTemplate with { iconId: linkIconId , href: shareLinkURL} only %}
+                {% include buttonTemplate with { iconId: linkIconId , href: shareLinkURL } only %}
             </div>
         </div>
     </div>

@@ -1,11 +1,11 @@
-<!-- Templates -->
+{# Templates #}
 {% set iconTemplate = 'partials/svg-icon.html.twig' %}
 {% set buttonTemplate = 'partials/elements/button.html.twig' %}
 
-<!-- Labels -->
+{# Labels #}
 {% set buttonFavLabel = 'View Saved' %}
 
-<!-- Classes -->
+{# Classes #}
 {% set iconLogoId = 'icon__logo--header' %}
 {% set iconFavId = 'icon__favorite' %}
 {% set buttonFavClass = 'is-favorite' %}
@@ -27,14 +27,14 @@
                 href: buttonFavHref
             } only %}
         </div>
-        <div class="container is-hidden-touch">
+        <div class="container is-hidden-touch is-fluid">
             <div class="logo">
                 <a class="navbar-item" href="{{ base_url == '' ? '/' : base_url }}">
                     {% include iconTemplate with { iconId: iconLogoId } only %}
                 </a>
             </div>
         </div>
-        <div class="container">
+        <div class="container is-fluid">
 
             <div class="navbar-brand is-hidden-desktop">
                 <div class="logo-mobile">
@@ -56,5 +56,6 @@
                 {% endblock %}
             </div>
         </div>
+        <div class="page-loader-bar" style="width: 554px"></div>
     </nav>
 </navbar>

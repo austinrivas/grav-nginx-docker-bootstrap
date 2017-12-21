@@ -24,18 +24,15 @@ persons:
         phone: 555-666-7777
 #}
 <section class="contact is-fullheight">
-    <div class="columns">
-        <div class="container column is-8 is-bg-blue-light">
+    <div class="columns is-desktop">
+        <div class="container column is-8-desktop is-bg-blue-light is-fluid">
             <div class="form-container">
                 {{ content }}
-                <!-- <form method="" action="">
-                    {% include formTemplate only %}
-                </form> -->
                 {% include "forms/form.html.twig" %}
             </div>
         </div>
 
-        <aside class="column is-4 is-narrow-mobile is-fullheight section">
+        <aside class="column is-4-desktop is-narrow-mobile is-fullheight section">
             <h2>{{ page.header.contact.titleOne }}</h2>
             <p>{{ page.header.contact.address }}</p>
             <p>Phone: <a href="tel:{{ page.header.contact.phone }}">{{ page.header.contact.phone }}</a></p>

@@ -1,6 +1,8 @@
 {% block content %}
     <articles inline-template>
+
         {% set collection = page.collection() %}
+
         {% if page.header.classes %}
         <section class="press lwrc {{ page.header.classes }}">
         {% else %}
@@ -8,7 +10,9 @@
         {% endif %}
             <div class="press-body">
                 <div class="container">
-                	<div class="press-heading columns is-mobile is-multiline">
+
+                    
+                	<div v-show="{% if collection|length > 0 %}true{% else %}false{% endif %}" class="press-heading columns is-mobile is-multiline">
 
                 		<div class="column is-9-tablet is-9-desktop is-9-widescreen is-9-fullhd is-full-mobile press-title">
                 			<h1 class="type__media-tile--heading-featured is-uppercase">Press</h1>
@@ -16,15 +20,24 @@
 
                 		<div class="column is-3-tablet is-3-desktop is-3-widescreen is-3-fullhd is-full-mobile press-filters columns is-gapless">
                 			<div class="buttons is-blog-button-group" :ref="'filterGroup'" data-category="{{ uri.param('category') }}">
-                                <a :disabled="activeCategory == 'News'" class="button" href="/press/category:News">News</a>
-                                <a :disabled="activeCategory == 'Resources'" class="button" href="/press/category:Resources">Resources</a>
+                                <a :disabled="activeCategory == 'news'" class="button" href="/press/category:news">News</a>
+                                <a :disabled="activeCategory == 'resources'" class="button" href="/press/category:resources">Resources</a>
                 			</div>
                 		</div>
 
                 	</div>
+                    
 
 
                 	<div class="article-grid columns is-multiline">
+
+                        {% if collection|length < 1 %}
+                            <div class="column not-found">
+                                <h3 class="type__content-tile--primary-heading">Sorry no articles were found!</h3>
+                                <p>No articles were found taged with "{{ uri.param('tag') }}"</p>
+                                <a href="/press" class="button is-primary">Return to Press Articles</a>
+                            </div>
+                        {% endif %}
 
                 		{% for post in collection %}
                 		    {% include 'partials/article.html.twig' with {'loop': loop, 'post': post} %}
