@@ -96,6 +96,23 @@ section.press
 	section.press .article-grid article .article-container a.article-photo
 		height: 50%;
 
+	section.press .article-grid .not-found
+		justify-content: center;
+		align-content: center;
+		align-items: center;
+		display: flex;
+		padding: 10%;
+		margin: 0 auto;
+		> *
+			text-align: center;
+
+	section.press article#article-content header .share-icons
+		align-items: flex-start
+		justify-content: flex-start
+		display: flex
+		.share-block
+			margin-left: initial
+
 @include break-min($tablet)
 	section.press .article-grid article.is-8 .article-container
 		display: flex;
