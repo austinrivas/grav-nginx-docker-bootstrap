@@ -9,7 +9,7 @@ buttons:
         class: is-primary
         link: /about-us
     -
-        label: 'Around Lakewood Ranch'
+        label: 'About the surrounding area'
         class: is-primary
         link: /map/
 ---
