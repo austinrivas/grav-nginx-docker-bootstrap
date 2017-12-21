@@ -17,7 +17,11 @@
     <div class="container is-fluid">
         <div class="columns">
             <div class="column">
-                {% include favPropTemplate only %}
+                <favorite-icon
+                    :id="id"
+                    inline-template>
+                    {% include favPropTemplate only %}
+                </favorite-icon>
             </div>
             <div class="column">
                 {% include shareTemplate only %}
