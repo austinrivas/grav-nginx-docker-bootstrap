@@ -1,0 +1,35 @@
+{% if page.header.classes %}
+<section class="affiliations lwrc {{ page.header.classes }}">
+{% else %}
+<section class="affiliations lwrc is-bg-cream">
+{% endif %}
+    <div class="affiliations-body">
+        <div class="container">
+            {% if page.header.title %}
+                <h2 class="is-proxima-nova-bold type__data-section--heading is-uppercase">{{ page.header.title }}</h2>
+            {% endif %}
+
+            {% if page.content %}
+                <div class="content">
+                    {{ page.content }}
+                </div>
+            {% endif %}
+
+            <div class="columns is-multiline affiliations-container is-mobile is-variable is-8">
+
+                {% for affiliation in page.header.affiliations %}
+                    <div class="column is-one-quarter-desktop is-one-quarter-widescreen is-one-quarter-fullhd is-half-tablet is-half-mobile">
+
+                        <a href="{{ affiliation.link }}">
+                            <picture class="circle-img">
+                                <img class="object-fit" src="{{ page.media[affiliation.logo].url }}" alt="{{ affiliation.name }}">
+                            </picture>
+                        </a>
+
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</section>

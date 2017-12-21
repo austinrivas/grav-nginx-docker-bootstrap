@@ -1,0 +1,590 @@
+{% set halfRowCard = 'is-6' %}
+{% set iconCardType = 'icon' %}
+{% set inputCardType = 'input' %}
+{% set textAreaInputType = 'textarea' %}
+{% set selectInputType = 'select' %}
+{% set sliderInputType = 'range' %}
+{% set checkboxInputType = 'checkbox' %}
+{% set buttonCardType = 'button' %}
+{% set typographyCardType = 'typography' %}
+{% set colorCardType = 'color' %}
+{% set darkBgColor = 'is-bg-blue-dark' %}
+{% set goldBGColor = 'is-bg-gold-light' %}
+{% set sectionTemplate = 'partials/style-guide/section.html.twig' %}
+
+{% set buttonContent = card.buttonContent | default('Click Here') %}
+{% set selectOptions = [{
+        text: "Select an Option",
+        disabled: true,
+        selected: true
+    },{
+        value: '1',
+        text: "one"
+    },{
+        value: '2',
+        text: "two"
+    }]
+%}
+
+{% extends 'partials/base.html.twig' %}
+
+{% block content %}
+    <div class="container is-fluid">
+        <div class="columns">
+            <div class="column is-8 is-offset-2">
+
+                <div class="columns">
+                    <div class="column content">
+                        <h1>Style Guide</h1>
+                        <hr>
+                        {{ page.content }}
+                    </div>
+                </div>
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Form Elements',
+                    cardsPerRow: 2,
+                    cards: [{
+                        cardType: inputCardType,
+                        inputType: 'text',
+                        inputClass: 'is-primary'
+                    },{
+                        cardType: inputCardType,
+                        inputType: 'text',
+                        inputClass: 'is-primary-invert'
+                    },{
+                        cardType: inputCardType,
+                        inputType: textAreaInputType,
+                        inputClass: 'is-primary-invert',
+                        inputPlaceholder: ' '
+                    },{
+                        cardType: inputCardType,
+                        inputType: selectInputType,
+                        inputClass: 'is-primary-invert',
+                        selectOptions: selectOptions
+                    },{
+                        cardType: inputCardType,
+                        inputType: selectInputType,
+                        inputClass: 'is-select-filter',
+                        iconId: 'icon__filter',
+                        selectOptions: selectOptions
+                    },
+                    {
+                        cardType: inputCardType,
+                        inputType: sliderInputType,
+                        inputClass: 'is-range-slider'
+                    },
+                    {
+                        cardType: inputCardType,
+                        inputType: checkboxInputType,
+                        inputClass: 'is-primary-invert'
+                    }]
+                } %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Buttons',
+                    cardsPerRow: 2,
+                    cards: [{
+                        cardType: buttonCardType,
+                        buttonClass: 'is-primary',
+                        buttonContent: buttonContent
+                    },{
+                        cardType: buttonCardType,
+                        buttonClass: 'is-primary-invert',
+                        buttonContent: buttonContent
+                    },{
+                        cardType: buttonCardType,
+                        buttonClass: 'is-favorite',
+                        buttonContent: buttonContent
+                    },{
+                        cardType: buttonCardType,
+                        buttonClass: 'is-icon-button',
+                        iconClass: 'icon__map'
+                    },{
+                        cardType: buttonCardType,
+                        buttonClass: 'is-blog-button-group',
+                        addons: [{
+                            content: "News",
+                            disabled: true
+                        },{
+                            content: "Resources"
+                        }]
+                    },{
+                        cardType: buttonCardType,
+                        buttonClass: 'is-filter-button-group',
+                        addons: [{
+                            iconClass: 'icon__hamburger-nav'
+                        },{
+                            iconClass: 'icon__grid',
+                            disabled: true
+                        }]
+                    }]
+                } %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Logos',
+                    cardsPerRow: 2,
+                    cards: [{
+                        cardType: iconCardType,
+                        iconId: 'icon__logo--header',
+                        columnClass: halfRowCard
+                    },{
+                        cardType: iconCardType,
+                        iconId: 'icon__logo--footer',
+                        columnClass: halfRowCard,
+                        colorClass: darkBgColor
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'SVG Images',
+                    cards: [{
+                        cardType: iconCardType,
+                        iconId: 'icon__favorite',
+                        colorClass: goldBGColor
+                    },{
+                        cardType: iconCardType,
+                        iconId: 'icon__favorite-unselected',
+                        colorClass: goldBGColor
+                    },{
+                        cardType: iconCardType,
+                        iconId: 'icon__favorite-selected'
+                    },{
+                        cardType: iconCardType,
+                        iconId: 'icon__share'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: "Font Icons",
+                    cards: [{
+                        cardType: iconCardType,
+                        iconClass: 'icon__arrow-back',
+                        iconContent: "\e900"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__arrow-forward',
+                        iconContent: "\e901"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__filter',
+                        iconContent: "\e905"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__grid',
+                        iconContent: "\e906"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__hamburger-nav',
+                        iconContent: "\e90a"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__link',
+                        iconContent: "\e907"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__mail',
+                        iconContent: "\e908"
+                    },{
+                        cardType: iconCardType,
+                        iconClass: 'icon__map',
+                        iconContent: "\e909"
+                    }]
+                } %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Named Colors',
+                    cards: [{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-blue-dark'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-blue-light'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-blue-tiffany'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-gold'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-gold-light'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-cream'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-olive'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-white'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-black'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Contextual Colors',
+                    cards: [{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-primary'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-primary-invert'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-info'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-success'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-warning'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-danger'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-light'
+                    },{
+                        cardType: colorCardType,
+                        colorClass: 'is-bg-dark'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Fonts',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'is-family-primary'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'is-proxima-nova-bold'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'is-proxima-nova-regular'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'is-eames-century-modern-regular'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'is-family-sans-serif'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'is-family-serif'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Nav Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__nav-item--label'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Favorites Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__favorites--label'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Hero Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__hero--headline'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__hero--content'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Featured Projects Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__featured-projects--headline'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Featured Project Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__featured-project--title'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__featured-project--callout'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__featured-project--details'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'CTA Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__primary-cta'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__button-group-cta'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Content Tile Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__content-tile--primary-heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__content-tile--secondary-heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__content-tile--content'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__content-bottom-tile--primary-heading'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Callout Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__callout--heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__callout--content'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Contact Us Section Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__contact-us-section--heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__contact-us-section--content'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Footer Signup Section Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__footer-signup--heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__footer-signup--content'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Footer Links Section Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__footer--links'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Footer Copy Section Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__footer--copy'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Property Page Heading Section Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-page--headline'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-page--subheading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-page--bold-subheading'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Property Page Info Table Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-info--table-header'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-info--table-cell'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Property Page Description Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-description--header'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-description--content'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-description--subheading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-description--info'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Property Page Description Toggle Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__property-description--toggle'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Content Section Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__content-section--heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__content-section--content'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Data Section Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__data-section--heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__data-section--content'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__data-section--value'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__data-section--label'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Affiliations Section Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__affiliations-section--heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__affiliations-section--content'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Contact Form Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__contact-form--heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__contact-form--label'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__contact-form-checkbox-label'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Contact Info Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__contact-info--heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__contact-info--subheading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__contact-info--content'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Blog Post Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__blog-post--headline'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__blog-post--subheading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__blog-post--author'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__blog-post--date'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__blog-post--image-caption'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__blog-post--content'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__blog-post--quotation'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__blog-post--tags-heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__blog-post--tag'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Media Tile Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__media-tile--heading-featured'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__media-tile--heading'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__media-tile--date'
+                    },{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__media-tile--caption'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Pagination Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__pagination--page-number'
+                    }]
+                } only %}
+
+                {% include sectionTemplate with {
+                    sectionTitle: 'Placeholder Typography',
+                    cards: [{
+                        cardType: typographyCardType,
+                        typographyClass: 'type__placeholder'
+                    }]
+                } only %}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

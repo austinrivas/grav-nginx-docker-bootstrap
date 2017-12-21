@@ -1,0 +1,23 @@
+article.featured-project
+    position: relative
+    @include break-max($widescreen)
+        margin: 0
+    .prop-description
+        padding: 1em .5em
+        min-height: 140px
+        .details
+            @extend .type__featured-project--details
+            @extend .is-uppercase
+        .subtitle
+            @extend .type__featured-project--callout
+            margin-bottom: 0
+        .prop-title, .prop-price
+            @extend .is-gold
+            @extend .type__featured-project--title
+    .favorite-icon-container
+        div
+            svg
+                position: absolute
+                right: .9em
+                top: .5em
+                z-index: 1

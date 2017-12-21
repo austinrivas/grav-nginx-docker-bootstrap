@@ -1,0 +1,8 @@
+<div>
+	<div v-show="!success">
+		{% include "forms/form.html.twig" with { form: forms( {route: '/newsletter-signup'} ) } %}
+	</div>
+
+	<h3 v-if="success" class="form-success" v-html="success"></h3>
+	<h3 v-if="error" class="form-error" v-html="error"></h3>
+</div>

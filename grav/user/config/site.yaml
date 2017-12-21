@@ -1,0 +1,20 @@
+title: 'Lakewood Ranch Commercial'
+default_lang: en
+author:
+  name: 'Push Admin'
+  email: dev+lwrc@pushhere.com
+taxonomies:
+  - category
+  - tag
+metadata:
+  description: 'update meta description'
+  arc-gis-feature-server-url: 'https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0'
+summary:
+  enabled: true
+  format: short
+  size: 300
+  delimiter: '==='
+blog:
+  route: /press
+routes:
+    /properties/(.*): '/properties'

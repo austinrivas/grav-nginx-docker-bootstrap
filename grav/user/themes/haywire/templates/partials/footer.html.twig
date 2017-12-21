@@ -1,0 +1,31 @@
+{# Templates #}
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+{% set formTemplate = 'partials/forms/inline-form.html.twig' %}
+
+
+{# Classes #}
+{% set iconLogoId = 'icon__logo--footer' %}
+
+{# Labels #}
+{% set formSuccess = 'Thank You!' %}
+
+<footer class="footer lwrc-footer">
+    <div class="container is-fluid">
+        <div class="content has-text-centered">
+            <p>{% include iconTemplate with { iconId: iconLogoId } only %}</p>
+            <h3>Sign Up Get Updates</h3>
+            <p class="type__footer-signup--content">Enter your email address for updates and the latest news from Lakewood Ranch Commercial</p>
+            <newsletter-signup inline-template>
+                {% include formTemplate only %}
+            </newsletter-signup>
+            <ul>
+                <li><a href="/press">Press</a></li>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/terms-of-service">Terms of Service</a></li>
+            </ul>
+            <p class="is-size-12">
+                &copy; 2017 Lakewood Ranch Commercial
+            </p>
+        </div>
+    </div>
+</footer>

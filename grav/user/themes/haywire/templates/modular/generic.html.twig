@@ -1,0 +1,19 @@
+{% if page.header.background %}
+<section class="generic lwrc" style="background: {{ page.header.background-color }}">
+{% else %}
+<section class="generic lwrc {{ page.header.class }}">
+{% endif %}
+    <div class="generic-body">
+        <div class="container is-fluid">
+        	{% if page.header.title %}
+            	<h2>{{ page.header.title }}</h2>
+            {% endif %}
+
+            {% if page.content %}
+                <div class="content">
+            	   {{ page.content }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

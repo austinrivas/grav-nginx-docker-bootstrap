@@ -1,0 +1,17 @@
+{% set propertyTileTemplate = 'components/property-tile.html.twig' %}
+{% set paginationTemplate = 'components/pagination.html.twig' %}
+
+
+<section class="featured-projects property-list-container">
+    <div class="container">
+        <h2 class="has-text-centered">${resultSize} Results</h2>
+        <div class="columns is-variable is-9" v-for="row in rows">
+            <div class="column card" v-for="model in row">
+                <property-tile v-if="model" :model="model" inline-template>
+                    {% include propertyTileTemplate with {} only %}
+                </property-tile>
+            </div>
+        </div>
+        {% include paginationTemplate only %}
+    </div>
+</section>

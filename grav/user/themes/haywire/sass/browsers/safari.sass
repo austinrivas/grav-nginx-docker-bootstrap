@@ -1,0 +1,40 @@
+
+@mixin safari-btn-fix
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    display: flex !important;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    height: auto;
+    padding: 20px 0;
+
+
+// Safari specific fix for tiles grid
+@include safari-min($tablet)
+    section.content-blocks .columns
+        .column 
+            min-height: 400px;
+            height: 60vmax;
+            max-height: 80vh;
+
+    section.content-blocks.content-tiles .columns
+        min-height: 400px;
+        height: 60vmax;
+        max-height: 80vh;
+        .column
+            height: 100%;
+
+
+// Applying all the fixes here.
+@include safari
+    section.content-blocks button.button,
+    .form-container form .button
+        @include safari-btn-fix;
+
+
+    .form-container form .button
+        height: auto !important;
+        padding: 15px 0 !important;
+        display: block !important;

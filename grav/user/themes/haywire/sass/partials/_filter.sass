@@ -1,0 +1,26 @@
+.property-filter
+    @extend .is-bg-cream
+    .range-slider
+        @extend .is-range-slider
+
+    .columns
+        margin-left: 0
+        margin-top: 0
+        margin-right: 0
+        margin-bottom: 0
+    .button
+        width: 330px
+        @include break-max($tablet)
+            width: 100%
+        &.is-favorite
+            background-color: $white
+            border: 1px solid $gold
+            height: 60px
+            width: 60px
+            svg
+                fill: $gold
+                margin: 0 auto
+    .is-button-100
+        width: 100px
+        @include break-max($tablet)
+            width: 100%

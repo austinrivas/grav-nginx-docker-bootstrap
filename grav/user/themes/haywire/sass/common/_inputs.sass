@@ -1,0 +1,171 @@
+$control-radius: $radius
+$control-radius-small: $radius-small
+$control-padding-vertical: calc(0.375em - 1px)
+$control-padding-horizontal: calc(0.625em - 1px)
+$label-color: $grey-darker
+$label-weight: $weight-bold
+$help-size: $size-small
+
+$input__padding-left: 33px
+$input__padding-left--mobile: 25px
+.input__padding
+    padding-left: $input__padding-left
+    @include break-max($tablet)
+        padding-left: $input__padding-left--mobile
+
+$input__height: 60px
+$input__height--mobile: 45px
+$input__width: 100%
+.input__size
+    height: 60px
+    width: 100%
+    @include break-max($tablet)
+        height: 45px
+
+.input
+    &.is-primary, &.is-primary-invert
+        @extend .type__placeholder
+        @extend .input__padding
+        @extend .input__size
+
+.textarea
+    &.is-primary-invert
+        @extend .type__placeholder
+        resize: none
+
+
+@mixin select-arrow
+    &:not(.is-multiple)
+        &::after
+            border: 2px solid $white
+            border-right: 0
+            border-top: 0
+            height: 9px
+            width: 9px
+            margin-top: -6px
+            margin-right: 6px
+            @include break-max($tablet)
+                height: 7px
+                width: 7px
+                margin-top: -5px
+                margin-right: 0
+
+@mixin select-icon($icon-name, $color, $font-size, $font-size--mobile)
+    &:not(.is-multiple)
+        &::after
+            @extend .is-#{$icon-name}
+            font-size: $font-size
+            color: $color
+            transform: none !important
+            top: 0 !important
+            right: 0 !important
+            margin-top: 0 !important
+            height: 100%
+            width: $input__height
+            border-color: $color
+            text-align: center
+            @include break-max($tablet)
+                height: 100%
+                width: $input__height--mobile
+                font-size: $font-size--mobile
+
+@mixin select-dropdown-bg($color, $border-color: $color)
+    &:not(.is-multiple)
+        &::before
+            content: ''
+            width: $input__height
+            height: 100%
+            background-color: $color
+            position: absolute
+            right: 0
+            pointer-events: none
+            z-index: 1
+            border: 1px solid $border-color
+            @include break-max($tablet)
+                width: $input__height--mobile
+
+@mixin select-input
+    @extend .input__size
+    &:not(.is-multiple)
+        @extend .input__size
+    select
+        @extend .input__size
+        @extend .input__padding
+        @extend .type__placeholder
+
+    select:required:invalid
+        color: gray
+    option
+        &[value=""][disabled]
+            display: none
+
+$select-input__icon-size: 42px
+$select-input__icon-size--mobile: 32px
+.select
+    &.is-primary-invert, &.is-gold
+        @include select-input
+        @include select-arrow
+        @extend .is-icon-white
+        select
+            color: $primary
+
+    &.is-primary-invert
+        @include select-dropdown-bg($primary-invert)
+
+    &.is-gold
+        @include select-dropdown-bg($gold)
+        select
+            color: $gold
+
+    &.is-select-filter
+        @include select-input
+        @include select-dropdown-bg($white, $gold)
+        @include select-icon('icon__filter', $gold, $select-input__icon-size, $select-input__icon-size--mobile)
+        select
+            color: $gold
+            border: 1px solid $gold
+
+
+@mixin styled-checkbox
+    user-select: none
+    cursor: pointer
+    input
+        position: absolute
+        opacity: 0
+        &:checked ~ .checkmark
+            background-color: $white
+            &:after
+                display: block
+    .checkmark
+        position: absolute
+        top: 0
+        left: 0
+        height: 20px
+        width: 20px
+        background-color: $white
+        border: 1px solid $primary-invert
+        &:after
+            content: ""
+            position: absolute
+            display: none
+            left: 6px
+            top: 3px
+            width: 5px
+            height: 10px
+            border: solid $primary
+            border-width: 0 3px 3px 0
+            -webkit-transform: rotate(45deg)
+            -ms-transform: rotate(45deg)
+            transform: rotate(45deg)
+            @include break-max($tablet)
+                left: 7px
+                top: 3px
+
+.checkbox.is-primary-invert
+    @include styled-checkbox
+    @extend .type__contact-form--checkbox-label
+    color: $primary
+    height: 20px
+    width: 100%
+    padding-left: 35px
+

@@ -1,0 +1,42 @@
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+
+{% if addons %}
+    <div class="buttons {{ class }}">
+        {% for addon in addons %}
+            <span class="button {{ addon.class }} {{ addon.iconClass }}"
+                {% if addon.disabled %} disabled{% endif %}
+                {% if addon.vueIf %} v-if="{{ addon.vueIf }}"{% endif %}
+                {% if addon.vueDisabled %} :disabled="{{ addon.vueDisabled }}"{% endif %}
+                {% if addon.vueClick %} @click="{{ addon.vueClick }}"{% endif %}>
+                {% if addon.content %}{{ addon.content }}{% endif %}
+                {% if addon.iconId %}
+                    {% include iconTemplate with {
+                        iconId: addon.iconId,
+                        contextualClass: addon.contextualClass
+                    } only %}
+                {% endif %}
+            </span>
+        {% endfor %}
+    </div>
+{% else %}
+    {% if href %}
+        {% set buttonElement = 'a' %}
+    {% else %}
+        {% set buttonElement = 'button' %}
+    {% endif %}
+    <{{ buttonElement }} class="button {{ class }} {{ iconClass }}"
+        {% if disabled %} disabled{% endif %}
+        {% if type %} type="{{ type }}"{% endif %}
+        {% if href %} href="{{ href }}"{% endif %}
+        {% if vueIf %} v-if="{{ vueIf }}"{% endif %}
+        {% if vueDisabled %} :disabled="{{ vueDisabled }}"{% endif %}
+        {% if vueClick %} @click="{{ vueClick }}"{% endif %}>
+            {% if iconId %}
+                {% include iconTemplate with {
+                    iconId: iconId
+                } only %}
+            {% elseif content %}
+                {{ content }}
+            {% endif %}
+    </{{ buttonElement }}>
+{% endif %}

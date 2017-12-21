@@ -1,0 +1,36 @@
+section.generic
+	background: $white
+	padding: 10vh 0
+
+	.generic-body
+		width: 90%
+		margin: 0 auto
+
+	.container
+		height: 100%
+		width: 100%
+		display: flex
+		flex-direction: column
+		justify-content: center
+		align-items: center
+		text-align: center
+
+		h2
+			@extend .type__content-section--heading
+			@extend .is-uppercase
+			@extend .is-blue-dark
+		p
+			@extend .type__content-section--content
+			color: $grey
+			margin: 2em 0 0
+			max-width: 1024px
+
+section.generic.is-bg-gold
+	@extend .is-bg-gold
+
+	.container
+
+		h2
+			@extend .is-gold-light
+		p
+			@extend .is-white

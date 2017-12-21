@@ -1,0 +1,34 @@
+{% set pagination = pagination|default(page.collection.params.pagination) %}
+{% set base_url = base_url|default(page.url) %}
+
+{% if pagination|length > 1 %}
+
+<ul class="pagination">
+    {% if pagination.hasPrev %}
+        {% set url =  base_url ~ (pagination.params ~ pagination.prevUrl)|replace({'//':'/', '/_articles': ''}) %}
+        <li class="prev-cta"><a rel="prev" href="{{ url|replace({'/_articles': ''}) }}">&laquo;</a></li>
+    {% else %}
+        <li class="prev-cta"><span>&laquo;</span></li>
+    {% endif %}
+
+    {% for paginate in pagination %}
+
+        {% if paginate.isCurrent %}
+            <li><span>{{ paginate.number }}</span></li>
+        {% elseif paginate.isInDelta %}
+            {% set url = base_url ~ (pagination.params ~ paginate.url)|replace({'//':'/', '/_articles': ''}) %}
+            <li><a href="{{ url|replace({'/_articles': ''}) }}">{{ paginate.number }}</a></li>
+        {% elseif paginate.isDeltaBorder %}
+            <li class="gap"><span>&hellip;</span></li>
+        {% endif %}
+
+    {% endfor %}
+    {% if pagination.hasNext %}
+        {% set url = base_url ~ (pagination.params ~ pagination.nextUrl)|replace({'//':'/', '/_articles': ''}) %}
+        <li class="next-cta"><a rel="next" href="{{ url|replace({'/_articles': ''}) }}">&raquo;</a></li>
+    {% else %}
+        <li class="next-cta"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+
+{% endif %}

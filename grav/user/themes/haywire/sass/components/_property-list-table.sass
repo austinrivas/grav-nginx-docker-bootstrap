@@ -1,0 +1,16 @@
+.property-info-table.property-list-table-container
+    table
+        th
+            border-top-color: transparent
+            &:first-child
+                border-left-color: transparent
+            &:last-child
+                border: none
+        tr
+            @extend .is-bg-white
+            &:nth-child(even)
+                @extend .is-bg-cream
+        td
+            text-transform: none
+            background-color: transparent
+            border: none

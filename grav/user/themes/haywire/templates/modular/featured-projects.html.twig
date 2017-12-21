@@ -1,0 +1,56 @@
+{# Templates #}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+{% set propertyTileTemplate = 'components/property-tile.html.twig' %}
+
+{# Labels #}
+{% set buttonLabel = 'View All Properties' %}
+
+{# Classes #}
+{% set buttonClass = 'is-primary' %}
+
+{# Routes #}
+{% set mapUrl = '/map' %}
+
+
+<featured-projects inline-template>
+    <section class="featured-projects">
+        <div class="container">
+
+            <h2 class="has-text-centered">Featured Projects</h2>
+
+            <div class="columns is-variable is-9">
+
+                <div class="column card">
+                    <property-tile
+                        :model="first"
+                        inline-template>
+                        {% include propertyTileTemplate with {} only %}
+                    </property-tile>
+                </div>
+
+                <div class="column card">
+                    <property-tile
+                        :model="second"
+                        inline-template>
+                        {% include propertyTileTemplate with {} only %}
+                    </property-tile>
+                </div>
+
+                <div class="column card">
+                    <property-tile
+                        :model="third"
+                        inline-template>
+                        {% include propertyTileTemplate with {} only %}
+                    </property-tile>
+                </div>
+
+            </div>
+
+            <div class="is-center">
+                {% include buttonTemplate with { content: buttonLabel, class: buttonClass, href: mapUrl } only %}
+            </div>
+
+        </div>
+
+    </section>
+</featured-projects>

@@ -1,0 +1,106 @@
+{# Templates #}
+{% set iconTemplate          = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate        = 'partials/elements/button.html.twig' %}
+{% set selectTemplate        = 'partials/elements/select.html.twig' %}
+{% set sliderTemplate        = 'partials/elements/range-slider.html.twig' %}
+
+{# Classes #}
+{% set iconFavId             = 'icon__favorite-selected' %}
+{% set iconHamId             = 'icon__hamburger-nav' %}
+{% set iconGridId            = 'icon__grid' %}
+{% set buttonClassGold       = 'is-gold is-marginless is-button-100' %}
+{% set buttonClassPrimary    = 'is-primary is-marginless' %}
+{% set buttonClassGroup      = 'is-filter-button-group' %}
+{% set buttonClassFav        = 'is-favorite-prop-filter' %}
+{% set buttonClassFavClicked = 'is-favorite-prop-filter is-clicked' %}
+{% set selectTemplateClass   = 'is-gold' %}
+
+{# Labels #}
+{% set selectPlaceholderOption = {
+        text: "Select a Filter",
+        value: "unselected",
+        selected: true,
+        disabled: true
+} %}
+{% set selectOptions = [selectPlaceholderOption] %}
+
+{% set selectFilterOptions = [selectPlaceholderOption] %}
+{% set sliderOptions = [] %}
+
+{% set buttonFilterApplyLabel   = 'Apply' %}
+{% set buttonPropLabel          = 'View *prop name*' %}
+
+{# Vue Change Handlers & Computed Properties #}
+{% set tableListViewChangeHandler = "showTableListViewHandler" %}
+{% set gridListViewChangeHandler = "showGridListViewHandler" %}
+{% set isListComputed = 'isTableListViewActive' %}
+{% set isGridComputed = 'isGridListViewActive' %}
+{% set executeQueryHandler = 'executeQueryHandler' %}
+{% set showApplyButton = 'showApplyButton' %}
+
+<div class="property-filter">
+    <div class="columns">
+        <div class="column is-3">
+            <select-filter :change-event="filterChangeEvent"
+                           :event-bus="eventBus"
+                           :options="filterOptions"
+                           :selected="selectedFilterField"
+                           inline-template>
+                {% include selectTemplate with { inputClass: selectTemplateClass, options: selectOptions, vue: true } only %}
+            </select-filter>
+        </div>
+        <div class="column is-3" v-if="showSlider">
+            <range-slider :change-event="rangeSliderChangeEvent"
+                          :event-bus="eventBus"
+                          :max-value="rangeSliderMaxValue"
+                          :min-value="rangeSliderMinValue"
+                          :output-function="rangeSliderOutputFunction"
+                          :slider-id="rangeSliderId"
+                          :step="rangeSliderStep"
+                          :values="rangeSliderValues"
+                          inline-template>
+                {% include sliderTemplate %}
+            </range-slider>
+        </div>
+        <div class="column is-3" v-if="showFilterOptions">
+            <select-filter :change-event="filterValueChangeEvent"
+                           :event-bus="eventBus"
+                           :options="selectedFilterOptions"
+                           :selected="selectedFilterValue"
+                           inline-template>
+                {% include selectTemplate with { inputClass: selectTemplateClass, options: selectFilterOptions, vue: true } only %}
+            </select-filter>
+        </div>
+        <div class="column is-1">
+            {% include buttonTemplate with {
+                class: buttonClassGold,
+                content: buttonFilterApplyLabel,
+                vueIf: showApplyButton,
+                vueClick: executeQueryHandler
+            } only %}
+        </div>
+        <div class="column is-3">
+            {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } only %}
+        </div>
+        <div class="column is-2">
+            <div class="columns is-hidden-touch is-gapless">
+                <div class="column is-8">
+                    {% include buttonTemplate with {
+                        class: buttonClassGroup,
+                        addons: [{
+                            iconClass: iconHamId,
+                            vueClick: tableListViewChangeHandler,
+                            vueDisabled: isListComputed
+                        },{
+                            iconClass: iconGridId,
+                            vueClick: gridListViewChangeHandler,
+                            vueDisabled: isGridComputed
+                    }]} only %}
+                </div>
+                <div class="column is-4">
+                    {% include buttonTemplate with { class: buttonClassFav, iconId: iconFavId } only %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

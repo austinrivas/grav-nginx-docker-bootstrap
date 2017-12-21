@@ -1,0 +1,51 @@
+section.statistics
+	padding: 10vh 0
+	&.gold
+		background-color: $gold
+		*
+			color: $gold-light
+		p, h2
+			color: #ddd
+
+	&.blue
+		background-color: $blue-dark
+		*
+			color: #AAC6C9
+		p, h2
+			color: #ddd
+
+
+	.statistics-body
+		width: 90%
+		margin: 0 auto
+
+	.container
+		height: 100%
+		width: 100%
+		display: flex
+		flex-direction: column
+		justify-content: center
+		align-items: center
+
+		*
+			text-align: center
+
+	.content
+		@extend .type__data-section--content
+		margin-top: 2em
+		max-width: 650px
+		text-align: center
+
+
+	.statistics-container
+		width: 100%
+		.column
+			margin-top: 50px
+		.column h3
+			line-height: 1em
+		.column p
+			@extend .is-uppercase
+			@extend .type__data-section--label
+			margin-top: 0
+			max-width: 300px
+			margin: 0 auto

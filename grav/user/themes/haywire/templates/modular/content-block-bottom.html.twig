@@ -1,0 +1,40 @@
+{# Templates #}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+{# Classes #}
+{% set buttonClassPrimary = 'is-primary' %}
+
+
+<section class="content-blocks content-blocks-bottom {{ page.header.class }}">
+    <div class="container is-fluid">
+
+        <div class="columns is-gapless is-multiline">
+
+            <div class="column is-half">
+                <div class="content-tile left-tile">
+                    <h2>
+                        {{ page.header.titleLeft}}
+                    </h2>
+                    <p>
+                        {{ page.header.contentLeft }}
+                    </p>
+                    {% include buttonTemplate with { content: page.header.buttonLeft, class: buttonClassPrimary, href: page.header.buttonLeftUrl } only %}
+                </div>
+            </div>
+
+            <div class="column is-half">
+                <div class="content-tile right-tile">
+                    <h2>
+                        {{ page.header.titleRight }}
+                    </h2>
+                    <p>
+                        {{ page.header.contentRight}}
+                    </p>
+                    {% include buttonTemplate with { content: page.header.buttonRight, class: buttonClassPrimary, href: page.header.buttonRightUrl } only %}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

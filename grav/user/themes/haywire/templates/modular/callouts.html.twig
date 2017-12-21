@@ -1,0 +1,14 @@
+<section class="callouts">
+    <div class="content-wrapper">
+        <div class="columns">
+        {% for callout in page.header.callouts %}
+            <div class="column callout">
+                <div class="callout-container">
+                    <h2>{{ callout.title }}</h2>
+                    <p>{{ callout.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</section>

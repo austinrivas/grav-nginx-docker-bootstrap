@@ -1,0 +1,161 @@
+@mixin break-max($size)
+    @media only screen and (max-width: $size - 1)
+        @content
+
+@mixin break-min($size)
+    @media only screen and (min-width: $size)
+        @content
+
+@mixin safari
+    @media only screen and (-webkit-min-device-pixel-ratio: 1)
+        @content
+
+@mixin safari-max($size)
+    @media only screen and (max-width: $size - 1) and (-webkit-min-device-pixel-ratio: 1)
+        @content
+
+@mixin safari-min($size)
+    @media only screen and (min-width: $size) and (-webkit-min-device-pixel-ratio: 1)
+        @content
+
+@mixin hero-arrow-down
+    content: " "
+    display: block
+    pointer-events: none
+    position: absolute
+    -webkit-transform: rotate(-45deg) translate(-50%, -50%)
+    transform: rotate(-45deg) translate(-50%, -50%)
+    -webkit-transform-origin: center
+    transform-origin: center
+    z-index: 4
+    border: 2px solid $white-rock
+    border-right: 0
+    border-top: 0
+    height: 25px
+    width: 25px
+    left: 50%
+    top: auto
+    bottom: 3rem
+    @include break-max($tablet)
+        height: 17px
+        width: 17px
+        margin-top: -5px
+        margin-right: 0
+        bottom: 1.5rem
+
+@mixin is-center
+    display: flex
+    justify-content: center
+
+@mixin is-right
+    display: flex
+    justify-content: flex-end
+
+@mixin is-mobile-button
+    @include break-max($tablet)
+        width: 95%
+
+@mixin is-hidden
+    display: none
+
+// optimization will be needed
+
+@mixin is-share-block
+    display: flex
+    flex-direction: column
+    max-width: 105px
+    margin-right: 0
+    margin-left: auto
+    border: 1px solid $blue-tiffany
+    h4
+        @extend .type__share--title
+        @extend .is-uppercase
+        @extend .is-blue-dark
+        @extend .has-text-centered
+        @extend .is-bg-blue-tiffany
+        padding: 0.7em 0
+    .icon-block
+        svg
+            fill: $blue-dark
+        .button
+            border: 0
+        .icon__mail
+            height: 33px
+            width: 29px
+        .icon__link
+            height: 33px
+            width: 23px
+
+@mixin is-accordion
+    .tab
+        position: relative
+        margin-bottom: 1px
+        width: 100%
+        overflow: hidden
+        &:nth-child(odd)
+            label
+                @extend .is-bg-cream
+            .tab-content
+                @extend .is-bg-cream
+        input
+            position: absolute
+            opacity: 0
+            z-index: -1
+        label
+            @extend .is-blue-dark
+            @extend .type__property-description--toggle
+            position: relative
+            display: block
+            padding: 0 0 0 1em
+            line-height: 3
+            cursor: pointer
+
+        .tab-content
+            background-color: $white
+            max-height: 0
+            overflow: hidden
+            webkit-transition: max-height .35s
+            -o-transition: max-height .35s
+            transition: max-height .35s
+
+        .tab-content p
+            @extend .type__content-section--content
+            @extend .is-blue-dark
+            margin: 2em
+        input:checked ~ .tab-content
+            max-height: 100%
+        label::after
+            position: absolute
+            right: 0
+            top: 0
+            display: block
+            width: 3em
+            height: 3em
+            line-height: 3
+            text-align: center
+            -webkit-transition: all .35s
+            -o-transition: all .35s
+            transition: all .35s
+
+        input[type=checkbox] + label::after
+            content: "\25BC"
+        input[type=checkbox]:checked + label::after
+            transform: rotate(180deg)
+
+@mixin responsive-asp-ratio($width, $height)
+	$asp-percentage: percentage($height / $width)
+	padding-top: $asp-percentage
+	position: relative
+	img
+		position: absolute
+		top: 0
+		left: 0
+		font-family: 'object-fit: cover;'
+		width: 100%
+
+	@supports (object-fit: cover)
+		img
+			object-fit: cover
+
+@mixin font-size-vmax($scalar)
+    font-size: calc(#{$scalar} * (1vw + 1vh - 1vmin))

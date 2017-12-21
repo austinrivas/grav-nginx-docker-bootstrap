@@ -1,0 +1,17 @@
+{# Templates #}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+{# Classes #}
+{% set buttonClass = 'is-primary' %}
+
+<section class="hero contact-cta">
+    <div class="contact-cta-body">
+        <div class="primary">
+            <h2>{{ page.header.title }}</h2>
+            {{ content }}
+        </div>
+        <div class="secondary">
+            {% include buttonTemplate with { content: page.header.contact.label, class: buttonClass, href: page.header.contact.link } only %}
+        </div>
+    </div>
+</section>

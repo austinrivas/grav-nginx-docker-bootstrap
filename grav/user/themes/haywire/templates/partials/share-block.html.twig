@@ -1,0 +1,25 @@
+{# Templates #}
+{% set iconTemplate   = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+{# Classes #}
+{% set emailIconId    = 'icon__mail' %}
+{% set linkIconId     = 'icon__link' %}
+
+{# Vars #}
+{% set shareEmailURL  = "mailto:?subject=Lakewood Ranch Commercial: " ~ page.title ~ "&body=" ~ page.url(true) %}
+{% set shareLinkURL   = "https://www.facebook.com/sharer/sharer.php?u=" ~ page.url(true) %}
+
+<div class="share-block">
+    <h4>Share</h4>
+    <div class="icon-block">
+        <div class="columns is-mobile is-gapless">
+            <div class="column is-narrow">
+                {% include buttonTemplate with { iconId: emailIconId, href: shareEmailURL } only %}
+            </div>
+            <div class="column is-narrow">
+                {% include buttonTemplate with { iconId: linkIconId , href: shareLinkURL } only %}
+            </div>
+        </div>
+    </div>
+</div>

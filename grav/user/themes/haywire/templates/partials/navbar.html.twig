@@ -1,0 +1,61 @@
+{# Templates #}
+{% set iconTemplate = 'partials/svg-icon.html.twig' %}
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
+{# Labels #}
+{% set buttonFavLabel = 'View Saved' %}
+
+{# Classes #}
+{% set iconLogoId = 'icon__logo--header' %}
+{% set iconFavId = 'icon__favorite' %}
+{% set buttonFavClass = 'is-favorite' %}
+{% set buttonFavIconClass = 'is-icon-button' %}
+{% set buttonFavHref = '/map?filter=favorites' %}
+
+
+<navbar inline-template>
+    <nav class="navbar lwrc-navbar" role="navigation" aria-label="main navigation">
+        <div class="fav-buttons-set is-hidden-touch">
+            {% include buttonTemplate with {
+                iconId: iconFavId,
+                class: buttonFavIconClass,
+                href: buttonFavHref
+            } only %}
+            {% include buttonTemplate with {
+                content: buttonFavLabel,
+                class: buttonFavClass,
+                href: buttonFavHref
+            } only %}
+        </div>
+        <div class="container is-hidden-touch is-fluid">
+            <div class="logo">
+                <a class="navbar-item" href="{{ base_url == '' ? '/' : base_url }}">
+                    {% include iconTemplate with { iconId: iconLogoId } only %}
+                </a>
+            </div>
+        </div>
+        <div class="container is-fluid">
+
+            <div class="navbar-brand is-hidden-desktop">
+                <div class="logo-mobile">
+                    <a class="navbar-item" href="{{ base_url == '' ? '/' : base_url }}">
+                        {% include iconTemplate with { iconId: iconLogoId } only %}
+                    </a>
+                </div>
+
+                <button class="button navbar-burger" :class="{'is-active': navIsActive}" @click.prevent="toggleNav">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <div class="navbar-menu" :class="{'is-active': navIsActive}">
+                {% block header_navigation %}
+                    {% include 'partials/navigation.html.twig' %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="page-loader-bar" style="width: 554px"></div>
+    </nav>
+</navbar>

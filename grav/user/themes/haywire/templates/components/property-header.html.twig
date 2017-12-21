@@ -1,0 +1,42 @@
+{# Templates #}
+{% set buttonTemplate  = 'partials/elements/button.html.twig' %}
+{% set favPropTemplate = 'components/favorite-icon.html.twig' %}
+{% set shareTemplate   = 'partials/share-block.html.twig' %}
+
+{# Classes #}
+{% set buttonClass = 'is-primary' %}
+
+{# Vars #}
+{% set propTitle = 'Name of property goes here - Lot 10' %}
+{% set propDescr = 'Retail, Commercial, Residential' %}
+{% set propDateAvailable = 'July 2017' %}
+{% set buttonLabel = 'Request Info' %}
+{% set requestInfoHref = '/contact-us' %}
+
+<section class="property-header">
+    <div class="container is-fluid">
+        <div class="columns">
+            <div class="column">
+                {% include favPropTemplate only %}
+            </div>
+            <div class="column">
+                {% include shareTemplate only %}
+            </div>
+        </div>
+        <div class="is-center">
+            <h2>${title}</h2>
+        </div>
+        <div class="is-center has-text-centered">
+            <p>
+                <strong>Uses: </strong>
+                ${uses}
+                <br>
+                <strong>Available date: </strong>
+                ${dateAvailable}
+            </p>
+        </div>
+        <div class="is-center">
+            {% include buttonTemplate with { content: buttonLabel, class: buttonClass, href: requestInfoHref } only %}
+        </div>
+    </div>
+</section>

@@ -1,5 +1,8 @@
 ---
 title: Home
+taxonomy:
+    category:
+        - home
 body_classes: index-page
 content:
     items: '@self.modular'

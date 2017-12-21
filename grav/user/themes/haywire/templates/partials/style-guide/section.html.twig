@@ -1,0 +1,17 @@
+{% set cardsPerRow = cardsPerRow | default(4) %}
+{% set columnSpan = 12 / cardsPerRow %}
+{% set columnClass = "is-#{columnSpan}" %}
+
+<h2>{{ sectionTitle }}</h2>
+<hr>
+<div class="columns">
+    {% for index, card in cards %}
+        <div class="column {{ columnClass }}">
+            {% include "partials/style-guide/style-card.html.twig" with { card: card } only %}
+        </div>
+        {% if index != 0 and (index + 1) % cardsPerRow == 0 %}
+            </div>
+            <div class="columns">
+        {% endif %}
+    {% endfor %}
+</div>

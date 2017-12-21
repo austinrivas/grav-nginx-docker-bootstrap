@@ -1,0 +1,527 @@
+// Typography
+$render-mode: optimizeLegibility
+
+$size-1: 3rem
+$size-2: 2.5rem
+$size-3: 2rem
+$size-4: 1.5rem
+$size-5: 1.25rem
+$size-6: 1rem
+$size-7: 0.75rem
+
+$weight-light: 300
+$weight-normal: 400
+$weight-medium: 500
+$weight-semibold: 600
+$weight-bold: 700
+
+$size-small: $size-7
+$size-normal: $size-6
+$size-medium: $size-5
+$size-large: $size-4
+
+// Lists and maps
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 $size-7
+
+// nav
+.type__nav-item--label
+    font-family: $proxima-nova-regular-family
+    font-size: 16px
+    letter-spacing: 3px
+    line-height: 19px
+
+// favorites
+.type__favorites--label
+    font-family: $proxima-nova-regular-family
+    font-size: 12px
+    letter-spacing: 0.86px
+    line-height: 14px
+
+// hero
+.type__hero--headline
+    font-family: $proxima-nova-regular-family
+    font-size: 48px
+    letter-spacing: 3.43px
+    line-height: 48px
+    font-weight: 100;
+    @include break-max($tablet)
+        font-size: 30px
+        letter-spacing: 2.14px
+        line-height: 35px
+
+.type__hero--content
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 1.29px
+    line-height: 24px
+    @include break-max($tablet)
+        font-size: 16px
+        letter-spacing: 1.14px
+        line-height: 24px
+
+// featured-projects
+.type__featured-projects--headline
+    font-family: $proxima-nova-bold-family
+    font-size: 18px
+    letter-spacing: 4px
+    line-height: 22px
+
+// featured-project
+.type__featured-project--title
+    font-family: $proxima-nova-bold-family
+    font-size: 20px
+    letter-spacing: 0.6px
+    line-height: 28px
+
+.type__featured-project--callout
+    font-family: $proxima-nova-regular-family
+    font-size: 17px
+    letter-spacing: 0.6px
+    line-height: 28px
+
+.type__featured-project--details
+    font-family: $proxima-nova-bold-family
+    font-size: 13px
+    letter-spacing: 0.8px
+    line-height: 28px
+
+// primary-cta
+.type__primary-cta
+    font-family: $proxima-nova-bold-family
+    font-size: 14px
+    letter-spacing: 1px
+    line-height: 17px
+
+.type__button-group-cta
+    font-family: $proxima-nova-bold-family
+    font-size: 12px
+    letter-spacing: 1px
+    line-height: 14px
+
+// content-tiles
+.type__content-tile--primary-heading
+    font-family: $proxima-nova-regular-family
+    font-weight: 100
+    font-size: 48px
+    letter-spacing: 3.43px
+    line-height: 48px
+    @include break-max($tablet)
+        font-size: 30px
+        letter-spacing: 2.14px
+        line-height: 35px
+
+.type__content-bottom-tile--primary-heading
+    // font-family: $eames-century-modern-regular-family
+    font-family: $proxima-nova-regular-family
+    font-weight: 100;
+    font-size: 38px
+    letter-spacing: 2.43px
+    line-height: 40px
+    @include break-max($tablet)
+        font-size: 25px
+        letter-spacing: 2.14px
+        line-height: 31px
+
+
+.type__content-tile--secondary-heading
+    font-family: $proxima-nova-bold-family
+    font-size: 18px
+    letter-spacing: 4px
+    line-height: 22px
+
+.type__content-tile--content
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 1.29px
+    line-height: 24px
+
+// callout
+.type__callout--heading
+    font-family: $proxima-nova-bold-family
+    font-size: 18px
+    letter-spacing: 2.7px
+    line-height: 22px
+
+.type__callout--content
+    font-family: $proxima-nova-regular-family
+    font-size: 14px
+    letter-spacing: 0
+    line-height: 20px
+
+// contact-us-section
+.type__contact-us-section--heading
+    font-family: $proxima-nova-regular-family
+    font-weight: 100;
+    font-size: 48px
+    letter-spacing: 3.43px
+    line-height: 48px
+    @include break-max($tablet)
+        font-size: 30px
+        letter-spacing: 2.14px
+        line-height: 35px
+
+.type__contact-us-section--content
+    font-family: $proxima-nova-regular-family
+    font-size:  18px
+    letter-spacing: 1.29px
+    line-height: 24px
+
+// footer-signup
+.type__footer-signup--heading
+    font-family: $proxima-nova-bold-family
+    font-size: 18px
+    letter-spacing: 3px
+    line-height: 30px
+
+.type__footer-signup--content
+    font-family: $proxima-nova-regular-family
+    font-size: 16px
+    letter-spacing: 0
+    line-height: 20px
+
+// footer-links
+.type__footer--links
+    font-family: $proxima-nova-regular-family
+    font-size:  14px
+    letter-spacing: 1px
+    line-height: 17px
+    @include break-max($tablet)
+        line-height: 27px
+
+// footer-copy
+.type__footer--copy
+    font-family: $proxima-nova-regular-family
+    font-size: 14px
+    letter-spacing: 1px
+    line-height: 17px
+
+// property-page-heading
+.type__property-page--headline
+    font-family: $eames-century-modern-regular-family
+    font-size: 36px
+    letter-spacing: 0.75px
+    line-height: 36px
+
+.type__property-page--subheading
+    font-family: $proxima-nova-regular-family
+    font-size: 24px
+    letter-spacing: 0
+    line-height: 32px
+
+.type__property-page--bold-subheading
+    font-family: $proxima-nova-bold-family
+    font-size: 24px
+    letter-spacing: 0
+    line-height: 32px
+
+// property-info-table
+.type__property-info--table-header
+    font-family: $proxima-nova-bold-family
+    font-size: 16px
+    letter-spacing: 1.14px
+    line-height: 20px
+
+.type__property-info--table-cell
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 32px
+
+// property-description
+.type__property-description--header
+    font-family: $proxima-nova-bold-family
+    font-size: 18px
+    letter-spacing: 4px
+    line-height: 30px
+
+.type__property-description--content
+    font-family: $proxima-nova-regular-family
+    font-size: 16px
+    letter-spacing: 0
+    line-height: 24px
+
+.type__property-description--subheading
+    font-family: $proxima-nova-bold-family
+    font-size: 16px
+    letter-spacing: 2.7px
+    line-height: 24px
+
+.type__property-description--info
+    font-family: $proxima-nova-regular-family
+    font-size: 16px
+    letter-spacing: 0
+    line-height: 24px
+
+// property-description-toggle
+.type__property-description--toggle
+    font-family: $proxima-nova-bold-family
+    font-size: 24px
+    letter-spacing: 0
+    line-height: 32px
+
+// content-section
+.type__content-section--heading
+    font-family: $proxima-nova-bold-family
+    font-size: 24px
+    letter-spacing: 2.7px
+    line-height: 30px
+
+.type__content-section--content
+    font-family: $proxima-nova-regular-family
+    font-size: 16px
+    letter-spacing: 1.67px
+    line-height: 24px
+
+// data-section
+.type__data-section--heading
+    font-family: $proxima-nova-bold-family
+    font-size: 24px
+    letter-spacing: 2.7px
+    line-height: 30px
+    @include break-max($tablet)
+        font-size: 18px
+        letter-spacing: 2.03px
+
+.type__data-section--content
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 1.29px
+    line-height: 24px
+    @include break-max($tablet)
+        font-size: 16px
+        letter-spacing: 1.48px
+
+
+.type__data-section--value
+    font-family: $proxima-nova-bold-family
+    // font-size: 4.5vmax;
+    @include font-size-vmax(4.5)
+    letter-spacing: 4.28px
+    line-height: 98px
+    @include break-max($tablet)
+        font-size: 50px
+        letter-spacing: 2.68px
+        line-height: 61px
+
+.type__data-section--label
+    font-family: $proxima-nova-bold-family
+    font-size: 18px
+    letter-spacing: 4px
+    line-height: 24px
+    @include break-max($tablet)
+        font-size: 16px
+        letter-spacing: 2.4px
+        line-height: 22px
+
+// affiliations-section
+.type__affiliations-section--heading
+    font-family: $proxima-nova-bold-family
+    font-size: 24px
+    letter-spacing: 2.7px
+    line-height: 30px
+    @include break-max($tablet)
+        font-size: 18px
+        letter-spacing: 2.03px
+        line-height: 24px
+
+.type__affiliations-section--content
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 24px
+    @include break-max($tablet)
+        font-size: 16px
+        letter-spacing: 1.48px
+
+// contact-form
+.type__contact-form--heading
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 26px
+    @include break-max($tablet)
+        font-size: 14px
+        letter-spacing: 0
+        line-height: 23px
+
+.type__contact-form--label
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 32px
+    @include break-max($tablet)
+        font-size: 13.5px
+        letter-spacing: 0
+        line-height: 24px
+
+.type__contact-form--checkbox-label
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 24px
+    @include break-max($tablet)
+        font-size: 12px
+        line-height: 26px
+
+// contact-info
+.type__contact-info--heading
+    font-family: $eames-century-modern-regular-family
+    font-size: 36px
+    letter-spacing: 0.75px
+    line-height: 39px
+    @include break-max($tablet)
+        font-size: 27px
+        letter-spacing: 0.56px
+        line-height: 29.25px
+
+.type__contact-info--subheading
+    font-family: $proxima-nova-bold-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 0
+    @include break-max($tablet)
+        font-size: 13.5px
+        letter-spacing: 0
+        line-height: 19.5px
+
+.type__contact-info--content
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 26px
+    @include break-max($tablet)
+        font-size: 13.5px
+        line-height: 19.5px
+
+// blog-post
+.type__blog-post--headline
+    font-family: $eames-century-modern-regular-family
+    font-size: 48px
+    letter-spacing: 1px
+    line-height: 48px
+    @include break-max($tablet)
+        font-size: 24px
+        letter-spacing: 0.5px
+        line-height: 24px
+
+.type__blog-post--subheading
+    font-family: $proxima-nova-regular-family
+    font-size: 28px
+    letter-spacing: 4px
+    line-height: 34px
+    @include break-max($tablet)
+        font-size: 14px
+        letter-spacing: 3.11px
+        line-height: 22px
+
+.type__blog-post--author
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 32px
+
+.type__blog-post--date
+    font-family: $proxima-nova-bold-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 32px
+
+.type__blog-post--image-caption
+    font-family: $proxima-nova-regular-family
+    font-size: 14px
+    letter-spacing: 0
+    line-height: 32px
+
+.type__blog-post--content
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 32px
+    @include break-max($tablet)
+        font-size: 12px
+        line-height: 20px
+
+.type__blog-post--quotation
+    font-family: $proxima-nova-regular-family
+    font-size: 17px
+    letter-spacing: 1.21px
+    line-height: 32px
+    @include break-max($tablet)
+        font-size: 12px
+        letter-spacing: 0
+        line-height: 20px
+
+.type__blog-post--tags-heading
+    font-family: $proxima-nova-bold-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 32px
+    @include break-max($tablet)
+        font-size: 12px
+
+.type__blog-post--tag
+    font-family: $proxima-nova-regular-family
+    font-size: 18px
+    letter-spacing: 0
+    line-height: 32px
+    @include break-max($tablet)
+        font-size: 12px
+
+// media-tile
+.type__media-tile--heading-featured
+    font-size: 48px
+    letter-spacing: 1.02px
+    line-height: 49px
+    @include break-max($tablet)
+        font-size: 24px
+        letter-spacing: 0.51px
+        line-height: 32px
+
+.type__media-tile--heading
+    font-family: $eames-century-modern-regular-family
+    font-size: 24px
+    letter-spacing: 0.51px
+    line-height: 32px
+
+.type__media-tile--date
+    font-family: $proxima-nova-regular-family
+    font-size: 14px
+    letter-spacing: 0
+    line-height: 32px
+
+.type__media-tile--caption
+    font-family: $proxima-nova-regular-family
+    font-size: 16px
+    letter-spacing: 0.24px
+    line-height: 22px
+    @include break-max($tablet)
+        letter-spacing: 0.69px
+
+// pagination
+.type__pagination--page-number
+    font-family: $proxima-nova-regular-family
+    font-size: 20px
+    letter-spacing: 0
+    line-height: 32px
+
+// share
+.type__share--title
+    font-family: $proxima-nova-bold-family
+    font-size: 14px
+    letter-spacing: 1px
+    line-height: 17px
+    @include break-max($tablet)
+        font-size: 10.5px
+        letter-spacing: 0.75px
+        line-height: 12px
+
+// placeholder
+.type__placeholder
+    font-family: $proxima-nova-bold-family
+    font-size: 14px
+    letter-spacing: 1px
+    line-height: 17px
+    @include break-max($tablet)
+        font-size: 10.5px
+        letter-spacing: 0.75px
+        line-height: 12px

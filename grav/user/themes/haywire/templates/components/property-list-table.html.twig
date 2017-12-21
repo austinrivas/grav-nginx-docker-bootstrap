@@ -1,0 +1,32 @@
+{% set favoriteIconTemplate = 'components/favorite-icon.html.twig' %}
+
+<section class="property-info-table property-list-table-container">
+    <table class="table is-fullwidth is-bordered">
+        <thead>
+            <tr>
+            <th>&nbsp;</th>
+            <th>Adress</th>
+            <th>Subdivision</th>
+            <th>Price</th>
+            <th>Price per sq. ft.</th>
+            <th>Type</th>
+            <th>Acres</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="model in collection">
+                <td>
+                    <favorite-icon :id="model.id" inline-template>
+                        {% include favoriteIconTemplate only %}
+                    </favorite-icon>
+                </td>
+                <td>${model.address}, ${model.city}, FL, ${model.zip}</td>
+                <td>${model.subdivision}</td>
+                <td>${model.totalPrice | currency}</td>
+                <td>${model.pricePerSqft | currency}</td>
+                <td>${model.type}</td>
+                <td>${model.acres}</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
