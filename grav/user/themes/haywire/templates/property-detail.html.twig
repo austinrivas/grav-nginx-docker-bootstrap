@@ -28,7 +28,11 @@
             </div>
 
             <div class="property-details" v-if="propertyExists">
-                {%- include galleryTemplate with {} only -%}
+                <property-image-gallery
+                    :images="propertyImages"
+                    inline-template>
+                    {%- include galleryTemplate with {} only -%}
+                </property-image-gallery>
                 {%- include headerTemplate with {} only -%}
                 {%- include infoTableTemplate with {} only -%}
                 {%- include descriptionTemplate with {} only -%}

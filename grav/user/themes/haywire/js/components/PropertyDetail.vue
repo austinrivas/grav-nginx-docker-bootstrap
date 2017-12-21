@@ -27,6 +27,10 @@
             propertyExists() {
                 let _this = this;
                 return !_this.loading && _this.property instanceof PropertyModel;
+            },
+            propertyImages() {
+                let _this = this;
+                return [null, _this.property.imageUrl, null];
             }
         }
     }

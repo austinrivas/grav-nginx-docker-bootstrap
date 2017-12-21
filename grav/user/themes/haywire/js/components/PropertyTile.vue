@@ -1,6 +1,4 @@
 <script>
-    import PropertyModel from "../models/propertyModel";
-
     // a reusable component for rendering a property in a tile ui
     export default {
 
@@ -8,56 +6,72 @@
             'model' // an instance of PropertyModel
         ],
 
+        data() {
+            return {
+                placeholderImageUrl: 'http://via.placeholder.com/580x350' // placeholder image to be used in the event of no image being available
+            };
+        },
+
         computed: {
             // computed property for accessing the model id
             id() {
-                return this.model && this.model.id ? this.model.id : null;
+                let _this = this;
+                return _this.model && _this.model.id ? _this.model.id : null;
             },
             // computed property for generating the property title
             title() {
                 // empty array for holding title elements
-                let title = [];
+                let _this = this,
+                    title = [];
                 // if the model is defined
-                if (this.model) {
+                if (_this.model) {
                     // if the model has an address prop
-                    if (this.model.address) {
+                    if (_this.model.address) {
                         // add the address value to title array
-                        title.push(this.model.address)
+                        title.push(_this.model.address)
                     }
                     // if the model has a lotId prop
-                    if (this.model.lotId) {
+                    if (_this.model.lotId) {
                         // add the lotId value to the title array
-                        title.push(`LOT ${this.model.lotId}`);
+                        title.push(`LOT ${_this.model.lotId}`);
                     }
                 }
                 // if model is defined join the title elements into a property title
-                return this.model && title.length ? title.join(' - ') : false;
+                return _this.model && title.length ? title.join(' - ') : false;
             },
             // computed property for showing the totalPrice of a property
             price() {
-                return this.model && this.model.totalPrice ? this.model.totalPrice : false;
+                let _this = this;
+                return _this.model && _this.model.totalPrice ? _this.model.totalPrice : false;
             },
             // computed property for getting the value of imageUrl
             image() {
-                return this.model ? this.model.imageUrl : false;
+                let _this = this;
+                return _this.model ? _this.model.imageUrl : _this.placeholderImageUrl;
+            },
+            url() {
+                let _this = this;
+                return _this.id ? `/properties/${_this.id}` : false;
             },
             // computed property for getting the value of the property subtitle
             subtitle() {
-                return this.model ? this.model.subdivision : false;
+                let _this = this;
+                return _this.model ? _this.model.subdivision : false;
             },
             // computed property for getting the details for a property
             details() {
                 // empty details container array
-                let details = [];
+                let _this = this,
+                    details = [];
                 // if model is defined
-                if (this.model) {
-                    if (this.model.acres) { details.push(`${this.model.acres} ACRES`); }
-                    if (this.model.type) { details.push(`${this.model.type}`); }
-                    if (this.model.status) { details.push(`${this.model.status}`); }
-                    if (this.model.pricePerSqft) { details.push(`${this.model.pricePerSqft} PSF`); }
+                if (_this.model) {
+                    if (_this.model.acres) { details.push(`${_this.model.acres} ACRES`); }
+                    if (_this.model.type) { details.push(`${_this.model.type}`); }
+                    if (_this.model.status) { details.push(`${_this.model.status}`); }
+                    if (_this.model.pricePerSqft) { details.push(`${_this.model.pricePerSqft} PSF`); }
                 }
                 // if model is defined join the details array into a details string
-                return this.model && details.length ? details.join(' | ') : false;
+                return _this.model && details.length ? details.join(' | ') : false;
             }
         }
 
