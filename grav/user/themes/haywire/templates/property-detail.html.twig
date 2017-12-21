@@ -40,7 +40,12 @@
                     inline-template>
                     {%- include headerTemplate with {} only -%}
                 </property-header>
-                {%- include infoTableTemplate with {} only -%}
+                <property-info-table
+                    :columns="propertyInfoTableColumns"
+                    :models="propertyInfoTableModels"
+                    inline-template>
+                    {%- include infoTableTemplate with {} only -%}
+                </property-info-table>
                 {%- include descriptionTemplate with {} only -%}
                 {%- include accordionTemplate with {} only -%}
 

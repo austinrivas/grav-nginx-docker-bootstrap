@@ -60,6 +60,39 @@
                     return [null, null, null];
                 }
             },
+            propertyInfoTableColumns() {
+                let _this = this;
+                return [
+                    {
+                        heading: 'PRICE',
+                        key: 'totalPrice',
+                        filter: _this.$options.filters.currency
+                    },{
+                        heading: 'ACRES',
+                        key: 'acres'
+                    },{
+                        heading: 'PRICE PER SQ. FT.',
+                        key: 'pricePerSqft',
+                        filter: _this.$options.filters.currency
+                    },{
+                        heading: 'PDI',
+                        computed(model) {
+                            return 'what is pdi?'
+                        }
+                    },{
+                        heading: 'PARCEL ID',
+                        key: 'lotId'
+                    }
+                ];
+            },
+            propertyInfoTableModels() {
+                let _this = this,
+                    models = [];
+                if (_this.property) {
+                    models.push(_this.property);
+                }
+                return models;
+            },
             propertyUses() {
                 let _this = this;
                 return _this.property && _this.property.type ? _this.property.type : "Unknown";
