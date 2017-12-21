@@ -28,9 +28,41 @@
                 let _this = this;
                 return !_this.loading && _this.property instanceof PropertyModel;
             },
+            propertyDateAvailable() {
+                let _this = this;
+                return _this.property && _this.property.dateAvailable ? _this.property.dateAvailable : 'Unknown';
+            },
+            propertyHeaderTitle() {
+                // empty array for holding title elements
+                let _this = this,
+                    title = [];
+                // if the model is defined
+                if (_this.property) {
+                    // if the model has an address prop
+                    if (_this.property.address) {
+                        // add the address value to title array
+                        title.push(_this.property.address)
+                    }
+                    // if the model has a lotId prop
+                    if (_this.property.lotId) {
+                        // add the lotId value to the title array
+                        title.push(`LOT ${_this.property.lotId}`);
+                    }
+                }
+                // if model is defined join the title elements into a property title
+                return _this.property && title.length ? title.join(' - ') : false;
+            },
             propertyImages() {
                 let _this = this;
-                return [null, _this.property.imageUrl, null];
+                if (_this.property && _this.property.imageUrl) {
+                    return [null, _this.property.imageUrl, null];
+                } else {
+                    return [null, null, null];
+                }
+            },
+            propertyUses() {
+                let _this = this;
+                return _this.property && _this.property.type ? _this.property.type : "Unknown";
             }
         }
     }

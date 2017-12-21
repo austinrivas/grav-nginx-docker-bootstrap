@@ -20,6 +20,8 @@
                         accumulator.push(image);
                         return accumulator;
                     }, []);
+                } else {
+                    return [];
                 }
             }
         }
