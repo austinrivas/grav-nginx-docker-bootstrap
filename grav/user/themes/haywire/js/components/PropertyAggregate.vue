@@ -100,48 +100,57 @@
             // execute the given query and return the result async
             async executeQuery(query) {
                 let _this = this,
-                    result = [];
+                    result = [],
+                    favoritesFilter = 'favorites';
                 // if the query is defined with a field and value
                 if (query) {
                     // retrieve the query result by accessing the Properties collection methods for the field
-                    switch (query.field) {
-                        case PROPERTY_FIELDS.acres:
-                            if (query.value && query.value.length === 2 && query.value[0] && query.value[1]) {
-                                result = await Properties.findPropertiesByAcreageRange(query.value[0], query.value[1]);
+                    if (query.filter === favoritesFilter) {
+                        result = await FavoriteProperties.findAllLocalModels();
+                        _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                            filter: favoritesFilter,
+                            filterValue: null
+                        });
+                    } else {
+                        switch (query.field) {
+                            case PROPERTY_FIELDS.acres:
+                                if (query.value && query.value.length === 2 && query.value[0] && query.value[1]) {
+                                    result = await Properties.findPropertiesByAcreageRange(query.value[0], query.value[1]);
+                                    _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                                        filter: query.filter,
+                                        filterValue: query.value
+                                    });
+                                }
+                                break;
+                            case PROPERTY_FIELDS.subdivision:
+                                result = await Properties.findPropertiesBySubdivision(query.value);
                                 _this.eventBus.$emit(_this.updateUrlParamsEvent, {
                                     filter: query.filter,
                                     filterValue: query.value
                                 });
-                            }
-                            break;
-                        case PROPERTY_FIELDS.subdivision:
-                            result = await Properties.findPropertiesBySubdivision(query.value);
-                            _this.eventBus.$emit(_this.updateUrlParamsEvent, {
-                                filter: query.filter,
-                                filterValue: query.value
-                            });
-                            break;
-                        case PROPERTY_FIELDS.status:
-                            result = await Properties.findPropertiesByType(query.value);
-                            _this.eventBus.$emit(_this.updateUrlParamsEvent, {
-                                filter: query.filter,
-                                filterValue: query.value
-                            });
-                            break;
-                        case PROPERTY_FIELDS.type:
-                            result = await Properties.findPropertiesByType(query.value);
-                            _this.eventBus.$emit(_this.updateUrlParamsEvent, {
-                                filter: query.filter,
-                                filterValue: query.value
-                            });
-                            break;
-                        default:
-                            result = await Properties.findAllProperties();
-                            _this.eventBus.$emit(_this.updateUrlParamsEvent, {
-                                filter: null,
-                                filterValue: null
-                            });
-                            break;
+                                break;
+                            case PROPERTY_FIELDS.status:
+                                result = await Properties.findPropertiesByType(query.value);
+                                _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                                    filter: query.filter,
+                                    filterValue: query.value
+                                });
+                                break;
+                            case PROPERTY_FIELDS.type:
+                                result = await Properties.findPropertiesByType(query.value);
+                                _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                                    filter: query.filter,
+                                    filterValue: query.value
+                                });
+                                break;
+                            default:
+                                result = await Properties.findAllProperties();
+                                _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                                    filter: null,
+                                    filterValue: null
+                                });
+                                break;
+                        }
                     }
                 }
                 // return the query result

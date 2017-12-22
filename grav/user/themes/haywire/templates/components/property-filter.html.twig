@@ -37,6 +37,7 @@
 {% set isGridComputed = 'isGridListViewActive' %}
 {% set executeQueryHandler = 'executeQueryHandler' %}
 {% set showApplyButton = 'showApplyButton' %}
+{% set applyFavoritesFilter = 'applyFavoritesFilterHandler' %}
 
 <div class="property-filter">
     <div class="columns">
@@ -98,7 +99,11 @@
                     }]} only %}
                 </div>
                 <div class="column is-4">
-                    {% include buttonTemplate with { class: buttonClassFav, iconId: iconFavId } only %}
+                    {% include buttonTemplate with {
+                        class: buttonClassFav,
+                        iconId: iconFavId,
+                        vueClick: applyFavoritesFilter
+                    } only %}
                 </div>
             </div>
         </div>

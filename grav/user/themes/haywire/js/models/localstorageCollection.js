@@ -105,6 +105,14 @@ export default class LocalStorageCollection extends Collection {
         return !!result;
     }
 
+    // findAllLocalModels just returns the value of this.colleciton to preserve the collection api interface
+    async findAllLocalModels() {
+        let _this = this;
+        return await Promise.all(_this.collection.map(async (id) => {
+            return await Properties.findPropertyById(id);
+        }));
+    }
+
     // findLocalModelById just returns the value of the id if it exists in localstorage
     // this could do more, like instantiate the model itself, but the current requirements to not dictate that
     async findLocalModelById(id) {
@@ -162,11 +170,6 @@ export default class LocalStorageCollection extends Collection {
         if (!this.localStorage.hasOwnProperty(this.collectionKey)) {
             this.collection = [];
         }
-    }
-
-    // findAllLocalModels just returns the value of this.colleciton to preserve the collection api interface
-    findAllLocalModels() {
-        return this.collection;
     }
 
     // empty the localstorage collection

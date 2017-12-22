@@ -231,6 +231,15 @@
                     return [0, 1];
                 }
             },
+            applyFavoritesFilterHandler() {
+                let _this = this;
+                // if there is a currently selected field with a valid value
+                _this.eventBus.$emit(_this.applyFilterEvent, {
+                    field: null,
+                    filter: 'favorites',
+                    value: null
+                });
+            },
             // string interpolator for generating a filter label
             createFilterLabel(label) {
                 return `Filter by ${label}`;
