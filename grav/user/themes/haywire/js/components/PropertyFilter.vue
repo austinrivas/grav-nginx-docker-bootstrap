@@ -73,6 +73,10 @@
         },
 
         computed: {
+            favoritesButtonClass() {
+                let _this = this;
+                return `button ${_this.filter === 'favorites' ? 'is-favorite-prop-filter is-clicked' : 'is-favorite-prop-filter'}`;
+            },
             // computed property for showing / hiding grid list view when active / inactive
             isGridListViewActive() {
                 let _this = this;

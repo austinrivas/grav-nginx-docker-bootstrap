@@ -5,14 +5,13 @@
 {% set sliderTemplate        = 'partials/elements/range-slider.html.twig' %}
 
 {# Classes #}
-{% set iconFavId             = 'icon__favorite-selected' %}
-{% set iconHamId             = 'icon__hamburger-nav' %}
-{% set iconGridId            = 'icon__grid' %}
 {% set buttonClassGold       = 'is-gold is-marginless is-button-100' %}
 {% set buttonClassPrimary    = 'is-primary is-marginless' %}
 {% set buttonClassGroup      = 'is-filter-button-group' %}
-{% set buttonClassFav        = 'is-favorite-prop-filter' %}
-{% set buttonClassFavClicked = 'is-favorite-prop-filter is-clicked' %}
+{% set favoritesButtonComputedClass = 'favoritesButtonClass' %}
+{% set iconFavId             = 'icon__favorite-selected' %}
+{% set iconHamId             = 'icon__hamburger-nav' %}
+{% set iconGridId            = 'icon__grid' %}
 {% set selectTemplateClass   = 'is-gold' %}
 
 {# Labels #}
@@ -100,8 +99,8 @@
                 </div>
                 <div class="column is-4">
                     {% include buttonTemplate with {
-                        class: buttonClassFav,
                         iconId: iconFavId,
+                        vueClass: favoritesButtonComputedClass,
                         vueClick: applyFavoritesFilter
                     } only %}
                 </div>
