@@ -238,6 +238,8 @@
             applyFavoritesFilterHandler() {
                 let _this = this;
                 // if there is a currently selected field with a valid value
+                _this.selectedFilterField = _this.defaultUnselectedValue;
+                _this.selectedFilterValue = _this.defaultUnselectedValue;
                 _this.eventBus.$emit(_this.applyFilterEvent, {
                     field: null,
                     filter: 'favorites',
