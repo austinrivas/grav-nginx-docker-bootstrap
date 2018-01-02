@@ -16,9 +16,6 @@
             }
         },
 
-        // runs when component is attached to DOM
-        mounted() {},
-
         // provides the data context for the component
         data() {
             return {
@@ -67,12 +64,13 @@
                 // if params are defined
                 if (params) {
                     // reduce the params into a urlParams map of key value pairs
-                    _this.urlParams = Object.keys(params).reduce((urlParams, key) => {
+                    // use Object.assign to trigger a change event that vue can observe
+                    _this.urlParams = Object.assign({}, Object.keys(params).reduce((urlParams, key) => {
                         urlParams[key] = params[key];
                         return urlParams;
-                    }, _this.urlParams);
+                    }, _this.urlParams));
                     // reduce the current url into a mapped state of the query params and replace the current url state in history
-                    window.history.replaceState({}, null, Object.keys(_this.urlParams).reduce((accumulator, key) => {
+                    window.history.pushState({}, null, Object.keys(_this.urlParams).reduce((accumulator, key) => {
                         return _this.updateQueryString(key, _this.urlParams[key], accumulator);
                     }, window.location.href));
                 }
