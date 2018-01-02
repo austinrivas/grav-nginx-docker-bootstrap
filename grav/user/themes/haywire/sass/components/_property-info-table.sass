@@ -1,15 +1,28 @@
 section.property-info-table
     table
-        th,td
+        th,td,
             @extend .has-text-centered
             @extend .is-blue-dark
             border-color: $white
             padding-top: 1.5em
             padding-bottom: 1.5em
-        th
+        th,.header
             @extend .is-uppercase
             @extend .is-bg-gold
             @extend .type__property-info--table-header
-        td
+        td,.cell
             @extend .is-bg-cream
             @extend .type__property-info--table-cell
+    .cell,.header
+        @extend .has-text-centered
+        @extend .is-blue-dark
+        border-color: $white
+        padding-top: 10px
+        padding-bottom: 10px
+    .header
+        @extend .is-uppercase
+        @extend .is-bg-gold
+        @extend .type__property-info--table-header
+    .cell
+        @extend .is-bg-cream
+        @extend .type__property-info--table-cell
