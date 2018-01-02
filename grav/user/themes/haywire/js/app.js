@@ -17,6 +17,7 @@ import VueCurrencyFilter from './filters/vue-currency-filter';
 import EventBus from './event-handlers/event-bus';
 
 // Vue Components
+import Accordion from './components/Accordion';
 import ArcMap from './components/ArcMap.vue';
 import Articles from './components/Articles.vue';
 import FavoriteIcon from './components/FavoriteIcon.vue';
@@ -25,10 +26,12 @@ import FeaturedProjects from './components/FeaturedProjects.vue';
 import Navbar from './components/Navbar.vue';
 import PageState from './components/PageState.vue';
 import PropertyAggregate from './components/PropertyAggregate.vue';
+import PropertyDescription from './components/PropertyDescription.vue';
 import PropertyDetail from './components/PropertyDetail.vue';
 import PropertyFilter from './components/PropertyFilter.vue';
 import PropertyHeader from './components/PropertyHeader.vue';
 import PropertyImageGallery from './components/PropertyImageGallery.vue';
+import PropertyInfoTable from './components/PropertyInfoTable.vue';
 import PropertyListGrid from './components/PropertyListGrid.vue';
 import PropertyListTable from './components/PropertyListTable.vue';
 import RangeSlider from './components/RangeSlider.vue';
@@ -36,23 +39,26 @@ import SelectFilter from './components/SelectFilter.vue';
 import NewsletterSignup from './components/NewsletterSignup.vue';
 
 // Vue Component declaration
+Vue.component('accordion', Accordion);
 Vue.component('arcmap', ArcMap);
+Vue.component('articles', Articles);
 Vue.component('favorite-icon', FavoriteIcon);
-Vue.component('property-tile', PropertyTile);
 Vue.component('featured-projects', FeaturedProjects);
 Vue.component('navbar', Navbar);
+Vue.component('newsletter-signup', NewsletterSignup);
 Vue.component('page-state', PageState);
 Vue.component('property-aggregate', PropertyAggregate);
+Vue.component('property-description', PropertyDescription);
 Vue.component('property-detail', PropertyDetail);
 Vue.component('property-filter', PropertyFilter);
 Vue.component('property-header', PropertyHeader);
 Vue.component('property-image-gallery', PropertyImageGallery);
+Vue.component('property-info-table', PropertyInfoTable);
 Vue.component('property-list-grid', PropertyListGrid);
 Vue.component('property-list-table', PropertyListTable);
+Vue.component('property-tile', PropertyTile);
 Vue.component('range-slider', RangeSlider);
 Vue.component('select-filter', SelectFilter);
-Vue.component('articles', Articles);
-Vue.component('newsletter-signup', NewsletterSignup);
 
 /**
  * Load all of this project's JavaScript dependencies including Vue

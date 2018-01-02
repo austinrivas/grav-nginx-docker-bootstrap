@@ -6,28 +6,36 @@
 {% set headerTemplate = 'components/property-header.html.twig' %}
 {% set infoTableTemplate = 'components/property-info-table.html.twig' %}
 {% set descriptionTemplate = 'components/property-description.html.twig' %}
-{% set accordionTemplate = 'components/property-accordion.html.twig' %}
+{% set accordionTemplate = 'components/accordion.html.twig' %}
 
 {# Content #}
 {% set loadingHeadline = 'Loading Property Details' %}
 {% set notFoundHeadline = 'Property Not Found' %}
 
+{# External Styles #}
+{% set esriMapCSS = 'https://js.arcgis.com/4.4/esri/css/main.css' %}
+
+{% block head %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ esriMapCSS }}">
+{% endblock %}
+
 {% block content %}
     <property-detail :id="urlParts[4]" inline-template>
         <div class="property-detail-container">
-            <div v-if="loading">
-                {%- include heroTemplate with {
-                    page: {
-                        header: {
-                            hero: {
-                                headline: loadingHeadline
-                            }
-                        }
-                    }
-                } only -%}
-            </div>
+            {#<div v-if="loading">#}
+                {#{%- include heroTemplate with {#}
+                    {#page: {#}
+                        {#header: {#}
+                            {#hero: {#}
+                                {#headline: loadingHeadline#}
+                            {#}#}
+                        {#}#}
+                    {#}#}
+                {#} only -%}#}
+            {#</div>#}
 
-            <div class="property-details" v-if="propertyExists">
+            <div class="property-details">
                 <property-image-gallery
                     :images="propertyImages"
                     inline-template>
@@ -35,31 +43,49 @@
                 </property-image-gallery>
                 <property-header
                     :date-available="propertyDateAvailable"
+                    :id="propertyId"
                     :title="propertyHeaderTitle"
                     :uses="propertyUses"
                     inline-template>
                     {%- include headerTemplate with {} only -%}
                 </property-header>
-                {%- include infoTableTemplate with {} only -%}
-                {%- include descriptionTemplate with {} only -%}
-                {%- include accordionTemplate with {} only -%}
+                <property-info-table
+                    :columns="propertyInfoTableColumns"
+                    :models="propertyInfoTableModels"
+                    inline-template>
+                    {%- include infoTableTemplate with {} only -%}
+                </property-info-table>
+                <property-description
+                    :id="propertyId"
+                    :description="propertyDescription"
+                    inline-template>
+                    {%- include descriptionTemplate with {
+                        contactName: page.header.contact.name,
+                        contactPhoneNumber: page.header.contact.phone
+                    } only -%}
+                </property-description>
+                <accordion
+                    :tabs="propertyTabs"
+                    inline-template>
+                    {%- include accordionTemplate with {} only -%}
+                </accordion>
 
                 {% for module in page.collection() %}
                     {{ module.content }}
                 {% endfor %}
             </div>
 
-            <div v-if="!propertyExists && !loading">
-                {%- include heroTemplate with {
-                    page: {
-                        header: {
-                            hero: {
-                                headline: notFoundHeadline
-                            }
-                        }
-                    }
-                } only -%}
-            </div>
+            {#<div v-if="!propertyExists && !loading">#}
+                {#{%- include heroTemplate with {#}
+                    {#page: {#}
+                        {#header: {#}
+                            {#hero: {#}
+                                {#headline: notFoundHeadline#}
+                            {#}#}
+                        {#}#}
+                    {#}#}
+                {#} only -%}#}
+            {#</div>#}
         </div>
     </property-detail>
 {% endblock %}

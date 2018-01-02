@@ -16,9 +16,6 @@
             }
         },
 
-        // runs when component is attached to DOM
-        mounted() {},
-
         // provides the data context for the component
         data() {
             return {
@@ -26,6 +23,13 @@
                 updateUrlParamsEvent: 'updateUrlParams', // named update url params event
                 urlParams: {}, // initial url param state,
                 urlParts: []
+            }
+        },
+
+        watch: {
+            urlParams() {
+                let _this = this;
+                _this.updateUrlState(_this.urlParams, window.location.href);
             }
         },
 
@@ -67,14 +71,11 @@
                 // if params are defined
                 if (params) {
                     // reduce the params into a urlParams map of key value pairs
-                    _this.urlParams = Object.keys(params).reduce((urlParams, key) => {
+                    // use Object.assign to trigger a change event that vue can observe
+                    _this.urlParams = Object.assign({}, Object.keys(params).reduce((urlParams, key) => {
                         urlParams[key] = params[key];
                         return urlParams;
-                    }, _this.urlParams);
-                    // reduce the current url into a mapped state of the query params and replace the current url state in history
-                    window.history.replaceState({}, null, Object.keys(_this.urlParams).reduce((accumulator, key) => {
-                        return _this.updateQueryString(key, _this.urlParams[key], accumulator);
-                    }, window.location.href));
+                    }, _this.urlParams));
                 }
             },
             // function that takes a key value pair and creates a url from an existing url that includes the serialized key value pair as query params
@@ -110,6 +111,15 @@
                     } else {
                         return url;
                     }
+                }
+            },
+            updateUrlState(urlParams, url) {
+                let _this = this;
+                if (urlParams && url) {
+                    // reduce the current url into a mapped state of the query params and replace the current url state in history
+                    window.history.pushState({}, null, Object.keys(urlParams).reduce((accumulator, key) => {
+                        return _this.updateQueryString(key, urlParams[key], accumulator);
+                    }, url));
                 }
             }
         }

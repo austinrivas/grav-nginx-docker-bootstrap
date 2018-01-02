@@ -3,8 +3,14 @@
 {% set propertyListGridTemplate = 'components/property-list-grid.html.twig' %}
 {% set propertyListTableTemplate = 'components/property-list-table.html.twig' %}
 <div class="property-aggregate-container">
+    {% if customFilter %}
+        <meta name="custom-filter-field" content="{{ customFilter.field }}" />
+        <meta name="custom-filter-value" content="{{ customFilter.value }}" />
+        <meta name="custom-filter-label" content="{{ customFilter.label }}" />
+    {% endif %}
     <property-filter
         :apply-filter-event="applyFilterEvent"
+        :custom-filter="customFilter"
         :enumerable-type="enumerableType"
         :event-bus="eventBus"
         :filters="filters"
