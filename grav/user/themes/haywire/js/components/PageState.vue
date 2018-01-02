@@ -26,6 +26,13 @@
             }
         },
 
+        watch: {
+            urlParams() {
+                let _this = this;
+                _this.updateUrlState(_this.urlParams, window.location.href);
+            }
+        },
+
         methods: {
             // async function that returns a map of key value pairs
             getUrlParams(search) {
@@ -69,10 +76,6 @@
                         urlParams[key] = params[key];
                         return urlParams;
                     }, _this.urlParams));
-                    // reduce the current url into a mapped state of the query params and replace the current url state in history
-                    window.history.pushState({}, null, Object.keys(_this.urlParams).reduce((accumulator, key) => {
-                        return _this.updateQueryString(key, _this.urlParams[key], accumulator);
-                    }, window.location.href));
                 }
             },
             // function that takes a key value pair and creates a url from an existing url that includes the serialized key value pair as query params
@@ -108,6 +111,15 @@
                     } else {
                         return url;
                     }
+                }
+            },
+            updateUrlState(urlParams, url) {
+                let _this = this;
+                if (urlParams && url) {
+                    // reduce the current url into a mapped state of the query params and replace the current url state in history
+                    window.history.pushState({}, null, Object.keys(urlParams).reduce((accumulator, key) => {
+                        return _this.updateQueryString(key, urlParams[key], accumulator);
+                    }, url));
                 }
             }
         }
