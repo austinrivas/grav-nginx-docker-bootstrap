@@ -49,27 +49,29 @@
                 {% include selectTemplate with { inputClass: selectTemplateClass, options: selectOptions, vue: true } only %}
             </select-filter>
         </div>
-        <div class="column is-3" v-if="showSlider">
-            <range-slider :change-event="rangeSliderChangeEvent"
-                          :event-bus="eventBus"
-                          :max-value="rangeSliderMaxValue"
-                          :min-value="rangeSliderMinValue"
-                          :output-function="rangeSliderOutputFunction"
-                          :slider-id="rangeSliderId"
-                          :step="rangeSliderStep"
-                          :values="rangeSliderValues"
-                          inline-template>
-                {% include sliderTemplate %}
-            </range-slider>
-        </div>
-        <div class="column is-3" v-if="showFilterOptions">
-            <select-filter :change-event="filterValueChangeEvent"
-                           :event-bus="eventBus"
-                           :options="selectedFilterOptions"
-                           :selected="selectedFilterValue"
-                           inline-template>
-                {% include selectTemplate with { inputClass: selectTemplateClass, options: selectFilterOptions, vue: true } only %}
-            </select-filter>
+        <div class="column is-3">
+            <div v-if="showSlider">
+                <range-slider :change-event="rangeSliderChangeEvent"
+                            :event-bus="eventBus"
+                            :max-value="rangeSliderMaxValue"
+                            :min-value="rangeSliderMinValue"
+                            :output-function="rangeSliderOutputFunction"
+                            :slider-id="rangeSliderId"
+                            :step="rangeSliderStep"
+                            :values="rangeSliderValues"
+                            inline-template>
+                    {% include sliderTemplate %}
+                </range-slider>
+            </div>
+            <div v-if="showFilterOptions">
+                <select-filter :change-event="filterValueChangeEvent"
+                            :event-bus="eventBus"
+                            :options="selectedFilterOptions"
+                            :selected="selectedFilterValue"
+                            inline-template>
+                    {% include selectTemplate with { inputClass: selectTemplateClass, options: selectFilterOptions, vue: true } only %}
+                </select-filter>
+            </div>
         </div>
         <div class="column is-1">
             {% include buttonTemplate with {
