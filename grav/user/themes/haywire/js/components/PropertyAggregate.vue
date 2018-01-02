@@ -45,6 +45,8 @@
                 field: _this.filter ? PROPERTY_FIELDS[_this.filter] : null,
                 value: _this.filterValue
             });
+
+            _this.getCustomFilterAttributes();
         },
 
         // provides the data context for the component
@@ -58,6 +60,9 @@
             return {
                 applyFilterEvent: 'applyFilter', // named event for triggering query execution from child components
                 collection: null, // initial collection state
+                customFilterField: null,
+                customFilterLabel: null,
+                customFilterValue: null,
                 enumerableType: enumerableType, // the named type for enumerable filters
                 filters: {
                     acres: {
@@ -84,6 +89,14 @@
         },
 
         computed: {
+            customFilter() {
+                let _this = this;
+                return {
+                    field: _this.customFilterField,
+                    label: _this.customFilterLabel,
+                    value: _this.customFilterValue
+                }
+            },
             // computed prop to show / hide grid list view
             showGrid() {
                 let _this = this;
@@ -174,6 +187,20 @@
                     }
                     return accumulator;
                 }, filters);
+            },
+            // gets the custom filter attributes from cms defined meta tags
+            getCustomFilterAttributes() {
+                let _this = this,
+                    fieldSelector = 'meta[name="custom-filter-field"]',
+                    valueSelector = 'meta[name="custom-filter-value"]',
+                    labelSelector = 'meta[name="custom-filter-label"]',
+                    fieldElement = _this.$el.querySelector(fieldSelector),
+                    valueElement = _this.$el.querySelector(valueSelector),
+                    labelElement = _this.$el.querySelector(labelSelector);
+
+                _this.customFilterField = fieldElement && fieldElement.getAttribute("content");
+                _this.customFilterValue = valueElement && valueElement.getAttribute("content");
+                _this.customFilterLabel = labelElement && labelElement.getAttribute("content");
             },
             // handle the listViewChange event
             handleListViewChange(type) {
