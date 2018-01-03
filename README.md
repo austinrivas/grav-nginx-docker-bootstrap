@@ -113,7 +113,7 @@ Its key features are :
 
 # Grav | [README](grav/README.md) | [DOCS](https://learn.getgrav.org/)
 
-If you are using the admin plugin, you can simply Update Grav itself from the notice. 
+If you are using the admin plugin, you can update Grav itself from the notice. 
 
 You can click the Update button to update plugins and themes. If you don't see any updates, you can clear the GPM cache by clicking the Check for Updates button in the top-right.
 
@@ -135,7 +135,7 @@ For additional information on the function and capabilities of the `pages` direc
 
 ## Plugins | [Registry](https://getgrav.org/downloads/plugins)
 
-Grav provides a plugin system that is available by calling the `docker-compose exec nginx-php-grav php bin/gpm install <plugin-name>` command.
+Grav provides a plugin system that is available by executing the `docker-compose exec nginx-php-grav php bin/gpm install <plugin-name>` command.
 
 Plugins are stored in the [grav/user/plugins](grav/user/plugins) directory.
 
