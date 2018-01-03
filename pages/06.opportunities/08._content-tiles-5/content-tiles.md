@@ -1,6 +1,6 @@
 ---
-title: 'Content Tiles 5'
-class: 'is-tile-white is-inverse'
+title: 'Content Tiles'
+backgroundName: OfficesRetailServices.jpg
 ---
 
 ### OFFICE
