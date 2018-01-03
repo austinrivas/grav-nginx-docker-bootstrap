@@ -12,7 +12,7 @@ We may send you emails from time to time to provide you with useful information 
 
 If we send you an email requesting that you log in to your account, we strongly recommend that you open your web browser and manually input the address for our website. Doing so will ensure that you do not open some third-party website disguised to look like our website.
 
-For more information about “phishing,” you should visit the Federal Trade Commission’s website at [www.ftc.gov](target="_blank"www.ftc.gov).
+For more information about “phishing,” you should visit the Federal Trade Commission’s website at [www.ftc.gov](www.ftc.gov){:target="_blank"}.
 
 **How do we use the Personal Information we collect:**
 
