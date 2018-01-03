@@ -3,7 +3,7 @@
     // https://github.com/rstacruz/nprogress
     import NProgress from '../vendor/nProgress';
     export default {
-        template: `<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div>`,
+        template: `<div class="bar" role="bar"></div>`,
         created() {
             window.addEventListener('load', () => {
                 if (NProgress && NProgress.done) {

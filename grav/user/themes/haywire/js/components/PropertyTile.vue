@@ -6,9 +6,14 @@
             'model' // an instance of PropertyModel
         ],
 
+        mounted() {
+          let _this = this;
+          _this.bindLoadEvents();
+        },
+
         data() {
             return {
-                placeholderImageUrl: 'http://via.placeholder.com/580x350' // placeholder image to be used in the event of no image being available
+                imageLoaded: false
             };
         },
 
@@ -20,24 +25,8 @@
             },
             // computed property for generating the property title
             title() {
-                // empty array for holding title elements
-                let _this = this,
-                    title = [];
-                // if the model is defined
-                if (_this.model) {
-                    // if the model has an address prop
-                    if (_this.model.address) {
-                        // add the address value to title array
-                        title.push(_this.model.address)
-                    }
-                    // if the model has a lotId prop
-                    if (_this.model.lotId) {
-                        // add the lotId value to the title array
-                        title.push(`LOT ${_this.model.lotId}`);
-                    }
-                }
-                // if model is defined join the title elements into a property title
-                return _this.model && title.length ? title.join(' - ') : false;
+                let _this = this;
+                return _this.getTitle(_this.model)
             },
             // computed property for showing the totalPrice of a property
             price() {
@@ -47,7 +36,11 @@
             // computed property for getting the value of imageUrl
             image() {
                 let _this = this;
-                return _this.model ? _this.model.imageUrl : _this.placeholderImageUrl;
+                return _this.model ? _this.model.imageUrl : '';
+            },
+            imageClass() {
+                let _this = this;
+                return _this.imageLoaded ? 'loaded' : '';
             },
             url() {
                 let _this = this;
@@ -72,6 +65,35 @@
                 }
                 // if model is defined join the details array into a details string
                 return _this.model && details.length ? details.join(' | ') : false;
+            }
+        },
+
+        methods: {
+            bindLoadEvents() {
+                let _this = this;
+                if (_this.$refs.propertyImage && _this.$refs.propertyImage.length) {
+                    _this.$refs.propertyImage[0].addEventListener('load', (e) => {
+                        _this.imageLoaded = true;
+                    });
+                }
+            },
+
+            getTitle(model) {
+                let title = [];
+                // if the model is defined
+                if (model) {
+                    // if the model has an address prop
+                    if (model.address) {
+                        // add the address value to title array
+                        title.push(model.address)
+                    }
+                    // if the model has a lotId prop
+                    if (model.lotId) {
+                        // add the lotId value to the title array
+                        title.push(`LOT ${model.lotId}`);
+                    }
+                }
+                return title.length ? title.join(' - ') : false;
             }
         }
 

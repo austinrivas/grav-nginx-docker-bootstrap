@@ -3,6 +3,7 @@
  */
 
 import 'babel-polyfill';
+import ImageLoader from './event-handlers/image-loader';
 
 // Resources and Collections
 import ArcModel from './models/arcModel';
@@ -95,3 +96,5 @@ window.App = new Vue({
     delimiters: ['${', '}'],
     el: '#app'
 });
+
+new ImageLoader();
