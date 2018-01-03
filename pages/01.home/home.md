@@ -1,4 +1,5 @@
 ---
+visible: false
 title: Home
 body_classes: index-page
 content:

@@ -14,11 +14,9 @@ statistics:
     -
         'SQ. FT. Of Space For Commercial Development': 10M.
 classes: blue
-buttons:
-    -
-        link: /view-us-by-the-numbers
-        label: 'View Us By The Numbers'
-        class: 'is-primary-invert'
+button_cta:
+    link: /view-us-by-the-numbers
+    label: 'View Us By The Numbers'
 ---
 
 Located in one of fastest-growing regions in the nation, Lakewood Ranch offers the space and

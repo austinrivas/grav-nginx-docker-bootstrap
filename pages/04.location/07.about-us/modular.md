@@ -1,5 +1,5 @@
 ---
-title: 'About Us'
+title: 'About Lakewood Ranch'
 content:
     items: '@self.modular'
     order:
