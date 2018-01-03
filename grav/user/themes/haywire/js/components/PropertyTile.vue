@@ -6,9 +6,16 @@
             'model' // an instance of PropertyModel
         ],
 
+        mounted() {
+          let _this = this;
+          _this.$refs.propertyImage.addEventListener('load', (e) => {
+              _this.imageLoaded = true;
+          })
+        },
+
         data() {
             return {
-                placeholderImageUrl: 'http://via.placeholder.com/580x350' // placeholder image to be used in the event of no image being available
+                imageLoaded: false
             };
         },
 
@@ -47,7 +54,11 @@
             // computed property for getting the value of imageUrl
             image() {
                 let _this = this;
-                return _this.model ? _this.model.imageUrl : _this.placeholderImageUrl;
+                return _this.model ? _this.model.imageUrl : '';
+            },
+            imageClass() {
+                let _this = this;
+                return _this.imageLoaded ? 'loaded' : '';
             },
             url() {
                 let _this = this;

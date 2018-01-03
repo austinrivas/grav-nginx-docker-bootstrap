@@ -1,8 +1,13 @@
-article.featured-project
+article.property-tile
     position: relative
     min-height: 450px
     @include break-max($widescreen)
         margin: 0
+    img
+        opacity: 0
+        &.loaded
+            opacity: 1
+            transition: opacity 0.5s
     .columns
         min-height: 520px
     .prop-description
