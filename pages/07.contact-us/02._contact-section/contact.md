@@ -11,15 +11,10 @@ contact:
             day: 'Sat. - Sun 10:00 am - 6:00 pm EST'
 persons:
     -
-        name: 'John Doe'
-        title: CEO
-        email: john@doe.com
-        phone: 333-444-5555
-    -
-        name: 'Bradley Pitts'
-        title: CFO
-        email: bradley@pitts.com
-        phone: 555-666-7777
+        name: 'Tom Johnson'
+        title: 'Marketing & Leasing Manager'
+        email: tom.johnson@lwrcommercial.com
+        phone: '(941) 757-1636'
 form:
     action: /contact-us
     name: Contact
