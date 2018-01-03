@@ -1,3 +1,5 @@
+{% set buttonTemplate = 'partials/elements/button.html.twig' %}
+
 {% if page.header.classes %}
 <section class="statistics lwrc {{ page.header.classes }}">
 {% else %}
@@ -13,6 +15,14 @@
                 <div class="content">
                     {{ page.content }}
                 </div>
+            {% endif %}
+
+            {% if page.header.buttons %}
+                {% for button in page.header.buttons %}
+                    <div class="is-center">
+                        {% include buttonTemplate with { content: button.label, class: button.class, href: button.link } only %}
+                    </div>
+                {% endfor %}
             {% endif %}
 
             <div class="columns is-multiline statistics-container is-fluid">
