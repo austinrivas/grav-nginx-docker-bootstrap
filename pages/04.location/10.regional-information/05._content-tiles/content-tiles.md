@@ -1,6 +1,7 @@
 ---
 title: 'Content Tiles'
 class: 'is-tile-white is-inverse'
+backgroundName: bradenton.jpg
 ---
 
 ### BRADENTON AREA
