@@ -56,13 +56,13 @@ Note: All paths are relative to the project root.
 
 - `git clone git@bitbucket.org:push-orlando/lwrc-grav.git lwrc-grav`
 
-- `cd lwrc-grav/grav`
+- `cd lwrc-grav`
 
 - `docker-compose up -d`
 
 - `docker-compose exec nginx-php-grav php bin/grav install`
 
-- `cd user/themes/haywire`
+- `cd grav/user/themes/haywire`
 
 - `yarn && yarn run production`
 
