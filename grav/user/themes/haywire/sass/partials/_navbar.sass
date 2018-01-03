@@ -96,6 +96,7 @@
                     border-color: transparent
                     box-shadow: none
                     left: 40px
+                    z-index: 1999
                     @include break-max($widescreen)
                         left: 18%
                     @include break-max($fullhd)
@@ -144,6 +145,9 @@
         left: 0
         width: 100%
         height: 8px
+        @include break-max($desktop)
+            top: 0
+            height: 4px
     .peg
         display: block
         position: absolute
