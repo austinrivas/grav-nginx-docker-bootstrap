@@ -10,7 +10,7 @@ content:
             - _content-section
             - _content-tiles
             - _statistics
-            - _content-tiles-sarasota
+            - _content-tiles-bradenton
             - _statistics-2
             - _featured-projects
             - _contact-cta
