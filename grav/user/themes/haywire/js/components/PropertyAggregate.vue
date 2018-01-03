@@ -67,6 +67,7 @@
                 customFilterLabel: null,
                 customFilterValue: null,
                 enumerableType: enumerableType, // the named type for enumerable filters
+                favoritesFilter: 'favorites', // the named filter for the favorites aggregate view
                 filters: {
                     acres: {
                         type: rangeType
@@ -131,15 +132,14 @@
             // execute the given query and return the result async
             async executeQuery(query) {
                 let _this = this,
-                    result = [],
-                    favoritesFilter = 'favorites';
+                    result = [];
                 // if the query is defined with a field and value
                 if (query) {
                     // retrieve the query result by accessing the Properties collection methods for the field
-                    if (query.filter === favoritesFilter) {
+                    if (query.filter === _this.favoritesFilter) {
                         result = await FavoriteProperties.findAllLocalModels();
                         _this.eventBus.$emit(_this.updateUrlParamsEvent, {
-                            filter: favoritesFilter,
+                            filter: _this.favoritesFilter,
                             filterValue: null
                         });
                     } else {
