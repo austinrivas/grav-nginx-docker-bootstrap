@@ -207,3 +207,36 @@ The `.ssh`, `grav`, and `nginx` directories are all mounted external volumes of 
     **/root/.ssh/**
 
   (Optional) Here you can put your **public** key so you can access container via SSH. After that, open a SSH connection to root@your_server:2222 specifying your **private** key.
+  
+# Helpful Functions
+
+### Deploy
+
+```bash
+# Push git deploy
+function push_git_deploy() {
+	git push $1 +HEAD:master
+	git fetch $1
+	git push origin --tags
+}
+```
+
+### Docker Shortcuts
+
+```bash
+function docker_remove_all_images() {
+	docker rmi $(docker images -q)
+}
+
+function docker_remove_all_containers() {
+	docker rm $(docker ps -q)
+}
+
+function docker_push_image() {
+	docker login && docker build -t $1 $2 && docker push $1
+}
+
+function docker_bash() {
+	docker-compose exec $1 /bin/bash
+}
+```
