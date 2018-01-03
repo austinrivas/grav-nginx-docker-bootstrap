@@ -208,8 +208,8 @@
             },
             // gets the custom filter attributes from cms defined meta tags
             getCustomFilterAttributes() {
-                let _this = this,
-                    fieldSelector = 'meta[name="custom-filter-field"]',
+                let _this = this;
+                let fieldSelector = 'meta[name="custom-filter-field"]',
                     valueSelector = 'meta[name="custom-filter-value"]',
                     labelSelector = 'meta[name="custom-filter-label"]',
                     fieldElement = _this.$el.querySelector(fieldSelector),
