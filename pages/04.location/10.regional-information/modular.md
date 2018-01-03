@@ -8,7 +8,7 @@ content:
         custom:
             - _regional-hero
             - _content-section
-            - _content-tiles
+            - _content-tiles-sarasota
             - _statistics
             - _content-tiles-bradenton
             - _statistics-2
