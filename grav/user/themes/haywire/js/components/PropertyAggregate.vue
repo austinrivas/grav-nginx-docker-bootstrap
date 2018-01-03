@@ -209,16 +209,9 @@
             // gets the custom filter attributes from cms defined meta tags
             getCustomFilterAttributes() {
                 let _this = this;
-                let fieldSelector = 'meta[name="custom-filter-field"]',
-                    valueSelector = 'meta[name="custom-filter-value"]',
-                    labelSelector = 'meta[name="custom-filter-label"]',
-                    fieldElement = _this.$el.querySelector(fieldSelector),
-                    valueElement = _this.$el.querySelector(valueSelector),
-                    labelElement = _this.$el.querySelector(labelSelector);
-
-                _this.customFilterField = fieldElement && fieldElement.getAttribute("content");
-                _this.customFilterValue = valueElement && valueElement.getAttribute("content");
-                _this.customFilterLabel = labelElement && labelElement.getAttribute("content");
+                _this.customFilterField = _this.$refs.customFilterField ? _this.$refs.customFilterField.content : null;
+                _this.customFilterValue = _this.$refs.customFilterValue ? _this.$refs.customFilterValue.content : null;
+                _this.customFilterLabel = _this.$refs.customFilterLabel ? _this.$refs.customFilterLabel.content : null;
             },
             // handle the listViewChange event
             handleListViewChange(type) {

@@ -4,9 +4,9 @@
 {% set propertyListTableTemplate = 'components/property-list-table.html.twig' %}
 <div class="property-aggregate-container">
     {% if customFilter %}
-        <meta name="custom-filter-field" content="{{ customFilter.field }}" />
-        <meta name="custom-filter-value" content="{{ customFilter.value }}" />
-        <meta name="custom-filter-label" content="{{ customFilter.label }}" />
+        <meta ref="customFilterField" content="{{ customFilter.field }}" />
+        <meta ref="customFilterValue" content="{{ customFilter.value }}" />
+        <meta ref="customFilterLabel" content="{{ customFilter.label }}" />
     {% endif %}
     <property-filter
         :apply-filter-event="applyFilterEvent"
