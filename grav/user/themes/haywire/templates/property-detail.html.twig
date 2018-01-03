@@ -23,18 +23,6 @@
 {% block content %}
     <property-detail :id="urlParts[4]" inline-template>
         <div class="property-detail-container">
-            {#<div v-if="loading">#}
-                {#{%- include heroTemplate with {#}
-                    {#page: {#}
-                        {#header: {#}
-                            {#hero: {#}
-                                {#headline: loadingHeadline#}
-                            {#}#}
-                        {#}#}
-                    {#}#}
-                {#} only -%}#}
-            {#</div>#}
-
             <div class="property-details">
                 <property-image-gallery
                     :images="propertyImages"
@@ -74,18 +62,6 @@
                     {{ module.content }}
                 {% endfor %}
             </div>
-
-            {#<div v-if="!propertyExists && !loading">#}
-                {#{%- include heroTemplate with {#}
-                    {#page: {#}
-                        {#header: {#}
-                            {#hero: {#}
-                                {#headline: notFoundHeadline#}
-                            {#}#}
-                        {#}#}
-                    {#}#}
-                {#} only -%}#}
-            {#</div>#}
         </div>
     </property-detail>
 {% endblock %}
