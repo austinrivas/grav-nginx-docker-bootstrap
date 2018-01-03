@@ -20,7 +20,7 @@ Run the following commands to add your git remote repositories:
 	git remote add stage push_dev@lc-www1:~/repos/www.lwrcommercial.com/Stage.git
 	git remote add test push_dev@lc-www1:~/repos/www.lwrcommercial.com/Test.git
 
-## [Production](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/push-admin)
+## [Production](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/admin)
 
 TODO: Deploy to production url with coming soon page
 
@@ -30,7 +30,7 @@ TODO: Describe prod environment snowflakes
 
 TODO: Describe prod deployment
 
-## [Staging](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/push-admin)
+## [Staging](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/admin)
 
 TODO: Deploy to staging url
 
@@ -40,7 +40,7 @@ TODO: Describe stage environment snowflakes
 
 TODO: Describe stage deployment
 
-## [Local](http://localhost) | [Admin](http://localhost/push-admin)
+## [Local](http://localhost) | [Admin](http://localhost/admin)
 
 The local dev environment runs in a docker service name `nginx-php-grav` that is hosted on dockerhub.
 
