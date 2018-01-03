@@ -3,7 +3,7 @@ contact:
     titleOne: 'Lakewood Ranch Commercial'
     titleTwo: 'Commercial Contacts'
     address: '<strong>LWR Commercial Realty</strong><br>14400 Covenant Way Lakewood Ranch, FL 34202'
-    phone: 941.907.6677
+    phone: '+1(941) 907-6677'
     hours:
         -
             day: 'Mon. - Fri 9:00 am - 5:30 pm EST'
@@ -14,7 +14,7 @@ persons:
         name: 'Tom Johnson'
         title: 'Marketing & Leasing Manager'
         email: tom.johnson@lwrcommercial.com
-        phone: '(941) 757-1636'
+        phone: '+1(941) 757-1636'
 form:
     action: /contact-us
     name: Contact
