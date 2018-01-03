@@ -9,6 +9,7 @@
     export default {
         props: [
             'applyFilterEvent', // named event for applying the current filter
+            'customFilter', // an object that contains the custom filter attributes
             'enumerableType', // named type for enumerable filters
             'eventBus', // shared eventBus
             'filter', // name of the selected filter
@@ -73,6 +74,18 @@
         },
 
         computed: {
+            customFilterClass() {
+                let _this = this;
+                return `button is-primary is-marginless ${_this.customFilter ? '' : 'is-hidden'}`;
+            },
+            customFilterContent() {
+                let _this = this;
+                return _this.customFilter && _this.customFilter.label ? _this.customFilter.label : null;
+            },
+            favoritesButtonClass() {
+                let _this = this;
+                return `button ${_this.filter === 'favorites' ? 'is-favorite-prop-filter is-clicked' : 'is-favorite-prop-filter'}`;
+            },
             // computed property for showing / hiding grid list view when active / inactive
             isGridListViewActive() {
                 let _this = this;
@@ -229,6 +242,34 @@
                 } else {
                     // default range of 0-1
                     return [0, 1];
+                }
+            },
+            applyFavoritesFilterHandler() {
+                let _this = this;
+                // if there is a currently selected field with a valid value
+                _this.selectedFilterField = _this.defaultUnselectedValue;
+                _this.selectedFilterValue = _this.defaultUnselectedValue;
+                _this.eventBus.$emit(_this.applyFilterEvent, {
+                    field: null,
+                    filter: 'favorites',
+                    value: null
+                });
+            },
+            applyCustomFilterHandler() {
+                let _this = this;
+                if (_this.customFilter &&
+                    _this.customFilter.field &&
+                    _this.filters[_this.customFilter.field] &&
+                    _this.filters[_this.customFilter.field].field &&
+                    _this.customFilter.value) {
+                    // if there is a currently selected field with a valid value
+                    _this.selectedFilterField = _this.filters[_this.customFilter.field].field;
+                    _this.selectedFilterValue = _this.customFilter.value;
+                    _this.eventBus.$emit(_this.applyFilterEvent, {
+                        field: _this.selectedFilterField,
+                        filter: _this.fields[_this.selectedFilterField].filter,
+                        value: _this.selectedFilterValue
+                    });
                 }
             },
             // string interpolator for generating a filter label

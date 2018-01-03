@@ -1,6 +1,6 @@
 enabled: true
 built_in_css: true
-route: /push-admin
+route:
 redirect_to_login: true
 route_activate: /activate_user
 route_forgot: /forgot_password

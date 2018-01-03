@@ -2,11 +2,8 @@
 
 This application uses the Grav flat-file cms to serve a static web application via a Nginx/PHP-fpm docker image.
 
-The scope of the application is to serve as a viable CMS for pages, blog posts, custom post types, and media assets while providing
+The scope of the application is to serve as a CMS for pages, blog posts, custom post types, and media assets while providing
 the ability to version control content/configuration changes.
-
-The development goals are to establish a reusable pattern for static marketing sites that relies on containerization, 
-modern FE development workflows, and simplified application backends.
 
 # Environments
 
@@ -20,7 +17,7 @@ Run the following commands to add your git remote repositories:
 	git remote add stage push_dev@lc-www1:~/repos/www.lwrcommercial.com/Stage.git
 	git remote add test push_dev@lc-www1:~/repos/www.lwrcommercial.com/Test.git
 
-## [Production](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/push-admin)
+## [Production](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/admin)
 
 TODO: Deploy to production url with coming soon page
 
@@ -30,7 +27,7 @@ TODO: Describe prod environment snowflakes
 
 TODO: Describe prod deployment
 
-## [Staging](https://www.lwrcommercial.com) | [Admin](https://www.lwrcommercial.com/push-admin)
+## [Staging](https://lwrcommercial-stage.pushdev.net/) | [Admin](https://lwrcommercial-stage.pushdev.net/admin)
 
 TODO: Deploy to staging url
 
@@ -40,9 +37,11 @@ TODO: Describe stage environment snowflakes
 
 TODO: Describe stage deployment
 
-## [Local](http://localhost) | [Admin](http://localhost/push-admin)
+## [Local](http://localhost) | [Admin](http://localhost/admin)
 
-TODO: Describe local environment snowflakes
+The local dev environment runs in a docker service name `nginx-php-grav` that is hosted on dockerhub.
+
+For more information on the docker image see the section of the README below. 
 
 # Build App
 
@@ -54,15 +53,13 @@ Note: All paths are relative to the project root.
 
 - `git clone git@bitbucket.org:push-orlando/lwrc-grav.git lwrc-grav`
 
-- `cd lwrc-grav/grav`
+- `cd lwrc-grav`
 
 - `docker-compose up -d`
 
 - `docker-compose exec nginx-php-grav php bin/grav install`
 
-TODO: include this step in the docker image initialization
-
-- `cd ../theme`
+- `cd grav/user/themes/haywire`
 
 - `yarn && yarn run production`
 
@@ -72,9 +69,9 @@ TODO: include this step in the docker image initialization
 
 ## Known Issues
 
-If after you run `docker-compose up` you seen an error like:
+If after you run `docker-compose up` you see an error like:
 
-```bash
+```
 Starting lwrc-grav ... 
 Starting lwrc-grav ... error
 
@@ -94,18 +91,14 @@ TODO: Bind container to a static ip locally and use a hosts declaration to avoid
 
 # Front End
 
-The front end application can be found in the symlinked `theme` folder.
-
-This folder is actually located in [grav/user/themes/haywire](grav/user/themes/haywire)
+The front end application can be found in the [grav/user/themes/haywire](grav/user/themes/haywire) folder.
 
 You can view which theme is currently active in [grav/user/config/system.yaml](grav/user/config/system.yaml)
 
-```aidl
+```yaml
 pages:
   theme: haywire
 ```
-
-If the active theme is changed be sure to update the symlink.
 
 ## Theme | [README](grav/user/themes/haywire/README.md) | [Github](https://github.com/robbinfellow/haywire-grav)
 
@@ -117,42 +110,32 @@ Its key features are :
 
 - VueJS Framework | [Github](https://github.com/vuejs/vue) | [Docs](https://vuejs.org/v2/guide/)
 
-### Build Commands
-
-- Production Build : `cd theme && yarn run production`
-- Development Build : `cd theme && yarn run dev`
-- Watch Local Files : `cd theme && yarn run watch`
-
-TOOD: implement livereload or BrowserSync, https://stackoverflow.com/questions/42047874/laravel-5-4-mix-how-to-run-browser-live-reload
-
 
 # Grav | [README](grav/README.md) | [DOCS](https://learn.getgrav.org/)
 
-If you are using the admin plugin, you can simply Update Grav itself from the notice. 
+If you are using the admin plugin, you can update Grav itself from the notice. 
 
 You can click the Update button to update plugins and themes. If you don't see any updates, you can clear the GPM cache by clicking the Check for Updates button in the top-right.
 
 Updating is now a simple affair. Simply navigate to the root of the Grav install in your terminal and type:
 
-`$ bin/gpm selfupgrade -f`
+`docker-compose exec nginx-php-grav php bin/gpm selfupgrade -f`
 
 This will upgrade the Grav core to the latest version. Additionally, you should update all your plugins and themes to the latest version (including the admin plugin if you have that installed).
 
 You can do this using the command below:
 
-`$ bin/gpm update -f`
+`docker-compose exec nginx-php-grav php bin/gpm update -f`
 
 ## Content
 
-All page content is stored in the `pages` directory.
-
-`pages` is actually a symlink to [grav/user/pages](grav/user/pages).
+All page content is stored in the [grav/user/pages](grav/user/pages) directory.
 
 For additional information on the function and capabilities of the `pages` directory see the [Grav Content Docs](https://learn.getgrav.org/content).
 
 ## Plugins | [Registry](https://getgrav.org/downloads/plugins)
 
-Grav provides a plugin system that is available by calling the `bin/gpm install pluginname` command.
+Grav provides a plugin system that is available by executing the `docker-compose exec nginx-php-grav php bin/gpm install <plugin-name>` command.
 
 Plugins are stored in the [grav/user/plugins](grav/user/plugins) directory.
 
@@ -221,3 +204,35 @@ The `.ssh`, `grav`, and `nginx` directories are all mounted external volumes of 
     **/root/.ssh/**
 
   (Optional) Here you can put your **public** key so you can access container via SSH. After that, open a SSH connection to root@your_server:2222 specifying your **private** key.
+  
+# Helpful Functions
+
+### Deploy
+
+```bash
+function push_git_deploy() {
+	git push $1 +HEAD:master
+	git fetch $1
+	git push origin --tags
+}
+```
+
+### Docker Shortcuts
+
+```bash
+function docker_remove_all_images() {
+	docker rmi $(docker images -q)
+}
+
+function docker_remove_all_containers() {
+	docker rm $(docker ps -q)
+}
+
+function docker_push_image() {
+	docker login && docker build -t $1 $2 && docker push $1
+}
+
+function docker_bash() {
+	docker-compose exec $1 /bin/bash
+}
+```

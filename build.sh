@@ -30,7 +30,7 @@ bin/grav install
 composer install
 
 echo "====================== Build ======================="
-cd ../theme
+cd user/themes/haywire
 yarn install
 yarn && yarn run production
 

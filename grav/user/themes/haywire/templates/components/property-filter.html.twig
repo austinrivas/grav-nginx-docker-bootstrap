@@ -5,14 +5,12 @@
 {% set sliderTemplate        = 'partials/elements/range-slider.html.twig' %}
 
 {# Classes #}
-{% set iconFavId             = 'icon__favorite-selected' %}
-{% set iconHamId             = 'icon__hamburger-nav' %}
-{% set iconGridId            = 'icon__grid' %}
 {% set buttonClassGold       = 'is-gold is-marginless is-button-100' %}
 {% set buttonClassPrimary    = 'is-primary is-marginless' %}
 {% set buttonClassGroup      = 'is-filter-button-group' %}
-{% set buttonClassFav        = 'is-favorite-prop-filter' %}
-{% set buttonClassFavClicked = 'is-favorite-prop-filter is-clicked' %}
+{% set iconFavId             = 'icon__favorite-selected' %}
+{% set iconHamId             = 'icon__hamburger-nav' %}
+{% set iconGridId            = 'icon__grid' %}
 {% set selectTemplateClass   = 'is-gold' %}
 
 {# Labels #}
@@ -37,6 +35,11 @@
 {% set isGridComputed = 'isGridListViewActive' %}
 {% set executeQueryHandler = 'executeQueryHandler' %}
 {% set showApplyButton = 'showApplyButton' %}
+{% set applyFavoritesFilter = 'applyFavoritesFilterHandler' %}
+{% set applyCustomFilter = 'applyCustomFilterHandler' %}
+{% set favoritesButtonComputedClass = 'favoritesButtonClass' %}
+{% set customFilterComputedClass = 'customFilterClass' %}
+{% set customFilterComputedContent = '${customFilterContent}' %}
 
 <div class="property-filter">
     <div class="columns">
@@ -82,7 +85,11 @@
             } only %}
         </div>
         <div class="column is-3">
-            {% include buttonTemplate with { class: buttonClassPrimary, content: buttonPropLabel } only %}
+            {% include buttonTemplate with {
+                vueClass: customFilterComputedClass,
+                content: customFilterComputedContent,
+                vueClick: applyCustomFilter
+            } only %}
         </div>
         <div class="column is-2">
             <div class="columns is-hidden-touch is-gapless">
@@ -100,7 +107,11 @@
                     }]} only %}
                 </div>
                 <div class="column is-4">
-                    {% include buttonTemplate with { class: buttonClassFav, iconId: iconFavId } only %}
+                    {% include buttonTemplate with {
+                        iconId: iconFavId,
+                        vueClass: favoritesButtonComputedClass,
+                        vueClick: applyFavoritesFilter
+                    } only %}
                 </div>
             </div>
         </div>
