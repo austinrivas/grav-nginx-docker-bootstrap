@@ -42,7 +42,9 @@ TODO: Describe stage deployment
 
 ## [Local](http://localhost) | [Admin](http://localhost/push-admin)
 
-TODO: Describe local environment snowflakes
+The local dev environment runs in a docker service name `nginx-php-grav` that is hosted on dockerhub.
+
+For more information on the docker image see the section of the README below. 
 
 # Build App
 
@@ -60,9 +62,7 @@ Note: All paths are relative to the project root.
 
 - `docker-compose exec nginx-php-grav php bin/grav install`
 
-TODO: include this step in the docker image initialization
-
-- `cd ../theme`
+- `cd user/themes/haywire`
 
 - `yarn && yarn run production`
 
@@ -116,14 +116,6 @@ Its key features are :
 - Bulma SASS Framework | [Github](https://github.com/jgthms/bulma) | [Docs](https://bulma.io/documentation/overview/start/)
 
 - VueJS Framework | [Github](https://github.com/vuejs/vue) | [Docs](https://vuejs.org/v2/guide/)
-
-### Build Commands
-
-- Production Build : `cd theme && yarn run production`
-- Development Build : `cd theme && yarn run dev`
-- Watch Local Files : `cd theme && yarn run watch`
-
-TOOD: implement livereload or BrowserSync, https://stackoverflow.com/questions/42047874/laravel-5-4-mix-how-to-run-browser-live-reload
 
 
 # Grav | [README](grav/README.md) | [DOCS](https://learn.getgrav.org/)
