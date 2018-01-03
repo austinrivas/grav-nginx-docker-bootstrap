@@ -38,7 +38,7 @@ We establish and maintain certain practices to help protect the confidentiality,
 
 **How to modify your Personal Information:**
 
-You may modify or update your Personal Information by sending an e-mail to our Customer Service Department at info@lakewoodranch.com. Data management requests are administered in an orderly manner to the extent feasible and within our direct control.
+You may modify or update your Personal Information by sending an e-mail to our Customer Service Department at [info@lakewoodranch.com](mailto:info@lakewoodranch.com). Data management requests are administered in an orderly manner to the extent feasible and within our direct control.
 
 **Other Limits to Your Privacy and Confidentiality:**
 
@@ -62,4 +62,4 @@ Our website may contain links to third-party websites that are not subject to ou
 
 **Your Questions and Comments:**
 
-If you have questions about this Policy or would like to be removed from our database, please send an e-mail to info@lakewoodranch.com, or contact us by mail at 14400 Covenant Way, Lakewood Ranch, FL 34202.
+If you have questions about this Policy or would like to be removed from our database, please send an e-mail to [info@lakewoodranch.com](mailto:info@lakewoodranch.com), or contact us by mail at 14400 Covenant Way, Lakewood Ranch, FL 34202.
