@@ -2,11 +2,8 @@
 
 This application uses the Grav flat-file cms to serve a static web application via a Nginx/PHP-fpm docker image.
 
-The scope of the application is to serve as a viable CMS for pages, blog posts, custom post types, and media assets while providing
+The scope of the application is to serve as a CMS for pages, blog posts, custom post types, and media assets while providing
 the ability to version control content/configuration changes.
-
-The development goals are to establish a reusable pattern for static marketing sites that relies on containerization, 
-modern FE development workflows, and simplified application backends.
 
 # Environments
 
@@ -213,7 +210,6 @@ The `.ssh`, `grav`, and `nginx` directories are all mounted external volumes of 
 ### Deploy
 
 ```bash
-# Push git deploy
 function push_git_deploy() {
 	git push $1 +HEAD:master
 	git fetch $1
