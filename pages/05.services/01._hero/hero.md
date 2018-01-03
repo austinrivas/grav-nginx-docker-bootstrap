@@ -1,5 +1,0 @@
----
-hero:
-    headline: Services
----
-
