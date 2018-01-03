@@ -1,7 +1,6 @@
 ---
 title: 'Content Tiles 2'
 class: is-tile-blue-tiffany-white
-backgroundName: DevelopmentPropertyManagement.jpg
 ---
 
 ### DEVELOPMENT & PROPERTY MANAGEMENT

@@ -4,12 +4,12 @@ media_order: '000000.gif,Pizza-icon.png,1200x1200.png,300.gif'
 affiliations:
     -
         name: 'Bright House Networks'
-        logo: 000000.gif
+        logo: 350x150.png
         link: 'https://google.com?q=brighthousenetworks'
     -
-        name: 'Bradenton Area'
+        name: 'Bright House Networks'
         logo: 000000.gif
-        link: 'https://www.lakewoodranch.com/surrounding-area/attractions/beaches-coastal-attractions/'
+        link: 'https://google.com?q=brighthousenetworks'
     -
         name: 'Bright House Networks'
         logo: 000000.gif

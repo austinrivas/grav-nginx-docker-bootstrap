@@ -7,7 +7,7 @@ content:
         dir: asc
 contact:
     name: 'Johnny Doe'
-    phone: 407-123-4568
+    phone: '407-123-4568'
 body_classes: property-details-page
 ---
 
