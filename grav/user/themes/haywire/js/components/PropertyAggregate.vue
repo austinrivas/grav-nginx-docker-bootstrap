@@ -11,6 +11,7 @@
         props: [
             'eventBus', // the shared event bus
             'filter', // the currently selected filter
+            'listView', // the currently selected view for the result list
             'rawFilterValue', // the current value to filter by
             'updateUrlParamsEvent' // named event to update the page state url params
         ],
@@ -45,6 +46,8 @@
                 field: _this.filter ? PROPERTY_FIELDS[_this.filter] : null,
                 value: _this.filterValue
             });
+
+            _this.setListView(_this.listView);
 
             _this.getCustomFilterAttributes();
         },
@@ -81,9 +84,9 @@
                 filterValue: null, // the sanitized filter value
                 gridItemsInRow: 3, // default row length for grid list view
                 gridView: gridView, // named grid list view
-                listView: gridView, // default list view
                 listViewChangeEvent: 'listViewChange', // named event for triggering list view change
                 rangeType: rangeType, // the named type for range filters
+                selectedListView: gridView, // the selected list view for results
                 tableView: tableView // named table list view
             }
         },
@@ -100,12 +103,27 @@
             // computed prop to show / hide grid list view
             showGrid() {
                 let _this = this;
-                return _this.listView === _this.gridView;
+                return _this.selectedListView === _this.gridView;
             },
             // computed prop to show / hide table list view
             showTable() {
                 let _this = this;
-                return _this.listView === _this.tableView;
+                return _this.selectedListView === _this.tableView;
+            }
+        },
+
+        watch: {
+            // watch the component prop and updated selected view
+            listView() {
+                let _this = this;
+                _this.setListView(_this.listView);
+            },
+            // fire a event to update the url params with the current list view state
+            selectedListView() {
+                let _this = this;
+                _this.eventBus.$emit(_this.updateUrlParamsEvent, {
+                    listView: _this.selectedListView
+                });
             }
         },
 
@@ -190,17 +208,10 @@
             },
             // gets the custom filter attributes from cms defined meta tags
             getCustomFilterAttributes() {
-                let _this = this,
-                    fieldSelector = 'meta[name="custom-filter-field"]',
-                    valueSelector = 'meta[name="custom-filter-value"]',
-                    labelSelector = 'meta[name="custom-filter-label"]',
-                    fieldElement = _this.$el.querySelector(fieldSelector),
-                    valueElement = _this.$el.querySelector(valueSelector),
-                    labelElement = _this.$el.querySelector(labelSelector);
-
-                _this.customFilterField = fieldElement && fieldElement.getAttribute("content");
-                _this.customFilterValue = valueElement && valueElement.getAttribute("content");
-                _this.customFilterLabel = labelElement && labelElement.getAttribute("content");
+                let _this = this;
+                _this.customFilterField = _this.$refs.customFilterField ? _this.$refs.customFilterField.content : null;
+                _this.customFilterValue = _this.$refs.customFilterValue ? _this.$refs.customFilterValue.content : null;
+                _this.customFilterLabel = _this.$refs.customFilterLabel ? _this.$refs.customFilterLabel.content : null;
             },
             // handle the listViewChange event
             handleListViewChange(type) {
@@ -208,6 +219,13 @@
                 // set the current list view selection to the value of the event
                 if (type === _this.gridView || type === _this.tableView) {
                     _this.listView = type;
+                }
+            },
+            // check that the new list view value is valid
+            setListView(viewName) {
+                let _this = this;
+                if (viewName === _this.gridView || viewName === _this.tableView) {
+                    _this.selectedListView = viewName;
                 }
             }
         }
