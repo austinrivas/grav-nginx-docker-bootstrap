@@ -100,7 +100,15 @@
                 map: null, // the current map
                 mapNodeSelector: null, // the id of the map container
                 mapView: null, // the current map view,
-                mapZindex: 1
+                mapZindex: 1,
+                markerColors: [
+                    [203, 207, 125, 1], // yellow
+                    [132, 127, 168, 1], // purple
+                    [168, 127, 126, 1], // red
+                    [151, 151, 151, 1], // grey
+                    [143, 168, 127, 1], // green
+                    [95, 42, 42, 1], // maroon
+                ]
             };
         },
 
@@ -176,10 +184,10 @@
                 }
             },
             // an iterator function that takes a model and adds it to the arc map
-            addModelToMap(model) {
+            addModelToMap(model, index) {
                 let _this = this,
                     // create an svg graphic marker from the model
-                    graphic = _this.createMarker(model);
+                    graphic = _this.createMarker(model, index);
                 if (graphic) {
                     // add the graphic marker to the graphics array
                     _this.graphics.push({graphic: graphic});
@@ -189,16 +197,16 @@
                 // update the extent of the map with the new model
                 _this.extent = _this.getMapExtent(model, _this.extent);
             },
-            createMarker(model) {
+            createMarker(model, index) {
                 let _this = this,
                     // marker rgba color value
-                    markerColor = [200, 25, 25, 0.8],
+                    markerColor = _this.getMarkerColor(index),
+                    markerOutlineColor = 'white',
                     // marker outline width
-                    markerOutlineWidth = "0.5px",
-                    // marker svg path
-                    markerPath = "M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z",
+                    markerOutlineWidth = "1px",
                     // marker size
-                    markerSize = "24px",
+                    markerSize = "20px",
+                    markerStyle = 'circle',
                     // function for generating the marker tooltip
                     tooltipContent = async function () {
                         // locally scope context of function to the current execution context
@@ -214,11 +222,12 @@
                     }),
                     // create the marker symbol
                     symbol: new _this.SimpleMarkerSymbol({
-                        path: markerPath,
+//                        path: markerPath,
+                        style: markerStyle,
                         size: markerSize,
                         color: markerColor,
                         outline: {
-                            color: markerColor,
+                            color: markerOutlineColor,
                             width: markerOutlineWidth
                         }
                     }),
@@ -230,6 +239,15 @@
                         content: tooltipContent
                     }
                 })
+            },
+            // returns an array of color values based on the index of the model
+            getMarkerColor(index) {
+                let _this = this;
+                if (_this.markerColors && _this.markerColors.length) {
+                    return _this.markerColors[index % _this.markerColors.length];
+                } else {
+                    return 'white';
+                }
             },
             // returns an empty map extent
             getInitialExtent() {
