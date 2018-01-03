@@ -1,4 +1,7 @@
-<section class="hero lwrc">
+{# Featured Image // last image uploaded for now #}
+{% set rowImage = page.media[page.header.hero.backgroundName].url %}
+
+<section class="hero lwrc" {% if rowImage %} style="background-size:cover; background-image: url('{{ rowImage }}')" {% endif %}>
     <div class="hero-body">
         <div class="container is-fluid">
             <h1 class="type__hero--headline">

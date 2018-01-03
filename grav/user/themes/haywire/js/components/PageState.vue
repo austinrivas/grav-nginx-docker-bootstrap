@@ -22,11 +22,12 @@
                 eventBus: EventBus, // shared event bus
                 updateUrlParamsEvent: 'updateUrlParams', // named update url params event
                 urlParams: {}, // initial url param state,
-                urlParts: []
+                urlParts: [] // the result of calling getUrlParts
             }
         },
 
         watch: {
+            // watch the value of the urlParams property and update the url whenever it changes
             urlParams() {
                 let _this = this;
                 _this.updateUrlState(_this.urlParams, window.location.href);

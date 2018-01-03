@@ -1,4 +1,5 @@
-import Collection from "./collection";
+import _filter from 'lodash/filter';
+import Collection from './collection';
 
 // LocalStorageCollection is an abstract class that provides and interface for storing an array of ids in localstorage
 export default class LocalStorageCollection extends Collection {
@@ -107,10 +108,20 @@ export default class LocalStorageCollection extends Collection {
 
     // findAllLocalModels just returns the value of this.colleciton to preserve the collection api interface
     async findAllLocalModels() {
-        let _this = this;
-        return await Promise.all(_this.collection.map(async (id) => {
-            return await Properties.findPropertyById(id);
+        let _this = this,
+            models = await Promise.all(_this.collection.map(async (id) => {
+            let model = await Properties.findPropertyById(id);
+            if (model && model.id && _this.exists(model.id)) {
+                return model;
+            } else {
+                await _this.remove({id: id});
+                return false;
+            }
         }));
+
+        return _filter(models, (m) => {
+            return m !== false;
+        });
     }
 
     // findLocalModelById just returns the value of the id if it exists in localstorage
@@ -138,24 +149,18 @@ export default class LocalStorageCollection extends Collection {
     // remove a model from localstorage
     // all this is doing is removing the id of the model from the serialized array at localstorage collectionKey
     async remove(model) {
+        let _this = this;
         if (!model) {
             return new Error("LocalStorageCollection.remove method requires a model as a parameter");
         } else if (!model.id) {
             return new Error("The model being removed has no id");
         } else {
-            let exists = await this.exists(model.id);
 
-            if (exists) {
-                let collection = this.collection;
+            _this.collection = await _this.collection.filter((iterateeId) => {
+                return iterateeId !== model.id;
+            });
 
-                this.collection = await collection.filter((iterateeId) => {
-                    return iterateeId !== model.id;
-                });
-
-                exists = await this.exists(model.id);
-            }
-
-            return !exists;
+            return !(await this.exists(model.id));
         }
     }
 

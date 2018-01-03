@@ -20,6 +20,28 @@
         async mounted() {
             let _this = this;
 
+                // Setup isScrolling variable
+                let isScrolling;
+
+                // Listen for scroll events
+                document.addEventListener('wheel', function (e) {
+                    let node = _this.$el.querySelector('#mapNode');
+                    _this.mapZindex = -1;
+                    console.log('scrolling', node);
+                    // Clear our timeout throughout the scroll
+                    window.clearTimeout( isScrolling );
+
+                    // Set a timeout to run after scrolling ends
+                    isScrolling = setTimeout(function() {
+
+                        // Run the callback
+                        console.log( 'Scrolling has stopped.' );
+                        _this.mapZindex = 1;
+                    }, 200);
+
+                }, false);
+
+
             // the basemap styles being used in the map TODO: set in CMS
             const basemap = "hybrid",
                 // default options for EsriLoader
@@ -77,8 +99,18 @@
                 graphics: [], // the current graphics being rendered
                 map: null, // the current map
                 mapNodeSelector: null, // the id of the map container
-                mapView: null // the current map view
+                mapView: null, // the current map view,
+                mapZindex: 1
             };
+        },
+
+        computed: {
+            mapStyles() {
+                let _this = this;
+                return {
+                    'z-index': _this.mapZindex
+                }
+            },
         },
 
         watch: {
@@ -130,7 +162,7 @@
                     // initialize a new map view using the current map and container
                     _this.mapView = new MapView({ container: _this.mapNodeSelector, map: _this.map });
                     // stop propagation of mouse-wheel events to prevent esri from breaking itself
-                    _this.mapView.on(mouseWheelEvent, _this.stopPropagation);
+                   // _this.mapView.on(mouseWheelEvent, _this.stopPropagation);
                     // add the collection models to the map
                     await collection.forEach(_this.addModelToMap);
 
