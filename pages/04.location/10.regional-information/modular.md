@@ -8,9 +8,9 @@ content:
         custom:
             - _regional-hero
             - _content-section
-            - _content-tiles-sarasota
-            - _statistics
             - _content-tiles
+            - _statistics
+            - _content-tiles-sarasota
             - _statistics-2
             - _featured-projects
             - _contact-cta
