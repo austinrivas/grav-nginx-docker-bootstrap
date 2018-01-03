@@ -72,9 +72,9 @@ Note: All paths are relative to the project root.
 
 ## Known Issues
 
-If after you run `docker-compose up` you seen an error like:
+If after you run `docker-compose up` you see an error like:
 
-```bash
+```
 Starting lwrc-grav ... 
 Starting lwrc-grav ... error
 
