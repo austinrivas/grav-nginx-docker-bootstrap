@@ -1,5 +1,5 @@
 ---
-title: 'Content Tiles Sarasota'
+title: 'Content Tiles Bradenton'
 class: 'is-tile-white is-inverse'
 backgroundName: atrractions-beaches-coastal-attractions.jpg
 ---
