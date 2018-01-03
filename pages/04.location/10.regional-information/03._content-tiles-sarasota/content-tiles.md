@@ -1,6 +1,6 @@
 ---
 title: 'Content Tiles Sarasota'
-class: is-tile-white
+class: 'is-tile-white is-inverse'
 backgroundName: atrractions-beaches-coastal-attractions.jpg
 ---
 
