@@ -3,7 +3,7 @@
     // https://github.com/rstacruz/nprogress
     import NProgress from '../vendor/nProgress';
     export default {
-        template: `<div id="progress-bar"></div>`,
+        template: `<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div>`,
         created() {
             window.addEventListener('load', () => {
                 if (NProgress && NProgress.done) {
@@ -22,7 +22,6 @@
         data() {
             return {
                 config: {
-                    parent: '#progress-bar',
                     showSpinner: false
                 }
             };
