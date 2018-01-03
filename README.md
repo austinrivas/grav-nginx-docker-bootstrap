@@ -94,18 +94,14 @@ TODO: Bind container to a static ip locally and use a hosts declaration to avoid
 
 # Front End
 
-The front end application can be found in the symlinked `theme` folder.
-
-This folder is actually located in [grav/user/themes/haywire](grav/user/themes/haywire)
+The front end application can be found in the [grav/user/themes/haywire](grav/user/themes/haywire) folder.
 
 You can view which theme is currently active in [grav/user/config/system.yaml](grav/user/config/system.yaml)
 
-```aidl
+```yaml
 pages:
   theme: haywire
 ```
-
-If the active theme is changed be sure to update the symlink.
 
 ## Theme | [README](grav/user/themes/haywire/README.md) | [Github](https://github.com/robbinfellow/haywire-grav)
 
@@ -126,25 +122,23 @@ You can click the Update button to update plugins and themes. If you don't see a
 
 Updating is now a simple affair. Simply navigate to the root of the Grav install in your terminal and type:
 
-`$ bin/gpm selfupgrade -f`
+`docker-compose exec nginx-php-grav php bin/gpm selfupgrade -f`
 
 This will upgrade the Grav core to the latest version. Additionally, you should update all your plugins and themes to the latest version (including the admin plugin if you have that installed).
 
 You can do this using the command below:
 
-`$ bin/gpm update -f`
+`docker-compose exec nginx-php-grav php bin/gpm update -f`
 
 ## Content
 
-All page content is stored in the `pages` directory.
-
-`pages` is actually a symlink to [grav/user/pages](grav/user/pages).
+All page content is stored in the [grav/user/pages](grav/user/pages) directory.
 
 For additional information on the function and capabilities of the `pages` directory see the [Grav Content Docs](https://learn.getgrav.org/content).
 
 ## Plugins | [Registry](https://getgrav.org/downloads/plugins)
 
-Grav provides a plugin system that is available by calling the `bin/gpm install pluginname` command.
+Grav provides a plugin system that is available by calling the `docker-compose exec nginx-php-grav php bin/gpm install <plugin-name>` command.
 
 Plugins are stored in the [grav/user/plugins](grav/user/plugins) directory.
 
