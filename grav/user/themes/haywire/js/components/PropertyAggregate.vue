@@ -216,10 +216,7 @@
             // handle the listViewChange event
             handleListViewChange(type) {
                 let _this = this;
-                // set the current list view selection to the value of the event
-                if (type === _this.gridView || type === _this.tableView) {
-                    _this.listView = type;
-                }
+                _this.setListView(type);
             },
             // check that the new list view value is valid
             setListView(viewName) {
