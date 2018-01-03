@@ -6,6 +6,11 @@
             'id' // the id of the PropertyModel being rendered
         ],
 
+        async mounted() {
+            let _this = this;
+            _this.favorite = await _this.getFavoriteState();
+        },
+
         data() {
             return {
                 toggling: false, // signals that the ui in a state of change
@@ -16,7 +21,8 @@
         computed: {
             // computed property for conditionally rendering the favorite icons
             isFavorite: function () {
-                return this.favorite;
+                let _this = this;
+                return _this.favorite;
             },
             // computed property for rendering icons based on model loaded state
             loaded: function () {
@@ -30,12 +36,16 @@
             // watch the id property for changes and update the ui
             async id() {
                 let _this = this;
-                // the property is a favorite if the component is not being toggled and the property id exists in the FavoriteProperties collection
-                _this.favorite = !_this.toggling && await FavoriteProperties.exists(_this.id);
+                _this.favorite = await _this.getFavoriteState();
             }
         },
 
         methods: {
+            // returns true if the component is not being toggled and the property id exists in the FavoriteProperties collection
+            async getFavoriteState() {
+                let _this = this;
+                return !_this.toggling && await FavoriteProperties.exists(_this.id);
+            },
             // async method that toggle the favorited state of a given property
             async toggleFavorite(e) {
                 let _this = this;

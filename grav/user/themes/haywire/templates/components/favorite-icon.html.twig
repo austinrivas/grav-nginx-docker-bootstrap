@@ -3,10 +3,10 @@
 {% set iconTemplate = 'partials/svg-icon.html.twig' %}
 
 <div class="favorite-icon-container" v-show="loaded">
-    <div v-show="isFavorite" v-on:click="toggleFavorite">
+    <div v-show="isFavorite" @click="toggleFavorite">
         {% include iconTemplate with { iconId: iconFavId } only %}
     </div>
-    <div v-show="!isFavorite" v-on:click="toggleFavorite">
+    <div v-show="!isFavorite" @click="toggleFavorite">
         {% include iconTemplate with { iconId: iconFavUnselectId } only %}
     </div>
 </div>

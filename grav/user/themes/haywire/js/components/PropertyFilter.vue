@@ -12,6 +12,7 @@
             'customFilter', // an object that contains the custom filter attributes
             'enumerableType', // named type for enumerable filters
             'eventBus', // shared eventBus
+            'favoritesFilter', // the named filter for showing favorite properties
             'filter', // name of the selected filter
             'filters', // list of filterable keys on the PropertyModel
             'filterValue', // the value for the selectedFilter
@@ -68,8 +69,8 @@
                 },
                 rangeSliderStep: 1, // default range slider step
                 selectedFilterField: null, // initial unselected value for filter field
-                selectedFilterOptions: [], // initial value for selected filter field options
-                selectedFilterValue: null // initial unselected value for selected filter value
+                selectedFilterValue: null, // initial unselected value for selected filter value
+                selectedFilterOptions: [] // initial value for selected filter field options
             }
         },
 
@@ -84,7 +85,7 @@
             },
             favoritesButtonClass() {
                 let _this = this;
-                return `button ${_this.filter === 'favorites' ? 'is-favorite-prop-filter is-clicked' : 'is-favorite-prop-filter'}`;
+                return `button is-favorite-prop-filter ${_this.filter === _this.favoritesFilter ? 'is-clicked' : ''}`;
             },
             // computed property for showing / hiding grid list view when active / inactive
             isGridListViewActive() {
@@ -103,23 +104,23 @@
                 if (_this.isFieldOfType(_this.enumerableType, _this.selectedFilterField, _this.fields)) {
                     // show the apply button as long as the selected value is not the default unselected value
                     return _this.selectedFilterValue !== _this.defaultUnselectedValue;
-                // if the currently selected field is a range property
+                    // if the currently selected field is a range property
                 } else if (_this.isFieldOfType(_this.rangeType, _this.selectedFilterField, _this.fields)) {
                     // show the apply button as long as the range value contains to values
                     return _this.rangeSliderValues && _this.rangeSliderValues.length === 2;
                 }
-            },
-            // computed property for showing / hiding the range slider
-            showSlider() {
-                let _this = this;
-                // if the slider has a min / max defined and the currently selected field is a range field
-                return _this.rangeSliderMinValue && _this.rangeSliderMaxValue && _this.isFieldOfType(_this.rangeType, _this.selectedFilterField, _this.fields);
             },
             // computed property for showing / hiding the enumerable select options
             showFilterOptions() {
                 let _this = this;
                 // if the currently selected field is an enumerable field show the options
                 return _this.isFieldOfType(_this.enumerableType, _this.selectedFilterField, _this.fields);
+            },
+            // computed property for showing / hiding the range slider
+            showSlider() {
+                let _this = this;
+                // if the slider has a min / max defined and the currently selected field is a range field
+                return _this.rangeSliderMinValue && _this.rangeSliderMaxValue && _this.isFieldOfType(_this.rangeType, _this.selectedFilterField, _this.fields);
             }
         },
 
@@ -140,7 +141,7 @@
                         }
                         // set the enumerable options to be the distinct enumerable options
                         _this.selectedFilterOptions = await _this.getSelectedFilterOptions(distinctOptions, _this.selectedFilterField);
-                    // if the field is a range field
+                        // if the field is a range field
                     } else if (_this.isFieldOfType(_this.rangeType, _this.selectedFilterField, _this.fields)) {
                         // get the min / max of the given rangeable field
                         let range = await _this.getSelectedFilterRange(distinctOptions, _this.selectedFilterField);
@@ -192,7 +193,9 @@
                 return filters ? await Object.keys(filters).reduce((accumulator, key) => {
                     let label = _this.createFilterLabel(filters[key].label),
                         field = filters[key] ? filters[key].field : null;
-                    if (label && field) { accumulator.push({text: label, value: field }); }
+                    if (label && field) {
+                        accumulator.push({text: label, value: field});
+                    }
                     return accumulator;
                 }, []) : [];
             },
@@ -211,7 +214,9 @@
                         // get the value of the given arc feature field
                         let filterValue = feature.attributes[field];
                         // if the value is defined add it to the accumulator as a selectable option
-                        if (filterValue) { accumulator.push({text: filterValue, value: filterValue}); }
+                        if (filterValue) {
+                            accumulator.push({text: filterValue, value: filterValue});
+                        }
                         return accumulator;
                     }, []);
                 } else {
@@ -231,7 +236,7 @@
                             if (!accumulator[0] || value < accumulator[0]) {
                                 // round the current value down and set it as the new min
                                 accumulator[0] = Math.floor(JSON.parse(value));
-                            // if the current value is greater than the current max
+                                // if the current value is greater than the current max
                             } else if (!accumulator[1] || value > accumulator[1]) {
                                 // round the current value up and set it as the new max
                                 accumulator[1] = Math.ceil(JSON.parse(value));
@@ -245,13 +250,15 @@
                 }
             },
             applyFavoritesFilterHandler() {
-                let _this = this;
+                let _this = this,
+                    filter = _this.filter === _this.favoritesFilter ? null : _this.favoritesFilter;
+
                 // if there is a currently selected field with a valid value
                 _this.selectedFilterField = _this.defaultUnselectedValue;
                 _this.selectedFilterValue = _this.defaultUnselectedValue;
                 _this.eventBus.$emit(_this.applyFilterEvent, {
                     field: null,
-                    filter: 'favorites',
+                    filter: filter,
                     value: null
                 });
             },
@@ -284,7 +291,7 @@
                 if (_this.isFieldOfType(_this.enumerableType, _this.selectedFilterField, _this.fields) && _this.selectedFilterValue !== _this.defaultUnselectedValue) {
                     // set the value of the query to the currently selected value
                     value = _this.selectedFilterValue;
-                // if the currently selected field a rangeable value and not default unselected value
+                    // if the currently selected field a rangeable value and not default unselected value
                 } else if (_this.isFieldOfType(_this.rangeType, _this.selectedFilterField, _this.fields) && _this.rangeSliderValues && _this.rangeSliderValues.length === 2) {
                     // set the value of the query to the currently selected value
                     value = _this.rangeSliderValues;
@@ -302,12 +309,16 @@
             // event handler for filter change
             filterChangeHandler(filter) {
                 let _this = this;
-                if (filter && filter.length) { _this.selectedFilterField = filter; }
+                if (filter && filter.length) {
+                    _this.selectedFilterField = filter;
+                }
             },
             // event handler for filter value change
             filterValueChangeHandler(value) {
                 let _this = this;
-                if (value && value.length) { _this.selectedFilterValue = value; }
+                if (value && value.length) {
+                    _this.selectedFilterValue = value;
+                }
             },
             // helper method for determining if a field is of a certain type
             isFieldOfType(type, field, fields) {
@@ -317,7 +328,9 @@
             showTableListViewHandler() {
                 let _this = this;
                 // if the current list view is not the table view emit an event to change the list view to the table view
-                if (_this.listView !== _this.tableView) { _this.eventBus.$emit(_this.listViewChangeEvent, _this.tableView); }
+                if (_this.listView !== _this.tableView) {
+                    _this.eventBus.$emit(_this.listViewChangeEvent, _this.tableView);
+                }
             },
             // set the selected values for the filter components
             setSelectedValues(filters, filter, filterValue) {
@@ -337,13 +350,17 @@
             showGridListViewHandler() {
                 let _this = this;
                 // if the current list view is not the grid view emit an event to change the list view to the grid view
-                if (_this.listView !== _this.gridView) { _this.eventBus.$emit(_this.listViewChangeEvent, _this.gridView); }
+                if (_this.listView !== _this.gridView) {
+                    _this.eventBus.$emit(_this.listViewChangeEvent, _this.gridView);
+                }
             },
             // event handler for the range slider change event
             rangeSliderChangeHandler(value) {
                 let _this = this;
                 // if the new value for the range slider is an array of length 2 set it as the new value
-                if (value && value.length === 2) { _this.rangeSliderValues = value; }
+                if (value && value.length === 2) {
+                    _this.rangeSliderValues = value;
+                }
             }
         }
     }
