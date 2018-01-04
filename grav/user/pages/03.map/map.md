@@ -2,7 +2,7 @@
 title: Map
 customFilter:
     field: type
-    value: Industrial
-    label: 'View Industrial Properties'
+    value: 'Developable Land'
+    label: 'View Developable Land'
 ---
 
