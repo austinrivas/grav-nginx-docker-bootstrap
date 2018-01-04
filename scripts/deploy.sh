@@ -14,4 +14,13 @@ merge_env_pages() {
 }
 
 merge_env_pages $1
-push_git_deploy $1
+
+if git diff-index --quiet HEAD --; then
+    # No changes to pages directory
+    # push_git_deploy $1
+    echo "No changes detected"
+else
+    # Changes to pages directory
+    echo "The ./grav/user/pages directory on $1 has changes that have not been committed to this deployment."
+    echo "Commit the changes and deploy again. You can force the deploy with the --force option."
+fi
