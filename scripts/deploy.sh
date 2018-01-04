@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
-source ./git_deploy.sh
-source ./merge_env_pages.sh
+source ./scripts/git_deploy.sh
+source ./scripts/merge_env_pages.sh
 
 merge_env_pages $1
 
 if git diff-index --quiet HEAD --; then
     git_deploy $1
 else
-    # Changes to pages directory
     echo "The ./grav/user/pages directory on $1 has changes that have not been committed to this deployment."
 
     read -p "Would you like to overwrite the changes made on $1? [Y/n]" -n 1 -r
