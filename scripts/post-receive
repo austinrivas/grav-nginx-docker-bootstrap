@@ -30,4 +30,4 @@ echo "Deploying $newrev to $target..."
 GIT_WORK_TREE=$target git checkout -f
 
 cd $target
-./build.sh "$FILES_CHANGED" "$APP_ENV"
+./scripts/build.sh "$FILES_CHANGED" "$APP_ENV"
