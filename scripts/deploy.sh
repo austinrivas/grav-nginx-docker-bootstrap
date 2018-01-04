@@ -8,7 +8,7 @@ UNCLEAN=$(git --work-tree=${WORKTREE} status --porcelain)
 
 if [ -n "${UNCLEAN}" ]; then
 
-    echo "This repo has uncommitted changes, aborting deploy to $1."
+    echo -e "\nThis repo has uncommitted changes, aborting deploy to $1."
 
 else
 
@@ -16,11 +16,13 @@ else
 
     CHANGED=$(git --work-tree=${WORKTREE} status --porcelain)
 
+    echo $CHANGED
+
     if [ -n "${CHANGED}" ]; then
 
-        echo "The ./grav/user/pages directory on $1 has changes that have not been committed to this deployment."
+        echo -e "\nThe ./grav/user/pages directory on $1 has changes that have not been committed to this deployment."
 
-        read -p "Would you like to overwrite the changes made on $1? [Y/n]" -n 1 -r
+        read -p "\nWould you like to overwrite the changes made on $1? [Y/n]" -n 1 -r
 
         if [[ ! $REPLY =~ ^[Yy]$ ]]
 
