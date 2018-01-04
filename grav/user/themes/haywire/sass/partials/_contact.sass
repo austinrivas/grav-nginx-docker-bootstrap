@@ -2,9 +2,12 @@
     padding: 0.75em
 
     form#contact
-        div.buttons
-            width: 100%;
-            margin-top: 3em;
+        .buttons
+            justify-content: flex-end
+            width: 50%
+            margin-top: 15px
+            @include break-max($tablet)
+                width: 100%
     .form-container
         padding: 4em 3.5em
         input
@@ -14,6 +17,7 @@
         .form-submit
             align-items: center
             margin-top: 2.5em
+            float: right
         .is-right
             @include is-right
             @include break-max($tablet)
