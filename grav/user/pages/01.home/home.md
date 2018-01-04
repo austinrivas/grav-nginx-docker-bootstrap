@@ -1,6 +1,7 @@
 ---
 title: Home
 body_classes: index-page
+visible: false
 content:
     items: '@self.modular'
     order:

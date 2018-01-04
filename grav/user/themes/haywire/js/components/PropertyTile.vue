@@ -44,7 +44,7 @@
             },
             url() {
                 let _this = this;
-                return _this.id ? `/properties/${_this.id}` : false;
+                return _this.getUrl(_this.id);
             },
             // computed property for getting the value of the property subtitle
             subtitle() {
@@ -94,6 +94,10 @@
                     }
                 }
                 return title.length ? title.join(' - ') : false;
+            },
+
+            getUrl(id) {
+                return id ? `/property-detail/${id}` : false;
             }
         }
 

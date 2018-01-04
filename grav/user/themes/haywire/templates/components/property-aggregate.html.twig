@@ -25,11 +25,13 @@
         inline-template>
         {% include filterTemplate with {} only %}
     </property-filter>
-    <arcmap
-        :collection="collection"
-        inline-template>
-        {% include arcMapTemplate with {} only %}
-    </arcmap>
+    {% if showMap %}
+        <arcmap
+            :collection="collection"
+            inline-template>
+            {% include arcMapTemplate with {} only %}
+        </arcmap>
+    {% endif %}
     <property-list-grid v-if="showGrid"
                    :collection="collection"
                    :row-length="gridItemsInRow"

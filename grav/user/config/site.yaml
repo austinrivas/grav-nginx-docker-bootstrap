@@ -14,7 +14,7 @@ summary:
   format: short
   size: 300
   delimiter: '==='
+routes:
+  '/property-detail/(.*)': /property-detail
 blog:
   route: /press
-routes:
-    /properties/(.*): '/properties'
