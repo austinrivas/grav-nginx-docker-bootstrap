@@ -1,5 +1,7 @@
 ---
 title: 'Property Details'
+body_classes: property-details-page
+visible: false
 content:
     items: '@self.modular'
     order:
@@ -7,7 +9,6 @@ content:
         dir: asc
 contact:
     name: 'Johnny Doe'
-    phone: '407-123-4568'
-body_classes: property-details-page
+    phone: 407-123-4568
 ---
 
