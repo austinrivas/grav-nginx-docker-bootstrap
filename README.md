@@ -35,7 +35,7 @@ TODO: Describe stage environment snowflakes
 
 ### Deployment
 
-TODO: Describe stage deployment
+Use the push_git_deploy script below.
 
 ## [Local](http://localhost) | [Admin](http://localhost/admin)
 
