@@ -1,6 +1,7 @@
 ---
 title: 'Content Tiles Sarasota'
 class: is-tile-blue-tiffany
+backgroundName: sarasota.jpg
 ---
 
 ### Sarasota
