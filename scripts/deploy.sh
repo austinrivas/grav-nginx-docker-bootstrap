@@ -5,7 +5,7 @@ source ./scripts/merge_env_pages.sh
 
 merge_env_pages $1
 
-if git diff-index HEAD --; then
+if git diff-index --quiet HEAD --; then
     git_deploy $1
 else
     echo "The ./grav/user/pages directory on $1 has changes that have not been committed to this deployment."
