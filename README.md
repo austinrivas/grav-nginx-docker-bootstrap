@@ -29,13 +29,11 @@ TODO: Describe prod deployment
 
 ## [Staging](https://lwrcommercial-stage.pushdev.net/) | [Admin](https://lwrcommercial-stage.pushdev.net/admin)
 
-TODO: Deploy to staging url
-
-TODO: Describe stage environment snowflakes
+The staging environment is meant to be ephemeral, meaning it should be able to be created and destroyed as needed and is not meant to preserve application state.
 
 ### Deployment
 
-Use the push_git_deploy script below.
+- `$ ./scripts/deploy.sh stage`
 
 ## [Local](http://localhost) | [Admin](http://localhost/admin)
 
@@ -205,34 +203,34 @@ The `.ssh`, `grav`, and `nginx` directories are all mounted external volumes of 
 
   (Optional) Here you can put your **public** key so you can access container via SSH. After that, open a SSH connection to root@your_server:2222 specifying your **private** key.
   
-# Helpful Functions
+# Scripts
 
-### Deploy
+### deploy.sh
 
-```bash
-function push_git_deploy() {
-	git push $1 +HEAD:master
-	git fetch $1
-	git push origin --tags
-}
-```
+- usage : `$ ./scripts/deploy.sh <environment>`
 
-### Docker Shortcuts
+The deploy script checks the remote and pulls down any changes in the `./grav/user/pages` directory.
 
-```bash
-function docker_remove_all_images() {
-	docker rmi $(docker images -q)
-}
+If changes are detected it prompts the user to either abort the deploy and commit the changes, or overwrite the changes present in the remote environment.
 
-function docker_remove_all_containers() {
-	docker rm $(docker ps -q)
-}
+The deploy script will also abort the deploy if any uncommitted changes are detected in the repo prior to pulling down the `pages` directory.
 
-function docker_push_image() {
-	docker login && docker build -t $1 $2 && docker push $1
-}
+### git_deploy.sh
 
-function docker_bash() {
-	docker-compose exec $1 /bin/bash
-}
-```
+This script is not meant to be executed directly and is sourced into `deploy.sh`.
+
+However you can execute it directly by calling `$ source ./scripts/git_deploy.sh && git_deploy <environment>`.
+
+Use at your own risk, this script does not check the remote before overwriting any changes made there.
+
+### merge_env_pages.sh
+
+This script is not meant to be executed directly and is sourced into `deploy.sh`.
+
+However you can execute it directly by calling `$ source ./scripts/merge_env_pages.sh && merge_env_pages <environment>`.
+
+This will pull down the `./grav/user/pages` directory from the remote and attempt to intelligently merge the changes with you local `pages`.
+
+### post-receive
+
+This is a git `post-receive` hook that is executed by the remote serve on deploy.

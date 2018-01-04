@@ -25,7 +25,7 @@ echo "================= Composer Version ================="
 composer --version
 
 echo "=================== Dependencies ==================="
-cd grav/
+cd ../grav/
 bin/grav install
 composer install
 

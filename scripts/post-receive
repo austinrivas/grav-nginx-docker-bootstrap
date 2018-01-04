@@ -23,7 +23,7 @@ LC_BASENAME=$(echo $BASENAME | awk '{print tolower($0)}')
 APP_ENV=$(echo $LC_BASENAME | sed 's/.git//g')
 echo "Application Environment Detected: $APP_ENV"
 
-target=$HOME/www.lwrcommercial.com/stage
+target=$HOME/www.lwrcommercial.com/<environment>
 grav_user=$target/grav/user
 
 echo "Deploying $newrev to $target..."

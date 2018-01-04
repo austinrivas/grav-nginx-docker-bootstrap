@@ -16,8 +16,6 @@ else
 
     CHANGED=$(git --work-tree=${WORKTREE} status --porcelain)
 
-    echo $CHANGED
-
     if [ -n "${CHANGED}" ]; then
 
         echo -e "\nThe ./grav/user/pages directory on $1 has changes that have not been committed to this deployment.\n"
