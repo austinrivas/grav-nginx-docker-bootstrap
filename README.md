@@ -234,3 +234,7 @@ This will pull down the `./grav/user/pages` directory from the remote and attemp
 ### post-receive
 
 This is a git `post-receive` hook that is executed by the remote serve on deploy.
+
+### build.sh
+
+This script is executed by `post-receive` and is responsible for setting up the server and installing dependencies.
