@@ -204,7 +204,6 @@
                     }),
                     // create the marker symbol
                     symbol: new _this.SimpleMarkerSymbol({
-//                        path: markerPath,
                         style: markerStyle,
                         size: markerSize,
                         color: markerColor,
