@@ -4,18 +4,18 @@
     <table class="table is-fullwidth is-bordered">
         <thead>
             <tr>
-            <th>&nbsp;</th>
+            <th class="is-hidden-mobile">&nbsp;</th>
             <th>Adress</th>
             <th>Subdivision</th>
             <th>Price</th>
-            <th>Price per sq. ft.</th>
+            <th>PPSF</th>
             <th>Type</th>
             <th>Acres</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="model in collection">
-                <td>
+                <td class="is-hidden-mobile">
                     <favorite-icon :id="model.id" inline-template>
                         {% include favoriteIconTemplate only %}
                     </favorite-icon>
