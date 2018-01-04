@@ -12,8 +12,10 @@ else
 
     read -p "Would you like to overwrite the changes made on $1? [Y/n]" -n 1 -r
     if [[ ! $REPLY =~ ^[Yy]$ ]]
-        git_deploy $1
-    then
+        echo "Aborting deploy to $1."
         [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
+    then
+        echo "Proceeding with deploy to $1."
+        git_deploy $1
     fi
 fi
