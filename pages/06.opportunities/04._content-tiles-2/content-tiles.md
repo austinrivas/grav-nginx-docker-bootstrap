@@ -1,6 +1,7 @@
 ---
 title: 'Content Tiles 2'
 class: is-inverse
+backgroundName: MTI.png
 ---
 
 ### TECHNOLOGY TERRACE
