@@ -28,6 +28,7 @@
     {% if showMap %}
         <arcmap
             :collection="collection"
+            :show-tooltip="true"
             inline-template>
             {% include arcMapTemplate with {} only %}
         </arcmap>

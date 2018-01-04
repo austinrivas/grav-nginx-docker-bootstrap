@@ -12,7 +12,8 @@
     // a reusable component that takes a collection of models with geometries and renders them into a esri map
     export default {
         props: [
-            'collection' // the collection that is providing the models to render into the map
+            'collection', // the collection that is providing the models to render into the map
+            'showTooltip'
         ],
 
         // runs when component is attached to the DOM
@@ -215,10 +216,10 @@
                     // define the feature layer the marker exists in
                     layer: _this.featureLayer,
                     // define the tooltip for the marker
-                    popupTemplate: {
+                    popupTemplate: _this.showTooltip ? {
                         title: model.address,
                         content: tooltipContent
-                    }
+                    } : null
                 })
             },
             // returns an array of color values based on the index of the model
