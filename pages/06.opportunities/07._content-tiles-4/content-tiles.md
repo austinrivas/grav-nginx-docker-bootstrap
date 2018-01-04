@@ -1,6 +1,7 @@
 ---
 title: 'Content Tiles 4'
 class: is-tile-white
+backgroundName: MTI.png
 ---
 
 ### HEALTHCARE & EDUCATION
