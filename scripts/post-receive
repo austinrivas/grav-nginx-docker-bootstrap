@@ -1,15 +1,5 @@
 #!/bin/bash
 source $HOME/.bash_profile
-# read oldrev newrev refname
-# read $1
-#FILES_CHANGE=""
-#while read oldrev newrev refname; do
-#  echo `git diff --name-only $oldrev..$newrev`
-  #echo `git show $newrev`
-  #echo $refname
-#done < "${1:FILES_CHANGED}"
-#echo "$FILES_CHANGED"
-
 
 function string_replace {
     echo "${1/\*/$2}"
