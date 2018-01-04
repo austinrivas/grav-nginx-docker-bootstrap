@@ -1,6 +1,5 @@
 ---
 title: 'Content Tiles 3'
-backgroundName: OFFICERETAIL.png
 ---
 
 ### MILES MEDIA
