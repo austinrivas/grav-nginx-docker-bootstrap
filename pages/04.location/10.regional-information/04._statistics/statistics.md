@@ -7,7 +7,7 @@ statistics:
     -
         'in Sarasota labor force': '160,500'
     -
-        'Per-capita personal income': $56,661
+        'Per-capita personal income': '$56,661'
     -
         'of residents with high school education': 92%
     -
@@ -17,3 +17,4 @@ button_cta:
     link: /view-us-by-the-numbers
     label: 'View Us By The Numbers'
 ---
+

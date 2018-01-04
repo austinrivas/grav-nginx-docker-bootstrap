@@ -1,5 +1,6 @@
 ---
-title: 'Property Details'
+title: Properties
+body_classes: property-details-page
 content:
     items: '@self.modular'
     order:
@@ -8,6 +9,5 @@ content:
 contact:
     name: 'Johnny Doe'
     phone: 407-123-4568
-body_classes: property-details-page
 ---
 
