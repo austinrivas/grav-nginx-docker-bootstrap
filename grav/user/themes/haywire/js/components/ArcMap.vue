@@ -193,6 +193,10 @@
                     tooltipContent = async function () {
                         // locally scope context of function to the current execution context
                         return await _this.createMarkerContent(model);
+                    },
+                    tooltipTemplate = {
+                        title: model.address,
+                        content: tooltipContent
                     };
 
                 // create a new graphic element
@@ -215,10 +219,7 @@
                     // define the feature layer the marker exists in
                     layer: _this.featureLayer,
                     // define the tooltip for the marker
-                    popupTemplate: _this.showTooltip ? {
-                        title: model.address,
-                        content: tooltipContent
-                    } : null
+                    popupTemplate: _this.showTooltip ? tooltipTemplate : null
                 })
             },
             // returns an array of color values based on the index of the model
