@@ -1,6 +1,7 @@
 ---
 title: 'Content Tiles 2'
 class: is-tile-blue-tiffany-white
+backgroundName: coffeeshop.jpg
 ---
 
 ### DEVELOPMENT & PROPERTY MANAGEMENT

@@ -1,6 +1,7 @@
 ---
 title: 'Content Tiles'
 class: is-inverse
+backgroundName: leasingandsales.png
 ---
 
 ### Leasing & Sales
