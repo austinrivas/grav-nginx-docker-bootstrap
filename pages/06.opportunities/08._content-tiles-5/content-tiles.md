@@ -1,6 +1,6 @@
 ---
 title: 'Content Tiles'
-backgroundName: OfficesRetailServices.jpg
+backgroundName: Officeretail.png
 ---
 
 ### OFFICE
