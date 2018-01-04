@@ -1,0 +1,33 @@
+#!/bin/bash
+source $HOME/.bash_profile
+# read oldrev newrev refname
+# read $1
+#FILES_CHANGE=""
+#while read oldrev newrev refname; do
+#  echo `git diff --name-only $oldrev..$newrev`
+  #echo `git show $newrev`
+  #echo $refname
+#done < "${1:FILES_CHANGED}"
+#echo "$FILES_CHANGED"
+
+
+function string_replace {
+    echo "${1/\*/$2}"
+}
+
+while read oldrev newrev refname; do FILES_CHANGED+=`git diff --name-only $oldrev..$newrev | awk 'NR > 1 { printf(", ") } { printf("%s%s", $1, $2) }'`; done
+
+CURRENT=`pwd`
+BASENAME=`basename "$CURRENT"`
+LC_BASENAME=$(echo $BASENAME | awk '{print tolower($0)}')
+APP_ENV=$(echo $LC_BASENAME | sed 's/.git//g')
+echo "Application Environment Detected: $APP_ENV"
+
+target=$HOME/www.lwrcommercial.com/stage
+grav_user=$target/grav/user
+
+echo "Deploying $newrev to $target..."
+GIT_WORK_TREE=$target git checkout -f
+
+cd $target
+./build.sh "$FILES_CHANGED" "$APP_ENV"
