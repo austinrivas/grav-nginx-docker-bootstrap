@@ -20,9 +20,9 @@ else
 
     if [ -n "${CHANGED}" ]; then
 
-        echo -e "\nThe ./grav/user/pages directory on $1 has changes that have not been committed to this deployment."
+        echo -e "\nThe ./grav/user/pages directory on $1 has changes that have not been committed to this deployment.\n"
 
-        read -p "\nWould you like to overwrite the changes made on $1? [Y/n]" -n 1 -r
+        read -p "Would you like to overwrite the changes made on $1? [Y/n]" -n 1 -r
 
         if [[ ! $REPLY =~ ^[Yy]$ ]]
 
