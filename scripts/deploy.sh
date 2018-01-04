@@ -3,19 +3,43 @@
 source ./scripts/git_deploy.sh
 source ./scripts/merge_env_pages.sh
 
-merge_env_pages $1
+WORKTREE=./
+UNCLEAN=$(git --work-tree=${WORKTREE} status --porcelain)
 
-if git diff-index --quiet HEAD --; then
-    git_deploy $1
+if [ -n "${UNCLEAN}" ]; then
+
+    echo "This repo has uncommitted changes, aborting deploy to $1."
+
 else
-    echo "The ./grav/user/pages directory on $1 has changes that have not been committed to this deployment."
 
-    read -p "Would you like to overwrite the changes made on $1? [Y/n]" -n 1 -r
-    if [[ ! $REPLY =~ ^[Yy]$ ]]
-        echo -e "\nAborting deploy to $1."
-        [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
-    then
-        echo -e "\nProceeding with deploy to $1."
+    merge_env_pages $1
+
+    CHANGED=$(git --work-tree=${WORKTREE} status --porcelain)
+
+    if [ -n "${CHANGED}" ]; then
+
+        echo "The ./grav/user/pages directory on $1 has changes that have not been committed to this deployment."
+
+        read -p "Would you like to overwrite the changes made on $1? [Y/n]" -n 1 -r
+
+        if [[ ! $REPLY =~ ^[Yy]$ ]]
+
+            echo -e "\nAborting deploy to $1."
+
+            [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
+
+        then
+
+            echo -e "\nProceeding with deploy to $1."
+
+            git_deploy $1
+
+        fi
+
+    else
+
         git_deploy $1
+
     fi
+
 fi
