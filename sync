@@ -2,11 +2,12 @@
 
 
 sync_env() {
+    rm -rf ./grav/user/pages
 	rsync -avc push_dev@lc-www1:~/www.lwrcommercial.com/$1/grav/user/pages/ ./grav/user/pages
 }
 
 
-read -p "Are you sure you would like to copy down files from $1? It may change your working copies. [Y/n]" -n 1 -r
+read -p "Are you sure you would like to copy down files from $1? It will overwrite your local ./grav/user/pages directory. [Y/n]" -n 1 -r
 if [[ ! $REPLY =~ ^[Yy]$ ]]
 	echo "Pulling down the $1 environment"
 	sync_env $1
