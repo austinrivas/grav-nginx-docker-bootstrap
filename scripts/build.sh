@@ -5,8 +5,10 @@
 FILES_CHANGED=$1
 APP_ENV=$2
 
-# Migrate the database if there are any migrations
-echo "------------ Changed the following files... ---------"
+echo "------------ Application Environment ---------------"
+echo $APP_ENV
+echo "----------------------------------------------------"
+echo "------------ Changed the following files... --------"
 echo $FILES_CHANGED
 echo "----------------------------------------------------"
 
