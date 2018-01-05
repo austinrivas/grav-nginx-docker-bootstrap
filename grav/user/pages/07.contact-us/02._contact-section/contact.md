@@ -23,8 +23,8 @@ form:
         -
             type: submit
             value: Submit
-            classes: 'form-submit button is-primary is-full column'
-            outerclasses: 'is-full columns is-gapless'
+            classes: 'form-submit is-primary'
+            outerclasses: 'column'
     fields:
         -
             name: firstname
@@ -100,7 +100,7 @@ form:
             name: news_letter
             type: checkbox
             classes: 'label checkbox is-primary-invert'
-            outerclasses: 'is-full column'
+            outerclasses: 'is-half column'
             label: 'Yes I''d like to receive updated news and information'
     process:
         -
