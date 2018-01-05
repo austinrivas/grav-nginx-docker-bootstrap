@@ -3,7 +3,6 @@
  */
 
 import 'babel-polyfill';
-import ImageLoader from './event-handlers/image-loader';
 
 // Resources and Collections
 import ArcModel from './models/arcModel';
@@ -14,17 +13,18 @@ import FavoritePropertiesCollection from './models/favoritePropertiesCollection'
 import Vue from 'vue';
 import VueCurrencyFilter from './filters/vue-currency-filter';
 
-// Vue Event Bus
+// Event Handlers
 import EventBus from './event-handlers/event-bus';
+import ImageLoader from './event-handlers/image-loader';
 
 // Vue Components
 import Accordion from './components/Accordion';
 import ArcMap from './components/ArcMap.vue';
 import Articles from './components/Articles.vue';
 import FavoriteIcon from './components/FavoriteIcon.vue';
-import PropertyTile from './components/PropertyTile.vue';
 import FeaturedProjects from './components/FeaturedProjects.vue';
 import Navbar from './components/Navbar.vue';
+import NewsletterSignup from './components/NewsletterSignup.vue';
 import PageState from './components/PageState.vue';
 import ProgressBar from './components/ProgressBar.vue';
 import PropertyAggregate from './components/PropertyAggregate.vue';
@@ -36,9 +36,9 @@ import PropertyImageGallery from './components/PropertyImageGallery.vue';
 import PropertyInfoTable from './components/PropertyInfoTable.vue';
 import PropertyListGrid from './components/PropertyListGrid.vue';
 import PropertyListTable from './components/PropertyListTable.vue';
+import PropertyTile from './components/PropertyTile.vue';
 import RangeSlider from './components/RangeSlider.vue';
 import SelectFilter from './components/SelectFilter.vue';
-import NewsletterSignup from './components/NewsletterSignup.vue';
 
 // Vue Component declaration
 Vue.component('accordion', Accordion);
@@ -97,4 +97,5 @@ window.App = new Vue({
     el: '#app'
 });
 
+// initialize ImageLoader class to animate in images on load
 new ImageLoader();
