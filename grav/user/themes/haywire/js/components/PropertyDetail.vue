@@ -1,7 +1,9 @@
 <script>
     import PropertyModel from '../models/propertyModel'
+    import LoadingState from '../components/mixins/LoadingState'
 
     export default {
+        mixins: [LoadingState],
         props: ['id'],
 
         async mounted() {
@@ -39,7 +41,7 @@
             },
             propertyDetailClass() {
                 let _this = this;
-                return _this.getLoadingState(_this.classes, _this.loaded, _this.property, _this.notFound);
+                return _this.getLoadingState(_this.classes, _this.loaded, _this.notFound, _this.property, PropertyModel);
             },
             propertyHeaderTitle() {
                 // empty array for holding title elements
@@ -120,33 +122,6 @@
             propertyUses() {
                 let _this = this;
                 return _this.property && _this.property.type ? _this.property.type : "Unknown";
-            }
-        },
-        methods: {
-            getLoadingState(classes, loaded, property, notFound) {
-                let _this = this;
-                // clone the classes array into a new array
-                classes = classes && classes.length && classes.slice ? classes.slice(0) : [];
-                // if the property is not found add the not found class to the classes array
-                if (notFound) {
-                    classes.push(_this.notFoundClass);
-                } else {
-                    // if the property is not loaded and property is not defined add the loading class to the classes array
-                    if (loaded === false && property === false) {
-                        classes.push(_this.loadingClass);
-                        // if the property is loaded and property is defined then add the loaded class to the classes array
-                    } else if (loaded === true && property instanceof PropertyModel) {
-                        classes.push(_this.loadedClass);
-                    }
-                }
-                return classes;
-            },
-            setLoadingState(model) {
-                let _this = this;
-                _this.loaded = true;
-                if (!model) {
-                    _this.notFound = true;
-                }
             }
         }
     }

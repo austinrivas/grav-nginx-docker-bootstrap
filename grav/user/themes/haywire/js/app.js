@@ -17,6 +17,9 @@ import VueCurrencyFilter from './filters/vue-currency-filter';
 import EventBus from './event-handlers/event-bus';
 import ImageLoader from './event-handlers/image-loader';
 
+// Vue Mixins
+import LoadingState from './components/mixins/LoadingState.vue';
+
 // Vue Components
 import Accordion from './components/Accordion';
 import ArcMap from './components/ArcMap.vue';
