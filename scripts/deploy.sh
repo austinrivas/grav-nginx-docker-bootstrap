@@ -3,18 +3,27 @@
 source ./scripts/git_deploy.sh
 source ./scripts/merge_env_pages.sh
 
-WORKTREE=./
-UNCLEAN=$(git --work-tree=${WORKTREE} status --porcelain)
+function exit_shell() {
+    [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
+}
+
+function git_diff() {
+    echo $(git --work-tree=./ status --porcelain)
+}
+
+UNCLEAN=$(git_diff)
 
 if [ -n "${UNCLEAN}" ]; then
 
     echo -e "\nThis repo has uncommitted changes, aborting deploy to $1."
 
+    exit_shell
+
 else
 
     merge_env_pages $1
 
-    CHANGED=$(git --work-tree=${WORKTREE} status --porcelain)
+    CHANGED=$(git_diff)
 
     if [ -n "${CHANGED}" ]; then
 
@@ -26,7 +35,7 @@ else
 
             echo -e "\nAborting deploy to $1."
 
-            [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
+            exit_shell
 
         then
 
