@@ -83,7 +83,7 @@ form:
             label: 'What can we help you with?'
             type: select
             outerclasses: 'is-half column'
-            classes: 'input is-primary-invert'
+            wrapper_classes: 'select is-primary-invert'
             options:
                 properties: 'Commercial Properties'
                 lots: 'Commercial Lots'
