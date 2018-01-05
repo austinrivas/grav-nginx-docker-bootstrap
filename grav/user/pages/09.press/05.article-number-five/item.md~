@@ -1,19 +1,31 @@
 ---
-title: 'Article Number Five'
+title: 'Doodle Bugs! looks to join preschool boom in Lakewood Ranch'
 published: true
-publish_date: '08-12-2017 17:30'
+publish_date: '23-07-2014 00:00'
 taxonomy:
     category: Resources
 ---
 
-What is Lorem Ipsum?
-Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+As more family oriented communities develop in and around Lakewood Ranch, the need for quality child care is growing. 
 
-Why do we use it?
-It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+There are more than half a dozen private schools within the master-planned community that offer professional child care combined with age-appropriate, accredited curriculums. The latest school to discover the potential in Lakewood Ranch is Doodle Bugs!, a child care and early education provider founded more than 20 years ago in upstate New York. 
 
+The family owned company operates more than 12 corporate and franchised locations in the Buffalo and Rochester areas and Pittsburgh. It touts itself as the official child care provider of the Buffalo Sabres and the Pittsburgh Steelers. Its Lakewood Ranch location is in the preliminary stages, and although the company has not closed upon the property, it is seeking to build a school to accommo 
 
-Where does it come from?
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+date 185 children on Passage Drive off Lakewood Ranch Boulevard and State Road 64, in the Lakewood Centre North. 
 
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+This would be the second Doodle Bugs! location in Florida, after one opened this year in Lake Worth. 
+
+"Our CEO personally searches out locations and looks for properties," said Natasha Fleury, who does marketing and communications for the company. "Florida has a growing demographic that fits our target audience. A lot of families are relocating to Florida in the 24- to 49-year-old age range who are dual family households with middle to high incomes. Lakewood Ranch is a beautiful community, and it met all our standards." 
+
+Doodle Bugs! is seeking to build in Commerce Park near the Jump Dance Company on approximately 11,074 square feet of vacant commercial space. Local engineer Allison-Gause of Bradenton has submitted final site plans to Manatee County. Once the county has completed its review, construction could begin in anticipation of a 2015 planned opening. 
+
+"There are no glaring issues and everything seems fairly straight foward. We'll offer comments, they make the adjustments and basically it's a done deal," said Barney Salmon of the Manatee County Building and Development Services Department. 
+
+Primrose School and The Goddard School are among the premier preschools in Lakewood Ranch. Josh White, owner of The Goddard School, one of the fastest growing child care franchises in the country, says the entire Sarasota/Manatee area has good long-term potential for early childhood learning. 
+
+"In general, the whole area up to 64, and throw Parrish in the mix, has a huge concentration of young families. We're very people oriented. We have great people, good leadership and good family support. When you run a quality program, that's everything." 
+
+Information about the Doodle Bugs! programs and children's centers are available online at doodlebugs.com. 
+
+Kathryn Moschella, Lakewood Ranch reporter, can be reached at 941-745-7010. Follow her on Twitter @MoschellaHerald.
