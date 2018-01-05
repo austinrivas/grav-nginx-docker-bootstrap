@@ -35,6 +35,8 @@ The staging environment is meant to be ephemeral, meaning it should be able to b
 
 - `$ ./scripts/deploy.sh stage`
 
+If you encounter a message notifying you that there are changes on stage not present locally you should abort the deploy and resolve the local git diff before redeploying.
+
 ## [Local](http://localhost) | [Admin](http://localhost/admin)
 
 The local dev environment runs in a docker service name `nginx-php-grav` that is hosted on dockerhub.
@@ -108,6 +110,33 @@ Its key features are :
 
 - VueJS Framework | [Github](https://github.com/vuejs/vue) | [Docs](https://vuejs.org/v2/guide/)
 
+### Vue Application
+
+- app.js
+- bootstrap.js
+- components
+- event-handlers
+- filters
+- vendor
+
+### SASS Structure / Style Guide
+
+- app.sass
+- browswers
+- common
+- components
+- partials
+
+### Twig Templates
+
+- page templates
+- components
+- forms
+- modular
+- partials
+-- elements
+-- forms
+-- style-guide
 
 # Grav | [README](grav/README.md) | [DOCS](https://learn.getgrav.org/)
 
