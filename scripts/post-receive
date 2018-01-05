@@ -13,6 +13,7 @@ LC_BASENAME=$(echo $BASENAME | awk '{print tolower($0)}')
 APP_ENV=$(echo $LC_BASENAME | sed 's/.git//g')
 echo "Application Environment Detected: $APP_ENV"
 
+# update this <environment> placeholder for the environment this hook is configured for
 target=$HOME/www.lwrcommercial.com/<environment>
 grav_user=$target/grav/user
 
