@@ -31,15 +31,22 @@
         li
             box-sizing: border-box
             margin-top: 0
-            padding: 0 20px
             position: relative
-            &:after
-                content: "|"
-                position: absolute
-                right: 0
-            &:last-child
-                &:after
-                    display: none
+
+            @include break-max($tablet)
+                font-size: 11px;
+            // &:after
+            //     content: "|"
+            //     position: absolute
+            //     right: 0
+            // &:last-child
+            //     &:after
+            //         display: none
+        li.div
+            width: 0;
+            border-right: 1px solid white;
+            margin: 0 20px;
+            height: 20px;
     a
         text-decoration:none
         color: #fff
@@ -59,3 +66,4 @@
 
         button
             max-width: 140px;
+
