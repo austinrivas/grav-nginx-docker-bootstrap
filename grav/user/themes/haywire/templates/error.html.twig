@@ -1,12 +1,16 @@
 {% extends 'partials/base.html.twig' %}
 
 {% block content %}
-    <div class="container is-fluid">
-        <article class="message is-danger">
-            <div class="message-body">
-                <strong>{{ 'ERROR'|t }} {{ page.header.http_response_code }}</strong>
-                {{ page.content }}
-            </div>
-        </article>
-    </div>
+    <section class="hero lwrc nofound">
+    	<div class="hero-body">
+    		<div class="container is-fluid">
+			    <h1 class="type__hero--headline">
+			        404 Error
+			    </h1> 
+			    <p class="hero-p type__hero--content">
+			        Page Not Found
+			    </p>
+			</div>
+		</div>
+	</section>
 {% endblock %}
