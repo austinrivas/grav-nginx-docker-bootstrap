@@ -44,7 +44,9 @@
         h2
             @extend .type__contact-us-section--heading
             @extend .is-blue-dark
-            margin: 0.5em 0;
+            margin: 0;
+            &:not(:first-child) 
+                margin: 2em 0 0;
             font-weight: 400;
             font-size: 38px;
             letter-spacing: 0;
@@ -54,6 +56,8 @@
             @extend .is-blue-dark
         p
             margin: 1em 0 0;
+            &:last-child
+                word-wrap: break-word;
 
 @include break-max($tablet)
     .form-container form .buttons
