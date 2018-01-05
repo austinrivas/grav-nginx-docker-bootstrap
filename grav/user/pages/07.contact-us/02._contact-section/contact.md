@@ -2,7 +2,7 @@
 contact:
     titleOne: 'Lakewood Ranch Commercial'
     titleTwo: 'Commercial Contacts'
-    address: '<strong>LWR Commercial Realty</strong><br>14400 Covenant Way Lakewood Ranch, FL 34202'
+    address: '<strong>LWR Commercial Realty</strong><br>14400 Covenant Way <br>Lakewood Ranch, FL 34202'
     phone: '+1(941) 907-6677'
     hours:
         -
@@ -24,7 +24,7 @@ form:
             type: submit
             value: Submit
             classes: 'form-submit is-primary'
-            outerclasses: 'column'
+            outerclasses: column
     fields:
         -
             name: firstname
