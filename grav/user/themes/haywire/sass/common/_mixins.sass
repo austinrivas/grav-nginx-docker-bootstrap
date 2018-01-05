@@ -61,20 +61,36 @@
 // optimization will be needed
 
 @mixin is-share-block
+    @extend .is-bg-blue-dark
+    color: $white
     display: flex
     flex-direction: column
     max-width: 105px
     margin-right: 0
     margin-left: auto
-    border: 1px solid $blue-tiffany
+    -webkit-transition: background .1s linear
+    -moz-transition: background .1s linear
+    -ms-transition: background .1s linear
+    -o-transition: background .1s linear
+    transition: background .1s linear
+    cursor: pointer
+    &:hover
+        @extend .is-bg-blue-tiffany
+        @extend .is-blue-dark
+        .icon-block
+            display: block
     h4
         @extend .type__share--title
         @extend .is-uppercase
-        @extend .is-blue-dark
         @extend .has-text-centered
-        @extend .is-bg-blue-tiffany
         padding: 0.7em 0
     .icon-block
+        display: none
+        border: 1px solid $blue-tiffany
+        position: absolute
+        top: 49px
+        width: 105px
+        border-top: 0
         svg
             fill: $blue-dark
         .button
