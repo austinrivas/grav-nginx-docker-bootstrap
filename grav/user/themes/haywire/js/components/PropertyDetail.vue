@@ -11,9 +11,13 @@
 
         data() {
           return {
+              classes: ['property-detail'],
               loaded: false,
+              loadedClass: 'loaded',
+              loadingClass: 'loading',
               property: false,
-              notFound: false
+              notFound: false,
+              notFoundClass: 'not-found',
           }
         },
 
@@ -35,9 +39,7 @@
             },
             propertyDetailClass() {
                 let _this = this;
-                let arr = _this.getLoadingState(_this.loaded, _this.property, _this.notFound);
-                debugger;
-                return arr;
+                return _this.getLoadingState(_this.classes, _this.loaded, _this.property, _this.notFound);
             },
             propertyHeaderTitle() {
                 // empty array for holding title elements
@@ -121,16 +123,20 @@
             }
         },
         methods: {
-            getLoadingState(loaded, property, notFound) {
-                let classes = ['property-detail'];
+            getLoadingState(classes, loaded, property, notFound) {
+                let _this = this;
+                // clone the classes array into a new array
+                classes = classes && classes.length && classes.slice ? classes.slice(0) : [];
+                // if the property is not found add the not found class to the classes array
                 if (notFound) {
-                    classes.push('not-found');
+                    classes.push(_this.notFoundClass);
                 } else {
-                    if ( loaded === false && property === false ) {
-                        classes.push('loading');
-                    }
-                    if ( loaded === true && property === true ) {
-                        classes.push('loaded');
+                    // if the property is not loaded and property is not defined add the loading class to the classes array
+                    if (loaded === false && property === false) {
+                        classes.push(_this.loadingClass);
+                        // if the property is loaded and property is defined then add the loaded class to the classes array
+                    } else if (loaded === true && property instanceof PropertyModel) {
+                        classes.push(_this.loadedClass);
                     }
                 }
                 return classes;
