@@ -29,21 +29,9 @@ else
 
         echo -e "\nThe ./grav/user/pages directory on $1 has changes that have not been committed to this deployment.\n"
 
-        read -p "Would you like to overwrite the changes made on $1? [Y/n]" -n 1 -r
+        echo -e "\nAborting deploy to $1."
 
-        if [[ ! $REPLY =~ ^[Yy]$ ]]
-
-            echo -e "\nAborting deploy to $1."
-
-            exit_shell
-
-        then
-
-            echo -e "\nProceeding with deploy to $1."
-
-            git_deploy $1
-
-        fi
+        exit_shell
 
     else
 
