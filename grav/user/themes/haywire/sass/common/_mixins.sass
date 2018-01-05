@@ -175,3 +175,10 @@
 
 @mixin font-size-vmax($scalar)
     font-size: calc(#{$scalar} * (1vw + 1vh - 1vmin))
+
+@mixin is-async-load($opacity)
+    $IEOpacity: $opacity*100
+    opacity: $opacity
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+$IEOpacity+")"
+    filter: alpha(opacity=$IEOpacity)
+    transition: opacity .5s

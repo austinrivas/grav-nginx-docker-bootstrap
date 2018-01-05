@@ -22,7 +22,7 @@
 
 {% block content %}
     <property-detail :id="urlParts[4]" inline-template>
-        <div class="property-detail-container">
+        <div :class="propertyDetailClass">
             <div class="property-details">
                 <property-image-gallery
                     :images="propertyImages"
