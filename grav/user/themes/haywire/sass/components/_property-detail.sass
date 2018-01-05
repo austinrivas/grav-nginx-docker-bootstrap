@@ -1,0 +1,8 @@
+.property-detail
+    @include is-async-load(0)
+
+    &.loaded
+        @include is-async-load(1)
+        transition: opacity .5s
+
+

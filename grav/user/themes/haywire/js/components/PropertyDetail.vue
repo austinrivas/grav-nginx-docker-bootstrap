@@ -11,23 +11,20 @@
 
         data() {
           return {
-              loading: true,
-              property: false
+              loaded: false,
+              property: false,
+              notFound: false
           }
         },
 
         watch: {
             property() {
                 let _this = this;
-                _this.loading = false;
+                _this.setLoadingState(_this.property);
             }
         },
 
         computed: {
-            propertyExists() {
-                let _this = this;
-                return !_this.loading && _this.property instanceof PropertyModel;
-            },
             propertyDateAvailable() {
                 let _this = this;
                 return _this.property && _this.property.dateAvailable ? _this.property.dateAvailable : 'Unknown';
@@ -35,6 +32,12 @@
             propertyDescription() {
                 let _this = this;
                 return _this.property && _this.property.description && _this.property.description.length > 1 ? _this.property.description : "No Description Available";
+            },
+            propertyDetailClass() {
+                let _this = this;
+                let arr = _this.getLoadingState(_this.loaded, _this.property, _this.notFound);
+                debugger;
+                return arr;
             },
             propertyHeaderTitle() {
                 // empty array for holding title elements
@@ -115,6 +118,29 @@
             propertyUses() {
                 let _this = this;
                 return _this.property && _this.property.type ? _this.property.type : "Unknown";
+            }
+        },
+        methods: {
+            getLoadingState(loaded, property, notFound) {
+                let classes = ['property-detail'];
+                if (notFound) {
+                    classes.push('not-found');
+                } else {
+                    if ( loaded === false && property === false ) {
+                        classes.push('loading');
+                    }
+                    if ( loaded === true && property === true ) {
+                        classes.push('loaded');
+                    }
+                }
+                return classes;
+            },
+            setLoadingState(model) {
+                let _this = this;
+                _this.loaded = true;
+                if (!model) {
+                    _this.notFound = true;
+                }
             }
         }
     }
