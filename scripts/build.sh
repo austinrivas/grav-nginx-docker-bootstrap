@@ -10,12 +10,6 @@ GRAV_ROOT=$APP_ROOT/grav
 THEME_NAME=haywire
 THEME_ROOT=$GRAV_ROOT/user/themes/$THEME_NAME
 
-function log_header() {
-    LINE_BREAK='#===================================================='
-    HEADER=$1
-    printf '%s\n# %s\n%s\n' $LINE_BREAK "$HEADER" $LINE_BREAK
-}
-
 function build_application() {
     log_header 'Start Building Application'
     create_backup
@@ -29,7 +23,7 @@ function build_front_end() {
     log_header 'Start Building Front-End'
     cd $THEME_ROOT
     yarn install
-    yarn && yarn run production
+    yarn run production
     log_header 'Finished Building Front-End'
 }
 
@@ -65,6 +59,12 @@ function log_configuration() {
     log_header 'Node Version '$(node -v)
     log_header 'NPM Version '$(npm -v)
     log_header "$(composer --version --no-ansi)"
+}
+
+function log_header() {
+    LINE_BREAK='#===================================================='
+    HEADER=$1
+    printf '%s\n# %s\n%s\n' $LINE_BREAK "$HEADER" $LINE_BREAK
 }
 
 function log_changed_files() {
