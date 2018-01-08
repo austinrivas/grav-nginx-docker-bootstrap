@@ -1,84 +1,78 @@
 article#article-content
-	padding: 2em 2em;
-	background: white;
-	border: 1px solid $blue-tiffany;
+	padding: 2em 2em
+	background: white
+	border: 1px solid $blue-tiffany
 
-	header 
+	header
 
-		margin-bottom: 2em;
+		margin-bottom: 2em
 
-
-		.share-icons
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: flex-end;
 
 	a.featured-photo
-		display: block;
-		background-size: cover;
-		background-repeat: no-repeat;
-		background-position: center center;
-		display: block;
-		width: 100%;
-		height: 50vh;
-		max-height: 400px;
-		margin-bottom: 2em;
+		display: block
+		background-size: cover
+		background-repeat: no-repeat
+		background-position: center center
+		display: block
+		width: 100%
+		height: 50vh
+		max-height: 400px
+		margin-bottom: 2em
 
 	address.author, address.author a
-		font-size: 12px;
-		color: $blue-secondary;
+		font-size: 12px
+		color: $blue-secondary
 
 		.divider
-			font-size: 13px;
-			display: inline-block;
-			margin: 0 4px;
-			font-weight: bold;
-			font-family: helvetica;
+			font-size: 13px
+			display: inline-block
+			margin: 0 4px
+			font-weight: bold
+			font-family: helvetica
 
 
 	.content
-		max-width: 850px;
+		max-width: 850px
 
 
 		h2
-			text-transform: uppercase;
-			color: $blue-secondary;
-			font-size: 1.6em;
-			letter-spacing: 1px;
+			text-transform: uppercase
+			color: $blue-secondary
+			font-size: 1.6em
+			letter-spacing: 1px
 		p 
-			@extend .is-proxima-nova-regular;
-			color: $grey;
-			font-size: 0.91em;
-			letter-spacing: 1px;
+			@extend .is-proxima-nova-regular
+			color: $grey
+			font-size: 0.91em
+			letter-spacing: 1px
 			a 
-				color: $blue-secondary;
-				text-decoration: underline;
+				color: $blue-secondary
+				text-decoration: underline
 
 		blockquote
-			padding: 0 0 0 16px;
-			margin-left: 16px;
-			border-left: 3px solid $blue-tiffany;
-			background-color: transparent;
+			padding: 0 0 0 16px
+			margin-left: 16px
+			border-left: 3px solid $blue-tiffany
+			background-color: transparent
 
 	footer *
-		font-size: 13px;
-		color: $blue-dark;
+		font-size: 13px
+		color: $blue-dark
 
 	footer a 
-		color: $blue-dark;
+		color: $blue-dark
 		&:hover
-			text-decoration: underline;
-			color: $blue;
+			text-decoration: underline
+			color: $blue
 
 	footer, footer ul
-		display: flex;
-		flex-direction: row;
-		justify-content: flex-start;
+		display: flex
+		flex-direction: row
+		justify-content: flex-start
 
 	footer ul li
-		margin: 0 0 0 10px;
+		margin: 0 0 0 10px
 
 	.share-block
-		@include is-share-block;
+		@include is-share-block
 
