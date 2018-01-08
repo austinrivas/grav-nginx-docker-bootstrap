@@ -3,11 +3,21 @@
         .is-column-text
             display: table
             min-height: 672px
+            @include break-max($tablet)
+                padding: 40px 0
+                display: block
+                min-height: initial
         .content-tile
             height: 100%
             vertical-align: middle
             display: table-cell
             color: $white
+            padding: 70px 0
+            @include safari
+                padding: 0
+            @include break-max($tablet)
+                padding: 40px 0
+                display: block
 .content-blocks
     margin: 2em 0 0
     .content-tile
@@ -18,8 +28,12 @@
         flex-direction: column
         color: $white
         padding: 20px 5%
+        min-height: 600px
         @include break-max($widescreen)
             padding: 2em 0
+        @include break-max($tablet)
+            min-height: initial
+            padding: 3em 0
         h2
             @extend .type__content-tile--primary-heading
         h3
@@ -66,7 +80,9 @@
                 color: $white
 
     .content-tile
-        min-height: 504px
+        min-height: 600px
+        @include break-max($tablet)
+            min-height: auto
     h2
         @extend .type__content-bottom-tile--primary-heading
         @extend .is-uppercase
