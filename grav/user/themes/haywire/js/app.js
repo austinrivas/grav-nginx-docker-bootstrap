@@ -43,6 +43,7 @@ import PropertyTile from './components/PropertyTile.vue';
 import RangeSlider from './components/RangeSlider.vue';
 import SelectFilter from './components/SelectFilter.vue';
 import Hero from './components/Hero.vue';
+import ContactForm from './components/ContactForm.vue';
 
 // Vue Component declaration
 Vue.component('accordion', Accordion);
@@ -67,6 +68,7 @@ Vue.component('property-tile', PropertyTile);
 Vue.component('range-slider', RangeSlider);
 Vue.component('select-filter', SelectFilter);
 Vue.component('hero', Hero);
+Vue.component('contact-form', ContactForm);
 
 /**
  * Load all of this project's JavaScript dependencies including Vue
