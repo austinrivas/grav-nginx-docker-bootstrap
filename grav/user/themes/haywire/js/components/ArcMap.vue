@@ -34,8 +34,8 @@
                 MapView: null, // esri module
                 Point: null, // esri module
                 SimpleMarkerSymbol: null, // esri module
-                defaultZoom: 16, // default zoom level for a empty or single location map
-                defaultCenter: [0,0], // default center for an empty map
+                defaultZoom: 18, // default zoom level for a empty or single location map
+                defaultCenter: {latitude: 27.4119421, longitude: -82.4638901}, // default center for an empty map
                 extent: null, // the current map extent / zoom
                 featureLayer: null, // the current featureLayer
                 featureServer: {url: null}, // the featureServer initialization object
@@ -68,11 +68,11 @@
             // watch the collection for changes and rerender the map with the new models
             async collection() {
                 let _this = this;
-                await _this.renderMap(_this.collection, _this.MapView, _this.defaultZoom, _this.defaultCenter);
+                await _this.renderMap(_this.collection, _this.map, _this.MapView, _this.defaultZoom, _this.defaultCenter);
             },
-            async MapView() {
+            async map() {
                 let _this = this;
-                await _this.renderMap(_this.collection, _this.MapView, _this.defaultZoom, _this.defaultCenter);
+                await _this.renderMap(_this.collection, _this.map, _this.MapView, _this.defaultZoom, _this.defaultCenter);
             }
         },
 
@@ -83,14 +83,14 @@
                     tooltipContainer = _this.parseHTML(`<div class="arcmap-tooltip-container"></div>`),
                     content = [];
 
-                if (model.imageUrl) { content.push(`<img src="${model.imageUrl}" />`); }
-                content.push(`<p>${model.address}</p>`);
-                content.push(`<p>${model.subdivision}</p>`);
-                content.push(`<p>${_this.$options.filters.currency(model.totalPrice)}</p>`);
-                content.push(`<p>${model.acres} Acres</p>`);
-                content.push(`<p>${model.type}</p>`);
-                content.push(`<p>${model.status}</p>`);
-                content.push(`<p>${_this.$options.filters.currency(model.pricePerSqft)} PSF</p>`);
+                if (model.imageUrl) content.push(`<img src="${model.imageUrl}" />`);
+                if (model.address) content.push(`<p>${model.address}</p>`);
+                if (model.subdivision) content.push(`<p>${model.subdivision}</p>`);
+                if (model.totalPrice) content.push(`<p>${_this.$options.filters.currency(model.totalPrice)}</p>`);
+                if (model.acres) content.push(`<p>${model.acres} Acres</p>`);
+                if (model.type) content.push(`<p>${model.type}</p>`);
+                if (model.status) content.push(`<p>${model.status}</p>`);
+                if (model.pricePerSqft) content.push(`<p>${_this.$options.filters.currency(model.pricePerSqft)} PSF</p>`);
 
                 // reduce the content array into a dom container and return it
                 return content.reduce((accumulator, elementHTML) => {
@@ -139,26 +139,25 @@
                 // add the featureLayer to the map
                 _this.map.layers.add(_this.featureLayer);
             },
-            async renderMap(collection, MapView, zoom, center) {
-                const _this = this,
-                    // named mouse-wheel event
-                    mouseWheelEvent = "mouse-wheel";
+            async renderMap(collection, map, MapView, zoom, center) {
+                let _this = this;
                 // if collection is defined and it contains models
-                if (collection && MapView) {
+                if (collection && map && MapView) {
                     // reset the extent
                     _this.extent = _this.getInitialExtent();
                     // reset the currently rendered graphics and remove them from the map
                     _this.graphics = _this.removeAllMarkers(_this.graphics, _this.mapView);
                     // initialize a new map view using the current map and container
-                    _this.mapView = new MapView({ container: _this.mapNodeSelector, map: _this.map });
-                    // stop propagation of mouse-wheel events to prevent esri from breaking itself
-                   // _this.mapView.on(mouseWheelEvent, _this.stopPropagation);
+                    _this.mapView = new MapView({ container: _this.mapNodeSelector, map: map });
                     // add the collection models to the map
                     await collection.forEach(_this.addModelToMap);
 
+                    // if the collection has more than one model
                     if (collection.length > 1) {
                         // set the new map extent defined during the collection -> addModelToMap loop
-                        _this.mapView.extent = _this.extent;
+                        const extentScaleFactor = 2;
+                        _this.mapView.extent = _this.extent.expand(extentScaleFactor);
+                    // else if the collection has 1 or 0 models
                     } else {
                         _this.mapView.zoom = zoom;
                         _this.mapView.center = collection.length === 1 ? collection[0].centroid : center;
@@ -233,12 +232,13 @@
             },
             // returns an empty map extent
             getInitialExtent() {
-                return {
+                let _this = this;
+                return new _this.Extent({
                     xmin: null,
                     ymin: null,
                     xmax: null,
                     ymax: null
-                };
+                });
             },
             // parses a string into a dom element
             parseHTML: function (htmlString) {
@@ -281,12 +281,13 @@
             },
             // updates an extent with a new model
             getMapExtent(model, extent) {
-                return {
+                let _this = this;
+                return new _this.Extent({
                     xmin: !extent.xmin || model.centroid.longitude < extent.xmin ? model.centroid.longitude : extent.xmin,
                     xmax: !extent.xmax || model.centroid.longitude > extent.xmax ? model.centroid.longitude : extent.xmax,
                     ymin: !extent.ymin || model.centroid.latitude < extent.ymin ? model.centroid.latitude : extent.ymin,
                     ymax: !extent.ymax || model.centroid.latitude > extent.ymax ? model.centroid.latitude : extent.ymax
-                };
+                });
             }
         }
     }

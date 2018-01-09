@@ -54,6 +54,12 @@ function install_dependencies() {
     log_header 'Finished Installing Dependencies'
 }
 
+function log_changed_files() {
+    log_header 'Changed Files'
+    printf "%s\n" $FILES_CHANGED
+    log_header 'END of Changed Files'
+}
+
 function log_configuration() {
     log_header 'Environment Name : '$APP_ENV
     log_header 'Node Version '$(node -v)
@@ -65,12 +71,6 @@ function log_header() {
     LINE_BREAK='#===================================================='
     HEADER=$1
     printf '%s\n# %s\n%s\n' $LINE_BREAK "$HEADER" $LINE_BREAK
-}
-
-function log_changed_files() {
-    log_header 'Changed Files'
-    printf "%s\n" $FILES_CHANGED
-    log_header 'END of Changed Files'
 }
 
 # Check to see if our nginx vhost files have changed
