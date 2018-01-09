@@ -238,7 +238,7 @@ The `.ssh`, `grav`, and `nginx` directories are all mounted external volumes of 
 
 - usage : `$ ./scripts/deploy.sh <environment>`
 
-The deploy script checks the remote and pulls down any changes in the `./grav/user/pages` directory.
+The deploy script checks the remote and pulls down any changes in the `./grav/user/pages` and `./grav/user/config` directory.
 
 If changes are detected it prompts the user to either abort the deploy and commit the changes, or overwrite the changes present in the remote environment.
 
@@ -252,13 +252,17 @@ However you can execute it directly by calling `$ source ./scripts/git_deploy.sh
 
 Use at your own risk, this script does not check the remote before overwriting any changes made there.
 
-### merge_env_pages.sh
+### merge_env.sh
 
 This script is not meant to be executed directly and is sourced into `deploy.sh`.
 
-However you can execute it directly by calling `$ source ./scripts/merge_env_pages.sh && merge_env_pages <environment>`.
+The file contains two function declarations for `merge_env_pages` and `merge_env_config`.
+
+You can execute them directly by calling `$ source ./scripts/merge_env.sh && merge_env_pages <environment>`.
 
 This will pull down the `./grav/user/pages` directory from the remote and attempt to intelligently merge the changes with you local `pages`.
+
+The same is true for the `merge_env_config` function.
 
 ### post-receive
 
