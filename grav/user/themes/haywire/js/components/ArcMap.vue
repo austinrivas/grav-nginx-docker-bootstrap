@@ -140,9 +140,7 @@
                 _this.map.layers.add(_this.featureLayer);
             },
             async renderMap(collection, MapView, zoom, center) {
-                const _this = this,
-                    // named mouse-wheel event
-                    mouseWheelEvent = "mouse-wheel";
+                let _this = this;
                 // if collection is defined and it contains models
                 if (collection && MapView) {
                     // reset the extent
@@ -151,14 +149,13 @@
                     _this.graphics = _this.removeAllMarkers(_this.graphics, _this.mapView);
                     // initialize a new map view using the current map and container
                     _this.mapView = new MapView({ container: _this.mapNodeSelector, map: _this.map });
-                    // stop propagation of mouse-wheel events to prevent esri from breaking itself
-                   // _this.mapView.on(mouseWheelEvent, _this.stopPropagation);
                     // add the collection models to the map
                     await collection.forEach(_this.addModelToMap);
 
                     if (collection.length > 1) {
                         // set the new map extent defined during the collection -> addModelToMap loop
-                        _this.mapView.extent = _this.extent;
+                        let extentScaleFactor = 2;
+                        _this.mapView.extent = _this.extent.expand(extentScaleFactor);
                     } else {
                         _this.mapView.zoom = zoom;
                         _this.mapView.center = collection.length === 1 ? collection[0].centroid : center;
@@ -233,12 +230,13 @@
             },
             // returns an empty map extent
             getInitialExtent() {
-                return {
+                let _this = this;
+                return new _this.Extent({
                     xmin: null,
                     ymin: null,
                     xmax: null,
                     ymax: null
-                };
+                });
             },
             // parses a string into a dom element
             parseHTML: function (htmlString) {
@@ -281,12 +279,13 @@
             },
             // updates an extent with a new model
             getMapExtent(model, extent) {
-                return {
+                let _this = this;
+                return new _this.Extent({
                     xmin: !extent.xmin || model.centroid.longitude < extent.xmin ? model.centroid.longitude : extent.xmin,
                     xmax: !extent.xmax || model.centroid.longitude > extent.xmax ? model.centroid.longitude : extent.xmax,
                     ymin: !extent.ymin || model.centroid.latitude < extent.ymin ? model.centroid.latitude : extent.ymin,
                     ymax: !extent.ymax || model.centroid.latitude > extent.ymax ? model.centroid.latitude : extent.ymax
-                };
+                });
             }
         }
     }
