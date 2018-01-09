@@ -238,7 +238,7 @@ The `.ssh`, `grav`, and `nginx` directories are all mounted external volumes of 
 
 - usage : `$ ./scripts/deploy.sh <environment>`
 
-The deploy script checks the remote and pulls down any changes in the `./grav/user/pages` directory.
+The deploy script checks the remote and pulls down any changes in the `./grav/user/pages` and `./grav/user/config` directory.
 
 If changes are detected it prompts the user to either abort the deploy and commit the changes, or overwrite the changes present in the remote environment.
 
