@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 source ./scripts/git_deploy.sh
-source ./scripts/merge_env_pages.sh
+source ./scripts/merge_env.sh
 
 ENVIRONMENT=$1
 
@@ -50,12 +50,13 @@ if [ -n "${UNCLEAN}" ]; then
 else
 
     merge_env_pages $ENVIRONMENT
+    merge_env_config $ENVIRONMENT
 
     CHANGED=$(git_diff)
 
     if [ -n "${CHANGED}" ]; then
 
-        echo -e "\nThe ./grav/user/pages directory on $ENVIRONMENT has changes that have not been committed to this deployment.\n"
+        echo -e "\nThe ./grav/user directory on $ENVIRONMENT has changes that have not been committed to this deployment.\n"
 
         handle_merge_conflict $ENVIRONMENT
 
