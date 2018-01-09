@@ -25,12 +25,12 @@ persons:
 #}
 <section class="contact is-fullheight">
     <div class="columns is-desktop">
-        <div class="container column is-8-desktop is-bg-blue-light is-fluid">
+        <contact-form inline-template class="container column is-8-desktop is-bg-blue-light is-fluid">
             <div class="form-container">
                 {{ content }}
                 {% include "forms/form.html.twig" %}
             </div>
-        </div>
+        </contact-form>
 
         <aside class="column is-4-desktop is-narrow-mobile is-fullheight section">
             <h2>{{ page.header.contact.titleOne }}</h2>

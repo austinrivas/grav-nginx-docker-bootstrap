@@ -6,5 +6,6 @@ content:
         by: date
         dir: desc
 body_classes: 'modular terms-of-service'
+visible: false
 ---
 
