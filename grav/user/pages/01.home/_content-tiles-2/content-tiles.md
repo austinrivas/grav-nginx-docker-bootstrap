@@ -1,5 +1,6 @@
 ---
 title: 'Content Tiles'
+media_order: womenshoppingnew.jpg
 class: 'is-tile-bg-invert-blue is-inverse'
 titles:
     title: 'Lakewood Ranch'
@@ -9,7 +10,7 @@ buttons:
         class: is-primary
         link: /about-us
     -
-        label: 'About the surrounding area'
+        label: 'Surrounding area'
         class: is-primary
         link: /map/
 ---

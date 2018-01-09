@@ -2,7 +2,7 @@
 title: 'About Lakewood Ranch'
 hero:
     headline: 'About Lakewood Ranch'
-    backgroundName: LakewoodRanch.jpg
+    backgroundName: aboutlwr3.jpg
 ---
 
 About Lakewood Ranch

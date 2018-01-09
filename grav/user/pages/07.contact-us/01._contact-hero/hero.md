@@ -1,5 +1,7 @@
 ---
 title: 'Contact Hero'
 hero:
-    headline: Contact Us
+    headline: 'Contact Us'
+    backgroundName: contactus2.jpg
 ---
+
