@@ -18,10 +18,19 @@
         word-wrap: break-word
         // &:after
         //     @include hero-arrow-down
-    &:after
-        @include hero-arrow-down
+    .scroll-down
+        width: 60px;
+        height: 100px;
+        bottom: 0;
+        margin: 0 auto;
+        cursor: pointer;
+        &:after
+            @include hero-arrow-down
     .hero-body
         flex-shrink: 1
+        display: flex;
+        justify-content: center;
+        align-items: center;
     h1
         @extend .is-uppercase
         color: $white

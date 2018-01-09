@@ -31,6 +31,7 @@
     "axios": "^0.17.1",
     "esri-loader": "^1.5.3",
     "lodash": "^4.17.4",
-    "object-fit-images": "^3.2.3"
+    "object-fit-images": "^3.2.3",
+    "vue-scrollto": "^2.8.0"
   }
 }

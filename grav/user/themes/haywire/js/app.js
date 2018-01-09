@@ -42,6 +42,7 @@ import PropertyListTable from './components/PropertyListTable.vue';
 import PropertyTile from './components/PropertyTile.vue';
 import RangeSlider from './components/RangeSlider.vue';
 import SelectFilter from './components/SelectFilter.vue';
+import Hero from './components/Hero.vue';
 
 // Vue Component declaration
 Vue.component('accordion', Accordion);
@@ -65,6 +66,7 @@ Vue.component('property-list-table', PropertyListTable);
 Vue.component('property-tile', PropertyTile);
 Vue.component('range-slider', RangeSlider);
 Vue.component('select-filter', SelectFilter);
+Vue.component('hero', Hero);
 
 /**
  * Load all of this project's JavaScript dependencies including Vue

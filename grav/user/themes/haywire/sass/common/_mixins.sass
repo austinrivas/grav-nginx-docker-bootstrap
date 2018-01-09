@@ -21,21 +21,21 @@
 @mixin hero-arrow-down
     content: " "
     display: block
-    pointer-events: none
     position: absolute
     -webkit-transform: rotate(-45deg) translate(-50%, -50%)
     transform: rotate(-45deg) translate(-50%, -50%)
     -webkit-transform-origin: center
     transform-origin: center
-    z-index: 4
-    border: 2px solid $white-rock
-    border-right: 0
-    border-top: 0
-    height: 25px
-    width: 25px
-    left: 50%
-    top: auto
-    bottom: 3rem
+    z-index: 4;
+    border: 2px solid #eae7d1;
+    border-right: 0;
+    border-top: 0;
+    height: 25px;
+    width: 25px;
+    left: calc(50% + 5px);
+    top: auto;
+    bottom: 3rem;
+    cursor: pointer;
     @include break-max($tablet)
         height: 17px
         width: 17px
