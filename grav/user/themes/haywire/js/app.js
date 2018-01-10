@@ -17,15 +17,14 @@ import VueCurrencyFilter from './filters/vue-currency-filter';
 import EventBus from './event-handlers/event-bus';
 import ImageLoader from './event-handlers/image-loader';
 
-// Vue Mixins
-import LoadingState from './components/mixins/LoadingState.vue';
-
 // Vue Components
 import Accordion from './components/Accordion';
 import ArcMap from './components/ArcMap.vue';
 import Articles from './components/Articles.vue';
+import ContactForm from './components/ContactForm.vue';
 import FavoriteIcon from './components/FavoriteIcon.vue';
 import FeaturedProjects from './components/FeaturedProjects.vue';
+import Hero from './components/Hero.vue';
 import Navbar from './components/Navbar.vue';
 import NewsletterSignup from './components/NewsletterSignup.vue';
 import PageState from './components/PageState.vue';
@@ -42,15 +41,15 @@ import PropertyListTable from './components/PropertyListTable.vue';
 import PropertyTile from './components/PropertyTile.vue';
 import RangeSlider from './components/RangeSlider.vue';
 import SelectFilter from './components/SelectFilter.vue';
-import Hero from './components/Hero.vue';
-import ContactForm from './components/ContactForm.vue';
 
 // Vue Component declaration
 Vue.component('accordion', Accordion);
 Vue.component('arcmap', ArcMap);
 Vue.component('articles', Articles);
+Vue.component('contact-form', ContactForm);
 Vue.component('favorite-icon', FavoriteIcon);
 Vue.component('featured-projects', FeaturedProjects);
+Vue.component('hero', Hero);
 Vue.component('navbar', Navbar);
 Vue.component('newsletter-signup', NewsletterSignup);
 Vue.component('page-state', PageState);
@@ -67,8 +66,6 @@ Vue.component('property-list-table', PropertyListTable);
 Vue.component('property-tile', PropertyTile);
 Vue.component('range-slider', RangeSlider);
 Vue.component('select-filter', SelectFilter);
-Vue.component('hero', Hero);
-Vue.component('contact-form', ContactForm);
 
 /**
  * Load all of this project's JavaScript dependencies including Vue
