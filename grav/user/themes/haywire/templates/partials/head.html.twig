@@ -5,6 +5,10 @@
 <link rel="icon" type="image/png" href="{{ url('theme://images/favicon.png') }}" />
 <link rel="canonical" href="{{ page.url(true, true) }}" />
 
+{% block analytics %}
+	{% include 'partials/analytics.html.twig' %}
+{% endblock %}
+
 {% block stylesheets %}
     {% do assets.addCss('theme://dist/css/app.css', 10) %}
 {% endblock %}
