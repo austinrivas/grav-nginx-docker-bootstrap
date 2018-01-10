@@ -5,6 +5,37 @@ source ./scripts/merge_env.sh
 
 ENVIRONMENT=$1
 
+function deploy() {
+    UNCLEAN=$(git_diff)
+
+    if [ -n "${UNCLEAN}" ]; then
+
+        echo -e "\nThis repo has uncommitted changes, aborting deploy to $ENVIRONMENT."
+
+        exit_shell
+
+    else
+
+        merge_env_pages $ENVIRONMENT
+        merge_env_config $ENVIRONMENT
+
+        CHANGED=$(git_diff)
+
+        if [ -n "${CHANGED}" ]; then
+
+            echo -e "\nThe ./grav/user directory on $ENVIRONMENT has changes that have not been committed to this deployment.\n"
+
+            handle_merge_conflict $ENVIRONMENT
+
+        else
+
+            git_deploy $ENVIRONMENT
+
+        fi
+
+    fi
+}
+
 function exit_shell() {
     [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1 # handle exits from shell or function but don't exit interactive shell
 }
@@ -39,31 +70,5 @@ function handle_merge_conflict() {
         done
 }
 
-UNCLEAN=$(git_diff)
-
-if [ -n "${UNCLEAN}" ]; then
-
-    echo -e "\nThis repo has uncommitted changes, aborting deploy to $ENVIRONMENT."
-
-    exit_shell
-
-else
-
-    merge_env_pages $ENVIRONMENT
-    merge_env_config $ENVIRONMENT
-
-    CHANGED=$(git_diff)
-
-    if [ -n "${CHANGED}" ]; then
-
-        echo -e "\nThe ./grav/user directory on $ENVIRONMENT has changes that have not been committed to this deployment.\n"
-
-        handle_merge_conflict $ENVIRONMENT
-
-    else
-
-        git_deploy $ENVIRONMENT
-
-    fi
-
-fi
+# Execute the deploy function
+deploy
