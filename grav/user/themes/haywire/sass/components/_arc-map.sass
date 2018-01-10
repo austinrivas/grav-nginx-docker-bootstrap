@@ -38,8 +38,11 @@
             color: $white
             font-weight: 600
     .esri-widget-button
-        @extend .is-bg-primary
-        color: $white
+        @extend .is-bg-primary-invert
+        color: $primary
         &:hover
-            @extend .is-bg-primary-invert
-            color: $primary
+            @extend .is-bg-primary
+            color: $white
+        &:focus
+            outline: none
+
