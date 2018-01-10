@@ -50,8 +50,7 @@
             return {
                 defaultUnselectedValue: defaultUnselectedValue, // the value of the default unselected option
                 defaultUnselectedOption: {
-                    disabled: true,
-                    selected: true,
+                    disabled: "disabled",
                     text: "Select a Filter",
                     value: defaultUnselectedValue
                 }, // the default option for a filter that has no selected option
@@ -74,8 +73,8 @@
                     }
                 },
                 rangeSliderStep: 1, // default range slider step
-                selectedFilterField: null, // initial unselected value for filter field
-                selectedFilterValue: null, // initial unselected value for selected filter value
+                selectedFilterField: defaultUnselectedValue, // initial unselected value for filter field
+                selectedFilterValue: defaultUnselectedValue, // initial unselected value for selected filter value
                 selectedFilterOptions: [] // initial value for selected filter field options
             }
         },
