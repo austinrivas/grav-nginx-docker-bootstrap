@@ -13,18 +13,6 @@
 {% set iconGridId            = 'icon__grid' %}
 {% set selectTemplateClass   = 'is-gold' %}
 
-{# Labels #}
-{% set selectPlaceholderOption = {
-        text: "Select a Filter",
-        value: "unselected",
-        selected: true,
-        disabled: true
-} %}
-{% set selectOptions = [selectPlaceholderOption] %}
-
-{% set selectFilterOptions = [selectPlaceholderOption] %}
-{% set sliderOptions = [] %}
-
 {% set buttonFilterApplyLabel   = 'Apply' %}
 {% set buttonPropLabel          = 'View *prop name*' %}
 
@@ -49,7 +37,7 @@
                            :options="filterOptions"
                            :selected="selectedFilterField"
                            inline-template>
-                {% include selectTemplate with { inputClass: selectTemplateClass, options: selectOptions, vue: true } only %}
+                {% include selectTemplate with { inputClass: selectTemplateClass, vue: true } only %}
             </select-filter>
         </div>
         <div class="column is-3">
@@ -72,7 +60,7 @@
                             :options="selectedFilterOptions"
                             :selected="selectedFilterValue"
                             inline-template>
-                    {% include selectTemplate with { inputClass: selectTemplateClass, options: selectFilterOptions, vue: true } only %}
+                    {% include selectTemplate with { inputClass: selectTemplateClass, vue: true } only %}
                 </select-filter>
             </div>
         </div>

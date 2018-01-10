@@ -49,6 +49,12 @@
             let defaultUnselectedValue = "unselected"; // the value of the default unselected option
             return {
                 defaultUnselectedValue: defaultUnselectedValue, // the value of the default unselected option
+                defaultUnselectedOption: {
+                    disabled: true,
+                    selected: true,
+                    text: "Select a Filter",
+                    value: defaultUnselectedValue
+                }, // the default option for a filter that has no selected option
                 enumerableFilterFields: [], // initial enumerable filterable fields
                 fields: {},
                 filterChangeEvent: 'filterChanged', // named event for a top level filter change
@@ -197,7 +203,7 @@
                         accumulator.push({text: label, value: field});
                     }
                     return accumulator;
-                }, []) : [];
+                }, [_this.defaultUnselectedOption]) : [];
             },
             // get an array of fields for a given type from a array of filters
             async getFieldsOfType(type, filters) {
@@ -207,6 +213,7 @@
             },
             // get the select option text / value pairs for a given arc field and its distinct options
             async getSelectedFilterOptions(distinctArcFeatures, field) {
+                let _this = this;
                 // if the distinctArcFeatures and field are defined
                 if (distinctArcFeatures && distinctArcFeatures.length && field && field.length) {
                     // reduce the distinctArcFeatures into an array of text / value objects
@@ -218,7 +225,7 @@
                             accumulator.push({text: filterValue, value: filterValue});
                         }
                         return accumulator;
-                    }, []);
+                    }, [_this.defaultUnselectedOption]);
                 } else {
                     return [];
                 }
