@@ -1,34 +1,24 @@
 <script>
 
-var VueScrollTo = require('vue-scrollto');
+    import ScrollDownMixin from './mixins/ScrollDown.vue'
 
     export default {
-    	mounted(){
-    		if ( typeof(this.$refs.notice) !== "undefined" && this.$refs.notice ) {
-    			this.scrollDown()
-    		}
-    	},
-        methods: {
-            scrollDown() {
+        mixins: [ScrollDownMixin],
 
-            	const height = this.$refs.notice.offsetHeight
+        mounted() {
+            let _this = this;
 
-            	var options = {
-				    container: 'body',
-				    easing: 'ease-in',
-				    offset: (height - 80),
-				    cancelable: true,
-				    onDone: function() {
-				      // scrolling is done
-				    },
-				    onCancel: function() {
-				      // scrolling has been interrupted
-				    },
-				    x: false,
-				    y: true
-				}
+            if (typeof(_this.$refs.notice) !== "undefined" && _this.$refs.notice && _this.$refs.notice.offsetHeight) {
+                _this.scrollElement = _this.$refs.notice;
+                _this.scrollOffsetHeight = _this.$refs.notice.offsetHeight - 80;
+                _this.scrollDown();
+            }
+        },
 
-				var vueScroll = VueScrollTo.scrollTo(this.$refs.notice, 500, options)
+        data() {
+            return {
+                scrollElement: null,
+                scrollOffsetHeight: null
             }
         }
     }
