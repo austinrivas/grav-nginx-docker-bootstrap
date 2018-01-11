@@ -29,7 +29,9 @@
                         :collection="collection"
                         :show-tooltip="false"
                         inline-template>
-                        {% include arcMapTemplate with {} only %}
+                        {% include arcMapTemplate with {
+                            arcmap: arcmap
+                        } only %}
                     </arcmap>
                 </div>
             </div>

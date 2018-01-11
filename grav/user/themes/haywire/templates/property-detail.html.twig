@@ -44,10 +44,11 @@
                     {%- include infoTableTemplate with {} only -%}
                 </property-info-table>
                 <property-description
-                    :id="propertyId"
                     :description="propertyDescription"
+                    :id="propertyId"
                     inline-template>
                     {%- include descriptionTemplate with {
+                        arcmap: page.header.arcmap,
                         contactName: page.header.contact.name,
                         contactPhoneNumber: page.header.contact.phone
                     } only -%}

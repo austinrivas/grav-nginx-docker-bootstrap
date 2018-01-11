@@ -3,7 +3,9 @@
     // the EsriLoader that is responsible for loading the ESRI map modules
     import * as EsriLoader from 'esri-loader'
     // the ArcModelClass that defines the static query methods
-    import ArcModelClass from '../models/arcModel'
+    import ArcModelClass from '../models/arcModel';
+    // the vue mixin to fetch grav config from meta attributes
+    import GravConfigMixin from './mixins/GravConfig.vue';
     // the property field definitions for the arcgis feature layer
     import PROPERTY_FIELDS from '../models/propertyFields';
     // the model definition for a arc gis property feature
@@ -11,6 +13,8 @@
 
     // a reusable component that takes a collection of models with geometries and renders them into a esri map
     export default {
+        mixins: [GravConfigMixin],
+
         props: [
             'collection', // the collection that is providing the models to render into the map
             'showTooltip'
@@ -19,6 +23,8 @@
         // runs when component is attached to the DOM
         async mounted() {
             let _this = this;
+
+            _this.gravConfig = await _this.getGravConfig(_this.gravConfig);
 
             _this.retargetEsriScroll();
 
@@ -34,12 +40,24 @@
                 MapView: null, // esri module
                 Point: null, // esri module
                 SimpleMarkerSymbol: null, // esri module
-                defaultZoom: 18, // default zoom level for a empty or single location map
-                defaultCenter: {latitude: 27.4119421, longitude: -82.4638901}, // default center for an empty map
+                defaultBasemap: 'hybrid',
+                defaultCenter: {
+                    latitude: 38.8976763,
+                    longitude: -77.0365298
+                }, // default center for an empty map
+                defaultZoomEmpty: 18, // default zoom level for a empty map
+                defaultZoomSingleResult: 18, // default zoom level for a map with a single result
                 extent: null, // the current map extent / zoom
                 featureLayer: null, // the current featureLayer
                 featureServer: {url: null}, // the featureServer initialization object
                 graphics: [], // the current graphics being rendered
+                gravConfig: {
+                    basemap: null,
+                    centerLatitude: null,
+                    centerLongitude: null,
+                    centerZoomEmpty: null,
+                    centerZoomSingleResult: null
+                },
                 map: null, // the current map
                 mapNodeSelector: null, // the id of the map container
                 mapView: null, // the current map view,
@@ -56,23 +74,56 @@
         },
 
         computed: {
+            basemap() {
+                let _this = this;
+                return _this.gravConfig.basemap ? _this.gravConfig.basemap : _this.defaultBasemap;
+            },
+            center() {
+                let _this = this;
+                return _this.gravConfig.centerLatitude && _this.gravConfig.centerLongitude ? {
+                    latitude: _this.gravConfig.centerLatitude,
+                    longitude: _this.gravConfig.centerLongitude
+                } : _this.defaultCenter;
+            },
             mapStyles() {
                 let _this = this;
                 return {
                     'z-index': _this.mapZindex
                 }
             },
+            zoomEmpty() {
+                let _this = this;
+                return _this.gravConfig.centerZoomEmpty ? _this.gravConfig.centerZoomEmpty : _this.defaultZoomEmpty;
+            },
+            zoomSingleResult() {
+                let _this = this;
+                return _this.gravConfig.centerZoomSingleResult ? _this.gravConfig.centerZoomSingleResult : _this.defaultZoomSingleResult;
+            }
         },
 
         watch: {
             // watch the collection for changes and rerender the map with the new models
             async collection() {
                 let _this = this;
-                await _this.renderMap(_this.collection, _this.map, _this.MapView, _this.defaultZoom, _this.defaultCenter);
+                await _this.renderMap(
+                    _this.collection,
+                    _this.map,
+                    _this.MapView,
+                    _this.center,
+                    _this.zoomEmpty,
+                    _this.zoomSingleResult
+                );
             },
             async map() {
                 let _this = this;
-                await _this.renderMap(_this.collection, _this.map, _this.MapView, _this.defaultZoom, _this.defaultCenter);
+                await _this.renderMap(
+                    _this.collection,
+                    _this.map,
+                    _this.MapView,
+                    _this.center,
+                    _this.zoomEmpty,
+                    _this.zoomSingleResult
+                );
             }
         },
 
@@ -102,8 +153,8 @@
             },
             async initializeEsriMap() {
                 let _this = this;
-                // the basemap styles being used in the map TODO: set in CMS
-                const basemap = "hybrid",
+                // the basemap styles being used in the map
+                const basemap = _this.basemap,
                     // default options for EsriLoader
                     options = {},
                     // the Esri module dependencies for the map
@@ -139,7 +190,7 @@
                 // add the featureLayer to the map
                 _this.map.layers.add(_this.featureLayer);
             },
-            async renderMap(collection, map, MapView, zoom, center) {
+            async renderMap(collection, map, MapView, defaultCenter, zoomEmpty, zoomSingleResult) {
                 let _this = this;
                 // if collection is defined and it contains models
                 if (collection && map && MapView) {
@@ -158,9 +209,12 @@
                         const extentScaleFactor = 2;
                         _this.mapView.extent = _this.extent.expand(extentScaleFactor);
                     // else if the collection has 1 or 0 models
+                    } else if (collection.length === 1) {
+                        _this.mapView.zoom = zoomSingleResult;
+                        _this.mapView.center = collection[0].centroid
                     } else {
-                        _this.mapView.zoom = zoom;
-                        _this.mapView.center = collection.length === 1 ? collection[0].centroid : center;
+                        _this.mapView.zoom = zoomEmpty;
+                        _this.mapView.center = defaultCenter;
                     }
                 }
             },

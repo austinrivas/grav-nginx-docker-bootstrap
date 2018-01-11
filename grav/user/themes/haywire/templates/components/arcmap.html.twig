@@ -1,3 +1,26 @@
+{% set gravConfigMetaTemplate = 'partials/grav-config-meta.html.twig' %}
 <div class="arc-map-container">
+    {% if arcmap %}
+        {% include gravConfigMetaTemplate with {
+            key: "basemap",
+            value: arcmap.basemap
+        } only %}
+        {% include gravConfigMetaTemplate with {
+            key: "centerLatitude",
+            value: arcmap.center.latitude
+        } only %}
+        {% include gravConfigMetaTemplate with {
+            key: "centerLongitude",
+            value: arcmap.center.longitude
+        } only %}
+        {% include gravConfigMetaTemplate with {
+            key: "centerZoomEmpty",
+            value: arcmap.center.zoomEmpty
+        } only %}
+        {% include gravConfigMetaTemplate with {
+            key: "centerZoomSingleResult",
+            value: arcmap.center.zoomSingleResult
+        } only %}
+    {% endif %}
     <div id="mapNode" :style="mapStyles"></div>
 </div>
