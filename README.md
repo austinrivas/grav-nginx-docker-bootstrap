@@ -5,6 +5,39 @@ This application uses the Grav flat-file cms to serve a static web application v
 The scope of the application is to serve as a CMS for pages, blog posts, custom post types, and media assets while providing
 the ability to version control content/configuration changes.
 
+# CMS Guide
+
+TODO: WORK IN PROGRESS
+
+### Sitewide Configuration
+Admin -> Configuration -> Site
+
+description: Site meta description for search results
+arc-gis-feature-server-url: https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0
+
+### Modular Pages
+content:
+    items: '@self.modular'
+    order:
+        by: default
+        dir: asc
+
+### Property Filter
+filters:
+    cta:
+        field: type
+        value: Industrial
+        label: 'View Industrial Land'
+
+### ArcGIS Map
+arcmap:
+    basemap: hybrid # https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
+    center:
+        latitude: 27.4119421
+        longitude: -82.4638901
+        zoomEmpty: 13
+        zoomSingleResult: 15
+
 # Environments
 
 Place the following in your `/etc/hosts` file:
