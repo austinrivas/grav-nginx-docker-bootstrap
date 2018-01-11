@@ -52,8 +52,6 @@
             });
 
             _this.setListView(_this.listView);
-
-            _this.gravConfig = await _this.getGravConfig(_this.gravConfig);
         },
 
         // provides the data context for the component
@@ -67,11 +65,6 @@
             return {
                 applyFilterEvent: 'applyFilter', // named event for triggering query execution from child components
                 collection: null, // initial collection state
-                gravConfig: {
-                    customFilterField: null,
-                    customFilterLabel: null,
-                    customFilterValue: null
-                },
                 enumerableType: enumerableType, // the named type for enumerable filters
                 favoritesFilter: 'favorites', // the named filter for the favorites aggregate view
                 filters: {
@@ -99,14 +92,6 @@
         },
 
         computed: {
-            customFilter() {
-                let _this = this;
-                return _this.gravConfig ? {
-                    field: _this.gravConfig.customFilterField,
-                    label: _this.gravConfig.customFilterLabel,
-                    value: _this.gravConfig.customFilterValue
-                } : {};
-            },
             // computed prop to show / hide grid list view
             showGrid() {
                 let _this = this;

@@ -2,25 +2,9 @@
 {% set arcMapTemplate = 'components/arcmap.html.twig' %}
 {% set propertyListGridTemplate = 'components/property-list-grid.html.twig' %}
 {% set propertyListTableTemplate = 'components/property-list-table.html.twig' %}
-{% set gravConfigMetaTemplate = 'partials/grav-config-meta.html.twig' %}
 <div class="property-aggregate-container">
-    {% if customFilter %}
-        {% include gravConfigMetaTemplate with {
-            key: "customFilterField",
-            value: customFilter.field
-        } only %}
-        {% include gravConfigMetaTemplate with {
-            key: "customFilterLabel",
-            value: customFilter.label
-        } only %}
-        {% include gravConfigMetaTemplate with {
-            key: "customFilterValue",
-            value: customFilter.value
-        } only %}
-    {% endif %}
     <property-filter
         :apply-filter-event="applyFilterEvent"
-        :custom-filter="customFilter"
         :enumerable-type="enumerableType"
         :event-bus="eventBus"
         :favorites-filter="favoritesFilter"
@@ -33,7 +17,9 @@
         :range-type="rangeType"
         :table-view="tableView"
         inline-template>
-        {% include filterTemplate with {} only %}
+        {% include filterTemplate with {
+            filters: filters
+        } only %}
     </property-filter>
     {% if arcmap %}
         <arcmap

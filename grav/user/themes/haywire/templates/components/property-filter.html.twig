@@ -24,12 +24,36 @@
 {% set executeQueryHandler = 'executeQueryHandler' %}
 {% set showApplyButton = 'showApplyButton' %}
 {% set applyFavoritesFilter = 'applyFavoritesFilterHandler' %}
-{% set applyCustomFilter = 'applyCustomFilterHandler' %}
+{% set applyCTAFilter = 'applyCTAFilterHandler' %}
 {% set favoritesButtonComputedClass = 'favoritesButtonClass' %}
-{% set customFilterComputedClass = 'customFilterClass' %}
-{% set customFilterComputedContent = '${customFilterContent}' %}
-
+{% set ctaFilterClass = 'button is-primary is-marginless' %}
+{% set ctaFilterComputedStyle = 'ctaFilterStyles' %}
+{% set ctaFilterComputedContent = '${ctaFilterContent}' %}
+{% set gravConfigMetaTemplate = 'partials/grav-config-meta.html.twig' %}
+{% set filterKeys = {
+    cta: {
+        field: "ctaFilterField",
+        label: "ctaFilterLabel",
+        value: "ctaFilterValue"
+    }
+} %}
 <div class="property-filter">
+    {% if filters %}
+        {% if filters.cta %}
+            {% include gravConfigMetaTemplate with {
+                key: filterKeys.cta.field,
+                value: filters.cta.field
+            } only %}
+            {% include gravConfigMetaTemplate with {
+                key: filterKeys.cta.label,
+                value: filters.cta.label
+            } only %}
+            {% include gravConfigMetaTemplate with {
+                key: filterKeys.cta.value,
+                value: filters.cta.value
+            } only %}
+        {% endif %}
+    {% endif %}
     <div class="columns">
         <div class="column is-3">
             <select-filter :change-event="filterChangeEvent"
@@ -74,9 +98,10 @@
         </div>
         <div class="column is-3">
             {% include buttonTemplate with {
-                vueClass: customFilterComputedClass,
-                content: customFilterComputedContent,
-                vueClick: applyCustomFilter
+                class: ctaFilterClass,
+                content: ctaFilterComputedContent,
+                vueClick: applyCTAFilter,
+                vueStyle: ctaFilterComputedStyle
             } only %}
         </div>
         <div class="column is-2">

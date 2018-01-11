@@ -5,11 +5,14 @@
     import PROPERTY_FIELDS from '../models/propertyFields';
     // map of property labels TODO: ADD TO CMS
     import PROPERTY_LABELS from '../models/propertyLabels';
+    // mixin that fetches data from meta attributes provided by grav cms
+    import GravConfigMixin from './mixins/GravConfig.vue';
 
     export default {
+        mixins: [GravConfigMixin],
+
         props: [
             'applyFilterEvent', // named event for applying the current filter
-            'customFilter', // an object that contains the custom filter attributes
             'enumerableType', // named type for enumerable filters
             'eventBus', // shared eventBus
             'favoritesFilter', // the named filter for showing favorite properties
@@ -37,6 +40,7 @@
         // runs when component is attached to the DOM
         async mounted() {
             let _this = this;
+            _this.gravConfig = await _this.getGravConfig(_this.gravConfig);
             // get the arc field names based on the filterable keys
             _this.fields = await _this.getFilterFields(_this.filters);
             // get the labels for the top level filters to be displayed as select options
@@ -59,6 +63,11 @@
                 filterChangeEvent: 'filterChanged', // named event for a top level filter change
                 filterValueChangeEvent: 'filterValueChanged', // named event for the value of a filter changing
                 filterOptions: [], // initial filter options
+                gravConfig: {
+                    ctaFilterField: null,
+                    ctaFilterLabel: null,
+                    ctaFilterValue: null
+                },
                 rangeFilterFields: [], // initial range filterable fields
                 rangeSliderId: 'range-slider-dom-target',
                 rangeSliderChangeEvent: 'rangeSliderChanged', // named event for range slider change
@@ -80,13 +89,25 @@
         },
 
         computed: {
-            customFilterClass() {
+            ctaFilter() {
                 let _this = this;
-                return `button is-primary is-marginless ${_this.customFilter ? '' : 'is-hidden'}`;
+                return _this.gravConfig ? {
+                    field: _this.gravConfig.ctaFilterField,
+                    label: _this.gravConfig.ctaFilterLabel,
+                    value: _this.gravConfig.ctaFilterValue
+                } : false;
             },
-            customFilterContent() {
+            ctaFilterStyles() {
                 let _this = this;
-                return _this.customFilter && _this.customFilter.label ? _this.customFilter.label : null;
+                if (!_this.ctaFilterContent) {
+                    return {
+                        display: 'none !important'
+                    }
+                }
+            },
+            ctaFilterContent() {
+                let _this = this;
+                return _this.ctaFilter && _this.ctaFilter.label ? _this.ctaFilter.label : null;
             },
             favoritesButtonClass() {
                 let _this = this;
@@ -268,16 +289,16 @@
                     value: null
                 });
             },
-            applyCustomFilterHandler() {
+            applyCTAFilterHandler() {
                 let _this = this;
-                if (_this.customFilter &&
-                    _this.customFilter.field &&
-                    _this.filters[_this.customFilter.field] &&
-                    _this.filters[_this.customFilter.field].field &&
-                    _this.customFilter.value) {
+                if (_this.ctaFilter &&
+                    _this.ctaFilter.field &&
+                    _this.filters[_this.ctaFilter.field] &&
+                    _this.filters[_this.ctaFilter.field].field &&
+                    _this.ctaFilter.value) {
                     // if there is a currently selected field with a valid value
-                    _this.selectedFilterField = _this.filters[_this.customFilter.field].field;
-                    _this.selectedFilterValue = _this.customFilter.value;
+                    _this.selectedFilterField = _this.filters[_this.ctaFilter.field].field;
+                    _this.selectedFilterValue = _this.ctaFilter.value;
                     _this.eventBus.$emit(_this.applyFilterEvent, {
                         field: _this.selectedFilterField,
                         filter: _this.fields[_this.selectedFilterField].filter,

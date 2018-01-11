@@ -17,7 +17,7 @@
         :update-url-params-event="updateUrlParamsEvent"
         inline-template>
         {% include propertyAggregateTemplate with {
-            customFilter: page.header.customFilter,
+            filters: page.header.filters,
             arcmap: page.header.arcmap
         } only %}
     </property-aggregate>

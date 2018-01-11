@@ -1,9 +1,10 @@
 ---
 title: Map
-customFilter:
-    field: type
-    value: Industrial
-    label: 'View Industrial Land'
+filters:
+    cta:
+        field: type
+        value: Industrial
+        label: 'View Industrial Land'
 arcmap:
     basemap: hybrid
     center:

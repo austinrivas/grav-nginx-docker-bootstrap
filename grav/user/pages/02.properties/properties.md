@@ -1,8 +1,9 @@
 ---
 title: Properties
-customFilter:
-    field: type
-    value: Industrial
-    label: 'View Industrial Properties'
+filters:
+    cta:
+        field: type
+        value: Developable Land
+        label: 'View Developable Land'
 ---
 

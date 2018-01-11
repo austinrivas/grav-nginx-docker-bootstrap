@@ -1,24 +1,33 @@
 {% set gravConfigMetaTemplate = 'partials/grav-config-meta.html.twig' %}
+{% set arcmapKeys = {
+    basemap: "basemap",
+    center: {
+        latitude: "centerLatitude",
+        longitude: "centerLongitude",
+        zoomEmpty: "centerZoomEmpty",
+        zoomSingleResult: "centerZoomSingleResult"
+    }
+} %}
 <div class="arc-map-container">
     {% if arcmap %}
         {% include gravConfigMetaTemplate with {
-            key: "basemap",
+            key: arcmapKeys.basemap,
             value: arcmap.basemap
         } only %}
         {% include gravConfigMetaTemplate with {
-            key: "centerLatitude",
+            key: arcmapKeys.center.latitude,
             value: arcmap.center.latitude
         } only %}
         {% include gravConfigMetaTemplate with {
-            key: "centerLongitude",
+            key: arcmapKeys.center.longitude,
             value: arcmap.center.longitude
         } only %}
         {% include gravConfigMetaTemplate with {
-            key: "centerZoomEmpty",
+            key: arcmap.center.zoomEmpty,
             value: arcmap.center.zoomEmpty
         } only %}
         {% include gravConfigMetaTemplate with {
-            key: "centerZoomSingleResult",
+            key: arcmap.center.zoomSingleResult,
             value: arcmap.center.zoomSingleResult
         } only %}
     {% endif %}
