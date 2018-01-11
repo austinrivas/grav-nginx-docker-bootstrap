@@ -4,10 +4,13 @@
     // property field definitions TODO: MOVE INTO CMS
     import PROPERTY_FIELDS from '../models/propertyFields';
     import PROPERTY_LABELS from '../models/propertyLabels';
+    import GravConfigMixin from './mixins/GravConfig.vue';
 
     // This is a parent component that is responsible for maintaining the state of the map aggregate page
     // it fetches data from the local collections / arc api and feeds the data into the filter / map / list child components
     export default {
+        mixins: [GravConfigMixin],
+
         props: [
             'eventBus', // the shared event bus
             'filter', // the currently selected filter
@@ -24,6 +27,7 @@
                 _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange);
                 _this.eventBus.$on(_this.applyFilterEvent, _this.handleApplyFilter);
             }
+
             // create a filters map of only the filterable fields
             _this.filters = _this.createFilterMap(PROPERTY_FIELDS, PROPERTY_LABELS, _this.filters)
         },
@@ -49,7 +53,7 @@
 
             _this.setListView(_this.listView);
 
-            _this.getCustomFilterAttributes();
+            _this.gravConfig = await _this.getGravConfig(_this.gravConfig);
         },
 
         // provides the data context for the component
@@ -63,9 +67,11 @@
             return {
                 applyFilterEvent: 'applyFilter', // named event for triggering query execution from child components
                 collection: null, // initial collection state
-                customFilterField: null,
-                customFilterLabel: null,
-                customFilterValue: null,
+                gravConfig: {
+                    customFilterField: null,
+                    customFilterLabel: null,
+                    customFilterValue: null
+                },
                 enumerableType: enumerableType, // the named type for enumerable filters
                 favoritesFilter: 'favorites', // the named filter for the favorites aggregate view
                 filters: {
@@ -95,11 +101,11 @@
         computed: {
             customFilter() {
                 let _this = this;
-                return {
-                    field: _this.customFilterField,
-                    label: _this.customFilterLabel,
-                    value: _this.customFilterValue
-                }
+                return _this.gravConfig ? {
+                    field: _this.gravConfig.customFilterField,
+                    label: _this.gravConfig.customFilterLabel,
+                    value: _this.gravConfig.customFilterValue
+                } : {};
             },
             // computed prop to show / hide grid list view
             showGrid() {
@@ -206,13 +212,6 @@
                     return accumulator;
                 }, filters);
             },
-            // gets the custom filter attributes from cms defined meta tags
-            getCustomFilterAttributes() {
-                let _this = this;
-                _this.customFilterField = _this.$refs.customFilterField ? _this.$refs.customFilterField.content : null;
-                _this.customFilterValue = _this.$refs.customFilterValue ? _this.$refs.customFilterValue.content : null;
-                _this.customFilterLabel = _this.$refs.customFilterLabel ? _this.$refs.customFilterLabel.content : null;
-            },
             // handle the listViewChange event
             handleListViewChange(type) {
                 let _this = this;
@@ -226,6 +225,5 @@
                 }
             }
         }
-
     }
 </script>

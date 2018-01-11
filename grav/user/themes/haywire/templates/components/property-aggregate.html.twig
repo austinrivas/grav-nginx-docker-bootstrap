@@ -2,11 +2,21 @@
 {% set arcMapTemplate = 'components/arcmap.html.twig' %}
 {% set propertyListGridTemplate = 'components/property-list-grid.html.twig' %}
 {% set propertyListTableTemplate = 'components/property-list-table.html.twig' %}
+{% set gravConfigMetaTemplate = 'partials/grav-config-meta.html.twig' %}
 <div class="property-aggregate-container">
     {% if customFilter %}
-        <meta ref="customFilterField" content="{{ customFilter.field }}" />
-        <meta ref="customFilterValue" content="{{ customFilter.value }}" />
-        <meta ref="customFilterLabel" content="{{ customFilter.label }}" />
+        {% include gravConfigMetaTemplate with {
+            key: "customFilterField",
+            value: customFilter.field
+        } only %}
+        {% include gravConfigMetaTemplate with {
+            key: "customFilterLabel",
+            value: customFilter.label
+        } only %}
+        {% include gravConfigMetaTemplate with {
+            key: "customFilterValue",
+            value: customFilter.value
+        } only %}
     {% endif %}
     <property-filter
         :apply-filter-event="applyFilterEvent"
@@ -25,12 +35,14 @@
         inline-template>
         {% include filterTemplate with {} only %}
     </property-filter>
-    {% if showMap %}
+    {% if arcmap %}
         <arcmap
             :collection="collection"
             :show-tooltip="true"
             inline-template>
-            {% include arcMapTemplate with {} only %}
+            {% include arcMapTemplate with {
+                arcmap: arcmap
+            } only %}
         </arcmap>
     {% endif %}
     <property-list-grid v-if="showGrid"
