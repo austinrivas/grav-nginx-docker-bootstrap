@@ -49,8 +49,7 @@
                     inline-template>
                     {%- include descriptionTemplate with {
                         arcmap: page.header.arcmap,
-                        contactName: page.header.contact.name,
-                        contactPhoneNumber: page.header.contact.phone
+                        contact: page.header.contact
                     } only -%}
                 </property-description>
                 <accordion

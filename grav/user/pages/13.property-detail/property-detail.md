@@ -1,6 +1,5 @@
 ---
 title: 'Property Detail'
-body_classes: property-details-page
 visible: false
 content:
     items: '@self.modular'

@@ -7,7 +7,7 @@
 
 {# Labels #}
 {% set buttonHref      = '/contact-us' %}
-{% set buttonLabel     = 'Get in Touch' %}
+{% set buttonContent     = 'Get in Touch' %}
 
 <section class="property-description">
     <div class="container">
@@ -18,10 +18,14 @@
                     <p>${description}</p>
                     <h2>For More Information</h2>
                     <div class="property-contact-info">
-                        {{ contactName }}
+                        {{ contact.name }}
                         <br>
-                        <a href="tel:{{ contactPhoneNumber }}">{{ contactPhoneNumber }}</a>
-                        {% include buttonTemplate with { content: buttonLabel, class: buttonClass, href: buttonHref } only %}
+                        <a href="tel:{{ contact.phone }}">{{ contact.phone }}</a>
+                        {% include buttonTemplate with {
+                            content: buttonContent,
+                            class: buttonClass,
+                            href: buttonHref
+                        } only %}
                     </div>
                 </div>
                 <div class="column">
