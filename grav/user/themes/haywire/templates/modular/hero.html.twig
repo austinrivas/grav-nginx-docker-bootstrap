@@ -2,7 +2,7 @@
 {% set rowImage = page.media[page.header.hero.backgroundName].url %}
 
 <hero inline-template>
-    <section ref="section" id="page-hero" class="hero lwrc" {% if rowImage %} style="background-size:cover; background-image: url('{{ rowImage }}')" {% endif %}>
+    <section ref="section" id="page-hero" class="hero lwrc{% if page.header.disable_arrow %} disable-arrow{% endif %}" {% if rowImage %} style="background-size:cover; background-image: url('{{ rowImage }}')" {% endif %}>
         <div class="hero-body">
             <div class="container is-fluid">
                 <h1 class="type__hero--headline">
@@ -13,6 +13,8 @@
                 </p>
             </div>
         </div>
-        <div class="scroll-down" @click="scrollDown"></div>
+        {% if not page.header.disable_arrow %} 
+            <div class="scroll-down" @click="scrollDown"></div>
+        {% endif %}
     </section>
 </hero>
