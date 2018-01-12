@@ -1,4 +1,5 @@
 <script>
+    // lodash functions
     import _filter from 'lodash/filter';
     import _includes from 'lodash/includes';
     // map of property fields TODO: ADD TO CMS

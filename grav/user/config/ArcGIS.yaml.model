@@ -1,0 +1,83 @@
+feature-server-url: 'https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0'
+feature-model:
+    acres:
+        field: "Acres"
+        label: "Acres"
+    address:
+        field: "Primary_Ad"
+        label: "Address"
+    association:
+        field: "Associatio"
+        label: "Association"
+    availability:
+        field: "Available_"
+        label: "Availability"
+    blockId:
+        field: "Block_ID__"
+        label: "Block ID"
+    city:
+        field: "City"
+        label: "City"
+    description:
+        field: "Full_Prope"
+        label: "Property Description"
+    exteriorPerimeter:
+        field: "Exterior_P"
+        label: "Exterior Perimeter"
+    featured:
+        field: "Feat_Prop"
+        label: "Featured"
+    id:
+        field: "Property_I"
+        label: "ID"
+    imageUrl:
+        field: "IMAGE_URL"
+        label: "Image"
+    lotId:
+        field: "Lot_ID__Pa"
+        label: "Lot ID"
+    objectId:
+        field: "OBJECTID"
+        label: "Object ID"
+    parkingDescription:
+        field: "Parking__A"
+        label: "Parking Description"
+    pictureOrder:
+        field: "Picture_Or"
+        label: "Picture Order"
+    pricePerAcre:
+        field: "Price_Per1"
+        label: "Price Per Acre"
+    pricePerSqft:
+        field: "Price_Per_"
+        label: "Price Per Sqft"
+    relatedProperties:
+        field: "Related_Pr"
+        label: "Related Properties"
+    shapeArea:
+        field: "SHAPE__Area"
+        label: "Shape Area"
+    shapeLength:
+        field: "SHAPE__Length"
+        label: "Shape Length"
+    status:
+        field: "NOT_IMPLEMENTED_YET"
+        label: "Status"
+    subdivision:
+        field: "Subdivisio"
+        label: "Subdivision"
+    totalPrice:
+        field: "Total_Pric"
+        label: "Total Price"
+    totalSqft:
+        field: "Total_Squa"
+        label: "Total Square Footage"
+    type:
+        field: "Type__Deve"
+        label: "Type"
+    utilities:
+        field: "Utilities_"
+        label: "Utilities Description"
+    zip:
+        field: "Zip"
+        label: "Zip Code"
