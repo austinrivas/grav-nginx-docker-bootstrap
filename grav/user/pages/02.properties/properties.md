@@ -2,8 +2,7 @@
 title: Properties
 filters:
     cta:
-        field: type
-        value: Developable Land
-        label: 'View Developable Land'
+        link: http://lwrwaterside.com/waterside-place/
+        label: 'Waterside Place'
 ---
 
