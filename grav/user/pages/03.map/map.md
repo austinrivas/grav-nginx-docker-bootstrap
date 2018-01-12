@@ -2,9 +2,8 @@
 title: Map
 filters:
     cta:
-        field: type
-        value: Industrial
-        label: 'View Industrial Land'
+        link: http://lwrwaterside.com/waterside-place/
+        label: 'Waterside Place'
 arcmap:
     basemap: hybrid
     center:
