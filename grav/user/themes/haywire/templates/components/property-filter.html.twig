@@ -97,12 +97,21 @@
             } only %}
         </div>
         <div class="column is-3">
-            {% include buttonTemplate with {
-                class: ctaFilterClass,
-                content: ctaFilterComputedContent,
-                vueClick: applyCTAFilter,
-                vueStyle: ctaFilterComputedStyle
-            } only %}
+            {% if filters and filters.cta and filters.cta.link %}
+                {% include buttonTemplate with {
+                    class: ctaFilterClass,
+                    content: ctaFilterComputedContent,
+                    href: filters.cta.link,
+                    target: "_blank"
+                } only %}
+            {% else %}
+                {% include buttonTemplate with {
+                    class: ctaFilterClass,
+                    content: ctaFilterComputedContent,
+                    vueClick: applyCTAFilter,
+                    vueStyle: ctaFilterComputedStyle
+                } only %}
+            {% endif %}
         </div>
         <div class="column is-2">
             <div class="columns is-hidden-touch is-gapless">
