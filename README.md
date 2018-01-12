@@ -28,6 +28,11 @@ filters:
         field: type
         value: Industrial
         label: 'View Industrial Land'
+        
+        or
+        
+        link: http://lwrwaterside.com/waterside-place/
+        label: 'Waterside Place'
 
 ### ArcGIS Map
 arcmap:
