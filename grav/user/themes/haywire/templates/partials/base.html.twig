@@ -17,7 +17,13 @@
         {% endif %}
     {% endfor %}
 
-    <h1>{{ page.config.ArcGIS.arc-gis-feature-server }}</h1>
+    {% set arcGISConfigTemplate = 'partials/arcGISConfig.html.twig' %}
+    {% set arcGISFeatureServerKey = "arc-gis-feature-server" %}
+    {% set arcGISModelKey = "model-properties" %}
+    {% include arcGISConfigTemplate with {
+        featureServer: config.ArcGIS[arcGISFeatureServerKey],
+        modelProperties: config.ArcGIS[arcGISModelKey]
+    } only %}
 
     {# Wrapping our content in #app to allow vue components #}
     <div id="app">

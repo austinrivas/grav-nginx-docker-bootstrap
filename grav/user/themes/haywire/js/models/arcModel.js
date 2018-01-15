@@ -21,7 +21,9 @@ export default class ArcModel {
 
     static getArcGISFeatureServerUrl(selector) {
 
-        selector = selector || 'meta[name="arc-gis-feature-server-url"]';
+        const featureServerMetaName = "arcgis-feature-server-url";
+
+        selector = selector || `meta[name="${featureServerMetaName}"]`;
 
         const element = document.querySelector(selector);
 
