@@ -9,10 +9,15 @@
 </head>
 <body class="{{ page.header.body_classes }}">
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NBNH6NN"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    {% set gtmMetaKey = 'gtm-id' %}
+    {% set gtmNoScriptTemplate = 'partials/gtmNoScript.html.twig' %}
+    {% for meta in page.metadata %}
+         {% if meta.name == gtmMetaKey %}
+             {% include gtmNoScriptTemplate with { id: meta.content } only %}
+        {% endif %}
+    {% endfor %}
+
+    <h1>{{ page.config.ArcGIS.arc-gis-feature-server }}</h1>
 
     {# Wrapping our content in #app to allow vue components #}
     <div id="app">
