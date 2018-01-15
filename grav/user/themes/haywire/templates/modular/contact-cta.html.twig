@@ -10,8 +10,6 @@
             <h2>{{ page.header.title }}</h2>
             {{ content }}
         </div>
-        <div class="secondary">
-            {% include buttonTemplate with { content: page.header.contact.label, class: buttonClass, href: page.header.contact.link } only %}
-        </div>
+        {% include buttonTemplate with { content: page.header.contact.label, class: buttonClass, href: page.header.contact.link } only %}
     </div>
 </section>

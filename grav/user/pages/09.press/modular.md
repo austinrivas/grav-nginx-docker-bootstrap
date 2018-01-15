@@ -2,7 +2,6 @@
 title: Press
 visible: false
 in_footer: false
-
 content:
     items: '@self.modular'
     order:

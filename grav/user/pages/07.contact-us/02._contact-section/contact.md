@@ -99,6 +99,7 @@ form:
         -
             name: news_letter
             type: checkbox
+            default: true
             classes: 'label checkbox is-primary-invert'
             outerclasses: 'is-half column'
             label: 'Yes I''d like to receive updated news and information'
