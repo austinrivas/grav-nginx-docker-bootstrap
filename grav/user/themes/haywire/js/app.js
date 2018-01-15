@@ -4,6 +4,12 @@
 
 import 'babel-polyfill';
 
+// NodeList polyfill for IE, still doing this in 2018
+(function () {
+    if (typeof NodeList.prototype.forEach === "function") { return false; }
+    NodeList.prototype.forEach = Array.prototype.forEach;
+})();
+
 // Resources and Collections
 import ArcModel from './models/arcModel';
 import PropertyCollection from './models/propertyCollection';

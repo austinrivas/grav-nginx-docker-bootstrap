@@ -7,6 +7,10 @@ the ability to version control content/configuration changes.
 
 # CMS Guide
 
+## DO NOT UPDATE THE HAYWIRE THEME, IT WILL OVERWRITE OUR APPLICATION.
+
+TODO: Fork Haywire into a theme that is managed by Push.
+
 TODO: WORK IN PROGRESS
 
 ### Sitewide Configuration
@@ -14,6 +18,7 @@ Admin -> Configuration -> Site
 
 description: Site meta description for search results
 arc-gis-feature-server-url: https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0
+gtm-id: 
 
 ### Modular Pages
 content:
