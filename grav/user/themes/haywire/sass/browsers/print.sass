@@ -1,0 +1,26 @@
+@media print 
+
+	body, html, #app
+		background-color: white;
+		margin: 0;
+		text-transform: initial
+
+	@page { margin: 0; }
+
+	#app
+		nav.navbar,
+		footer.footer,
+		.property-filter,
+		.arc-map-container
+			display: none;
+
+		td 
+			font-size: 12px !important;
+			.favorite-icon-container
+				padding-left: 20px;
+
+	th
+		background-color: white !important
+		border-bottom: 1px solid #f7f7f3 !important
+		&:not(:last-child):not(:first-child)
+			border-right: 1px solid #f7f7f3 !important
