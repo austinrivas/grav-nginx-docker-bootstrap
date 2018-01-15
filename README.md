@@ -7,6 +7,10 @@ the ability to version control content/configuration changes.
 
 # CMS Guide
 
+## DO NOT UPDATE THE HAYWIRE THEME, IT WILL OVERWRITE OUR APPLICATION.
+
+TODO: Fork Haywire into a theme that is managed by Push.
+
 TODO: WORK IN PROGRESS
 
 ### Sitewide Configuration
