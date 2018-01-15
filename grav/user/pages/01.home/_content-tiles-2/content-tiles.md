@@ -8,7 +8,7 @@ buttons:
     -
         label: 'About Lakewood Ranch'
         class: is-primary
-        link: /about-us
+        link: /location/about-us
     -
         label: 'Surrounding area'
         class: is-primary
