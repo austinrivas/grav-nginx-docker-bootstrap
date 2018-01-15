@@ -3,7 +3,7 @@ title: Villages
 callouts:
     -
         title: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Corporate Park</a>'
-        description: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Located in the Sarasota section of Lakewood Ranch, Corporate Park is part of a mixed-use residential, commercial and industrial real estate development</a>'
+        description: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Located in the Sarasota section of Lakewood Ranch, Corporate Park is part of a mixed-use residential, commercial and industrial real estate development. <b>Click for more info.</b></a>'
     -
         title: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Business Park</a>'
         description: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Business Park is located near I-75 and State Road 64. It provides for a mix of retail, office and industrial uses.</a>'

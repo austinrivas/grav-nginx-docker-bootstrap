@@ -1,5 +1,5 @@
 ---
-title: 'Contact Us'
+title: 'Get In Touch'
 contact:
     label: contact
     link: /contact-us
