@@ -13,17 +13,20 @@
     <div class="container is-fluid">
         <div class="content has-text-centered">
             <p>{% include iconTemplate with { iconId: iconLogoId } only %}</p>
-            <h3>Sign Up Get Updates</h3>
+            <h3>Sign Up For Updates</h3>
             <p class="type__footer-signup--content">Enter your email address for updates and the latest news from Lakewood Ranch Commercial</p>
             <newsletter-signup inline-template>
                 {% include formTemplate only %}
             </newsletter-signup>
             <ul>
-                <li><a href="/press">Press</a></li>
-                <li class="div"></li>
+                {% set pressPage = page.find('/press') %}
+                {% if pressPage.header.in_footer %}
+                    <li><a href="/press">Press</a></li>
+                    <li class="div"></li>
+                {% endif %}
                 <li><a href="/privacy-policy">Privacy Policy</a></li>
-                <li class="div"></li>
-                <li><a href="/terms-of-service">Terms of Service</a></li>
+                <!-- <li class="div"></li>
+                <li><a href="/terms-of-service">Terms of Service</a></li> -->
             </ul>
             <p class="is-size-12">
                 &copy; {{ "now"|date('Y') }} Lakewood Ranch Commercial

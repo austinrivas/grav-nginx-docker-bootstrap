@@ -1,5 +1,7 @@
 ---
 title: Press
+visible: false
+in_footer: false
 content:
     items: '@self.modular'
     order:
@@ -7,7 +9,6 @@ content:
         dir: asc
     limit: 5
     pagination: true
-visible: false
 modules:
     items: '@self.modular'
     order:

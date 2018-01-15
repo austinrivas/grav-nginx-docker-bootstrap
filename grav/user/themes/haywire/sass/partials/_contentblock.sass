@@ -28,7 +28,7 @@
         flex-direction: column
         color: $white
         padding: 20px 5%
-        min-height: 600px
+        // min-height: 600px
         @include break-max($widescreen)
             padding: 2em 0
         @include break-max($tablet)
@@ -52,14 +52,20 @@
             width: 100%
             flex-basis: 50px
             max-width: 650px
-            margin: 25px auto
+            margin: 0 auto 25px
             text-align: center
+        p 
+            margin: 0 !important;
         &.is-bg-primary
             h2
                 @extend .is-blue-tiffany
         &.is-bg-primary-invert
             h2
                 @extend .is-blue-dark
+
+        @include break-max($desktop)
+            p
+                font-size: 0.95em !important;
 .content-blocks.content-blocks-bottom
     margin-top: 0
     &.is-tile-gold
