@@ -55,6 +55,7 @@ export default class PropertyModel {
         let _this = this;
         return Object.keys(PROPERTY_FIELDS).reduce((accumulator, key) => {
             accumulator[key] = _this[key];
+            return accumulator;
         }, {});
     }
 }
