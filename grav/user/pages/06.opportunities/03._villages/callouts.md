@@ -11,13 +11,13 @@ callouts:
         title: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Commerce Park</a>'
         description: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Commerce Park is located near State Road 64 off of Lakewood Ranch Blvd. It has a mix of office, commercial and industrial spaces. <b>Click for more info.</b> </a>'
     -
-        title: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">White Eagle Blvd</a>'
+        title: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">White Eagle/SR70</a>'
         description: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">A corner lot located at State Road 70 and White Eagle Blvd. <b>Click for more info.</b></a>'
     -
         title: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Portal Crossing</a>'
         description: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Located at the corner of Portal Crossing and SR 64, this property includes three lots from 1.45 - 2.11 acres. <b>Click for more info.</b></a>'
     -
-        title: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Technology Terrace</a>'
-        description: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">This business park has sites from 1.2 acres to 4.2 acres designed for small retail commercial, warehouse use, professional services or light manufacturing. <b>Click for more info.</b></a>'
+        title: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Main Street</a>'
+        description: '<a href="/map?filter=subdivision&filterValue=LAKEWOOD%20RANCH%20BUSINESS%20PARK%20PHI%20PB50/98">Main Street offers shops and restaurants in an ideal “downtown” environment in the heart of Lakewood Ranch. Office suites are available on the second floor of buildings lining the plaza. <b>Click for more info.</b></a>'
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: 'Regional Info Hero'
+media_order: 'reigonalinfo3.png,reigonal.jpg'
 hero:
     headline: 'Regional Information'
-    backgroundName: reigonalinfo2.jpg
+    backgroundName: beach2.jpg
 ---
 

@@ -12,7 +12,7 @@ buttons:
     -
         label: 'Surrounding area'
         class: is-primary
-        link: /map/
+        link: /location/regional-information
 ---
 
 Learn more about our award-winning community and why it’s the perfect place for your business to call home.

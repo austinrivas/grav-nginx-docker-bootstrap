@@ -2,6 +2,6 @@
 title: 'Opportunities Hero'
 hero:
     headline: 'Opportunities for business'
-    backgroundName: watersidereal.jpg
+    backgroundName: watersidereal2.jpg
 ---
 

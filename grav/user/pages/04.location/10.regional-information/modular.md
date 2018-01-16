@@ -15,6 +15,6 @@ content:
             - _featured-projects
             - _contact-cta
 body_classes: regional-information-page
-backgroundName: downtown.jpg
+backgroundName: reigonal.jpg
 ---
 
