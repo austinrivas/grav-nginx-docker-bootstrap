@@ -1,0 +1,164 @@
+arc-gis-feature-server: 'https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0'
+model-properties:
+  -
+    label: Acres
+    key: acres
+    arc-key: Acres
+    field-type: range
+    filterable: true
+  -
+    label: Address
+    key: address
+    arc-key: Primary_Ad
+    field-type: text
+    filterable: false
+  -
+    label: Association
+    key: association
+    arc-key: Associatio
+    field-type: text
+    filterable: false
+  -
+    label: Availability
+    key: availability
+    arc-key: Available_
+    field-type: text
+    filterable: false
+  -
+    label: 'Block ID'
+    key: blockId
+    arc-key: Block_ID__
+    field-type: text
+    filterable: false
+  -
+    label: City
+    key: city
+    arc-key: City
+    field-type: text
+    filterable: false
+  -
+    label: Description
+    key: description
+    arc-key: Full_Prope
+    field-type: text
+    filterable: false
+  -
+    label: 'Exterior Perimeter'
+    key: exteriorPerimeter
+    arc-key: Exterior_P
+    field-type: text
+    filterable: false
+  -
+    label: 'Featured Property'
+    key: featured
+    arc-key: Feat_Prop
+    field-type: text
+    filterable: false
+  -
+    label: ID
+    key: id
+    arc-key: Property_I
+    field-type: text
+    filterable: false
+  -
+    label: 'Image URL'
+    key: imageUrl
+    arc-key: IMAGE_URL
+    field-type: text
+    filterable: false
+  -
+    label: 'Lot ID'
+    key: lotId
+    arc-key: Lot_ID__Pa
+    field-type: text
+    filterable: false
+  -
+    label: 'Object ID'
+    key: objectId
+    arc-key: OBJECTID
+    field-type: text
+    filterable: false
+  -
+    label: 'Parking Description'
+    key: parkingDescription
+    arc-key: Parking__A
+    field-type: text
+    filterable: false
+  -
+    label: 'Picture Order'
+    key: pictureOrder
+    arc-key: Picture_Or
+    field-type: text
+    filterable: false
+  -
+    label: 'Price Per Acre'
+    key: pricePerAcre
+    arc-key: Price_Per1
+    field-type: text
+    filterable: false
+  -
+    label: 'Price Per SqFt'
+    key: pricePerSqft
+    arc-key: Price_Per_
+    field-type: text
+    filterable: false
+  -
+    label: 'Related Properties'
+    key: relatedProperties
+    arc-key: Related_Pr
+    field-type: text
+    filterable: false
+  -
+    label: 'Shape Area'
+    key: shapeArea
+    arc-key: SHAPE__Area
+    field-type: text
+    filterable: false
+  -
+    label: 'Shape Length'
+    key: shapeLength
+    arc-key: SHAPE__Length
+    field-type: text
+    filterable: false
+  -
+    label: Status
+    key: status
+    arc-key: NOT_IMPLEMENTED_YET
+    field-type: enumerable
+    filterable: true
+  -
+    label: Subdivision
+    key: subdivision
+    arc-key: Subdivisio
+    field-type: enumerable
+    filterable: true
+  -
+    label: 'Total Price'
+    key: totalPrice
+    arc-key: Total_Pric
+    field-type: text
+    filterable: false
+  -
+    label: 'Total SqFt'
+    key: totalSqft
+    arc-key: Total_Squa
+    field-type: text
+    filterable: false
+  -
+    label: Type
+    key: type
+    arc-key: Type__Deve
+    field-type: enumerable
+    filterable: true
+  -
+    label: Utilities
+    key: utilities
+    arc-key: Utilities_
+    field-type: text
+    filterable: false
+  -
+    label: 'Zip Code'
+    key: zip
+    arc-key: Zip
+    field-type: text
+    filterable: false

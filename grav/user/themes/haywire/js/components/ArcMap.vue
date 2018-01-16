@@ -7,7 +7,7 @@
     // the vue mixin to fetch grav config from meta attributes
     import GravConfigMixin from './mixins/GravConfig.vue';
     // the property field definitions for the arcgis feature layer
-    import PROPERTY_FIELDS from '../models/propertyFields';
+    import { PROPERTY_FIELDS } from "../models/propertyModelJSON";
     // the model definition for a arc gis property feature
     import PropertyModel from '../models/propertyModel';
 

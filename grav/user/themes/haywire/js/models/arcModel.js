@@ -1,5 +1,5 @@
 import * as esriLoader from 'esri-loader';
-import PROPERTY_FIELDS from "./propertyFields";
+import { PROPERTY_FIELDS } from "./propertyModelJSON";
 import PropertyModel from "./propertyModel";
 
 // ArcModel is a resource model that is responsible for constructing ArcGIS queries and retrieving remote data from a feature server
@@ -21,7 +21,9 @@ export default class ArcModel {
 
     static getArcGISFeatureServerUrl(selector) {
 
-        selector = selector || 'meta[name="arc-gis-feature-server-url"]';
+        const featureServerMetaName = "arcgis-feature-server-url";
+
+        selector = selector || `meta[name="${featureServerMetaName}"]`;
 
         const element = document.querySelector(selector);
 

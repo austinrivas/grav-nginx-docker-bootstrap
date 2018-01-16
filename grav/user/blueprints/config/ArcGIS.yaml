@@ -1,0 +1,48 @@
+title: ArcGIS Configuration
+form:
+    validation: strict
+    fields:
+        section1:
+            type: section
+            title: 'ArcGIS Configuration'
+            underline: true
+        arc-gis-feature-server:
+            type: text
+            label: 'Feature Server Url'
+            size: long
+            placeholder: 'https://services2.arcgis.com/<server-version-id>/arcgis/rest/services/<server-name>/FeatureServer/0'
+        section2:
+            type: section
+            title: 'Property Model'
+            underline: true
+        model-properties:
+            name: model
+            type: list
+            style: vertical
+            fields:
+                .label:
+                    type: text
+                    label: UI Label
+                .key:
+                    type: text
+                    label: Model Key
+                .arc-key:
+                    type: text
+                    label: ArcGIS Field
+                .field-type:
+                    type: select
+                    label: Field Type
+                    options:
+                        enumerable: Enumerable
+                        range: Range
+                        text: Text
+                .filterable:
+                    type: toggle
+                    label: Filterable Property
+                    highlight: 1
+                    default: 0
+                    options:
+                        1: 'Yes'
+                        0: 'No'
+                    validate:
+                        type: bool
