@@ -1,5 +1,7 @@
 const modelPropertiesId = "arcgis-model-properties",
-    modelJSON = JSON.parse(document.getElementById(modelPropertiesId).innerHTML);
+    modelJSON = JSON.parse(document.getElementById(modelPropertiesId).innerHTML),
+    arcKey = 'arc-key',
+    labelKey = 'label';
 
 function parseModelJSON(jsonArray, field) {
     return jsonArray.reduce((accumulator, property) => {
@@ -8,6 +10,6 @@ function parseModelJSON(jsonArray, field) {
     }, {});
 }
 
-export const PROPERTY_FIELDS = parseModelJSON(modelJSON, 'ark-key');
+export const PROPERTY_FIELDS = parseModelJSON(modelJSON, arcKey);
 
-export const PROPERTY_LABELS = parseModelJSON(modelJSON, 'label');
+export const PROPERTY_LABELS = parseModelJSON(modelJSON, labelKey);
