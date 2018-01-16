@@ -2,8 +2,7 @@
     // creates an object composed of picked object properties
     import _pick from 'lodash/pick';
     // property field definitions TODO: MOVE INTO CMS
-    import PROPERTY_FIELDS from '../models/propertyFields';
-    import PROPERTY_LABELS from '../models/propertyLabels';
+    import { PROPERTY_FIELDS, PROPERTY_LABELS } from "../models/propertyModelJSON";
     import GravConfigMixin from './mixins/GravConfig.vue';
 
     // This is a parent component that is responsible for maintaining the state of the map aggregate page

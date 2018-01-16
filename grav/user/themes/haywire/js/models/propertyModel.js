@@ -1,4 +1,4 @@
-import PROPERTY_FIELDS from "./propertyFields";
+import { PROPERTY_FIELDS } from "./propertyModelJSON";
 
 // PropertyModel is a simple data container class that maps ArcGIS feature field names to usable names
 export default class PropertyModel {

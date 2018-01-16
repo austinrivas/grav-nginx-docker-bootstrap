@@ -2,10 +2,7 @@
     // lodash functions
     import _filter from 'lodash/filter';
     import _includes from 'lodash/includes';
-    // map of property fields TODO: ADD TO CMS
-    import PROPERTY_FIELDS from '../models/propertyFields';
-    // map of property labels TODO: ADD TO CMS
-    import PROPERTY_LABELS from '../models/propertyLabels';
+    import { PROPERTY_FIELDS, PROPERTY_LABELS } from "../models/propertyModelJSON";
     // mixin that fetches data from meta attributes provided by grav cms
     import GravConfigMixin from './mixins/GravConfig.vue';
 

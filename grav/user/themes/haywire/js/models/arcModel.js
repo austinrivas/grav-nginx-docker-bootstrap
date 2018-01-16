@@ -1,5 +1,5 @@
 import * as esriLoader from 'esri-loader';
-import PROPERTY_FIELDS from "./propertyFields";
+import { PROPERTY_FIELDS } from "./propertyModelJSON";
 import PropertyModel from "./propertyModel";
 
 // ArcModel is a resource model that is responsible for constructing ArcGIS queries and retrieving remote data from a feature server
