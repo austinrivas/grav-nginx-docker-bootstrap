@@ -1,5 +1,5 @@
 <script>
-    import { ENUMERABLE_TYPE, PROPERTY_FIELDS, PROPERTY_FILTERS, RANGE_TYPE } from "../models/propertyModelJSON";
+    import { ENUMERABLE_TYPE, PROPERTY_FIELDS, PROPERTY_FILTERS, PROPERTY_FILTERABLE_FIELDS, RANGE_TYPE } from "../models/propertyModelJSON";
     import GravConfigMixin from './mixins/GravConfig.vue';
 
     // This is a parent component that is responsible for maintaining the state of the map aggregate page
@@ -58,6 +58,7 @@
                 collection: null, // initial collection state
                 enumerableType: ENUMERABLE_TYPE, // the named type for enumerable filters
                 favoritesFilter: 'favorites', // the named filter for the favorites aggregate view
+                fields: PROPERTY_FILTERABLE_FIELDS,
                 filters: PROPERTY_FILTERS,
                 filterValue: null, // the sanitized filter value
                 gridItemsInRow: 3, // default row length for grid list view

@@ -10,15 +10,16 @@ const modelPropertiesId = "arcgis-model-properties",
     arcKey = 'arc-key',
     filterableKey = 'filterable',
     labelKey = 'label',
+    modelKey = 'key',
     typeKey = 'field-type';
 
-function createFilterMap(jsonArray, types) {
+function createFilterMap(jsonArray, key, types) {
     return _filter(jsonArray, (field) => {
         return !!field[filterableKey] && _indexOf(types, field[typeKey]) !== -1;
     }).reduce((accumulator, field) => {
-        accumulator[field.key] = {
+        accumulator[field[key]] = {
             field: field[arcKey],
-            filter: field.key,
+            filter: field[modelKey],
             label: field[labelKey],
             type: field[typeKey]
         };
@@ -38,4 +39,6 @@ export const PROPERTY_FIELDS = parseModelJSON(modelJSON, arcKey);
 
 export const PROPERTY_LABELS = parseModelJSON(modelJSON, labelKey);
 
-export const PROPERTY_FILTERS = createFilterMap(modelJSON, [ENUMERABLE_TYPE, RANGE_TYPE]);
+export const PROPERTY_FILTERS = createFilterMap(modelJSON, modelKey, [ENUMERABLE_TYPE, RANGE_TYPE]);
+
+export const PROPERTY_FILTERABLE_FIELDS = createFilterMap(modelJSON, arcKey, [ENUMERABLE_TYPE, RANGE_TYPE]);

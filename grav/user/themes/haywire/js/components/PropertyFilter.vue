@@ -12,6 +12,7 @@
             'enumerableType', // named type for enumerable filters
             'eventBus', // shared eventBus
             'favoritesFilter', // the named filter for showing favorite properties
+            'fields', // map of filterable arc fields to their model properties
             'filter', // name of the selected filter
             'filters', // list of filterable keys on the PropertyModel
             'filterValue', // the value for the selectedFilter
@@ -37,8 +38,6 @@
         async mounted() {
             let _this = this;
             _this.gravConfig = await _this.getGravConfig(_this.gravConfig);
-            // get the arc field names based on the filterable keys
-            _this.fields = await _this.getFilterFields(_this.filters);
             // get the labels for the top level filters to be displayed as select options
             _this.filterOptions = await _this.getFilterOptions(_this.filters);
             // if there is a selected filter field and its value is not the unselected option
@@ -54,7 +53,6 @@
                     text: "Select a Filter",
                     value: defaultUnselectedValue
                 }, // the default option for a filter that has no selected option
-                fields: {},
                 filterChangeEvent: 'filterChanged', // named event for a top level filter change
                 filterValueChangeEvent: 'filterValueChanged', // named event for the value of a filter changing
                 filterOptions: [], // initial filter options
@@ -192,19 +190,6 @@
                 } else {
                     return [];
                 }
-            },
-            // create a map of arc fields to filters
-            async getFilterFields(filters) {
-                // if keys reduce the array to an array of arc keys
-                return filters ? await Object.keys(filters).reduce((accumulator, key) => {
-                    let filter = filters[key];
-                    accumulator[filter.field] = {
-                        filter: key,
-                        label: filter.label,
-                        type: filter.type
-                    };
-                    return accumulator;
-                }, {}) : {};
             },
             // get the filter options for an array of arc fields
             async getFilterOptions(filters) {
