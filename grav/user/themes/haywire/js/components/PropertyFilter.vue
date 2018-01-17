@@ -1,10 +1,6 @@
 <script>
+    // lodash functions
     import _filter from 'lodash/filter';
-    import _includes from 'lodash/includes';
-    // map of property fields TODO: ADD TO CMS
-    import PROPERTY_FIELDS from '../models/propertyFields';
-    // map of property labels TODO: ADD TO CMS
-    import PROPERTY_LABELS from '../models/propertyLabels';
     // mixin that fetches data from meta attributes provided by grav cms
     import GravConfigMixin from './mixins/GravConfig.vue';
 
@@ -58,7 +54,6 @@
                     text: "Select a Filter",
                     value: defaultUnselectedValue
                 }, // the default option for a filter that has no selected option
-                enumerableFilterFields: [], // initial enumerable filterable fields
                 fields: {},
                 filterChangeEvent: 'filterChanged', // named event for a top level filter change
                 filterValueChangeEvent: 'filterValueChanged', // named event for the value of a filter changing
@@ -68,7 +63,6 @@
                     ctaFilterLabel: null,
                     ctaFilterValue: null
                 },
-                rangeFilterFields: [], // initial range filterable fields
                 rangeSliderId: 'range-slider-dom-target',
                 rangeSliderChangeEvent: 'rangeSliderChanged', // named event for range slider change
                 rangeSliderValues: null, // initial range slider value

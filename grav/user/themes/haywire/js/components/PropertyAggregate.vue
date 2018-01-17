@@ -1,9 +1,5 @@
 <script>
-    // creates an object composed of picked object properties
-    import _pick from 'lodash/pick';
-    // property field definitions TODO: MOVE INTO CMS
-    import PROPERTY_FIELDS from '../models/propertyFields';
-    import PROPERTY_LABELS from '../models/propertyLabels';
+    import { ENUMERABLE_TYPE, PROPERTY_FIELDS, PROPERTY_FILTERS, RANGE_TYPE } from "../models/propertyModelJSON";
     import GravConfigMixin from './mixins/GravConfig.vue';
 
     // This is a parent component that is responsible for maintaining the state of the map aggregate page
@@ -27,9 +23,6 @@
                 _this.eventBus.$on(_this.listViewChangeEvent, _this.handleListViewChange);
                 _this.eventBus.$on(_this.applyFilterEvent, _this.handleApplyFilter);
             }
-
-            // create a filters map of only the filterable fields
-            _this.filters = _this.createFilterMap(PROPERTY_FIELDS, PROPERTY_LABELS, _this.filters)
         },
 
         // runs when component is attached to DOM
@@ -59,33 +52,18 @@
             // names for the grid and table views
             // these names are used by child components to trigger list view changes
             let gridView = 'grid',
-                tableView = 'table',
-                enumerableType = 'enumerable',
-                rangeType = 'range';
+                tableView = 'table';
             return {
                 applyFilterEvent: 'applyFilter', // named event for triggering query execution from child components
                 collection: null, // initial collection state
-                enumerableType: enumerableType, // the named type for enumerable filters
+                enumerableType: ENUMERABLE_TYPE, // the named type for enumerable filters
                 favoritesFilter: 'favorites', // the named filter for the favorites aggregate view
-                filters: {
-                    acres: {
-                        type: rangeType
-                    },
-                    type: {
-                        type: enumerableType
-                    },
-                    status: {
-                        type: enumerableType
-                    },
-                    subdivision: {
-                        type: enumerableType
-                    }
-                },
+                filters: PROPERTY_FILTERS,
                 filterValue: null, // the sanitized filter value
                 gridItemsInRow: 3, // default row length for grid list view
                 gridView: gridView, // named grid list view
                 listViewChangeEvent: 'listViewChange', // named event for triggering list view change
-                rangeType: rangeType, // the named type for range filters
+                rangeType: RANGE_TYPE, // the named type for range filters
                 selectedListView: gridView, // the selected list view for results
                 tableView: tableView // named table list view
             }
@@ -183,19 +161,6 @@
                 let _this = this;
                 // set the collection property to the result of executing the query
                 _this.collection = await _this.executeQuery(query);
-            },
-            // creates a map of filterable fields and their labels
-            createFilterMap(fields, labels, filters) {
-                let keys = Object.keys(_pick(fields, Object.keys(filters)));
-                return keys.reduce((accumulator, key) => {
-                    if (!accumulator[key].field && fields[key]) {
-                        accumulator[key].field = fields[key];
-                    }
-                    if (!accumulator[key].label && labels[key]) {
-                        accumulator[key].label = labels[key];
-                    }
-                    return accumulator;
-                }, filters);
             },
             // handle the listViewChange event
             handleListViewChange(type) {
