@@ -1,4 +1,5 @@
 <script>
+    import { PROPERTY_LABELS } from '../models/propertyModelJSON'
     import PropertyModel from '../models/propertyModel'
     import LoadingState from '../components/mixins/LoadingState'
 
@@ -20,6 +21,11 @@
               property: false,
               notFound: false,
               notFoundClass: 'not-found',
+              tabProperties: [
+                  'associationDescription',
+                  'parkingDescription',
+                  'utilitiesDescription'
+              ]
           }
         },
 
@@ -109,19 +115,28 @@
                 return models;
             },
             propertyTabs() {
-                return [
-                    {
-                        label: 'Test',
-                        content: 'This accordion needs content.'
-                    },{
-                        label: 'Test2',
-                        content: 'This accordion needs content also.'
+                let _this = this;
+                return _this.tabProperties.reduce((accumulator, modelProperty) => {
+                    let label = PROPERTY_LABELS[modelProperty],
+                        tabContent = _this.property[modelProperty];
+                    if (label && tabContent && tabContent.length > 1) {
+                        accumulator.push(_this.createTab(label, tabContent))
                     }
-                ]
+                    return accumulator;
+                }, []);
             },
             propertyUses() {
                 let _this = this;
                 return _this.property && _this.property.type ? _this.property.type : "Unknown";
+            }
+        },
+
+        methods: {
+            createTab(label, content) {
+                return {
+                    label: label,
+                    content: content
+                }
             }
         }
     }

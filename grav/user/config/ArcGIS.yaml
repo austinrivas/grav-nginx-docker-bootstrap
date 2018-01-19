@@ -14,7 +14,7 @@ model-properties:
     filterable: false
   -
     label: Association
-    key: association
+    key: associationDescription
     arc-key: Associatio
     field-type: text
     filterable: false
@@ -152,7 +152,7 @@ model-properties:
     filterable: true
   -
     label: Utilities
-    key: utilities
+    key: utilitiesDescription
     arc-key: Utilities_
     field-type: text
     filterable: false
