@@ -161,10 +161,9 @@ Its key features are :
     - `bootstrap.js` is a secondary loader file that is responsible for loading vendor libraries that operate outside the scope of the main VueJS application, an example of this is the `object-fit` polyfill.
 - components
     - The components directory contains the definitions for the VueJS components that compose the application
-        - mixins - The mixins directory warehouses VueJS mixins that apply shared functionality to Vue Components
+        - `mixins` - The mixins directory warehouses VueJS mixins that apply shared functionality to Vue Components
         - Noteworthy Components
-            - `PageState.vue`
-                - `PageState.vue` acts as the "router" for the application. In reality all it does is parse the url state and supply it as parts and parameters to child components, most notably the `PropertyAggregate.vue`. `PageState.vue` is also the handler for `updateQueryParam` events emitted by the `EventBus`.
+            - `PageState.vue` acts as the "router" for the application. In reality all it does is parse the url state and supply it as parts and parameters to child components, most notably the `PropertyAggregate.vue`. `PageState.vue` is also the handler for `updateQueryParam` events emitted by the `EventBus`.
                 - `PropertyAggregate.vue` handles the logic of taking url param supplied by page state and executing queries against the ArcGIS api to populate collections. The resulting collection is then passed to child components along with the filter state.
                 - `PropertyFilter.vue` is the "query builder" of the application and is responsible for both displaying the current filter state and emitting change events to update the collection state and url params based on new query values.
                 - `ArcMap.vue` is the view layer for the ArcGIS map component. It is responsible for fetching the required ArcGIS modules using the proprietary Arc loader and then rendering the current state of the map depending on the state of the collection parameter.
