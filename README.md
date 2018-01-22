@@ -157,9 +157,9 @@ Its key features are :
 
 - `app.js`
     - `app.js` is the entry point for the application. It is where browser polyfills are loaded, property collections are initialized and attached to the global scope, VueJS is initialized, Vue components are imported, and VueJS is configured.
-- bootstrap.js
+- `bootstrap.js`
     - `bootstrap.js` is a secondary loader file that is responsible for loading vendor libraries that operate outside the scope of the main VueJS application, an example of this is the `object-fit` polyfill.
-- components
+- `components`
     - The components directory contains the definitions for the VueJS components that compose the application
         - `mixins` - The mixins directory warehouses VueJS mixins that apply shared functionality to Vue Components
         - Noteworthy Components
@@ -171,13 +171,13 @@ Its key features are :
                 - `PropertyTile.vue` is the tile representation of a property model. It implements the `FavoriteIcon` component and links to the `PropertyDetail` component page.
                 - `PropertyDetail.vue` is a page level component that consumes a the output of `PageState` and renders the details for a given property model based on the url state.
                 - `FavoriteIcon.vue` is responsible for displaying the favorite status of a given property model and providing the ui for saving a model to local storage as a favorite.
-- event-handlers
+- `event-handlers`
     - `event-bus.js` defines the primary Event Bus for dispatching events throughout the VueJS application. The same `EventBus` is passed as a parameter to child components in order to tightly scope events.
     - `image-loader.js` defines the default behaviour for all `img` tags on the site and sets up the event handlers for animating images into the dom after load.
-- filters
+- `filters`
     - `vue-currency-filter.js` defines the text filter for displaying currency values in the ui.
-- models
-    - The models directory is the storage location for all classes that act as the application data layer.
+- `models`
+    - The `models` directory is the storage location for all classes that act as the application data layer.
         - `arcModel.js` initializes the ArcGIS query layer and is the root of all external api interactions with ArcGIS.
         - `collection.js` is an abstract class that acts as a parent for all other collections in the application.
             - `localStorageCollection.js` is an abstract class that implements the localStorage layer used by the favorites feature.
@@ -185,16 +185,16 @@ Its key features are :
             - `propertyCollection.js` defines the api surface for querying properties directly, this is the intended interface for all Property actions and queries.
         - `propertyModelJSON.js` is a set of helper methods that build the `PropertyModel` definition from the [ArcGIS](grav/user/config/ArcGIS.yaml) cms configuration.
         - `proeprtyModel.js` is dynamic class that is built at runtime from the [ArcGIS](grav/user/config/ArcGIS.yaml) cms configuration. `PropertyModel` is the type of all elements of collections in the application.
-- vendor
+- `vendor`
     - The default storage location for 3rd party libraries such as `noUISlider` and `nProgress`.
 
 ### SASS Structure / Style Guide
 
-- app.sass
-- browswers
-- common
-- components
-- partials
+- `app.sass` - The entry point for sass compilation. Imports bulma modules and application specific styles.
+- `browsers` - Storage location for browser specific stylesheets.
+- `common` - Storage location for all common styles such as typography, buttons, fonts, icons, inputs, etc.
+- `components` - Storage location for all VueJS component specific styles.
+- `partials` - Storage location for all layout and non functional styles related to markup.
 
 ### Twig Templates
 
