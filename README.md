@@ -153,14 +153,41 @@ Its key features are :
 
 - VueJS Framework | [Github](https://github.com/vuejs/vue) | [Docs](https://vuejs.org/v2/guide/)
 
-### Vue Application
+### VueJS Application | [Source](grav/user/themes/haywire/js)
 
-- app.js
+- `app.js`
+    - `app.js` is the entry point for the application. It is where browser polyfills are loaded, property collections are initialized and attached to the global scope, VueJS is initialized, Vue components are imported, and VueJS is configured.
 - bootstrap.js
+    - `bootstrap.js` is a secondary loader file that is responsible for loading vendor libraries that operate outside the scope of the main VueJS application, an example of this is the `object-fit` polyfill.
 - components
+    - The components directory contains the definitions for the VueJS components that compose the application
+        - mixins - The mixins directory warehouses VueJS mixins that apply shared functionality to Vue Components
+        - Noteworthy Components
+            - `PageState.vue`
+                - `PageState.vue` acts as the "router" for the application. In reality all it does is parse the url state and supply it as parts and parameters to child components, most notably the `PropertyAggregate.vue`. `PageState.vue` is also the handler for `updateQueryParam` events emitted by the `EventBus`.
+                - `PropertyAggregate.vue` handles the logic of taking url param supplied by page state and executing queries against the ArcGIS api to populate collections. The resulting collection is then passed to child components along with the filter state.
+                - `PropertyFilter.vue` is the "query builder" of the application and is responsible for both displaying the current filter state and emitting change events to update the collection state and url params based on new query values.
+                - `ArcMap.vue` is the view layer for the ArcGIS map component. It is responsible for fetching the required ArcGIS modules using the proprietary Arc loader and then rendering the current state of the map depending on the state of the collection parameter.
+                - `PropertyListGrid.vue / PropertyListTable.vue` components renders the state of the paginated collection in list form.
+                - `PropertyTile.vue` is the tile representation of a property model. It implements the `FavoriteIcon` component and links to the `PropertyDetail` component page.
+                - `PropertyDetail.vue` is a page level component that consumes a the output of `PageState` and renders the details for a given property model based on the url state.
+                - `FavoriteIcon.vue` is responsible for displaying the favorite status of a given property model and providing the ui for saving a model to local storage as a favorite.
 - event-handlers
+    - `event-bus.js` defines the primary Event Bus for dispatching events throughout the VueJS application. The same `EventBus` is passed as a parameter to child components in order to tightly scope events.
+    - `image-loader.js` defines the default behaviour for all `img` tags on the site and sets up the event handlers for animating images into the dom after load.
 - filters
+    - `vue-currency-filter.js` defines the text filter for displaying currency values in the ui.
+- models
+    - The models directory is the storage location for all classes that act as the application data layer.
+        - `arcModel.js` initializes the ArcGIS query layer and is the root of all external api interactions with ArcGIS.
+        - `collection.js` is an abstract class that acts as a parent for all other collections in the application.
+            - `localStorageCollection.js` is an abstract class that implements the localStorage layer used by the favorites feature.
+                - `favoritePropertiesCollection.js` defines the behaviour for the favorites feature and provides the query methods for retrieving favorite properties.
+            - `propertyCollection.js` defines the api surface for querying properties directly, this is the intended interface for all Property actions and queries.
+        - `propertyModelJSON.js` is a set of helper methods that build the `PropertyModel` definition from the [ArcGIS](grav/user/config/ArcGIS.yaml) cms configuration.
+        - `proeprtyModel.js` is dynamic class that is built at runtime from the [ArcGIS](grav/user/config/ArcGIS.yaml) cms configuration. `PropertyModel` is the type of all elements of collections in the application.
 - vendor
+    - The default storage location for 3rd party libraries such as `noUISlider` and `nProgress`.
 
 ### SASS Structure / Style Guide
 
