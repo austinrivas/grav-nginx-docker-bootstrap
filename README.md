@@ -188,7 +188,9 @@ Its key features are :
 - `vendor`
     - The default storage location for 3rd party libraries such as `noUISlider` and `nProgress`.
 
-### SASS Structure / Style Guide
+### SASS Structure / Style Guide | [Source](grav/user/themes/haywire/sass)
+
+There is a style guide defined in the [`styles.html.twig`](grav/user/themes/haywire/templates/styles.html.twig) that can be enabled via the cms for reference.
 
 - `app.sass` - The entry point for sass compilation. Imports bulma modules and application specific styles.
 - `browsers` - Storage location for browser specific stylesheets.
@@ -196,16 +198,13 @@ Its key features are :
 - `components` - Storage location for all VueJS component specific styles.
 - `partials` - Storage location for all layout and non functional styles related to markup.
 
-### Twig Templates
+### Twig Templates | [Source](grav/user/themes/haywire/templates)
 
-- page templates
-- components
-- forms
-- modular
-- partials
--- elements
--- forms
--- style-guide
+- page templates - The root level of the `templates` directory is reserved for page level templates only.
+- `components` - VueJS components use twig templates to render their html contents into the initial markup, those templates are named after their components on a 1-1 basis.
+- `forms` - The `forms` directory contains the twig templates responsible for rendering all html forms and their input elements into the dom.
+- `modular` -  The `modular` directory contains the templates for [Grav Modular Pages](https://learn.getgrav.org/content/modular).
+- `partials` - The partials directory contains the twig templates for all non VueJS markup elements.
 
 # Grav | [README](grav/README.md) | [DOCS](https://learn.getgrav.org/)
 
