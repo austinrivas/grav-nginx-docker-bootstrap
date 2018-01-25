@@ -9,44 +9,57 @@ the ability to version control content/configuration changes.
 
 ## DO NOT UPDATE THE HAYWIRE THEME, IT WILL OVERWRITE OUR APPLICATION.
 
-TODO: Fork Haywire into a theme that is managed by Push.
-
-TODO: WORK IN PROGRESS
+TODO: Fork Haywire into a theme that is managed by Push. 
 
 ### Sitewide Configuration
 Admin -> Configuration -> Site
 
-description: Site meta description for search results
-arc-gis-feature-server-url: https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0
-gtm-id: 
+    description: Site meta description for search results
+    gtm-id: XXXXXXX
+            
+### ArcGIS Property Model | [Source](grav/user/config/ArcGIS.yaml)
+Admin -> Configuration -> ArcGIS
+
+The admin provides an interface for defining model properties and mapping them to ArcGIS fields.
+
+    arc-gis-feature-server: 'https://services2.arcgis.com/XS7JKtqtY6stbXzM/arcgis/rest/services/SMRLWR_Commercial_Sample_20171205/FeatureServer/0'
+    model-properties:
+      -
+        label: Acres // Field label for use in UI
+        key: acres // key in the application PropertyModel definition
+        arc-key: Acres // ArcGIS field feature key
+        field-type: text | enummerable | range
+        filterable: true | false // filterable fields must be enumerable or range type
+
+## Page Frontmatter
 
 ### Modular Pages
-content:
-    items: '@self.modular'
-    order:
-        by: default
-        dir: asc
+    content:
+        items: '@self.modular'
+        order:
+            by: default
+            dir: asc
 
 ### Property Filter
-filters:
-    cta:
-        field: type
-        value: Industrial
-        label: 'View Industrial Land'
-        
-        or
-        
-        link: http://lwrwaterside.com/waterside-place/
-        label: 'Waterside Place'
+    filters:
+        cta:
+            field: type
+            value: Industrial
+            label: 'View Industrial Land'
+            
+            or
+            
+            link: http://lwrwaterside.com/waterside-place/
+            label: 'Waterside Place'
 
 ### ArcGIS Map
-arcmap:
-    basemap: hybrid # https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
-    center:
-        latitude: 27.4119421
-        longitude: -82.4638901
-        zoomEmpty: 13
-        zoomSingleResult: 15
+    arcmap:
+        basemap: hybrid # https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
+        center:
+            latitude: 27.4119421
+            longitude: -82.4638901
+            zoomEmpty: 13
+            zoomSingleResult: 15
 
 # Environments
 
